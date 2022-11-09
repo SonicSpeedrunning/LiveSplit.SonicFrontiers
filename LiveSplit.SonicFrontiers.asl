@@ -124,7 +124,6 @@ update
     vars.watchers.UpdateAll(game);
 
     current.Status = vars.GetStatus();
-    print(vars.watchers["LevelID"].Current);
 
     current.LevelID = vars.SanitizeString("LevelID");
 
