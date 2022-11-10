@@ -1,7 +1,7 @@
 // Load time remover for Sonic Frontiers
 // Coding: Jujstme
 // contacts: just.tribe@gmail.com
-// Version: 1.0.2 (Nov 10th, 2022)
+// Version: 1.0.3 (Nov 10th, 2022)
 
 state("SonicFrontiers") {}
 
@@ -23,7 +23,22 @@ init
     }});
     checkptr(ptr);
 
-    // Recovering the adresses for some RTTI stuff
+    // Using DeepPointer instead of a memorywatcher because we need to do quirky stuff during the update action.
+    // Well'use .Deref instead.
+    // Luckily we won't need to do all the weird stuff you'll see below
+    vars.CURRENTSTAGE = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, 0xA0);
+    vars.TUTORIALSTAGE = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, 0xF8);
+    vars.ARCADEFLAG = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, 0x122);
+
+    // This value tells the game (and the autosplitter) the number of subclasses loaded in the main GAMEMODE class. It's used for the loops in the following functions.
+    // It's the only MemoryWatcher used in this script.
+    vars.GameModeExtensionCount = new MemoryWatcher<int>(new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION + 0x8)) { FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull };
+
+    //
+    // Recovering the addresses for some RTTI stuff
+    //
+
+    // StageTimeExtension - this is used to identify the active instance of this class. Used for IGT
     var tempaddr = scanner.Scan(new SigScanTarget(1, "E9 ???????? 0F 86 15 8A 59 FF") { OnFound = (p, s, addr) => {
         var tempAddr = addr + p.ReadValue<int>(addr) + 0x4 + 0x7;
         tempAddr += p.ReadValue<int>(tempAddr) + 0x4;
@@ -32,6 +47,7 @@ init
     checkptr(tempaddr);
     var StageTimeExtension = (long)tempaddr;
 
+    // HsmExtension - Hedgehog Scene Manager, maybe? Anyway, it's used to look for the status variable
     tempaddr = scanner.Scan(new SigScanTarget(1, "E8 ???????? 48 8B F8 48 8D 55 C0") { OnFound = (p, s, addr) => {
         var tempAddr = addr + p.ReadValue<int>(addr) + 0x4 + 0x9;
         tempAddr += p.ReadValue<int>(tempAddr) + 0x4;
@@ -40,27 +56,11 @@ init
     checkptr(tempaddr);
     var HsmExtension = (long)tempaddr;
 
-    // Using DeepPointer instead of a memorywatcher because we need to do quirky stuff during update
-    vars.CURRENTSTAGE = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, 0xA0);
-    vars.TUTORIALSTAGE = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, 0xF8);
-    vars.ARCADEFLAG = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, 0x122);
-
-    // This value tells the game (and the autosplitter) the number of subclasses loaded in the main GAMEMODE class. It's used for the loops in the following functions
-    vars.GameModeExtensionCount = new MemoryWatcher<int>(new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION + 0x8)) { FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull };
-
-    // Very important variable. Essentially tells us the current status of the game
-    vars.GetStatus = (Func<Process, int, string>)((p, ii) => {
-        if (ii == 0)
-            return string.Empty;
-        string value = string.Empty;
-        for (int i = 0; i < ii; i++)
-        {
-            var q = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x0).Deref<long>(p);
-            if (q == HsmExtension)
-            return new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x60, 0x20, 0x0).DerefString(p, 255);
-        }
-        return value;
-    });
+    // QTE management data - we need the function's address to identify whether we are in a QTE or not
+    vars.QTEinput = new DeepPointer(ptr, 0x70, 0xD0, 0x28, 0x0, 0x0);
+    tempaddr = scanner.Scan(new SigScanTarget(13, "C7 83 ???????? ???????? 48 8D 05 ???????? 48 89 BB") { OnFound = (p, s, addr) => addr + p.ReadValue<int>(addr) + 0x4 });
+    checkptr(tempaddr);
+    vars.QTEADDRESS = (long)tempaddr;
 
     // This ensures the real IGT is always caught
     vars.GetIGT = (Func<Process, int, float>)((p, ii) => {
@@ -76,11 +76,26 @@ init
         return value;
     });
 
+    // Very important variable. Essentially tells us the current status of the game
+    vars.GetStatus = (Func<Process, int, string>)((p, ii) => {
+        if (ii == 0)
+            return string.Empty;
+        string value = string.Empty;
+        for (int i = 0; i < ii; i++)
+        {
+            var q = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x0).Deref<long>(p);
+            if (q == HsmExtension)
+            return new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x60, 0x20, 0x0).DerefString(p, 255);
+        }
+        return value;
+    });
+
     // Default state
     current.IGT = TimeSpan.Zero;
     current.Status = "";
     current.LevelID = "";
     current.isInTutorial = false;
+    current.isInQTE = false;
 }
 
 startup
@@ -88,6 +103,7 @@ startup
     settings.Add("newGame", true, "Enable autostart on New Game");
     settings.Add("arcade", true, "Enable autostart on Arcade mode");
     settings.Add("startonw6d01", true, "Start the timer only when entering Act 1-1", "arcade");
+    settings.Add("finalQTE", true, "Split at the final boss' QTE (final split for story mode)");
     var CyberSpaceLevels = new Dictionary<string, string>{
         { "w6d01", "1-1" }, { "w8d01", "1-2" }, { "w9d04", "1-3" }, { "w6d02", "1-4" }, { "w7d04", "1-5" }, { "w6d06", "1-6" }, { "w9d06", "1-7" },
         { "w6d05", "2-1" }, { "w8d03", "2-2" }, { "w7d02", "2-3" }, { "w7d06", "2-4" }, { "w8d04", "2-5" }, { "w6d03", "2-6" }, { "w8d05", "2-7" },
@@ -98,6 +114,7 @@ startup
     foreach (var entry in CyberSpaceLevels) settings.Add(entry.Key + "_story", true, entry.Value, "cyberSpace");
     settings.Add("cyberSpace_arcade", true, "Cyber Space levels autosplitting (arcade mode)");
     foreach (var entry in CyberSpaceLevels) settings.Add(entry.Key + "_arcade", true, entry.Value, "cyberSpace_arcade");
+    settings.Add("w9d07_soon", true, "Split as soon as possible when completing this level", "w9d07_arcade");
 
     // Constants
     vars.STATUS_TOPMENU = "TopMenu"; // Main menu screen
@@ -121,6 +138,7 @@ startup
     // Basic variables
     vars.AccumulatedIGT = TimeSpan.Zero;
     vars.isInArcade = false;
+    vars.EndQTECount = 0;
 
     // Islands
     // w1r03 - Chronos Island
@@ -128,14 +146,29 @@ startup
     // w3r01 - Chaos Island
     // w1r05 - Rhea Island
     // w1r04 - Ouranos Island
+
+	if (timer.CurrentTimingMethod == TimingMethod.RealTime)
+    {        
+        var timingMessage = MessageBox.Show (
+                "This autosplitter supports Time without Loads (Game Time).\n"+
+                "LiveSplit is currently set to show Real Time (RTA).\n"+
+                "Would you like to set the timing method to Game Time?",
+                "LiveSplit | Sonic Frontiers",
+                MessageBoxButtons.YesNo,MessageBoxIcon.Question
+        );
+        if (timingMessage == DialogResult.Yes)
+            timer.CurrentTimingMethod = TimingMethod.GameTime;
+    }
 }
 
 update
 {
+    // Update the main variables
     vars.GameModeExtensionCount.Update(game);
     current.Status = vars.GetStatus(game, vars.GameModeExtensionCount.Current);
     current.IGT = TimeSpan.FromSeconds(Math.Truncate(vars.GetIGT(game, vars.GameModeExtensionCount.Current) * 100) / 100);
     current.LevelID = vars.CURRENTSTAGE.DerefString(game, 5);
+    current.isInQTE = vars.QTEinput.Deref<long>(game) == vars.QTEADDRESS;
 
     var tutorial = vars.TUTORIALSTAGE.DerefString(game, 5);
     current.isInTutorial = tutorial != null && tutorial.Contains("w") && tutorial.Contains("t");
@@ -149,7 +182,16 @@ update
 
     // Accumulate the time if the IGT resets
     if (old.IGT != TimeSpan.Zero && current.IGT == TimeSpan.Zero)
-        vars.AccumulatedIGT += old.IGT;   
+        vars.AccumulatedIGT += old.IGT;
+
+    // Final split QTE stuff
+    if (current.LevelID == "w5r01")
+    {
+        if (old.isInQTE && !current.isInQTE)
+            vars.EndQTECount++;
+    } else if (vars.EndQTECount > 0) {
+        vars.EndQTECount = 0;
+    }
 }
 
 gameTime
@@ -168,7 +210,7 @@ start
     if (current.Status == vars.STATUS_QUIT && old.Status == vars.STATUS_NEWGAMEMENU) // Story mode
     {
         return settings["newGame"];
-    } else if (settings["arcade"] && vars.isInArcade) {
+    } else if (settings["arcade"] && vars.isInArcade) {  // Arcade mode
         if (settings["startonw6d01"])
         {
             return current.LevelID == "w6d01" && old.LevelID == "w0r01";
@@ -188,10 +230,25 @@ split
     if (vars.isInArcade)
     {
         if (old.LevelID == "w9d07")
-            return old.Status != vars.STATUS_FINISH && current.Status == vars.STATUS_FINISH && settings[old.LevelID + "_arcade"];
+        {
+            if (!settings[old.LevelID + "_arcade"])
+                return false;
+            if (settings["w9d07_soon"])
+                return old.Status != vars.STATUS_FINISH && current.Status == vars.STATUS_FINISH;
+            else
+                return old.Status == vars.STATUS_RESULT && current.Status != vars.STATUS_RESULT;
+        }
         else
-            return old.Status == vars.STATUS_RESULT && current.Status != vars.STATUS_RESULT && settings[old.LevelID + "_arcade"];
+        {
+            return old.Status == vars.STATUS_RESULT && current.Status != vars.STATUS_RESULT;
+        }
     } else {
-        return old.Status == vars.STATUS_RESULT && current.Status != vars.STATUS_RESULT && settings[old.LevelID + "_story"];
+        if (current.LevelID == "w5r01" && vars.EndQTECount == 3)
+        {
+            vars.EndQTECount = 0;
+            return settings["finalQTE"];
+        } else {
+            return old.Status == vars.STATUS_RESULT && current.Status != vars.STATUS_RESULT && settings[old.LevelID + "_story"];
+        }
     }
 }
