@@ -15,13 +15,30 @@ init
 
     // Sigscanning for the base address
     var checkptr = (Action<IntPtr>)((p) => { if (p == IntPtr.Zero) throw new NullReferenceException("Sigscanning failed!"); });
-    var ptr = new SignatureScanner(game, modules.First().BaseAddress, modules.First().ModuleMemorySize)
-            .Scan(new SigScanTarget(1, "E8 ???????? 4C 8B 40 70") { OnFound = (p, s, addr) => {
+    var scanner = new SignatureScanner(game, modules.First().BaseAddress, modules.First().ModuleMemorySize);
+    var ptr = scanner.Scan(new SigScanTarget(1, "E8 ???????? 4C 8B 40 70") { OnFound = (p, s, addr) => {
                 var tempAddr = addr + p.ReadValue<int>(addr) + 0x4 + 0x3;
                 tempAddr += p.ReadValue<int>(tempAddr) + 0x4;
                 return tempAddr;
     }});
     checkptr(ptr);
+
+    // Recovering the adresses for some RTTI stuff
+    var tempaddr = scanner.Scan(new SigScanTarget(1, "E9 ???????? 0F 86 15 8A 59 FF") { OnFound = (p, s, addr) => {
+        var tempAddr = addr + p.ReadValue<int>(addr) + 0x4 + 0x7;
+        tempAddr += p.ReadValue<int>(tempAddr) + 0x4;
+        return tempAddr;
+    }});
+    checkptr(tempaddr);
+    var StageTimeExtension = (long)tempaddr;
+
+    tempaddr = scanner.Scan(new SigScanTarget(1, "E8 ???????? 48 8B F8 48 8D 55 C0") { OnFound = (p, s, addr) => {
+        var tempAddr = addr + p.ReadValue<int>(addr) + 0x4 + 0x9;
+        tempAddr += p.ReadValue<int>(tempAddr) + 0x4;
+        return tempAddr;
+    }});
+    checkptr(tempaddr);
+    var HsmExtension = (long)tempaddr;
 
     // Using DeepPointer instead of a memorywatcher because we need to do quirky stuff during update
     vars.CURRENTSTAGE = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, 0xA0);
@@ -38,33 +55,12 @@ init
         string value = string.Empty;
         for (int i = 0; i < ii; i++)
         {
-            var g = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x10).Deref<long>(p);
-            var q = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x30).Deref<long>(p);
-            if (g != q)
-                continue;
+            var q = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x0).Deref<long>(p);
+            if (q == HsmExtension)
             return new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x60, 0x20, 0x0).DerefString(p, 255);
         }
         return value;
     });
-
-    // Probably won't be ever used, but it's nice to have anyway
-    // Commented out for now
-    /*
-    vars.GetStatus2 = (Func<Process, int, string>)((p, ii) => {
-        if (ii == 0)
-            return string.Empty;
-        string value = string.Empty;
-        for (int i = 0; i < ii; i++)
-        {
-            var g = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x10).Deref<long>(p);
-            var q = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x30).Deref<long>(p);
-            if (g != q)
-                continue;
-            return new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x68, 0x20, 0x0).DerefString(p, 255);
-        }
-        return value;
-    });
-    */
 
     // This ensures the real IGT is always caught
     vars.GetIGT = (Func<Process, int, float>)((p, ii) => {
@@ -73,11 +69,9 @@ init
         float value = 0f;
         for (int i = 0; i < ii; i++)
         {
-            var g = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x10).Deref<long>(p);
-            var q = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x98).Deref<long>(p);
-            if (g != q)
-                continue;
-            return new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x28).Deref<float>(p);
+            var q = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x0).Deref<long>(p);
+            if (q == StageTimeExtension)
+                return new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x28).Deref<float>(p);
         }
         return value;
     });
