@@ -202,7 +202,8 @@ gameTime
 
 isLoading
 {
-    return vars.isInArcade ? true : vars.GameModeExtensionCount.Current == 0 || (current.isInTutorial && !current.LevelID.Contains("r"));
+    return vars.isInArcade ? true : (current.LevelID == "w0r01" ? false : vars.GameModeExtensionCount.Current == 0) || (current.isInTutorial && !current.LevelID.Contains("r"));
+    // return vars.isInArcade ? true : vars.GameModeExtensionCount.Current == 0 || (current.isInTutorial && !current.LevelID.Contains("r"));
 }
 
 start
