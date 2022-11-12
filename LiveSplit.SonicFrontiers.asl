@@ -1,7 +1,7 @@
 // Load time remover for Sonic Frontiers
 // Coding: Jujstme
 // contacts: just.tribe@gmail.com
-// Version: 1.0.3 (Nov 10th, 2022)
+// Version: 1.0.4 (Nov 12th, 2022)
 
 state("SonicFrontiers") {}
 
@@ -40,8 +40,9 @@ init
     // We need a little of black magic to cope with this. Thanks, Hedgehog Engine 2, for being so BS
     tempaddr = scanner.Scan(new SigScanTarget(7, "48 83 EC 20 48 8D 05 ???????? 48 89 51 08 48 89 01 48 89 CF 48 8D 05") { OnFound = (p, s, addr) => addr + p.ReadValue<int>(addr) + 0x4 });
     checkptr(tempaddr);
-    long APPLICATIONSEQUENCE_f = (long)tempaddr; // 0x1412232B8 in v1.0.1
-    var APPLICATIONSEQUENCE = (Func<int>)(() => {
+    long APPLICATIONSEQUENCE_f = (long)tempaddr;
+    vars.APPLICATIONSEQUENCE = 0;
+    vars.GetAPPLICATIONSEQUENCE = (Func<int>)(() => {
         int value = new DeepPointer(ptr, APPLICATION + 0x8).Deref<byte>(game);
         if (value == 0) return 0;
         for (int i = 0; i < value; i++)
@@ -65,9 +66,9 @@ init
 
     // Using DeepPointer instead of a memorywatcher because we need to do quirky stuff that relies on the APPLICATIONSEQUENNCE() which is not a constant.
     // Well'use .Deref instead.
-    vars.CURRENTSTAGE = (Func<string>)(() => new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE(), 0xA0).DerefString(game, 5));
-    vars.TUTORIALSTAGE = (Func<string>)(() => new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE(), GAMEMODE, 0xF8).DerefString(game, 5));
-    vars.ARCADEFLAG = (Func<byte>)(() => new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE(), 0x122).Deref<byte>(game));
+    vars.CURRENTSTAGE = (Func<string>)(() => new DeepPointer(ptr, APPLICATION, vars.APPLICATIONSEQUENCE, 0xA0).DerefString(game, 5));
+    vars.TUTORIALSTAGE = (Func<string>)(() => new DeepPointer(ptr, APPLICATION, vars.APPLICATIONSEQUENCE, GAMEMODE, 0xF8).DerefString(game, 5));
+    vars.ARCADEFLAG = (Func<byte>)(() => new DeepPointer(ptr, APPLICATION, vars.APPLICATIONSEQUENCE, 0x122).Deref<byte>(game));
 
 
     //
@@ -76,7 +77,7 @@ init
 
     // This value tells the game (and the autosplitter) the number of subclasses loaded in the main GAMEMODE class. It's used for the loops in the following functions.
     // It's the only MemoryWatcher used in this script.
-    vars.GetGameModeExtensionCount = (Func<int>)(() => new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE(), GAMEMODE, GAMEMODEEXTENSION + 0x8).Deref<byte>(game));
+    vars.GetGameModeExtensionCount = (Func<int>)(() => new DeepPointer(ptr, APPLICATION, vars.APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION + 0x8).Deref<byte>(game));
     vars.GameModeExtensionCount = 0;
     
     // StageTimeExtension - this is used to identify the active instance of this class. Used for IGT
@@ -93,9 +94,9 @@ init
         if (vars.GameModeExtensionCount == 0) return TimeSpan.Zero;
         for (int i = 0; i < vars.GameModeExtensionCount; i++)
         {
-            var q = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE(), GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x0).Deref<long>(game);
+            var q = new DeepPointer(ptr, APPLICATION, vars.APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x0).Deref<long>(game);
             if (q == StageTimeExtension)
-                return TimeSpan.FromSeconds(Math.Truncate(new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE(), GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x28).Deref<float>(game) * 100) / 100);
+                return TimeSpan.FromSeconds(Math.Truncate(new DeepPointer(ptr, APPLICATION, vars.APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x28).Deref<float>(game) * 100) / 100);
         }
         return TimeSpan.Zero;
     });
@@ -115,9 +116,9 @@ init
         if (vars.GameModeExtensionCount == 0) return string.Empty;
         for (int i = 0; i < vars.GameModeExtensionCount; i++)
         {
-            var q = new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE(), GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x0).Deref<long>(game);
+            var q = new DeepPointer(ptr, APPLICATION, vars.APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x0).Deref<long>(game);
             if (q == HsmExtension)
-            return new DeepPointer(ptr, APPLICATION, APPLICATIONSEQUENCE(), GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x60, 0x20, 0x0).DerefString(game, 255);
+            return new DeepPointer(ptr, APPLICATION, vars.APPLICATIONSEQUENCE, GAMEMODE, GAMEMODEEXTENSION, 0x8 * i, 0x60, 0x20, 0x0).DerefString(game, 255);
         }
         return string.Empty;
     });
@@ -141,6 +142,12 @@ startup
     settings.Add("newGame", true, "Enable autostart on New Game");
     settings.Add("arcade", true, "Enable autostart on Arcade mode");
     settings.Add("startonw6d01", true, "Start the timer only when entering Act 1-1", "arcade");
+    //settings.Add("storymode", true, "Story mode autosplitting options");
+    //settings.Add("kronos", true, "Split when completing Kronos Island", "storymode");
+    //settings.Add("ares", true, "Split when completing Ares Island", "storymode");
+    //settings.Add("chaos", true, "Split when completing Chaos Island", "storymode");
+    //settings.Add("rhea", true, "Split when completing Rhea Island", "storymode");
+    //settings.Add("finalQTE", true, "Split at the final boss' QTE (final split for story mode)", "storymode");
     settings.Add("finalQTE", true, "Split at the final boss' QTE (final split for story mode)");
     var CyberSpaceLevels = new Dictionary<string, string>{
         { "w6d01", "1-1" }, { "w8d01", "1-2" }, { "w9d04", "1-3" }, { "w6d02", "1-4" }, { "w7d04", "1-5" }, { "w6d06", "1-6" }, { "w9d06", "1-7" },
@@ -203,6 +210,7 @@ update
 {
     // Update the main variables
     vars.GameModeExtensionCount = vars.GetGameModeExtensionCount();
+    vars.APPLICATIONSEQUENCE = vars.GetAPPLICATIONSEQUENCE();
     current.Status = vars.GetStatus();
     current.IGT = vars.GetIGT();
     current.LevelID = vars.CURRENTSTAGE();
