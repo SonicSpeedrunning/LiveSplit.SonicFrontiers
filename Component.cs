@@ -9,7 +9,7 @@ namespace LiveSplit.SonicFrontiers
 {
     partial class SonicFrontiersComponent : LogicComponent
     {
-        public override string ComponentName => "Sonic Frontiers";
+        public override string ComponentName => "Sonic Frontiers - Autosplitter";
         private Settings Settings { get; set; }
         private readonly TimerModel timer;
 

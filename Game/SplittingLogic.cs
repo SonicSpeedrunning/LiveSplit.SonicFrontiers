@@ -53,8 +53,7 @@ namespace LiveSplit.SonicFrontiers
             }
             else if (Settings.ArcadeStart && watchers.IsInArcade)
             {
-                if (Settings.Arcade1_1)
-                    return watchers.LevelID.Current == CyberSpaceLevels.w1_1 && watchers.LevelID.Old == SpecialLevels.MainMenu;
+                return (Settings.Arcade1_1 ? watchers.LevelID.Current == CyberSpaceLevels.w1_1 : watchers.LevelID.Current != watchers.LevelID.Old) && watchers.LevelID.Old == SpecialLevels.MainMenu;
             }
 
             return false;

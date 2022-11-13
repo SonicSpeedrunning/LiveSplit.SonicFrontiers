@@ -93,6 +93,7 @@ namespace LiveSplit.SonicFrontiers
         public Settings()
         {
             InitializeComponent();
+            label6.Text = "Autosplitter version: v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion;
 
             // General settings
             chkStoryStart.DataBindings.Add("Checked", this, "StoryStart", false, DataSourceUpdateMode.OnPropertyChanged);

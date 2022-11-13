@@ -1347,11 +1347,12 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(330, 477);
+            this.label6.Location = new System.Drawing.Point(333, 477);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(132, 13);
+            this.label6.Size = new System.Drawing.Size(135, 13);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Autosplitter version: v1.0.1";
+            this.label6.Text = "Autosplitter version: vX.X.X";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Settings
             // 

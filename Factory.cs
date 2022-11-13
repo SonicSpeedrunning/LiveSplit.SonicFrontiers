@@ -4,13 +4,13 @@ using LiveSplit.Model;
 using LiveSplit.UI.Components;
 using LiveSplit.SonicFrontiers;
 
-[assembly: ComponentFactory(typeof(SonicASRTFactory))]
+[assembly: ComponentFactory(typeof(SonicFrontiersFactory))]
 
 namespace LiveSplit.SonicFrontiers
 {
-    public class SonicASRTFactory : IComponentFactory
+    public class SonicFrontiersFactory : IComponentFactory
     {
-        public string ComponentName => "Sonic Frontiers";
+        public string ComponentName => "Sonic Frontiers - Autosplitter";
         public string Description => "Automatic splitting and Game Time calculation";
         public ComponentCategory Category => ComponentCategory.Control;
         public string UpdateName => this.ComponentName;
