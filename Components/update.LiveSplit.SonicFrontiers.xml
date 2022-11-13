@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updates>
+	 <update version="1.0.1">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>First public release</change>
+		</changelog>
+	 </update>
+</updates>
