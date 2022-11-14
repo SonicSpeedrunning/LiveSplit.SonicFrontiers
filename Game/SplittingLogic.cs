@@ -4,31 +4,7 @@ namespace LiveSplit.SonicFrontiers
 {
     partial class SonicFrontiersComponent
     {
-        private Watchers watchers;
-
-        public void SplittingLogicUpdate()
-        {
-            if (!VerifyOrHookGameProcess())
-                return;
-
-            watchers.Update();
-            UUpdate();
-            timer.CurrentState.IsGameTimePaused = IsLoading();
-
-            switch (timer.CurrentState.CurrentPhase)
-            {
-                case Model.TimerPhase.NotRunning:
-                    if (Start()) timer.Start();
-                    break;
-                case Model.TimerPhase.Running:
-                case Model.TimerPhase.Paused:
-                    if (Reset()) timer.Reset();
-                    else if (Split()) timer.Split();
-                    break;
-            }
-        }
-
-        private void UUpdate()
+        private void LogicUpdate()
         {
             // If the timer is not running (eg. a run has been reset) these variables need to be reset
             if (timer.CurrentState.CurrentPhase == Model.TimerPhase.NotRunning)
@@ -155,20 +131,6 @@ namespace LiveSplit.SonicFrontiers
         {
             return watchers.IsInArcade || (watchers.LevelID.Current != SpecialLevels.MainMenu && watchers.GameModeExtensionCount == 0)
                 || (watchers.IsInTutorial && !watchers.LevelID.Current.Contains("r"));
-        }
-
-        bool VerifyOrHookGameProcess()
-        {
-            try
-            {
-                if (watchers == null)
-                    watchers = new Watchers();
-                return watchers.IsGameHooked;
-            }
-            catch
-            {
-                return false;
-            }
         }
     }
 }

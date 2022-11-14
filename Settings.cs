@@ -6,7 +6,7 @@ namespace LiveSplit.SonicFrontiers
 {
     public partial class Settings : UserControl
     {
-        // 
+        // General
         public bool StoryStart { get; set; }
         public bool ArcadeStart { get; set; }
         public bool Arcade1_1 { get; set; }

@@ -23,6 +23,14 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debu\</OutputPath>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <DefineConstants>DEBUG</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiveSplit.Core">
       <HintPath>..\..\..\..\..\Program Files (x86)\LiveSplit\LiveSplit.Core.dll</HintPath>

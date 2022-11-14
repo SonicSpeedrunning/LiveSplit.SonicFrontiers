@@ -7,7 +7,6 @@ namespace LiveSplit.SonicFrontiers
     partial class Watchers
     {
         // Game process
-        private readonly string[] processNames = { "SonicFrontiers" };
         private IntPtr baseAddress;
 
         // Variables 

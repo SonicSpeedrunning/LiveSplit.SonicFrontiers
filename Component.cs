@@ -12,33 +12,39 @@ namespace LiveSplit.SonicFrontiers
         public override string ComponentName => "Sonic Frontiers - Autosplitter";
         private Settings Settings { get; set; }
         private readonly TimerModel timer;
+        private Watchers watchers;
+
 
         public SonicFrontiersComponent(LiveSplitState state)
         {
             timer = new TimerModel { CurrentState = state };
             Settings = new Settings();
 
+            string[] processNames = new string[] { "SonicFrontiers" };
+            watchers = new Watchers(processNames);
+
             if (timer.CurrentState.CurrentTimingMethod == TimingMethod.RealTime)
-            {
-                new Task(() =>
-                {
-                    var timingMessage = MessageBox.Show(
-                        "This autosplitter supports Time without Loads (Game Time).\n" +
-                        "LiveSplit is currently set to show Real Time (RTA).\n" +
-                        "Would you like to set the timing method to Game Time?",
-                        "LiveSplit - Sonic Frontiers",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question
-                    );
-                    if (timingMessage == DialogResult.Yes)
-                        timer.CurrentState.CurrentTimingMethod = TimingMethod.GameTime;
-                }).Start();
-            }
+                Task.Run(AskGameTime);
+        }
+
+        private void AskGameTime()
+        {
+            var timingMessage = MessageBox.Show(
+                "This autosplitter supports Time without Loads (Game Time).\n" +
+                "LiveSplit is currently set to show Real Time (RTA).\n" +
+                "Would you like to set the timing method to Game Time?",
+                "LiveSplit - Sonic Frontiers",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question
+            );
+
+            if (timingMessage == DialogResult.Yes)
+                timer.CurrentState.CurrentTimingMethod = TimingMethod.GameTime;
         }
 
         public override void Dispose()
         {
-            this.Settings.Dispose();
-            this.watchers = null;
+            Settings.Dispose();
+            watchers.Dispose();
         }
 
         public override XmlNode GetSettings(XmlDocument document) { return this.Settings.GetSettings(document); }
@@ -49,7 +55,26 @@ namespace LiveSplit.SonicFrontiers
 
         public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
-            this.SplittingLogicUpdate();
+            if (!watchers.IsGameHooked)
+                return;
+
+            watchers.Update();
+            LogicUpdate();
+            timer.CurrentState.IsGameTimePaused = IsLoading();
+
+            switch (timer.CurrentState.CurrentPhase)
+            {
+                case TimerPhase.NotRunning:
+                    if (Start()) timer.Start();
+                    break;
+                case TimerPhase.Running:
+                    if (Reset()) timer.Reset();
+                    else if (Split()) timer.Split();
+                    break;
+                case TimerPhase.Paused:
+                    if (Reset()) timer.Reset();
+                    break;
+            }
         }
     }
 }

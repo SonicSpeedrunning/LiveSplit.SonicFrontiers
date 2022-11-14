@@ -1,78 +1,49 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Management;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LiveSplit.SonicFrontiers
 {
     partial class Watchers
     {
-        // Common variable that are likely to be used in every game
-        private ManagementEventWatcher[] _watcher;
         private Process game;
+        private readonly string[] processNames;
         private bool GotAddresses = false;
         public bool IsGameHooked => game != null && !game.HasExited;
+        private CancellationTokenSource CancelToken = new CancellationTokenSource();
 
 
-        public Watchers()
+        public Watchers(string[] n)
         {
-            AddManagementWatchers();
-            TryConnect();
+            this.processNames = n;
+            Task.Run(TryConnect, CancelToken.Token);
         }
 
-        private void CallBackAddManagementWatchers(object sender, EventArgs e)
+        async Task TryConnect()
         {
-            game.Exited -= CallBackAddManagementWatchers;
-            GotAddresses = false;
-            game = null;
-            AddManagementWatchers();
-        }
-
-        private void AddManagementWatchers()
-        {
-            _watcher = new ManagementEventWatcher[processNames.Length];
-
-            for (int i = 0; i < _watcher.Length; i++)
+            while (true)
             {
-                _watcher[i] = new ManagementEventWatcher(new WqlEventQuery($"SELECT * FROM __InstanceCreationEvent WITHIN 1 WHERE TargetInstance ISA 'Win32_Process' AND TargetInstance.Name = '{processNames[i]}.exe'"));
-                _watcher[i].EventArrived += CallBackTryConnect;
-                _watcher[i].Start();
+                foreach (var entry in processNames)
+                {
+                    game = Process.GetProcessesByName(entry).OrderByDescending(x => x.StartTime).FirstOrDefault(x => !x.HasExited);
+                    if (game != null)
+                    {
+                        game.Exited += CallBackTryConnect;
+                        return;
+                    }
+                }
+                await Task.Delay(1500, CancelToken.Token);
             }
         }
 
         private void CallBackTryConnect(object sender, EventArgs e)
         {
-            for (int i = 0; i < _watcher.Length; i++)
-            {
-                _watcher[i].Stop();
-                _watcher[i].EventArrived -= CallBackTryConnect;
-                _watcher[i].Dispose();
-            }
-            _watcher = null;
-            TryConnect();
-        }
-
-        private void TryConnect()
-        {
-            foreach (var entry in processNames)
-            {
-                game = Process.GetProcessesByName(entry).OrderByDescending(x => x.StartTime).FirstOrDefault(x => !x.HasExited);
-                if (game != null)
-                {
-                    game.Exited += CallBackAddManagementWatchers;
-
-                    if (_watcher != null)
-                    {
-                        for (int i = 0; i < _watcher.Length; i++)
-                        {
-                            _watcher[i].Stop();
-                            _watcher[i].Dispose();
-                        }
-                        _watcher = null;
-                    }
-                    return;
-                }
-            }
+            game.Exited -= CallBackTryConnect;
+            GotAddresses = false;
+            game = null;
+            Task.Run(TryConnect, CancelToken.Token);
         }
 
         private void CheckPtr(IntPtr o)
@@ -91,6 +62,11 @@ namespace LiveSplit.SonicFrontiers
                 this.Old = old;
                 this.Current = current;
             }
+        }
+
+        public void Dispose()
+        {
+            CancelToken.Cancel();
         }
     }
 }
