@@ -83,37 +83,53 @@ namespace LiveSplit.SonicFrontiers
                         switch (watchers.LevelID.Old)
                         {
                             case Islands.Kronos:
-                                if (watchers.VisitedIslands.Contains(Islands.Kronos))
-                                    return Settings.Kronos && !Settings.KronosFirst;
-                                else
+                                if (!Settings.Kronos) return false;
+                                if (watchers.LevelID.Current != Islands.Ares) return !Settings.KronosFirst;
+
+                                if (!watchers.VisitedIslands.Contains(watchers.LevelID.Old))
                                 {
-                                    watchers.VisitedIslands.Add(Islands.Kronos);
-                                    return Settings.Kronos;
+                                    watchers.VisitedIslands.Add(watchers.LevelID.Old);
+                                    return true;
                                 }
+                                else
+                                    return !Settings.KronosFirst;
+
                             case Islands.Ares:
-                                if (watchers.VisitedIslands.Contains(Islands.Ares))
-                                    return Settings.Ares && !Settings.AresFirst;
-                                else
+                                if (!Settings.Ares) return false;
+                                if (watchers.LevelID.Current != Islands.Chaos) return !Settings.AresFirst;
+                                
+                                if (!watchers.VisitedIslands.Contains(watchers.LevelID.Old))
                                 {
-                                    watchers.VisitedIslands.Add(Islands.Ares);
-                                    return Settings.Ares;
+                                    watchers.VisitedIslands.Add(watchers.LevelID.Old);
+                                    return true;
                                 }
+                                else
+                                    return !Settings.AresFirst;
+
                             case Islands.Chaos:
-                                if (watchers.VisitedIslands.Contains(Islands.Chaos))
-                                    return Settings.Chaos && !Settings.ChaosFirst;
-                                else
+                                if (!Settings.Chaos) return false;
+                                if (watchers.LevelID.Current != Islands.Rhea) return !Settings.ChaosFirst;
+
+                                if (!watchers.VisitedIslands.Contains(watchers.LevelID.Old))
                                 {
-                                    watchers.VisitedIslands.Add(Islands.Chaos);
-                                    return Settings.Chaos;
+                                    watchers.VisitedIslands.Add(watchers.LevelID.Old);
+                                    return true;
                                 }
+                                else
+                                    return !Settings.ChaosFirst;
+
+
                             case Islands.Rhea:
-                                if (watchers.VisitedIslands.Contains(Islands.Rhea))
-                                    return Settings.Rhea && !Settings.RheaFirst;
-                                else
+                                if (!Settings.Chaos) return false;
+                                if (watchers.LevelID.Current != Islands.Ouranos) return !Settings.RheaFirst;
+
+                                if (!watchers.VisitedIslands.Contains(watchers.LevelID.Old))
                                 {
-                                    watchers.VisitedIslands.Add(Islands.Rhea);
-                                    return Settings.Rhea;
+                                    watchers.VisitedIslands.Add(watchers.LevelID.Old);
+                                    return true;
                                 }
+                                else
+                                    return !Settings.RheaFirst;
                         }
                     }
 

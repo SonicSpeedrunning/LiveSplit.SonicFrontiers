@@ -640,7 +640,7 @@
             this.groupBox4.Location = new System.Drawing.Point(6, 6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox4.Size = new System.Drawing.Size(415, 118);
+            this.groupBox4.Size = new System.Drawing.Size(418, 118);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Story progression";
@@ -650,12 +650,12 @@
             this.chkRheaFirst.AutoSize = true;
             this.chkRheaFirst.Checked = true;
             this.chkRheaFirst.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRheaFirst.Location = new System.Drawing.Point(247, 74);
+            this.chkRheaFirst.Location = new System.Drawing.Point(236, 74);
             this.chkRheaFirst.Margin = new System.Windows.Forms.Padding(0);
             this.chkRheaFirst.Name = "chkRheaFirst";
-            this.chkRheaFirst.Size = new System.Drawing.Size(89, 17);
+            this.chkRheaFirst.Size = new System.Drawing.Size(172, 17);
             this.chkRheaFirst.TabIndex = 13;
-            this.chkRheaFirst.Text = "First time only";
+            this.chkRheaFirst.Text = "Only during the story sequence";
             this.chkRheaFirst.UseVisualStyleBackColor = true;
             // 
             // chkChaosFirst
@@ -663,12 +663,12 @@
             this.chkChaosFirst.AutoSize = true;
             this.chkChaosFirst.Checked = true;
             this.chkChaosFirst.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkChaosFirst.Location = new System.Drawing.Point(247, 57);
+            this.chkChaosFirst.Location = new System.Drawing.Point(236, 57);
             this.chkChaosFirst.Margin = new System.Windows.Forms.Padding(0);
             this.chkChaosFirst.Name = "chkChaosFirst";
-            this.chkChaosFirst.Size = new System.Drawing.Size(89, 17);
+            this.chkChaosFirst.Size = new System.Drawing.Size(156, 17);
             this.chkChaosFirst.TabIndex = 12;
-            this.chkChaosFirst.Text = "First time only";
+            this.chkChaosFirst.Text = "Only when defeating Knight";
             this.chkChaosFirst.UseVisualStyleBackColor = true;
             // 
             // chkAresFirst
@@ -676,12 +676,12 @@
             this.chkAresFirst.AutoSize = true;
             this.chkAresFirst.Checked = true;
             this.chkAresFirst.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAresFirst.Location = new System.Drawing.Point(247, 40);
+            this.chkAresFirst.Location = new System.Drawing.Point(236, 40);
             this.chkAresFirst.Margin = new System.Windows.Forms.Padding(0);
             this.chkAresFirst.Name = "chkAresFirst";
-            this.chkAresFirst.Size = new System.Drawing.Size(89, 17);
+            this.chkAresFirst.Size = new System.Drawing.Size(163, 17);
             this.chkAresFirst.TabIndex = 11;
-            this.chkAresFirst.Text = "First time only";
+            this.chkAresFirst.Text = "Only when defeating Wyvern";
             this.chkAresFirst.UseVisualStyleBackColor = true;
             // 
             // chkKronosFirst
@@ -689,12 +689,12 @@
             this.chkKronosFirst.AutoSize = true;
             this.chkKronosFirst.Checked = true;
             this.chkKronosFirst.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkKronosFirst.Location = new System.Drawing.Point(247, 23);
+            this.chkKronosFirst.Location = new System.Drawing.Point(236, 23);
             this.chkKronosFirst.Margin = new System.Windows.Forms.Padding(0);
             this.chkKronosFirst.Name = "chkKronosFirst";
-            this.chkKronosFirst.Size = new System.Drawing.Size(89, 17);
+            this.chkKronosFirst.Size = new System.Drawing.Size(168, 17);
             this.chkKronosFirst.TabIndex = 10;
-            this.chkKronosFirst.Text = "First time only";
+            this.chkKronosFirst.Text = "Only when defeating Gigantos";
             this.chkKronosFirst.UseVisualStyleBackColor = true;
             // 
             // label10
@@ -741,9 +741,9 @@
             this.chkFinalBoss.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkFinalBoss.Location = new System.Drawing.Point(10, 91);
             this.chkFinalBoss.Name = "chkFinalBoss";
-            this.chkFinalBoss.Size = new System.Drawing.Size(395, 17);
+            this.chkFinalBoss.Size = new System.Drawing.Size(398, 17);
             this.chkFinalBoss.TabIndex = 5;
-            this.chkFinalBoss.Text = "Final Boss";
+            this.chkFinalBoss.Text = "Final Boss: split when completing the final QTE";
             this.chkFinalBoss.UseVisualStyleBackColor = true;
             // 
             // chkRhea
@@ -754,7 +754,7 @@
             this.chkRhea.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkRhea.Location = new System.Drawing.Point(10, 74);
             this.chkRhea.Name = "chkRhea";
-            this.chkRhea.Size = new System.Drawing.Size(395, 17);
+            this.chkRhea.Size = new System.Drawing.Size(398, 17);
             this.chkRhea.TabIndex = 4;
             this.chkRhea.Text = "Leave Rhea Island";
             this.chkRhea.UseVisualStyleBackColor = true;
@@ -768,7 +768,7 @@
             this.chkChaos.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkChaos.Location = new System.Drawing.Point(10, 57);
             this.chkChaos.Name = "chkChaos";
-            this.chkChaos.Size = new System.Drawing.Size(395, 17);
+            this.chkChaos.Size = new System.Drawing.Size(398, 17);
             this.chkChaos.TabIndex = 3;
             this.chkChaos.Text = "Leave Chaos Island";
             this.chkChaos.UseVisualStyleBackColor = true;
@@ -782,7 +782,7 @@
             this.chkAres.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkAres.Location = new System.Drawing.Point(10, 40);
             this.chkAres.Name = "chkAres";
-            this.chkAres.Size = new System.Drawing.Size(395, 17);
+            this.chkAres.Size = new System.Drawing.Size(398, 17);
             this.chkAres.TabIndex = 2;
             this.chkAres.Text = "Leave Ares Island";
             this.chkAres.UseVisualStyleBackColor = true;
@@ -796,7 +796,7 @@
             this.chkKronos.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkKronos.Location = new System.Drawing.Point(10, 23);
             this.chkKronos.Name = "chkKronos";
-            this.chkKronos.Size = new System.Drawing.Size(395, 17);
+            this.chkKronos.Size = new System.Drawing.Size(398, 17);
             this.chkKronos.TabIndex = 1;
             this.chkKronos.Text = "Leave Kronos Island";
             this.chkKronos.UseVisualStyleBackColor = true;
