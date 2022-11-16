@@ -124,7 +124,8 @@ namespace LiveSplit.SonicFrontiers
 
         bool Reset()
         {
-            return Settings.Reset && watchers.Status.Current == Status.TopMenu && watchers.Status.Old != watchers.Status.Current;
+            return false;
+            // return Settings.Reset && watchers.Status.Current == Status.TopMenu && watchers.Status.Old != watchers.Status.Current;
         }
 
         bool IsLoading()

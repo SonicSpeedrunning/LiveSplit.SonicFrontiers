@@ -174,7 +174,7 @@ namespace LiveSplit.SonicFrontiers
             
             // Default Values
             StoryStart = ArcadeStart = Arcade1_1 = true;
-            Reset = true;
+            Reset = false;
             Kronos = Ares = Chaos = Rhea = FinalBoss = true;
             KronosFirst = AresFirst = ChaosFirst = RheaFirst = true;
 

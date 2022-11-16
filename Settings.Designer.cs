@@ -1334,9 +1334,8 @@
             // chkReset
             // 
             this.chkReset.AutoSize = true;
-            this.chkReset.Checked = true;
-            this.chkReset.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkReset.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkReset.Enabled = false;
             this.chkReset.Location = new System.Drawing.Point(10, 23);
             this.chkReset.Name = "chkReset";
             this.chkReset.Size = new System.Drawing.Size(435, 17);

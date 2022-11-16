@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.0.5">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Disabled auto-reset as it conflicts with the recently-found pinball skip</change>
+		</changelog>
+	</update>
 	<update version="1.0.4">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
