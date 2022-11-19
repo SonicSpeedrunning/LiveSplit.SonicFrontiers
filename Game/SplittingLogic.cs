@@ -1,8 +1,9 @@
-﻿using System;
+﻿using LiveSplit.UI.Components;
+using System;
 
 namespace LiveSplit.SonicFrontiers
 {
-    partial class SonicFrontiersComponent
+    partial class SonicFrontiersComponent : LogicComponent
     {
         private bool Start()
         {

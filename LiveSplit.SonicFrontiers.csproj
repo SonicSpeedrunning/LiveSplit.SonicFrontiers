@@ -24,7 +24,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debu\</OutputPath>
+    <OutputPath>ComponentsDebug\</OutputPath>
     <Optimize>true</Optimize>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>7.3</LangVersion>
@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Common\Methods.cs" />
     <Compile Include="Game\Common\FakeMemoryWatcher.cs" />
     <Compile Include="Game\Common\ProcessHook.cs" />
     <Compile Include="Game\SplittingLogic.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Game\Common\FakeEnums.cs" />
+    <Compile Include="Game\FakeEnums.cs" />
     <Compile Include="Game\GameMemory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
