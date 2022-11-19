@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.0.6">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Added autosplitting when exiting fishing levels (check settings)</change>
+			<change>Permanently removed auto-reset from the setting</change>
+			<change>Fixed a memory leak issue</change>
+			<change>Other improvements under the hood</change>
+		</changelog>
+	</update>
 	<update version="1.0.5">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>

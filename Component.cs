@@ -12,16 +12,14 @@ namespace LiveSplit.SonicFrontiers
         public override string ComponentName => "Sonic Frontiers - Autosplitter";
         private Settings Settings { get; set; }
         private readonly TimerModel timer;
-        private Watchers watchers;
+        private readonly Watchers watchers;
 
 
         public SonicFrontiersComponent(LiveSplitState state)
         {
             timer = new TimerModel { CurrentState = state };
             Settings = new Settings();
-
-            string[] processNames = new string[] { "SonicFrontiers" };
-            watchers = new Watchers(processNames);
+            watchers = new Watchers(state);
 
             if (timer.CurrentState.CurrentTimingMethod == TimingMethod.RealTime)
                 Task.Run(AskGameTime);
@@ -55,12 +53,8 @@ namespace LiveSplit.SonicFrontiers
 
         public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
-            if (!watchers.IsGameHooked)
-                return;
-
-            watchers.Update();
-            LogicUpdate();
-            timer.CurrentState.IsGameTimePaused = IsLoading();
+            // If LiveSplit is not connected to the game, or if Update explicitly returns false, do not proceed further
+            if (!watchers.Update()) return;
 
             switch (timer.CurrentState.CurrentPhase)
             {
@@ -68,11 +62,11 @@ namespace LiveSplit.SonicFrontiers
                     if (Start()) timer.Start();
                     break;
                 case TimerPhase.Running:
+                case TimerPhase.Paused:
+                    timer.CurrentState.IsGameTimePaused = IsLoading();
+                    if (GameTime() == null ? false : true) timer.CurrentState.SetGameTime(GameTime());
                     if (Reset()) timer.Reset();
                     else if (Split()) timer.Split();
-                    break;
-                case TimerPhase.Paused:
-                    if (Reset()) timer.Reset();
                     break;
             }
         }

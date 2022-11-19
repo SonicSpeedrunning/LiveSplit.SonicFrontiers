@@ -35,6 +35,11 @@
             w4_9 = "w9d07";
     }
 
+    static class FishingLevels
+    {
+        public const string Fishing = "w1f01";
+    }
+
     static class Islands
     {
         public const string

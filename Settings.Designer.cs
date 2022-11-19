@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.chkArcade1_1 = new System.Windows.Forms.CheckBox();
             this.chkArcadeStart = new System.Windows.Forms.CheckBox();
             this.chkStoryStart = new System.Windows.Forms.CheckBox();
@@ -85,6 +84,21 @@
             this.chkChaos = new System.Windows.Forms.CheckBox();
             this.chkAres = new System.Windows.Forms.CheckBox();
             this.chkKronos = new System.Windows.Forms.CheckBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkFishingOuranosFirst = new System.Windows.Forms.CheckBox();
+            this.chkFishingChaosFirst = new System.Windows.Forms.CheckBox();
+            this.chkFishingAresFirst = new System.Windows.Forms.CheckBox();
+            this.chkFishingKronosFirst = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chkFishingOuranos = new System.Windows.Forms.CheckBox();
+            this.chkFishingChaos = new System.Windows.Forms.CheckBox();
+            this.chkFishingAres = new System.Windows.Forms.CheckBox();
+            this.chkFishingKronos = new System.Windows.Forms.CheckBox();
+            this.chkFishing = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.chk4_9_arcade_soon = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -122,8 +136,6 @@
             this.chk1_3_arcade = new System.Windows.Forms.CheckBox();
             this.chk1_2_arcade = new System.Windows.Forms.CheckBox();
             this.chk1_1_arcade = new System.Windows.Forms.CheckBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chkReset = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -131,18 +143,18 @@
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox13.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.chkArcade1_1);
             this.groupBox1.Controls.Add(this.chkArcadeStart);
             this.groupBox1.Controls.Add(this.chkStoryStart);
@@ -151,26 +163,17 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(455, 67);
+            this.groupBox1.Size = new System.Drawing.Size(455, 81);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Auto start settings";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(111, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "---------------->";
             // 
             // chkArcade1_1
             // 
             this.chkArcade1_1.AutoSize = true;
             this.chkArcade1_1.Checked = true;
             this.chkArcade1_1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkArcade1_1.Location = new System.Drawing.Point(194, 40);
+            this.chkArcade1_1.Location = new System.Drawing.Point(29, 57);
             this.chkArcade1_1.Margin = new System.Windows.Forms.Padding(0);
             this.chkArcade1_1.Name = "chkArcade1_1";
             this.chkArcade1_1.Size = new System.Drawing.Size(141, 17);
@@ -209,11 +212,11 @@
             // 
             this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.tabControl1);
-            this.groupBox2.Location = new System.Drawing.Point(10, 137);
+            this.groupBox2.Location = new System.Drawing.Point(10, 101);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox2.Size = new System.Drawing.Size(455, 329);
+            this.groupBox2.Size = new System.Drawing.Size(455, 362);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Autosplitting options";
@@ -221,12 +224,13 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabControl1.Location = new System.Drawing.Point(10, 23);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(435, 296);
+            this.tabControl1.Size = new System.Drawing.Size(435, 329);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -236,7 +240,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(427, 270);
+            this.tabPage1.Size = new System.Drawing.Size(427, 303);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Story mode";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -277,10 +281,10 @@
             this.groupBox5.Controls.Add(this.chk1_2_story);
             this.groupBox5.Controls.Add(this.chk1_1_story);
             this.groupBox5.Controls.Add(this.label2);
-            this.groupBox5.Location = new System.Drawing.Point(6, 130);
+            this.groupBox5.Location = new System.Drawing.Point(3, 130);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox5.Size = new System.Drawing.Size(415, 134);
+            this.groupBox5.Size = new System.Drawing.Size(421, 167);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Cyber Space Levels";
@@ -288,7 +292,7 @@
             // chk4_9_story
             // 
             this.chk4_9_story.AutoSize = true;
-            this.chk4_9_story.Location = new System.Drawing.Point(128, 108);
+            this.chk4_9_story.Location = new System.Drawing.Point(128, 140);
             this.chk4_9_story.Name = "chk4_9_story";
             this.chk4_9_story.Size = new System.Drawing.Size(41, 17);
             this.chk4_9_story.TabIndex = 35;
@@ -298,7 +302,7 @@
             // chk4_8_story
             // 
             this.chk4_8_story.AutoSize = true;
-            this.chk4_8_story.Location = new System.Drawing.Point(81, 108);
+            this.chk4_8_story.Location = new System.Drawing.Point(81, 140);
             this.chk4_8_story.Name = "chk4_8_story";
             this.chk4_8_story.Size = new System.Drawing.Size(41, 17);
             this.chk4_8_story.TabIndex = 34;
@@ -308,7 +312,7 @@
             // chk4_7_story
             // 
             this.chk4_7_story.AutoSize = true;
-            this.chk4_7_story.Location = new System.Drawing.Point(363, 89);
+            this.chk4_7_story.Location = new System.Drawing.Point(363, 121);
             this.chk4_7_story.Name = "chk4_7_story";
             this.chk4_7_story.Size = new System.Drawing.Size(41, 17);
             this.chk4_7_story.TabIndex = 33;
@@ -318,7 +322,7 @@
             // chk4_6_story
             // 
             this.chk4_6_story.AutoSize = true;
-            this.chk4_6_story.Location = new System.Drawing.Point(316, 89);
+            this.chk4_6_story.Location = new System.Drawing.Point(316, 121);
             this.chk4_6_story.Name = "chk4_6_story";
             this.chk4_6_story.Size = new System.Drawing.Size(41, 17);
             this.chk4_6_story.TabIndex = 32;
@@ -328,7 +332,7 @@
             // chk4_5_story
             // 
             this.chk4_5_story.AutoSize = true;
-            this.chk4_5_story.Location = new System.Drawing.Point(269, 89);
+            this.chk4_5_story.Location = new System.Drawing.Point(269, 121);
             this.chk4_5_story.Name = "chk4_5_story";
             this.chk4_5_story.Size = new System.Drawing.Size(41, 17);
             this.chk4_5_story.TabIndex = 31;
@@ -338,7 +342,7 @@
             // chk4_4_story
             // 
             this.chk4_4_story.AutoSize = true;
-            this.chk4_4_story.Location = new System.Drawing.Point(222, 89);
+            this.chk4_4_story.Location = new System.Drawing.Point(222, 121);
             this.chk4_4_story.Name = "chk4_4_story";
             this.chk4_4_story.Size = new System.Drawing.Size(41, 17);
             this.chk4_4_story.TabIndex = 30;
@@ -348,7 +352,7 @@
             // chk4_3_story
             // 
             this.chk4_3_story.AutoSize = true;
-            this.chk4_3_story.Location = new System.Drawing.Point(175, 89);
+            this.chk4_3_story.Location = new System.Drawing.Point(175, 121);
             this.chk4_3_story.Name = "chk4_3_story";
             this.chk4_3_story.Size = new System.Drawing.Size(41, 17);
             this.chk4_3_story.TabIndex = 29;
@@ -358,7 +362,7 @@
             // chk4_2_story
             // 
             this.chk4_2_story.AutoSize = true;
-            this.chk4_2_story.Location = new System.Drawing.Point(128, 89);
+            this.chk4_2_story.Location = new System.Drawing.Point(128, 121);
             this.chk4_2_story.Name = "chk4_2_story";
             this.chk4_2_story.Size = new System.Drawing.Size(41, 17);
             this.chk4_2_story.TabIndex = 28;
@@ -368,7 +372,7 @@
             // chk4_1_story
             // 
             this.chk4_1_story.AutoSize = true;
-            this.chk4_1_story.Location = new System.Drawing.Point(81, 89);
+            this.chk4_1_story.Location = new System.Drawing.Point(81, 121);
             this.chk4_1_story.Name = "chk4_1_story";
             this.chk4_1_story.Size = new System.Drawing.Size(41, 17);
             this.chk4_1_story.TabIndex = 27;
@@ -378,7 +382,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 89);
+            this.label5.Location = new System.Drawing.Point(7, 122);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 26);
             this.label5.TabIndex = 26;
@@ -387,7 +391,7 @@
             // chk3_7_story
             // 
             this.chk3_7_story.AutoSize = true;
-            this.chk3_7_story.Location = new System.Drawing.Point(363, 66);
+            this.chk3_7_story.Location = new System.Drawing.Point(363, 88);
             this.chk3_7_story.Name = "chk3_7_story";
             this.chk3_7_story.Size = new System.Drawing.Size(41, 17);
             this.chk3_7_story.TabIndex = 25;
@@ -397,7 +401,7 @@
             // chk3_6_story
             // 
             this.chk3_6_story.AutoSize = true;
-            this.chk3_6_story.Location = new System.Drawing.Point(316, 66);
+            this.chk3_6_story.Location = new System.Drawing.Point(316, 88);
             this.chk3_6_story.Name = "chk3_6_story";
             this.chk3_6_story.Size = new System.Drawing.Size(41, 17);
             this.chk3_6_story.TabIndex = 24;
@@ -407,7 +411,7 @@
             // chk3_5_story
             // 
             this.chk3_5_story.AutoSize = true;
-            this.chk3_5_story.Location = new System.Drawing.Point(269, 66);
+            this.chk3_5_story.Location = new System.Drawing.Point(269, 88);
             this.chk3_5_story.Name = "chk3_5_story";
             this.chk3_5_story.Size = new System.Drawing.Size(41, 17);
             this.chk3_5_story.TabIndex = 23;
@@ -417,7 +421,7 @@
             // chk3_4_story
             // 
             this.chk3_4_story.AutoSize = true;
-            this.chk3_4_story.Location = new System.Drawing.Point(222, 66);
+            this.chk3_4_story.Location = new System.Drawing.Point(222, 88);
             this.chk3_4_story.Name = "chk3_4_story";
             this.chk3_4_story.Size = new System.Drawing.Size(41, 17);
             this.chk3_4_story.TabIndex = 22;
@@ -427,7 +431,7 @@
             // chk3_3_story
             // 
             this.chk3_3_story.AutoSize = true;
-            this.chk3_3_story.Location = new System.Drawing.Point(175, 66);
+            this.chk3_3_story.Location = new System.Drawing.Point(175, 88);
             this.chk3_3_story.Name = "chk3_3_story";
             this.chk3_3_story.Size = new System.Drawing.Size(41, 17);
             this.chk3_3_story.TabIndex = 21;
@@ -437,7 +441,7 @@
             // chk3_2_story
             // 
             this.chk3_2_story.AutoSize = true;
-            this.chk3_2_story.Location = new System.Drawing.Point(128, 66);
+            this.chk3_2_story.Location = new System.Drawing.Point(128, 88);
             this.chk3_2_story.Name = "chk3_2_story";
             this.chk3_2_story.Size = new System.Drawing.Size(41, 17);
             this.chk3_2_story.TabIndex = 20;
@@ -447,7 +451,7 @@
             // chk3_1_story
             // 
             this.chk3_1_story.AutoSize = true;
-            this.chk3_1_story.Location = new System.Drawing.Point(81, 66);
+            this.chk3_1_story.Location = new System.Drawing.Point(81, 88);
             this.chk3_1_story.Name = "chk3_1_story";
             this.chk3_1_story.Size = new System.Drawing.Size(41, 17);
             this.chk3_1_story.TabIndex = 19;
@@ -457,7 +461,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 67);
+            this.label4.Location = new System.Drawing.Point(7, 89);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 13);
             this.label4.TabIndex = 18;
@@ -466,7 +470,7 @@
             // chk2_7_story
             // 
             this.chk2_7_story.AutoSize = true;
-            this.chk2_7_story.Location = new System.Drawing.Point(363, 44);
+            this.chk2_7_story.Location = new System.Drawing.Point(363, 55);
             this.chk2_7_story.Name = "chk2_7_story";
             this.chk2_7_story.Size = new System.Drawing.Size(41, 17);
             this.chk2_7_story.TabIndex = 17;
@@ -476,7 +480,7 @@
             // chk2_6_story
             // 
             this.chk2_6_story.AutoSize = true;
-            this.chk2_6_story.Location = new System.Drawing.Point(316, 44);
+            this.chk2_6_story.Location = new System.Drawing.Point(316, 55);
             this.chk2_6_story.Name = "chk2_6_story";
             this.chk2_6_story.Size = new System.Drawing.Size(41, 17);
             this.chk2_6_story.TabIndex = 16;
@@ -486,7 +490,7 @@
             // chk2_5_story
             // 
             this.chk2_5_story.AutoSize = true;
-            this.chk2_5_story.Location = new System.Drawing.Point(269, 44);
+            this.chk2_5_story.Location = new System.Drawing.Point(269, 55);
             this.chk2_5_story.Name = "chk2_5_story";
             this.chk2_5_story.Size = new System.Drawing.Size(41, 17);
             this.chk2_5_story.TabIndex = 15;
@@ -496,7 +500,7 @@
             // chk2_4_story
             // 
             this.chk2_4_story.AutoSize = true;
-            this.chk2_4_story.Location = new System.Drawing.Point(222, 44);
+            this.chk2_4_story.Location = new System.Drawing.Point(222, 55);
             this.chk2_4_story.Name = "chk2_4_story";
             this.chk2_4_story.Size = new System.Drawing.Size(41, 17);
             this.chk2_4_story.TabIndex = 14;
@@ -506,7 +510,7 @@
             // chk2_3_story
             // 
             this.chk2_3_story.AutoSize = true;
-            this.chk2_3_story.Location = new System.Drawing.Point(175, 44);
+            this.chk2_3_story.Location = new System.Drawing.Point(175, 55);
             this.chk2_3_story.Name = "chk2_3_story";
             this.chk2_3_story.Size = new System.Drawing.Size(41, 17);
             this.chk2_3_story.TabIndex = 13;
@@ -516,7 +520,7 @@
             // chk2_2_story
             // 
             this.chk2_2_story.AutoSize = true;
-            this.chk2_2_story.Location = new System.Drawing.Point(128, 44);
+            this.chk2_2_story.Location = new System.Drawing.Point(128, 55);
             this.chk2_2_story.Name = "chk2_2_story";
             this.chk2_2_story.Size = new System.Drawing.Size(41, 17);
             this.chk2_2_story.TabIndex = 12;
@@ -526,7 +530,7 @@
             // chk2_1_story
             // 
             this.chk2_1_story.AutoSize = true;
-            this.chk2_1_story.Location = new System.Drawing.Point(81, 44);
+            this.chk2_1_story.Location = new System.Drawing.Point(81, 55);
             this.chk2_1_story.Name = "chk2_1_story";
             this.chk2_1_story.Size = new System.Drawing.Size(41, 17);
             this.chk2_1_story.TabIndex = 11;
@@ -536,7 +540,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 45);
+            this.label3.Location = new System.Drawing.Point(7, 56);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 10;
@@ -637,10 +641,10 @@
             this.groupBox4.Controls.Add(this.chkChaos);
             this.groupBox4.Controls.Add(this.chkAres);
             this.groupBox4.Controls.Add(this.chkKronos);
-            this.groupBox4.Location = new System.Drawing.Point(6, 6);
+            this.groupBox4.Location = new System.Drawing.Point(3, 6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox4.Size = new System.Drawing.Size(418, 118);
+            this.groupBox4.Size = new System.Drawing.Size(421, 118);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Story progression";
@@ -741,7 +745,7 @@
             this.chkFinalBoss.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkFinalBoss.Location = new System.Drawing.Point(10, 91);
             this.chkFinalBoss.Name = "chkFinalBoss";
-            this.chkFinalBoss.Size = new System.Drawing.Size(398, 17);
+            this.chkFinalBoss.Size = new System.Drawing.Size(401, 17);
             this.chkFinalBoss.TabIndex = 5;
             this.chkFinalBoss.Text = "Final Boss: split when completing the final QTE";
             this.chkFinalBoss.UseVisualStyleBackColor = true;
@@ -754,7 +758,7 @@
             this.chkRhea.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkRhea.Location = new System.Drawing.Point(10, 74);
             this.chkRhea.Name = "chkRhea";
-            this.chkRhea.Size = new System.Drawing.Size(398, 17);
+            this.chkRhea.Size = new System.Drawing.Size(401, 17);
             this.chkRhea.TabIndex = 4;
             this.chkRhea.Text = "Leave Rhea Island";
             this.chkRhea.UseVisualStyleBackColor = true;
@@ -768,7 +772,7 @@
             this.chkChaos.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkChaos.Location = new System.Drawing.Point(10, 57);
             this.chkChaos.Name = "chkChaos";
-            this.chkChaos.Size = new System.Drawing.Size(398, 17);
+            this.chkChaos.Size = new System.Drawing.Size(401, 17);
             this.chkChaos.TabIndex = 3;
             this.chkChaos.Text = "Leave Chaos Island";
             this.chkChaos.UseVisualStyleBackColor = true;
@@ -782,7 +786,7 @@
             this.chkAres.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkAres.Location = new System.Drawing.Point(10, 40);
             this.chkAres.Name = "chkAres";
-            this.chkAres.Size = new System.Drawing.Size(398, 17);
+            this.chkAres.Size = new System.Drawing.Size(401, 17);
             this.chkAres.TabIndex = 2;
             this.chkAres.Text = "Leave Ares Island";
             this.chkAres.UseVisualStyleBackColor = true;
@@ -796,11 +800,202 @@
             this.chkKronos.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkKronos.Location = new System.Drawing.Point(10, 23);
             this.chkKronos.Name = "chkKronos";
-            this.chkKronos.Size = new System.Drawing.Size(398, 17);
+            this.chkKronos.Size = new System.Drawing.Size(401, 17);
             this.chkKronos.TabIndex = 1;
             this.chkKronos.Text = "Leave Kronos Island";
             this.chkKronos.UseVisualStyleBackColor = true;
             this.chkKronos.CheckedChanged += new System.EventHandler(this.ChkKronos_CheckedChanged);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(427, 303);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Story mode (misc.)";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.chkFishingOuranosFirst);
+            this.groupBox3.Controls.Add(this.chkFishingChaosFirst);
+            this.groupBox3.Controls.Add(this.chkFishingAresFirst);
+            this.groupBox3.Controls.Add(this.chkFishingKronosFirst);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.chkFishingOuranos);
+            this.groupBox3.Controls.Add(this.chkFishingChaos);
+            this.groupBox3.Controls.Add(this.chkFishingAres);
+            this.groupBox3.Controls.Add(this.chkFishingKronos);
+            this.groupBox3.Controls.Add(this.chkFishing);
+            this.groupBox3.Location = new System.Drawing.Point(3, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox3.Size = new System.Drawing.Size(421, 118);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Fishing";
+            // 
+            // chkFishingOuranosFirst
+            // 
+            this.chkFishingOuranosFirst.AutoSize = true;
+            this.chkFishingOuranosFirst.Checked = true;
+            this.chkFishingOuranosFirst.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFishingOuranosFirst.Location = new System.Drawing.Point(274, 91);
+            this.chkFishingOuranosFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFishingOuranosFirst.Name = "chkFishingOuranosFirst";
+            this.chkFishingOuranosFirst.Size = new System.Drawing.Size(89, 17);
+            this.chkFishingOuranosFirst.TabIndex = 22;
+            this.chkFishingOuranosFirst.Text = "First time only";
+            this.chkFishingOuranosFirst.UseVisualStyleBackColor = true;
+            // 
+            // chkFishingChaosFirst
+            // 
+            this.chkFishingChaosFirst.AutoSize = true;
+            this.chkFishingChaosFirst.Checked = true;
+            this.chkFishingChaosFirst.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFishingChaosFirst.Location = new System.Drawing.Point(274, 74);
+            this.chkFishingChaosFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFishingChaosFirst.Name = "chkFishingChaosFirst";
+            this.chkFishingChaosFirst.Size = new System.Drawing.Size(89, 17);
+            this.chkFishingChaosFirst.TabIndex = 21;
+            this.chkFishingChaosFirst.Text = "First time only";
+            this.chkFishingChaosFirst.UseVisualStyleBackColor = true;
+            // 
+            // chkFishingAresFirst
+            // 
+            this.chkFishingAresFirst.AutoSize = true;
+            this.chkFishingAresFirst.Checked = true;
+            this.chkFishingAresFirst.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFishingAresFirst.Location = new System.Drawing.Point(274, 57);
+            this.chkFishingAresFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFishingAresFirst.Name = "chkFishingAresFirst";
+            this.chkFishingAresFirst.Size = new System.Drawing.Size(89, 17);
+            this.chkFishingAresFirst.TabIndex = 20;
+            this.chkFishingAresFirst.Text = "First time only";
+            this.chkFishingAresFirst.UseVisualStyleBackColor = true;
+            // 
+            // chkFishingKronosFirst
+            // 
+            this.chkFishingKronosFirst.AutoSize = true;
+            this.chkFishingKronosFirst.Checked = true;
+            this.chkFishingKronosFirst.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFishingKronosFirst.Location = new System.Drawing.Point(274, 40);
+            this.chkFishingKronosFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFishingKronosFirst.Name = "chkFishingKronosFirst";
+            this.chkFishingKronosFirst.Size = new System.Drawing.Size(89, 17);
+            this.chkFishingKronosFirst.TabIndex = 19;
+            this.chkFishingKronosFirst.Text = "First time only";
+            this.chkFishingKronosFirst.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(156, 75);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(61, 13);
+            this.label13.TabIndex = 18;
+            this.label13.Text = "---------------->";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(156, 92);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(61, 13);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "---------------->";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(156, 58);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(61, 13);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "---------------->";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(156, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "---------------->";
+            // 
+            // chkFishingOuranos
+            // 
+            this.chkFishingOuranos.AutoSize = true;
+            this.chkFishingOuranos.Checked = true;
+            this.chkFishingOuranos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFishingOuranos.Location = new System.Drawing.Point(27, 91);
+            this.chkFishingOuranos.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFishingOuranos.Name = "chkFishingOuranos";
+            this.chkFishingOuranos.Size = new System.Drawing.Size(66, 17);
+            this.chkFishingOuranos.TabIndex = 15;
+            this.chkFishingOuranos.Text = "Ouranos";
+            this.chkFishingOuranos.UseVisualStyleBackColor = true;
+            this.chkFishingOuranos.CheckedChanged += new System.EventHandler(this.chkFishing_CheckedChanged);
+            // 
+            // chkFishingChaos
+            // 
+            this.chkFishingChaos.AutoSize = true;
+            this.chkFishingChaos.Checked = true;
+            this.chkFishingChaos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFishingChaos.Location = new System.Drawing.Point(27, 74);
+            this.chkFishingChaos.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFishingChaos.Name = "chkFishingChaos";
+            this.chkFishingChaos.Size = new System.Drawing.Size(56, 17);
+            this.chkFishingChaos.TabIndex = 14;
+            this.chkFishingChaos.Text = "Chaos";
+            this.chkFishingChaos.UseVisualStyleBackColor = true;
+            this.chkFishingChaos.CheckedChanged += new System.EventHandler(this.chkFishing_CheckedChanged);
+            // 
+            // chkFishingAres
+            // 
+            this.chkFishingAres.AutoSize = true;
+            this.chkFishingAres.Checked = true;
+            this.chkFishingAres.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFishingAres.Location = new System.Drawing.Point(27, 57);
+            this.chkFishingAres.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFishingAres.Name = "chkFishingAres";
+            this.chkFishingAres.Size = new System.Drawing.Size(47, 17);
+            this.chkFishingAres.TabIndex = 13;
+            this.chkFishingAres.Text = "Ares";
+            this.chkFishingAres.UseVisualStyleBackColor = true;
+            this.chkFishingAres.CheckedChanged += new System.EventHandler(this.chkFishing_CheckedChanged);
+            // 
+            // chkFishingKronos
+            // 
+            this.chkFishingKronos.AutoSize = true;
+            this.chkFishingKronos.Checked = true;
+            this.chkFishingKronos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFishingKronos.Location = new System.Drawing.Point(27, 40);
+            this.chkFishingKronos.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFishingKronos.Name = "chkFishingKronos";
+            this.chkFishingKronos.Size = new System.Drawing.Size(59, 17);
+            this.chkFishingKronos.TabIndex = 12;
+            this.chkFishingKronos.Text = "Kronos";
+            this.chkFishingKronos.UseVisualStyleBackColor = true;
+            this.chkFishingKronos.CheckedChanged += new System.EventHandler(this.chkFishing_CheckedChanged);
+            // 
+            // chkFishing
+            // 
+            this.chkFishing.AutoSize = true;
+            this.chkFishing.Checked = true;
+            this.chkFishing.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFishing.Location = new System.Drawing.Point(10, 23);
+            this.chkFishing.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFishing.Name = "chkFishing";
+            this.chkFishing.Size = new System.Drawing.Size(175, 17);
+            this.chkFishing.TabIndex = 11;
+            this.chkFishing.Text = "Split when exiting a fishing level";
+            this.chkFishing.UseVisualStyleBackColor = true;
+            this.chkFishing.CheckedChanged += new System.EventHandler(this.chkFishing_CheckedChanged);
             // 
             // tabPage2
             // 
@@ -809,7 +1004,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(427, 270);
+            this.tabPage2.Size = new System.Drawing.Size(427, 303);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Arcade mode";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1317,32 +1512,6 @@
             this.chk1_1_arcade.Text = "1 - 1";
             this.chk1_1_arcade.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.AutoSize = true;
-            this.groupBox3.Controls.Add(this.chkReset);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(10, 77);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox3.Size = new System.Drawing.Size(455, 50);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Reset";
-            // 
-            // chkReset
-            // 
-            this.chkReset.AutoSize = true;
-            this.chkReset.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkReset.Enabled = false;
-            this.chkReset.Location = new System.Drawing.Point(10, 23);
-            this.chkReset.Name = "chkReset";
-            this.chkReset.Size = new System.Drawing.Size(435, 17);
-            this.chkReset.TabIndex = 0;
-            this.chkReset.Text = "Reset when returning to the main menu";
-            this.chkReset.UseVisualStyleBackColor = true;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -1359,7 +1528,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(0);
@@ -1376,6 +1544,9 @@
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1388,8 +1559,6 @@
             this.groupBox12.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1403,8 +1572,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox chkReset;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox chkFinalBoss;
         private System.Windows.Forms.CheckBox chkRhea;
@@ -1448,7 +1615,6 @@
         private System.Windows.Forms.CheckBox chk1_3_arcade;
         private System.Windows.Forms.CheckBox chk1_2_arcade;
         private System.Windows.Forms.CheckBox chk1_1_arcade;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chk4_9_story;
         private System.Windows.Forms.CheckBox chk4_8_story;
         private System.Windows.Forms.CheckBox chk4_7_story;
@@ -1493,5 +1659,20 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox chkFishingOuranos;
+        private System.Windows.Forms.CheckBox chkFishingChaos;
+        private System.Windows.Forms.CheckBox chkFishingAres;
+        private System.Windows.Forms.CheckBox chkFishingKronos;
+        private System.Windows.Forms.CheckBox chkFishing;
+        private System.Windows.Forms.CheckBox chkFishingOuranosFirst;
+        private System.Windows.Forms.CheckBox chkFishingChaosFirst;
+        private System.Windows.Forms.CheckBox chkFishingAresFirst;
+        private System.Windows.Forms.CheckBox chkFishingKronosFirst;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label1;
     }
 }

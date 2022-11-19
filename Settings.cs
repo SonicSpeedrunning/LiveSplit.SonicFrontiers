@@ -10,7 +10,6 @@ namespace LiveSplit.SonicFrontiers
         public bool StoryStart { get; set; }
         public bool ArcadeStart { get; set; }
         public bool Arcade1_1 { get; set; }
-        public bool Reset { get; set; }
         public bool Kronos { get; set; }
         public bool Ares { get; set; }
         public bool Chaos { get; set; }
@@ -89,6 +88,18 @@ namespace LiveSplit.SonicFrontiers
         public bool w9d07_arcade_soon { get; set; }
 
 
+        // Fishing
+        public bool Fishing { get; set; }
+        public bool w1r03_fish { get; set; }
+        public bool w2r01_fish { get; set; }
+        public bool w3r01_fish { get; set; }
+        public bool w1r04_fish { get; set; }
+        public bool w1r03_fish_first { get; set; }
+        public bool w2r01_fish_first { get; set; }
+        public bool w3r01_fish_first { get; set; }
+        public bool w1r04_fish_first { get; set; }
+
+
 
         public Settings()
         {
@@ -99,7 +110,6 @@ namespace LiveSplit.SonicFrontiers
             chkStoryStart.DataBindings.Add("Checked", this, "StoryStart", false, DataSourceUpdateMode.OnPropertyChanged);
             chkArcadeStart.DataBindings.Add("Checked", this, "ArcadeStart", false, DataSourceUpdateMode.OnPropertyChanged);
             chkArcade1_1.DataBindings.Add("Checked", this, "Arcade1_1", false, DataSourceUpdateMode.OnPropertyChanged);
-            chkReset.DataBindings.Add("Checked", this, "Reset", false, DataSourceUpdateMode.OnPropertyChanged);
             chkKronos.DataBindings.Add("Checked", this, "Kronos", false, DataSourceUpdateMode.OnPropertyChanged);
             chkAres.DataBindings.Add("Checked", this, "Ares", false, DataSourceUpdateMode.OnPropertyChanged);
             chkChaos.DataBindings.Add("Checked", this, "Chaos", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -170,11 +180,19 @@ namespace LiveSplit.SonicFrontiers
             chk4_8_arcade.DataBindings.Add("Checked", this, "w7d05_arcade", false, DataSourceUpdateMode.OnPropertyChanged);
             chk4_9_arcade.DataBindings.Add("Checked", this, "w9d07_arcade", false, DataSourceUpdateMode.OnPropertyChanged);
             chk4_9_arcade_soon.DataBindings.Add("Checked", this, "w9d07_arcade_soon", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkFishing.DataBindings.Add("Checked", this, "Fishing", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkFishingKronos.DataBindings.Add("Checked", this, "w1r03_fish", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkFishingAres.DataBindings.Add("Checked", this, "w2r01_fish", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkFishingChaos.DataBindings.Add("Checked", this, "w3r01_fish", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkFishingOuranos.DataBindings.Add("Checked", this, "w1r04_fish", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkFishingKronosFirst.DataBindings.Add("Checked", this, "w1r03_fish_first", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkFishingAresFirst.DataBindings.Add("Checked", this, "w2r01_fish_first", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkFishingChaosFirst.DataBindings.Add("Checked", this, "w3r01_fish_first", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkFishingOuranosFirst.DataBindings.Add("Checked", this, "w1r04_fish_first", false, DataSourceUpdateMode.OnPropertyChanged);
 
-            
+
             // Default Values
             StoryStart = ArcadeStart = Arcade1_1 = true;
-            Reset = false;
             Kronos = Ares = Chaos = Rhea = FinalBoss = true;
             KronosFirst = AresFirst = ChaosFirst = RheaFirst = true;
 
@@ -189,6 +207,11 @@ namespace LiveSplit.SonicFrontiers
             w6d05_arcade = w8d03_arcade = w7d02_arcade = w7d06_arcade = w8d04_arcade = w6d03_arcade = w8d05_arcade = true;
             w6d04_arcade = w6d08_arcade = w8d02_arcade = w6d09_arcade = w6d07_arcade = w8d06_arcade = w7d03_arcade = true;
             w7d08_arcade = w9d02_arcade = w7d01_arcade = w9d03_arcade = w6d10_arcade = w7d07_arcade = w9d05_arcade = w7d05_arcade = w9d07_arcade = w9d07_arcade_soon = true;
+
+            // Fishing
+            Fishing = true;
+            w1r03_fish = w2r01_fish = w3r01_fish = w1r04_fish = true;
+            w1r03_fish_first = w2r01_fish_first = w3r01_fish_first = w1r04_fish_first = true;
         }
 
         public XmlNode GetSettings(XmlDocument doc)
@@ -197,7 +220,6 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "StoryStart", StoryStart));
             settingsNode.AppendChild(ToElement(doc, "ArcadeStart", ArcadeStart));
             settingsNode.AppendChild(ToElement(doc, "Arcade1_1", Arcade1_1));
-            settingsNode.AppendChild(ToElement(doc, "Reset", Reset));
             settingsNode.AppendChild(ToElement(doc, "Kronos", Kronos));
             settingsNode.AppendChild(ToElement(doc, "Ares", Ares));
             settingsNode.AppendChild(ToElement(doc, "Chaos", Chaos));
@@ -268,7 +290,15 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "w7d05_arcade", w7d05_arcade));
             settingsNode.AppendChild(ToElement(doc, "w9d07_arcade", w9d07_arcade));
             settingsNode.AppendChild(ToElement(doc, "w9d07_arcade_soon", w9d07_arcade_soon));
-
+            settingsNode.AppendChild(ToElement(doc, "Fishing", Fishing));
+            settingsNode.AppendChild(ToElement(doc, "w1r03_fish", w1r03_fish));
+            settingsNode.AppendChild(ToElement(doc, "w2r01_fish", w2r01_fish));
+            settingsNode.AppendChild(ToElement(doc, "w3r01_fish", w3r01_fish));
+            settingsNode.AppendChild(ToElement(doc, "w1r04_fish", w1r04_fish));
+            settingsNode.AppendChild(ToElement(doc, "w1r03_fish_first", w1r03_fish_first));
+            settingsNode.AppendChild(ToElement(doc, "w1r03_fish_first", w1r03_fish_first));
+            settingsNode.AppendChild(ToElement(doc, "w1r03_fish_first", w1r03_fish_first));
+            settingsNode.AppendChild(ToElement(doc, "w1r03_fish_first", w1r03_fish_first));
             return settingsNode;
         }
 
@@ -277,7 +307,6 @@ namespace LiveSplit.SonicFrontiers
             StoryStart = ParseBool(settings, "StoryStart", true);
             ArcadeStart = ParseBool(settings, "ArcadeStart", true);
             Arcade1_1 = ParseBool(settings, "Arcade1_1", true);
-            Reset = ParseBool(settings, "Reset", true);
             Kronos = ParseBool(settings, "Kronos", true);
             Ares = ParseBool(settings, "Ares", true);
             Chaos = ParseBool(settings, "Chaos", true);
@@ -404,6 +433,18 @@ namespace LiveSplit.SonicFrontiers
         private void ChkRhea_CheckedChanged(object sender, EventArgs e)
         {
             chkRheaFirst.Enabled = chkRhea.Checked;
+        }
+
+        private void chkFishing_CheckedChanged(object sender, EventArgs e)
+        {
+            chkFishingAres.Enabled = chkFishing.Checked;
+            chkFishingChaos.Enabled = chkFishing.Checked;
+            chkFishingKronos.Enabled = chkFishing.Checked;
+            chkFishingOuranos.Enabled = chkFishing.Checked;
+            chkFishingKronosFirst.Enabled = chkFishing.Checked && chkFishingKronos.Checked;
+            chkFishingAresFirst.Enabled = chkFishing.Checked && chkFishingAres.Checked;
+            chkFishingChaosFirst.Enabled = chkFishing.Checked && chkFishingChaos.Checked;
+            chkFishingOuranosFirst.Enabled = chkFishing.Checked && chkFishingOuranos.Checked;
         }
     }
 }
