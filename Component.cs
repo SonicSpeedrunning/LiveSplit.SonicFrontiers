@@ -19,7 +19,7 @@ namespace LiveSplit.SonicFrontiers
         {
             timer = new TimerModel { CurrentState = state };
             Settings = new Settings();
-            watchers = new Watchers(state);
+            watchers = new Watchers(state, "SonicFrontiers");
 
             if (timer.CurrentState.CurrentTimingMethod == TimingMethod.RealTime)
                 Task.Run(AskGameTime);
@@ -53,8 +53,11 @@ namespace LiveSplit.SonicFrontiers
 
         public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
-            // If LiveSplit is not connected to the game, or if Update explicitly returns false, do not proceed further
-            if (!watchers.Update()) return;
+            // If LiveSplit is not connected to the game, of course there's no point in going further
+            if (!watchers.Init()) return;
+
+            // Main update logic is inside the watcher class inorder to expose unneded stuff to the outside
+            watchers.Update();
 
             switch (timer.CurrentState.CurrentPhase)
             {
