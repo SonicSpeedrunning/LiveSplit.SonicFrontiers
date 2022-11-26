@@ -76,4 +76,10 @@
             Result = "Result",                      // Results screen
             Build = "Build";                        // Used while "building" the level, regardless of the actual load. Don't use it
     }
+
+    enum GameVersion
+    {
+        Unknown,
+        v1_01 = 0x162C8000,
+    }
 }

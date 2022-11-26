@@ -112,7 +112,7 @@ namespace LiveSplit.SonicFrontiers
             }
 
             // Final boss split
-            if (watchers.LevelID.Current == SpecialLevels.TheEndBoss && watchers.EndQTECount == 3)
+            if (watchers.LevelID.Current == SpecialLevels.TheEndBoss && watchers.EndQTECount.Old == 3 && watchers.EndQTECount.Current == 0)
                 return Settings.FinalBoss;
             else
                 return Settings.GetSetting(watchers.LevelID.Old + "_story") && watchers.StoryModeCyberSpaceCompletionFlag.Old && !watchers.StoryModeCyberSpaceCompletionFlag.Current;

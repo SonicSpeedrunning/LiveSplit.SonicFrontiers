@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.0.8">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Fixed final split being triggered even when failing the QTE</change>
+		</changelog>
+	</update>
 	<update version="1.0.7">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
