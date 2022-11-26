@@ -50,6 +50,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Common\GameMemoryCommon.cs" />
+    <Compile Include="Game\Common\RTTI.cs" />
     <Compile Include="Game\Common\Methods.cs" />
     <Compile Include="Game\Common\FakeMemoryWatcher.cs" />
     <Compile Include="Game\Common\ProcessHook.cs" />

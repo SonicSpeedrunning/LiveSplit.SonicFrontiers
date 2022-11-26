@@ -17,6 +17,16 @@ namespace LiveSplit.SonicFrontiers
             if (ptr == IntPtr.Zero)
                 throw new SigscanFailedException();
         }
+
+        public static bool BitCheck(this int value, int bitPos)
+        {
+            return (value & (1 << bitPos)) != 0;
+        }
+
+        public static bool BitCheck(this byte value, int bitPos)
+        {
+            return (value & (1 << bitPos)) != 0;
+        }
     }
 
     public class SigscanFailedException : Exception
