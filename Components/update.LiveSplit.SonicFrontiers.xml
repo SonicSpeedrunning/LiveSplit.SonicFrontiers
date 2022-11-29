@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.0.8.1">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Code optimization</change>
+			<change>Added a setting to prevent the game from automatically pausing if the user switches to another window (disabled by default)</change>
+		</changelog>
+	</update>
 	<update version="1.0.8">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>

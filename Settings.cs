@@ -7,6 +7,7 @@ namespace LiveSplit.SonicFrontiers
     public partial class Settings : UserControl
     {
         // General
+        public bool WFocus { get; set; }
         public bool StoryStart { get; set; }
         public bool ArcadeStart { get; set; }
         public bool Arcade1_1 { get; set; }
@@ -107,6 +108,7 @@ namespace LiveSplit.SonicFrontiers
             label6.Text = "Autosplitter version: v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion;
 
             // General settings
+            chkFocus.DataBindings.Add("Checked", this, "WFocus", false, DataSourceUpdateMode.OnPropertyChanged);
             chkStoryStart.DataBindings.Add("Checked", this, "StoryStart", false, DataSourceUpdateMode.OnPropertyChanged);
             chkArcadeStart.DataBindings.Add("Checked", this, "ArcadeStart", false, DataSourceUpdateMode.OnPropertyChanged);
             chkArcade1_1.DataBindings.Add("Checked", this, "Arcade1_1", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -192,6 +194,7 @@ namespace LiveSplit.SonicFrontiers
 
 
             // Default Values
+            WFocus = false;
             StoryStart = ArcadeStart = Arcade1_1 = true;
             Kronos = Ares = Chaos = Rhea = FinalBoss = true;
             KronosFirst = AresFirst = ChaosFirst = RheaFirst = true;
@@ -217,6 +220,7 @@ namespace LiveSplit.SonicFrontiers
         public XmlNode GetSettings(XmlDocument doc)
         {
             XmlElement settingsNode = doc.CreateElement("Settings");
+            settingsNode.AppendChild(ToElement(doc, "WFocus", WFocus));
             settingsNode.AppendChild(ToElement(doc, "StoryStart", StoryStart));
             settingsNode.AppendChild(ToElement(doc, "ArcadeStart", ArcadeStart));
             settingsNode.AppendChild(ToElement(doc, "Arcade1_1", Arcade1_1));
@@ -304,6 +308,7 @@ namespace LiveSplit.SonicFrontiers
 
         public void SetSettings(XmlNode settings)
         {
+            WFocus = ParseBool(settings, "WFocus", true);
             StoryStart = ParseBool(settings, "StoryStart", true);
             ArcadeStart = ParseBool(settings, "ArcadeStart", true);
             Arcade1_1 = ParseBool(settings, "Arcade1_1", true);
@@ -316,36 +321,36 @@ namespace LiveSplit.SonicFrontiers
             ChaosFirst = ParseBool(settings, "ChaosFirst", true);
             RheaFirst = ParseBool(settings, "RheaFirst", true);
             FinalBoss = ParseBool(settings, "FinalBoss", true);
-            w6d01_story = ParseBool(settings, "w6d01_story", false);
-            w8d01_story = ParseBool(settings, "w8d01_story", false);
-            w9d04_story = ParseBool(settings, "w9d04_story", false);
-            w6d02_story = ParseBool(settings, "w6d02_story", false);
-            w7d04_story = ParseBool(settings, "w7d04_story", false);
-            w6d06_story = ParseBool(settings, "w6d06_story", false);
-            w9d06_story = ParseBool(settings, "w9d06_story", false);
-            w6d05_story = ParseBool(settings, "w6d05_story", false);
-            w8d03_story = ParseBool(settings, "w8d03_story", false);
-            w7d02_story = ParseBool(settings, "w7d02_story", false);
-            w7d06_story = ParseBool(settings, "w7d06_story", false);
-            w8d04_story = ParseBool(settings, "w8d04_story", false);
-            w6d03_story = ParseBool(settings, "w6d03_story", false);
-            w8d05_story = ParseBool(settings, "w8d05_story", false);
-            w6d04_story = ParseBool(settings, "w6d04_story", false);
-            w6d08_story = ParseBool(settings, "w6d08_story", false);
-            w8d02_story = ParseBool(settings, "w8d02_story", false);
-            w6d09_story = ParseBool(settings, "w6d09_story", false);
-            w6d07_story = ParseBool(settings, "w6d07_story", false);
-            w8d06_story = ParseBool(settings, "w8d06_story", false);
-            w7d03_story = ParseBool(settings, "w7d03_story", false);
-            w7d08_story = ParseBool(settings, "w7d08_story", false);
-            w9d02_story = ParseBool(settings, "w9d02_story", false);
-            w7d01_story = ParseBool(settings, "w7d01_story", false);
-            w9d03_story = ParseBool(settings, "w9d03_story", false);
-            w6d10_story = ParseBool(settings, "w6d10_story", false);
-            w7d07_story = ParseBool(settings, "w7d07_story", false);
-            w9d05_story = ParseBool(settings, "w9d05_story", false);
-            w7d05_story = ParseBool(settings, "w7d05_story", false);
-            w9d07_story = ParseBool(settings, "w9d07_story", false);
+            w6d01_story = ParseBool(settings, "w6d01_story", true);
+            w8d01_story = ParseBool(settings, "w8d01_story", true);
+            w9d04_story = ParseBool(settings, "w9d04_story", true);
+            w6d02_story = ParseBool(settings, "w6d02_story", true);
+            w7d04_story = ParseBool(settings, "w7d04_story", true);
+            w6d06_story = ParseBool(settings, "w6d06_story", true);
+            w9d06_story = ParseBool(settings, "w9d06_story", true);
+            w6d05_story = ParseBool(settings, "w6d05_story", true);
+            w8d03_story = ParseBool(settings, "w8d03_story", true);
+            w7d02_story = ParseBool(settings, "w7d02_story", true);
+            w7d06_story = ParseBool(settings, "w7d06_story", true);
+            w8d04_story = ParseBool(settings, "w8d04_story", true);
+            w6d03_story = ParseBool(settings, "w6d03_story", true);
+            w8d05_story = ParseBool(settings, "w8d05_story", true);
+            w6d04_story = ParseBool(settings, "w6d04_story", true);
+            w6d08_story = ParseBool(settings, "w6d08_story", true);
+            w8d02_story = ParseBool(settings, "w8d02_story", true);
+            w6d09_story = ParseBool(settings, "w6d09_story", true);
+            w6d07_story = ParseBool(settings, "w6d07_story", true);
+            w8d06_story = ParseBool(settings, "w8d06_story", true);
+            w7d03_story = ParseBool(settings, "w7d03_story", true);
+            w7d08_story = ParseBool(settings, "w7d08_story", true);
+            w9d02_story = ParseBool(settings, "w9d02_story", true);
+            w7d01_story = ParseBool(settings, "w7d01_story", true);
+            w9d03_story = ParseBool(settings, "w9d03_story", true);
+            w6d10_story = ParseBool(settings, "w6d10_story", true);
+            w7d07_story = ParseBool(settings, "w7d07_story", true);
+            w9d05_story = ParseBool(settings, "w9d05_story", true);
+            w7d05_story = ParseBool(settings, "w7d05_story", true);
+            w9d07_story = ParseBool(settings, "w9d07_story", true);
             w6d01_arcade = ParseBool(settings, "w6d01_arcade", true);
             w8d01_arcade = ParseBool(settings, "w8d01_arcade", true);
             w9d04_arcade = ParseBool(settings, "w9d04_arcade", true);
@@ -445,6 +450,14 @@ namespace LiveSplit.SonicFrontiers
             chkFishingAresFirst.Enabled = chkFishing.Checked && chkFishingAres.Checked;
             chkFishingChaosFirst.Enabled = chkFishing.Checked && chkFishingChaos.Checked;
             chkFishingOuranosFirst.Enabled = chkFishing.Checked && chkFishingOuranos.Checked;
+        }
+
+
+        public event EventHandler<bool> WFocusChange;
+
+        private void chkFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            WFocusChange?.Invoke(this, chkFocus.Checked);
         }
     }
 }

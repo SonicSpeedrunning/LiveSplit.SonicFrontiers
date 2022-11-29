@@ -137,6 +137,8 @@
             this.chk1_2_arcade = new System.Windows.Forms.CheckBox();
             this.chk1_1_arcade = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.chkFocus = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -151,6 +153,7 @@
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox13.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -158,12 +161,11 @@
             this.groupBox1.Controls.Add(this.chkArcade1_1);
             this.groupBox1.Controls.Add(this.chkArcadeStart);
             this.groupBox1.Controls.Add(this.chkStoryStart);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(455, 81);
+            this.groupBox1.Size = new System.Drawing.Size(233, 81);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Auto start settings";
@@ -189,7 +191,7 @@
             this.chkArcadeStart.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkArcadeStart.Location = new System.Drawing.Point(10, 40);
             this.chkArcadeStart.Name = "chkArcadeStart";
-            this.chkArcadeStart.Size = new System.Drawing.Size(435, 17);
+            this.chkArcadeStart.Size = new System.Drawing.Size(213, 17);
             this.chkArcadeStart.TabIndex = 3;
             this.chkArcadeStart.Text = "Arcade mode";
             this.chkArcadeStart.UseVisualStyleBackColor = true;
@@ -203,7 +205,7 @@
             this.chkStoryStart.Dock = System.Windows.Forms.DockStyle.Top;
             this.chkStoryStart.Location = new System.Drawing.Point(10, 23);
             this.chkStoryStart.Name = "chkStoryStart";
-            this.chkStoryStart.Size = new System.Drawing.Size(435, 17);
+            this.chkStoryStart.Size = new System.Drawing.Size(213, 17);
             this.chkStoryStart.TabIndex = 0;
             this.chkStoryStart.Text = "Story mode (New Game)";
             this.chkStoryStart.UseVisualStyleBackColor = true;
@@ -1522,11 +1524,37 @@
             this.label6.Text = "Autosplitter version: vX.X.X";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // chkFocus
+            // 
+            this.chkFocus.AutoSize = true;
+            this.chkFocus.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkFocus.Location = new System.Drawing.Point(10, 23);
+            this.chkFocus.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFocus.Name = "chkFocus";
+            this.chkFocus.Size = new System.Drawing.Size(196, 30);
+            this.chkFocus.TabIndex = 5;
+            this.chkFocus.Text = "Prevent the game from pausing\r\nwhen it goes out of focus";
+            this.chkFocus.UseVisualStyleBackColor = true;
+            this.chkFocus.CheckedChanged += new System.EventHandler(this.chkFocus_CheckedChanged);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.chkFocus);
+            this.groupBox6.Location = new System.Drawing.Point(249, 10);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox6.Size = new System.Drawing.Size(216, 81);
+            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Other options";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -1559,6 +1587,8 @@
             this.groupBox12.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1674,5 +1704,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkFocus;
+        private System.Windows.Forms.GroupBox groupBox6;
     }
 }

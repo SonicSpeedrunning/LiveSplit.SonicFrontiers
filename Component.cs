@@ -21,6 +21,9 @@ namespace LiveSplit.SonicFrontiers
             Settings = new Settings();
             watchers = new Watchers(state, "SonicFrontiers");
 
+            watchers.WFocusChange += (s, e) => OnWFocusChange(s, Settings.WFocus);
+            Settings.WFocusChange += OnWFocusChange;
+
             if (timer.CurrentState.CurrentTimingMethod == TimingMethod.RealTime)
                 Task.Run(AskGameTime);
         }
@@ -39,8 +42,15 @@ namespace LiveSplit.SonicFrontiers
                 timer.CurrentState.CurrentTimingMethod = TimingMethod.GameTime;
         }
 
+        public void OnWFocusChange(object sender, bool b)
+        {
+            watchers.ScreenFocus(b);
+        }
+
         public override void Dispose()
         {
+            Settings.WFocusChange -= OnWFocusChange;
+            watchers.WFocusChange -= (s, e) => OnWFocusChange(s, Settings.WFocus); ;
             Settings.Dispose();
             watchers.Dispose();
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveSplit.Model;
 
@@ -10,9 +9,6 @@ namespace LiveSplit.SonicFrontiers
         // Game process
         private readonly ProcessHook GameProcess;
         private readonly LiveSplitState state;
-
-        // Game offsets
-        private readonly Dictionary<string, int> offsets;
 
         public bool Init()
         {
