@@ -1,5 +1,6 @@
 ﻿using LiveSplit.UI.Components;
 using System;
+using System.Linq;
 
 namespace LiveSplit.SonicFrontiers
 {
@@ -7,10 +8,10 @@ namespace LiveSplit.SonicFrontiers
     {
         private bool Start()
         {
-            if (watchers.Status.Current == Status.Quit && watchers.Status.Old == Status.NewGameMenu) // Main trigger for story mode
+            if (watchers.Status.Current == FakeEnums.Status.Quit && watchers.Status.Old == FakeEnums.Status.NewGameMenu) // Main trigger for story mode
                 return Settings.StoryStart;
             else if (Settings.ArcadeStart && watchers.IsInArcade)
-                return (Settings.Arcade1_1 ? watchers.LevelID.Current == CyberSpaceLevels.w1_1 : watchers.LevelID.Current != watchers.LevelID.Old) && watchers.LevelID.Old == SpecialLevels.MainMenu;
+                return (Settings.Arcade1_1 ? watchers.LevelID.Current == FakeEnums.LevelID["w6d01"] : watchers.LevelID.Current != watchers.LevelID.Old) && watchers.LevelID.Old == FakeEnums.LevelID["w0r01"];
 
             return false;
         }
@@ -20,102 +21,36 @@ namespace LiveSplit.SonicFrontiers
             // Arcade mode splitting
             if (watchers.IsInArcade)
             {
-                if (watchers.LevelID.Old == CyberSpaceLevels.w4_9)
-                {
-                    if (!Settings.w9d07_arcade)
-                        return false;
-                    if (Settings.w9d07_arcade_soon)
-                        return watchers.Status.Old != watchers.Status.Current && watchers.Status.Current == Status.Finish;
-                    else
-                        return watchers.Status.Old == Status.Result && watchers.Status.Current != Status.Result;
-                }
-                else
-                {
-                    return Settings.GetSetting(watchers.LevelID.Old + "_arcade") && watchers.Status.Old == Status.Result && watchers.Status.Current != Status.Result;
-                }
+                // First, the code checks if autosplitting for the current stage is enabled.
+                // If it's not, there's no point in continuing.
+                if (!Settings["c" + watchers.LevelID.Old + "_arcade"]) return false;
+
+                // In 4-9 there's a specific setting to allow splitting when touching the goal.
+                // As this is usually the final split, this is usually a desirable thing to have.
+                if (watchers.LevelID.Old == FakeEnums.LevelID["w9d07"] && Settings.c29_arcade_soon)
+                    return watchers.Status.Changed && watchers.Status.Current == FakeEnums.Status.Finish;
+
+                return watchers.Status.Changed && watchers.Status.Old == FakeEnums.Status.Result;
             }
 
-            // Story mode splitting - island switching
-            if (watchers.SwitchedIsland())
+            // Story mode
+
+            // Event flags
+            foreach (var flag in watchers.SplitBools.Where(b => !watchers.AlreadyTriggeredBools.Contains(b.Key)))
             {
-                switch (watchers.LevelID.Old)
+                if (Settings[flag.Key] && !flag.Value.Old && flag.Value.Current)
                 {
-                    case Islands.Kronos:
-                        if (!Settings.Kronos) return false;
-                        if (watchers.LevelID.Current != Islands.Ares) return !Settings.KronosFirst;
-
-                        if (!watchers.VisitedIslands.Contains(watchers.LevelID.Old))
-                        {
-                            watchers.VisitedIslands.Add(watchers.LevelID.Old);
-                            return true;
-                        }
-                        else
-                            return !Settings.KronosFirst;
-
-                    case Islands.Ares:
-                        if (!Settings.Ares) return false;
-                        if (watchers.LevelID.Current != Islands.Chaos) return !Settings.AresFirst;
-                                
-                        if (!watchers.VisitedIslands.Contains(watchers.LevelID.Old))
-                        {
-                            watchers.VisitedIslands.Add(watchers.LevelID.Old);
-                            return true;
-                        }
-                        else
-                            return !Settings.AresFirst;
-
-                    case Islands.Chaos:
-                        if (!Settings.Chaos) return false;
-                        if (watchers.LevelID.Current != Islands.Rhea) return !Settings.ChaosFirst;
-
-                        if (!watchers.VisitedIslands.Contains(watchers.LevelID.Old))
-                        {
-                            watchers.VisitedIslands.Add(watchers.LevelID.Old);
-                            return true;
-                        }
-                        else
-                            return !Settings.ChaosFirst;
-
-
-                    case Islands.Rhea:
-                        if (!Settings.Chaos) return false;
-                        if (watchers.LevelID.Current != Islands.Ouranos) return !Settings.RheaFirst;
-
-                        if (!watchers.VisitedIslands.Contains(watchers.LevelID.Old))
-                        {
-                            watchers.VisitedIslands.Add(watchers.LevelID.Old);
-                            return true;
-                        }
-                        else
-                            return !Settings.RheaFirst;
-                }
-            }
-
-            // Fishing stages splitting
-            if (watchers.LevelID.Old == FishingLevels.Fishing && watchers.LevelID.Changed)
-            {
-                switch (watchers.LevelID.Current)
-                {
-                    case Islands.Kronos:
-                    case Islands.Ares:
-                    case Islands.Chaos:
-                    case Islands.Ouranos:
-                        if (!Settings.Fishing) return false;
-                        if (!watchers.VisitedFishingLevels.Contains(watchers.LevelID.Current))
-                        {
-                            watchers.VisitedFishingLevels.Add(watchers.LevelID.Current);
-                            return Settings.GetSetting(watchers.LevelID.Current + "_fish");
-                        }
-                        else
-                            return !Settings.GetSetting(watchers.LevelID.Current + "_fish_first");
+                    watchers.AlreadyTriggeredBools.Add(flag.Key);
+                    return true;
                 }
             }
 
             // Final boss split
-            if (watchers.LevelID.Current == SpecialLevels.TheEndBoss && watchers.EndQTECount.Old == 3 && watchers.EndQTECount.Current == 0)
-                return Settings.FinalBoss;
-            else
-                return Settings.GetSetting(watchers.LevelID.Old + "_story") && watchers.StoryModeCyberSpaceCompletionFlag.Old && !watchers.StoryModeCyberSpaceCompletionFlag.Current;
+            if (Settings.FinalBoss && watchers.LevelID.Current == 72 && watchers.EndQTECount.Old == watchers.EndQTECount.Current - 1 && watchers.EndQTECount.Current == 3)
+                return true;
+            
+            // Cyber space levels (in story mode)
+            return Settings["c" + watchers.LevelID.Old + "_story"] && watchers.StoryModeCyberSpaceCompletionFlag.Old && !watchers.StoryModeCyberSpaceCompletionFlag.Current;
         }
 
         bool Reset()
@@ -125,8 +60,8 @@ namespace LiveSplit.SonicFrontiers
 
         bool IsLoading()
         {
-            return watchers.IsInArcade || (watchers.LevelID.Current != SpecialLevels.MainMenu && watchers.GameModeLoad)
-                || (watchers.IsInTutorial && !watchers.LevelID.Current.Contains("r"));
+            return watchers.IsInArcade || (watchers.LevelID.Current != FakeEnums.LevelID["w0r01"] && watchers.GameModeLoad)
+                || (watchers.IsInTutorial && (watchers.LevelID.Current <= 29 || watchers.LevelID.Current == 70));
         }
 
         private TimeSpan? GameTime()

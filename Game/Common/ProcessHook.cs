@@ -6,17 +6,27 @@ using System.Threading.Tasks;
 
 namespace LiveSplit.SonicFrontiers
 {
+    /// <summary>
+    /// Custom class with the ability to automatically hook to a target process using Tasks
+    /// </summary>
     class ProcessHook
     {
         // Internal stuff
         private readonly string[] processNames;
         private readonly CancellationTokenSource CancelToken;
 
-        // Properties we probably want to expose
+        /// <summary>
+        /// Game process
+        /// </summary>
         public Process Game { get; protected set; }
-        public GameInitStatus InitStatus { get; set; }
         public bool IsGameHooked => Game != null && !Game.HasExited;
 
+
+        /// <summary>
+        /// Reports the current status for the init function. The autosplitter will check if
+        /// it's set to GameInitStatus.Completed before performing any actual splitting logic.
+        /// </summary>
+        public GameInitStatus InitStatus { get; set; }
 
         public ProcessHook(params string[] exeNames)
         {
@@ -26,7 +36,7 @@ namespace LiveSplit.SonicFrontiers
             Task.Run(TryConnect, CancelToken.Token);
         }
 
-        private void TryConnect()
+        private async Task TryConnect()
         {
             while (!CancelToken.IsCancellationRequested)
             {
@@ -39,7 +49,7 @@ namespace LiveSplit.SonicFrontiers
                         return;
                     }
                 }
-                Task.Delay(1500, CancelToken.Token).Wait();
+                await Task.Delay(1500, CancelToken.Token);
             }
         }
 
@@ -49,13 +59,13 @@ namespace LiveSplit.SonicFrontiers
             InitStatus = GameInitStatus.NotStarted;
             Game?.Dispose();
             Game = null;
-            Task.Run(() => TryConnect(), CancelToken.Token);
+            Task.Run(TryConnect, CancelToken.Token);
         }
 
         public void Dispose()
         {
-            CancelToken.Cancel();
-            CancelToken.Dispose();
+            CancelToken?.Cancel();
+            CancelToken?.Dispose();
             Game?.Dispose();
         }
     }

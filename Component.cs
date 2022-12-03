@@ -14,7 +14,6 @@ namespace LiveSplit.SonicFrontiers
         private readonly TimerModel timer;
         private readonly Watchers watchers;
 
-
         public SonicFrontiersComponent(LiveSplitState state)
         {
             timer = new TimerModel { CurrentState = state };
@@ -24,8 +23,7 @@ namespace LiveSplit.SonicFrontiers
             watchers.WFocusChange += (s, e) => OnWFocusChange(s, Settings.WFocus);
             Settings.WFocusChange += OnWFocusChange;
 
-            if (timer.CurrentState.CurrentTimingMethod == TimingMethod.RealTime)
-                Task.Run(AskGameTime);
+            if (timer.CurrentState.CurrentTimingMethod == TimingMethod.RealTime) Task.Run(AskGameTime);
         }
 
         private void AskGameTime()
@@ -66,21 +64,20 @@ namespace LiveSplit.SonicFrontiers
             // If LiveSplit is not connected to the game, of course there's no point in going further
             if (!watchers.Init()) return;
 
-            // Main update logic is inside the watcher class inorder to expose unneded stuff to the outside
+            // Main update logic is inside the watcher class in order to avoid exposing unneded stuff to the outside
             watchers.Update();
 
-            switch (timer.CurrentState.CurrentPhase)
+            if (timer.CurrentState.CurrentPhase == TimerPhase.Running || timer.CurrentState.CurrentPhase == TimerPhase.Paused)
             {
-                case TimerPhase.NotRunning:
-                    if (Start()) timer.Start();
-                    break;
-                case TimerPhase.Running:
-                case TimerPhase.Paused:
-                    timer.CurrentState.IsGameTimePaused = IsLoading();
-                    if (GameTime() == null ? false : true) timer.CurrentState.SetGameTime(GameTime());
-                    if (Reset()) timer.Reset();
-                    else if (Split()) timer.Split();
-                    break;
+                timer.CurrentState.IsGameTimePaused = IsLoading();
+                if (GameTime() != null) timer.CurrentState.SetGameTime(GameTime());
+                if (Reset()) timer.Reset();
+                else if (Split()) timer.Split();
+            }
+
+            if (timer.CurrentState.CurrentPhase == TimerPhase.NotRunning)
+            {
+                if (Start()) timer.Start();
             }
         }
     }
