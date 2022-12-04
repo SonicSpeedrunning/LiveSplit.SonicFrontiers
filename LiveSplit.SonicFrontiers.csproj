@@ -50,9 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SettingsBools.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Game\GameMemory_patches.cs" />
     <Compile Include="Game\Common\GameMemoryCommon.cs" />
     <Compile Include="Game\Common\RTTI.cs" />
     <Compile Include="Game\Common\Methods.cs" />
@@ -77,7 +75,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include=".editorconfig" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>

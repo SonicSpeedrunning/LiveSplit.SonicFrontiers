@@ -40,6 +40,16 @@ namespace LiveSplit.SonicFrontiers
         {
             return bitPos >= 0 && bitPos <= 7 && (value & (1 << bitPos)) != 0;
         }
+
+        /// <summary>
+        /// Checks if a provided IntPtr value is equal to IntPtr.Zero
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>True is the value is IntPtr.Zero, false otherwise</returns>
+        public static bool IsZero(this IntPtr value)
+        {
+            return value == IntPtr.Zero;
+        }
     }
 
     public class SigscanFailedException : Exception

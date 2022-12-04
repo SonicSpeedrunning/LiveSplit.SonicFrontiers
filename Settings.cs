@@ -12,7 +12,6 @@ namespace LiveSplit.SonicFrontiers
         public bool ArcadeStart { get; set; }
         public bool Arcade1_1 { get; set; }
 
-
         // Story - Kronos
         public bool Kronos_Ninja { get; set; }
         public bool Kronos_Door { get; set; }
@@ -20,6 +19,7 @@ namespace LiveSplit.SonicFrontiers
         public bool Kronos_GigantosFirst { get; set; }
         public bool Kronos_Tombstones { get; set; }
         public bool Kronos_GigantosStart { get; set; }
+        public bool Kronos_SuperSonic { get; set; }
         public bool c50_story { get; set; }
         public bool c0_story { get; set; }
         public bool c1_story { get; set; }
@@ -36,6 +36,53 @@ namespace LiveSplit.SonicFrontiers
         public bool Kronos_CyanCE { get; set; }
         public bool c50_fishing { get; set; }
 
+        // Story - Ares
+        public bool Ares_Knuckles { get; set; }
+        public bool Ares_WyvernFirst { get; set; }
+        public bool Ares_Water { get; set; }
+        public bool Ares_Crane { get; set; }
+        public bool Ares_GreenCE { get; set; }
+        public bool Ares_CyanCE { get; set; }
+        public bool Ares_WyvernStart { get; set; }
+        public bool Ares_WyvernRun { get; set; }
+        public bool Ares_SuperSonic { get; set; }
+        public bool c51_story { get; set; }
+        public bool c7_story { get; set; }
+        public bool c8_story { get; set; }
+        public bool c9_story { get; set; }
+        public bool c10_story { get; set; }
+        public bool c11_story { get; set; }
+        public bool c12_story { get; set; }
+        public bool c13_story { get; set; }
+        public bool Ares_BlueCE { get; set; }
+        public bool Ares_RedCE { get; set; }
+        public bool Ares_YellowCE { get; set; }
+        public bool Ares_WhiteCE { get; set; }
+        public bool c51_fishing { get; set; }
+
+        // Chaos
+        public bool Chaos_Tails { get; set; }
+        public bool Chaos_KnightFirst { get; set; }
+        public bool Chaos_Hacking { get; set; }
+        public bool Chaos_GreenCE { get; set; }
+        public bool Chaos_CyanCE { get; set; }
+        public bool Chaos_PinballStart { get; set; }
+        public bool Chaos_PinballEnd { get; set; }
+        public bool Chaos_BlueCE { get; set; }
+        public bool Chaos_RedCE { get; set; }
+        public bool Chaos_YellowCE { get; set; }
+        public bool Chaos_WhiteCE { get; set; }
+        public bool Chaos_KnightStart { get; set; }
+        public bool Chaos_SuperSonic { get; set; }
+        public bool c52_story { get; set; }
+        public bool c52_fishing { get; set; }
+        public bool c14_story { get; set; }
+        public bool c15_story { get; set; }
+        public bool c16_story { get; set; }
+        public bool c17_story { get; set; }
+        public bool c18_story { get; set; }
+        public bool c19_story { get; set; }
+        public bool c20_story { get; set; }
 
         // Story - Rhea
         public bool Rhea_Tower1 { get; set; }
@@ -45,7 +92,6 @@ namespace LiveSplit.SonicFrontiers
         public bool Rhea_Tower5 { get; set; }
         public bool Rhea_Tower6 { get; set; }
         public bool c53_story { get; set; }
-
 
         // Story - Ouranos
         public bool Ouranos_Bridge { get; set; }
@@ -102,7 +148,6 @@ namespace LiveSplit.SonicFrontiers
         public bool c29_arcade_soon { get; set; }
 
 
-
         public Settings()
         {
             InitializeComponent();
@@ -119,6 +164,7 @@ namespace LiveSplit.SonicFrontiers
             chkKronos_GigantosFirst.DataBindings.Add("Checked", this, "Kronos_GigantosFirst", false, DataSourceUpdateMode.OnPropertyChanged);
             chkKronos_Tombstones.DataBindings.Add("Checked", this, "Kronos_Tombstones", false, DataSourceUpdateMode.OnPropertyChanged);
             chkKronos_GigantosStart.DataBindings.Add("Checked", this, "Kronos_GigantosStart", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkKronos_SuperSonic.DataBindings.Add("Checked", this, "Kronos_SuperSonic", false, DataSourceUpdateMode.OnPropertyChanged);
             chk50_story.DataBindings.Add("Checked", this, "c50_story", false, DataSourceUpdateMode.OnPropertyChanged);
             chk0_story.DataBindings.Add("Checked", this, "c0_story", false, DataSourceUpdateMode.OnPropertyChanged);
             chk1_story.DataBindings.Add("Checked", this, "c1_story", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -134,7 +180,50 @@ namespace LiveSplit.SonicFrontiers
             chkKronos_GreenCE.DataBindings.Add("Checked", this, "Kronos_GreenCE", false, DataSourceUpdateMode.OnPropertyChanged);
             chkKronos_CyanCE.DataBindings.Add("Checked", this, "Kronos_CyanCE", false, DataSourceUpdateMode.OnPropertyChanged);
             chk50_fishing.DataBindings.Add("Checked", this, "c50_fishing", false, DataSourceUpdateMode.OnPropertyChanged);
-
+            chkAres_Knuckles.DataBindings.Add("Checked", this, "Ares_Knuckles", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_WyvernFirst.DataBindings.Add("Checked", this, "Ares_WyvernFirst", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_Water.DataBindings.Add("Checked", this, "Ares_Water", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_Crane.DataBindings.Add("Checked", this, "Ares_Crane", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_GreenCE.DataBindings.Add("Checked", this, "Ares_GreenCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_CyanCE.DataBindings.Add("Checked", this, "Ares_CyanCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_WyvernStart.DataBindings.Add("Checked", this, "Ares_WyvernStart", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_WyvernRun.DataBindings.Add("Checked", this, "Ares_WyvernRun", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_SuperSonic.DataBindings.Add("Checked", this, "Ares_SuperSonic", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk51_story.DataBindings.Add("Checked", this, "c51_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk7_story.DataBindings.Add("Checked", this, "c7_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk8_story.DataBindings.Add("Checked", this, "c8_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk9_story.DataBindings.Add("Checked", this, "c9_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk10_story.DataBindings.Add("Checked", this, "c10_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk11_story.DataBindings.Add("Checked", this, "c11_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk12_story.DataBindings.Add("Checked", this, "c12_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk13_story.DataBindings.Add("Checked", this, "c13_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_BlueCE.DataBindings.Add("Checked", this, "Ares_BlueCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_RedCE.DataBindings.Add("Checked", this, "Ares_RedCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_YellowCE.DataBindings.Add("Checked", this, "Ares_YellowCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkAres_WhiteCE.DataBindings.Add("Checked", this, "Ares_WhiteCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk51_fishing.DataBindings.Add("Checked", this, "c51_fishing", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_Tails.DataBindings.Add("Checked", this, "Chaos_Tails", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_KnightFirst.DataBindings.Add("Checked", this, "Chaos_KnightFirst", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_Hacking.DataBindings.Add("Checked", this, "Chaos_Hacking", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_GreenCE.DataBindings.Add("Checked", this, "Chaos_GreenCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_CyanCE.DataBindings.Add("Checked", this, "Chaos_CyanCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_PinballStart.DataBindings.Add("Checked", this, "Chaos_PinballStart", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_PinballEnd.DataBindings.Add("Checked", this, "Chaos_PinballEnd", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_BlueCE.DataBindings.Add("Checked", this, "Chaos_BlueCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_RedCE.DataBindings.Add("Checked", this, "Chaos_RedCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_YellowCE.DataBindings.Add("Checked", this, "Chaos_YellowCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_WhiteCE.DataBindings.Add("Checked", this, "Chaos_WhiteCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_KnightStart.DataBindings.Add("Checked", this, "Chaos_KnightStart", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkChaos_SuperSonic.DataBindings.Add("Checked", this, "Chaos_SuperSonic", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk52_story.DataBindings.Add("Checked", this, "c52_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk52_fishing.DataBindings.Add("Checked", this, "c52_fishing", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk14_story.DataBindings.Add("Checked", this, "c14_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk15_story.DataBindings.Add("Checked", this, "c15_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk16_story.DataBindings.Add("Checked", this, "c16_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk17_story.DataBindings.Add("Checked", this, "c17_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk18_story.DataBindings.Add("Checked", this, "c18_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk19_story.DataBindings.Add("Checked", this, "c19_story", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk20_story.DataBindings.Add("Checked", this, "c20_story", false, DataSourceUpdateMode.OnPropertyChanged);
             chkRhea_Tower1.DataBindings.Add("Checked", this, "Rhea_Tower1", false, DataSourceUpdateMode.OnPropertyChanged);
             chkRhea_Tower2.DataBindings.Add("Checked", this, "Rhea_Tower2", false, DataSourceUpdateMode.OnPropertyChanged);
             chkRhea_Tower3.DataBindings.Add("Checked", this, "Rhea_Tower3", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -201,7 +290,22 @@ namespace LiveSplit.SonicFrontiers
             Kronos_Ninja = Kronos_Door = Kronos_Amy = Kronos_GigantosFirst = Kronos_Tombstones = false;
             c50_story = c50_fishing = true;
             c0_story = c1_story = c2_story = c3_story = c4_story = c50_story = c6_story = false;
-            Kronos_BlueCE = Kronos_RedCE = Kronos_YellowCE = Kronos_WhiteCE = Kronos_GreenCE = Kronos_CyanCE  = Kronos_GigantosStart = false;
+            Kronos_BlueCE = Kronos_RedCE = Kronos_YellowCE = Kronos_WhiteCE = Kronos_GreenCE = Kronos_CyanCE  = Kronos_GigantosStart = Kronos_SuperSonic = false;
+
+            // Ares
+            Ares_Knuckles = Ares_WyvernFirst = Ares_Water = Ares_Crane = false;
+            Ares_WyvernRun = Ares_WyvernStart = Ares_SuperSonic = false;
+            c51_story = c51_fishing = true;
+            c7_story = c8_story = c9_story = c10_story = c11_story = c12_story = c13_story = false;
+            Ares_GreenCE = Ares_CyanCE = Ares_BlueCE = Ares_RedCE = Ares_YellowCE = Ares_YellowCE = false;
+
+            // Chaos
+            Chaos_Tails = Chaos_KnightFirst = Chaos_Hacking = false;
+            Chaos_GreenCE = Chaos_CyanCE = Chaos_PinballEnd = Chaos_PinballStart = false;
+            Chaos_BlueCE = Chaos_RedCE = Chaos_YellowCE = Chaos_WhiteCE = false;
+            Chaos_KnightStart = Chaos_SuperSonic = false;
+            c52_story = c52_fishing = true;
+            c14_story = c15_story = c16_story = c17_story = c18_story = c19_story = c20_story = false;
 
             // Rhea
             Rhea_Tower1 = Rhea_Tower2 = Rhea_Tower3 = Rhea_Tower4 = Rhea_Tower5 = Rhea_Tower6 = false;
@@ -234,6 +338,7 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "Kronos_GigantosFirst", Kronos_GigantosFirst));
             settingsNode.AppendChild(ToElement(doc, "Kronos_Tombstones", Kronos_Tombstones));
             settingsNode.AppendChild(ToElement(doc, "Kronos_GigantosStart", Kronos_GigantosStart));
+            settingsNode.AppendChild(ToElement(doc, "Kronos_SuperSonic", Kronos_SuperSonic));
             settingsNode.AppendChild(ToElement(doc, "c50_story", c50_story));
             settingsNode.AppendChild(ToElement(doc, "c0_story", c0_story));
             settingsNode.AppendChild(ToElement(doc, "c1_story", c1_story));
@@ -249,7 +354,50 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "Kronos_GreenCE", Kronos_GreenCE));
             settingsNode.AppendChild(ToElement(doc, "Kronos_CyanCE", Kronos_CyanCE));
             settingsNode.AppendChild(ToElement(doc, "c50_fishing", c50_fishing));
-
+            settingsNode.AppendChild(ToElement(doc, "Ares_Knuckles", Ares_Knuckles));
+            settingsNode.AppendChild(ToElement(doc, "Ares_WyvernFirst", Ares_WyvernFirst));
+            settingsNode.AppendChild(ToElement(doc, "Ares_Water", Ares_Water));
+            settingsNode.AppendChild(ToElement(doc, "Ares_Crane", Ares_Crane));
+            settingsNode.AppendChild(ToElement(doc, "Ares_GreenCE", Ares_GreenCE));
+            settingsNode.AppendChild(ToElement(doc, "Ares_CyanCE", Ares_CyanCE));
+            settingsNode.AppendChild(ToElement(doc, "Ares_WyvernStart", Ares_WyvernStart));
+            settingsNode.AppendChild(ToElement(doc, "Ares_WyvernRun", Ares_WyvernRun));
+            settingsNode.AppendChild(ToElement(doc, "Ares_SuperSonic", Ares_SuperSonic));
+            settingsNode.AppendChild(ToElement(doc, "c51_story", c51_story));
+            settingsNode.AppendChild(ToElement(doc, "c7_story", c7_story));
+            settingsNode.AppendChild(ToElement(doc, "c8_story", c8_story));
+            settingsNode.AppendChild(ToElement(doc, "c9_story", c9_story));
+            settingsNode.AppendChild(ToElement(doc, "c10_story", c10_story));
+            settingsNode.AppendChild(ToElement(doc, "c11_story", c11_story));
+            settingsNode.AppendChild(ToElement(doc, "c12_story", c12_story));
+            settingsNode.AppendChild(ToElement(doc, "c13_story", c13_story));
+            settingsNode.AppendChild(ToElement(doc, "Ares_BlueCE", Ares_BlueCE));
+            settingsNode.AppendChild(ToElement(doc, "Ares_RedCE", Ares_RedCE));
+            settingsNode.AppendChild(ToElement(doc, "Ares_YellowCE", Ares_YellowCE));
+            settingsNode.AppendChild(ToElement(doc, "Ares_WhiteCE", Ares_WhiteCE));
+            settingsNode.AppendChild(ToElement(doc, "c51_fishing", c51_fishing));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_Tails", Chaos_Tails));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_KnightFirst", Chaos_KnightFirst));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_Hacking", Chaos_Hacking));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_GreenCE", Chaos_GreenCE));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_CyanCE", Chaos_CyanCE));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_PinballStart", Chaos_PinballStart));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_PinballEnd", Chaos_PinballEnd));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_BlueCE", Chaos_BlueCE));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_RedCE", Chaos_RedCE));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_YellowCE", Chaos_YellowCE));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_WhiteCE", Chaos_WhiteCE));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_KnightStart", Chaos_KnightStart));
+            settingsNode.AppendChild(ToElement(doc, "Chaos_SuperSonic", Chaos_SuperSonic));
+            settingsNode.AppendChild(ToElement(doc, "c52_story", c52_story));
+            settingsNode.AppendChild(ToElement(doc, "c52_fishing", c52_fishing));
+            settingsNode.AppendChild(ToElement(doc, "c14_story", c14_story));
+            settingsNode.AppendChild(ToElement(doc, "c15_story", c15_story));
+            settingsNode.AppendChild(ToElement(doc, "c16_story", c16_story));
+            settingsNode.AppendChild(ToElement(doc, "c17_story", c17_story));
+            settingsNode.AppendChild(ToElement(doc, "c18_story", c18_story));
+            settingsNode.AppendChild(ToElement(doc, "c19_story", c19_story));
+            settingsNode.AppendChild(ToElement(doc, "c20_story", c20_story));
             settingsNode.AppendChild(ToElement(doc, "Rhea_Tower1", Rhea_Tower1));
             settingsNode.AppendChild(ToElement(doc, "Rhea_Tower2", Rhea_Tower2));
             settingsNode.AppendChild(ToElement(doc, "Rhea_Tower3", Rhea_Tower3));
@@ -322,6 +470,7 @@ namespace LiveSplit.SonicFrontiers
             Kronos_GigantosFirst = ParseBool(settings, "Kronos_GigantosFirst", false);
             Kronos_Tombstones = ParseBool(settings, "Kronos_Tombstones", false);
             Kronos_GigantosStart = ParseBool(settings, "Kronos_GigantosStart", false);
+            Kronos_SuperSonic = ParseBool(settings, "Kronos_SuperSonic", false);
             c50_story = ParseBool(settings, "c50_story", true);
             c0_story = ParseBool(settings, "c0_story", false);
             c1_story = ParseBool(settings, "c1_story", false);
@@ -337,7 +486,50 @@ namespace LiveSplit.SonicFrontiers
             Kronos_GreenCE = ParseBool(settings, "Kronos_GreenCE", false);
             Kronos_CyanCE = ParseBool(settings, "Kronos_CyanCE", false);
             c50_fishing = ParseBool(settings, "c50_fishing", true);
-
+            Ares_Knuckles = ParseBool(settings, "Ares_Knuckles", false);
+            Ares_WyvernFirst = ParseBool(settings, "Ares_WyvernFirst", false);
+            Ares_Water = ParseBool(settings, "Ares_Water", false);
+            Ares_Crane = ParseBool(settings, "Ares_Crane", false);
+            Ares_GreenCE = ParseBool(settings, "Ares_GreenCE", false);
+            Ares_CyanCE = ParseBool(settings, "Ares_CyanCE", false);
+            Ares_WyvernStart = ParseBool(settings, "Ares_WyvernStart", false);
+            Ares_WyvernRun = ParseBool(settings, "Ares_WyvernRun", false);
+            Ares_SuperSonic = ParseBool(settings, "Ares_SuperSonic", false);
+            c51_story = ParseBool(settings, "c51_story", true);
+            c7_story = ParseBool(settings, "c7_story", false);
+            c8_story = ParseBool(settings, "c8_story", false);
+            c9_story = ParseBool(settings, "c9_story", false);
+            c10_story = ParseBool(settings, "c10_story", false);
+            c11_story = ParseBool(settings, "c11_story", false);
+            c12_story = ParseBool(settings, "c12_story", false);
+            c13_story = ParseBool(settings, "c13_story", false);
+            Ares_BlueCE = ParseBool(settings, "Ares_BlueCE", false);
+            Ares_RedCE = ParseBool(settings, "Ares_RedCE", false);
+            Ares_YellowCE = ParseBool(settings, "Ares_YellowCE", false);
+            Ares_WhiteCE = ParseBool(settings, "Ares_WhiteCE", false);
+            c51_fishing = ParseBool(settings, "c51_fishing", true);
+            Chaos_Tails = ParseBool(settings, "Chaos_Tails", false);
+            Chaos_KnightFirst = ParseBool(settings, "Chaos_KnightFirst", false);
+            Chaos_Hacking = ParseBool(settings, "Chaos_Hacking", false);
+            Chaos_GreenCE = ParseBool(settings, "Chaos_GreenCE", false);
+            Chaos_CyanCE = ParseBool(settings, "Chaos_CyanCE", false);
+            Chaos_PinballStart = ParseBool(settings, "Chaos_PinballStart", false);
+            Chaos_PinballEnd = ParseBool(settings, "Chaos_PinballEnd", false);
+            Chaos_BlueCE = ParseBool(settings, "Chaos_BlueCE", false);
+            Chaos_RedCE = ParseBool(settings, "Chaos_RedCE", false);
+            Chaos_YellowCE = ParseBool(settings, "Chaos_YellowCE", false);
+            Chaos_WhiteCE = ParseBool(settings, "Chaos_WhiteCE", false);
+            Chaos_KnightStart = ParseBool(settings, "Chaos_KnightStart", false);
+            Chaos_SuperSonic = ParseBool(settings, "Chaos_SuperSonic", false);
+            c52_story = ParseBool(settings, "c52_story", true);
+            c52_fishing = ParseBool(settings, "c52_fishing", true);
+            c14_story = ParseBool(settings, "c14_story", false);
+            c15_story = ParseBool(settings, "c15_story", false);
+            c16_story = ParseBool(settings, "c16_story", false);
+            c17_story = ParseBool(settings, "c17_story", false);
+            c18_story = ParseBool(settings, "c18_story", false);
+            c19_story = ParseBool(settings, "c19_story", false);
+            c20_story = ParseBool(settings, "c20_story", false);
             Rhea_Tower1 = ParseBool(settings, "Rhea_Tower1", false);
             Rhea_Tower2 = ParseBool(settings, "Rhea_Tower2", false);
             Rhea_Tower3 = ParseBool(settings, "Rhea_Tower3", false);
@@ -399,7 +591,7 @@ namespace LiveSplit.SonicFrontiers
 
         static bool ParseBool(XmlNode settings, string setting, bool default_ = false)
         {
-            return settings[setting] != null ? (Boolean.TryParse(settings[setting].InnerText, out bool val) ? val : default_) : default_;
+            return settings[setting] != null ? (bool.TryParse(settings[setting].InnerText, out bool val) ? val : default_) : default_;
         }
 
         static XmlElement ToElement<T>(XmlDocument document, string name, T value)
@@ -411,7 +603,7 @@ namespace LiveSplit.SonicFrontiers
 
         private void ChkArcadeStart_CheckedChanged(object sender, EventArgs e)
         {
-            this.chkArcade1_1.Enabled = this.chkArcadeStart.Checked;
+            chkArcade1_1.Enabled = chkArcadeStart.Checked;
         }
 
         public bool this[string entry]
@@ -428,13 +620,6 @@ namespace LiveSplit.SonicFrontiers
         private void Chk4_9_arcade_CheckedChanged(object sender, EventArgs e)
         {
             chk29_arcade_soon.Enabled = chk29_arcade.Checked;
-        }
-
-        public event EventHandler<bool> WFocusChange;
-
-        private void chkFocus_CheckedChanged(object sender, EventArgs e)
-        {
-            WFocusChange?.Invoke(this, chkFocus.Checked);
         }
 
         private void KronosButton_Click(object sender, EventArgs e)
@@ -534,6 +719,71 @@ namespace LiveSplit.SonicFrontiers
         private void chk53_story_CheckedChanged(object sender, EventArgs e)
         {
             rheaWarning.Enabled = chk53_story.Checked;
+        }
+
+        private void DiscordLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://discord.gg/WkQW4rv73J");
+        }
+
+        private void AresButton_Click(object sender, EventArgs e)
+        {
+            chkAres_Knuckles.Checked = false;
+            chkAres_WyvernFirst.Checked = false;
+            chkAres_Water.Checked = false;
+            chkAres_Crane.Checked = false;
+            chkAres_WyvernStart.Checked = false;
+            chkAres_WyvernRun.Checked = false;
+            chkAres_SuperSonic.Checked = false;
+            chk51_story.Checked = true;
+            chk7_story.Checked = false;
+            chk8_story.Checked = false;
+            chk9_story.Checked = false;
+            chk10_story.Checked = false;
+            chk11_story.Checked = false;
+            chk12_story.Checked = false;
+            chk13_story.Checked = false;
+            chkAres_BlueCE.Checked = false;
+            chkAres_RedCE.Checked = false;
+            chkAres_YellowCE.Checked = false;
+            chkAres_WhiteCE.Checked = false;
+            chkAres_GreenCE.Checked = false;
+            chkAres_CyanCE.Checked = false;
+            chk51_fishing.Checked = true;
+        }
+
+        private void ChaosButton_Click(object sender, EventArgs e)
+        {
+            chkChaos_Tails.Checked = false;
+            chkChaos_KnightFirst.Checked = false;
+            chkChaos_Hacking.Checked = false;
+            chkChaos_GreenCE.Checked = false;
+            chkChaos_CyanCE.Checked = false;
+            chkChaos_PinballStart.Checked = false;
+            chkChaos_PinballEnd.Checked = false;
+            chkChaos_BlueCE.Checked = false;
+            chkChaos_RedCE.Checked = false;
+            chkChaos_YellowCE.Checked = false;
+            chkChaos_WhiteCE.Checked = false;
+            chkChaos_KnightStart.Checked = false;
+            chkChaos_SuperSonic.Checked = false;
+            chk52_story.Checked = true;
+            chk52_fishing.Checked = true;
+            chk14_story.Checked = false;
+            chk15_story.Checked = false;
+            chk16_story.Checked = false;
+            chk17_story.Checked = false;
+            chk18_story.Checked = false;
+            chk19_story.Checked = false;
+            chk20_story.Checked = false;
+        }
+
+
+        public event EventHandler<bool> WFocusChange;
+
+        private void chkFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            WFocusChange?.Invoke(this, chkFocus.Checked);
         }
     }
 }

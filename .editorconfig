@@ -1,4 +1,0 @@
-﻿[*.cs]
-
-# IDE1006: Stili di denominazione
-dotnet_diagnostic.IDE1006.severity = none

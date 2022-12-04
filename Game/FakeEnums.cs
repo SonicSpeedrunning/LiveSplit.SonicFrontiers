@@ -45,7 +45,8 @@ namespace LiveSplit.SonicFrontiers
 
             { "w1f01", 70 },    // Fishing
             { "w0r01", 71 },    // Main Menu
-            { "w5r01", 72 }     // The End (boss)
+            { "w5r01", 72 },    // The End (boss)
+            { "w5t01", 73 },    // Tutorial stage
         };
 
         public readonly struct Status

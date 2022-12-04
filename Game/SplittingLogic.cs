@@ -46,7 +46,7 @@ namespace LiveSplit.SonicFrontiers
             }
 
             // Final boss split
-            if (Settings.FinalBoss && watchers.LevelID.Current == 72 && watchers.EndQTECount.Old == watchers.EndQTECount.Current - 1 && watchers.EndQTECount.Current == 3)
+            if (Settings.FinalBoss && watchers.LevelID.Current == 72 && watchers.EndQTECount.Old == 3 && watchers.EndQTECount.Current == 0)
                 return true;
             
             // Cyber space levels (in story mode)
