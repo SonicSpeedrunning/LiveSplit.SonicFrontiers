@@ -147,8 +147,8 @@
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.chkOuranos_WhiteCE = new System.Windows.Forms.CheckBox();
             this.chkOuranos_CyanCE = new System.Windows.Forms.CheckBox();
-            this.chkOuranos_YellowCE = new System.Windows.Forms.CheckBox();
             this.chkOuranos_GreenCE = new System.Windows.Forms.CheckBox();
+            this.chkOuranos_YellowCE = new System.Windows.Forms.CheckBox();
             this.chkOuranos_RedCE = new System.Windows.Forms.CheckBox();
             this.chkOuranos_BlueCE = new System.Windows.Forms.CheckBox();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
@@ -1154,7 +1154,7 @@
             this.chkChaos_CyanCE.Name = "chkChaos_CyanCE";
             this.chkChaos_CyanCE.Size = new System.Drawing.Size(116, 30);
             this.chkChaos_CyanCE.TabIndex = 25;
-            this.chkChaos_CyanCE.Text = "Cyan Emerald\r\n(Knuckles\' quest)";
+            this.chkChaos_CyanCE.Text = "Cyan Emerald\r\n(Tails\' quest)";
             this.chkChaos_CyanCE.UseVisualStyleBackColor = true;
             // 
             // chkChaos_GreenCE
@@ -1165,7 +1165,7 @@
             this.chkChaos_GreenCE.Name = "chkChaos_GreenCE";
             this.chkChaos_GreenCE.Size = new System.Drawing.Size(116, 30);
             this.chkChaos_GreenCE.TabIndex = 24;
-            this.chkChaos_GreenCE.Text = "Green Emerald\r\n(Knuckles\' quest)";
+            this.chkChaos_GreenCE.Text = "Green Emerald\r\n(Tails\' quest)";
             this.chkChaos_GreenCE.UseVisualStyleBackColor = true;
             // 
             // chkChaos_WhiteCE
@@ -1670,17 +1670,6 @@
             this.chkOuranos_CyanCE.Text = "Cyan Emerald";
             this.chkOuranos_CyanCE.UseVisualStyleBackColor = true;
             // 
-            // chkOuranos_YellowCE
-            // 
-            this.chkOuranos_YellowCE.AutoSize = true;
-            this.chkOuranos_YellowCE.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkOuranos_YellowCE.Location = new System.Drawing.Point(10, 57);
-            this.chkOuranos_YellowCE.Name = "chkOuranos_YellowCE";
-            this.chkOuranos_YellowCE.Size = new System.Drawing.Size(116, 17);
-            this.chkOuranos_YellowCE.TabIndex = 11;
-            this.chkOuranos_YellowCE.Text = "Yellow Emerald";
-            this.chkOuranos_YellowCE.UseVisualStyleBackColor = true;
-            // 
             // chkOuranos_GreenCE
             // 
             this.chkOuranos_GreenCE.AutoSize = true;
@@ -1691,6 +1680,17 @@
             this.chkOuranos_GreenCE.TabIndex = 10;
             this.chkOuranos_GreenCE.Text = "Green Emerald";
             this.chkOuranos_GreenCE.UseVisualStyleBackColor = true;
+            // 
+            // chkOuranos_YellowCE
+            // 
+            this.chkOuranos_YellowCE.AutoSize = true;
+            this.chkOuranos_YellowCE.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkOuranos_YellowCE.Location = new System.Drawing.Point(10, 57);
+            this.chkOuranos_YellowCE.Name = "chkOuranos_YellowCE";
+            this.chkOuranos_YellowCE.Size = new System.Drawing.Size(116, 17);
+            this.chkOuranos_YellowCE.TabIndex = 11;
+            this.chkOuranos_YellowCE.Text = "Yellow Emerald";
+            this.chkOuranos_YellowCE.UseVisualStyleBackColor = true;
             // 
             // chkOuranos_RedCE
             // 
