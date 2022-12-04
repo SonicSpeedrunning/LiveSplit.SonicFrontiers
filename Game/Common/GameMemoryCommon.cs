@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveSplit.Model;
 
@@ -6,10 +7,21 @@ namespace LiveSplit.SonicFrontiers
 {
     partial class Watchers
     {
-        // Game process
+        /// <summary>
+        /// The local ProcessHook instance
+        /// </summary>
         private readonly ProcessHook GameProcess;
+        private Process game => GameProcess.Game;
+
+        /// <summary>
+        /// LiveSplit's current state
+        /// </summary>
         private readonly LiveSplitState state;
 
+        /// <summary>
+        /// Actions to perform after hooking the target process (eg. getting addresses, sigscanning, etc.)
+        /// </summary>
+        /// <returns>True if the target process is hooked and the actions complete without errors, otherwise false</returns>
         public bool Init()
         {
             // This "init" function checks if the autosplitter has connected to the game
@@ -43,11 +55,13 @@ namespace LiveSplit.SonicFrontiers
 
             // At this point, if init has not been completed yet, return
             // false to avoid running the rest of the splitting logic.
-            if (GameProcess.InitStatus != GameInitStatus.Completed)
-                return false;
-
-            return true;
+            return GameProcess.InitStatus == GameInitStatus.Completed;
         }
+
+        /// <summary>
+        /// Clears the resources used by the Watchers object.
+        /// Remember to always run Dispose() when the component is unloaded in order to cancel the internal task run by ProcessHook
+        /// </summary>
         public void Dispose()
         {
             GameProcess.Dispose();

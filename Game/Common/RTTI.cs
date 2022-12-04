@@ -3,46 +3,33 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-
 namespace LiveSplit.SonicFrontiers
 {   
     class RTTI : Dictionary<string, IntPtr>
     {
-        private readonly Dictionary<string, int> RTTI_Entries = new Dictionary<string, int>();
-
         /// <summary>
         /// This class returns a Dictionary of RTTI classes with the vtable addresses for each one.
-        /// In order to use this, use AddEntry() to import the RTTI classes you need to employ in
+        /// In order to use this, use AddEntry() to import the RTTI classes you want to employ in
         /// your autosplitter.
         /// </summary>
-        public RTTI(SignatureScanner scanner)
+        /// <param name="scanner">A SignatureScanner object that will be used to search for the RTTI entried in memory</param>
+        /// <param name="entries">A string[] with the names of the RTTI classes for which we want to calculate the vTable address. The names must be precise: if a class name doesn't exist, an Exception will be thrown.</param>
+        public RTTI(SignatureScanner scanner, params string[] entries)
         {
-            var mainMbase = (long)scanner.Process.MainModuleWow64Safe().BaseAddress;
-
-            var init = scanner.ScanAll(new SigScanTarget("2E 3F 41 56"), 8);
+            Dictionary<string, int> RTTI_Entries = new Dictionary<string, int>();
+            long mainMbase = (long)scanner.Process.MainModuleWow64Safe().BaseAddress;
+            IEnumerable<IntPtr> init = scanner.ScanAll(new SigScanTarget("2E 3F 41 56"), 8);
 
             foreach (var entry in init)
-                RTTI_Entries.Add(new DeepPointer(entry).DerefString(scanner.Process, 255).Replace(".?AV", "").Replace("@@", "").Replace("@", "::"), (int)((long)entry - mainMbase - 0x10));
-        }
+                RTTI_Entries.Add(scanner.Process.ReadString(entry + 4, 250).Replace("@@", "").Replace("@", "::"), (int)((long)entry - mainMbase - 0x10));
 
-        /// <summary>
-        /// Adds an entry to the RTTI dictionary. The function will calculate the vtable address.
-        /// If you entered an invalid class name, this will return an exception.
-        /// </summary>
-        /// <param name="scanner"></param>
-        /// <param name="entry"></param>
-        public void AddEntry(SignatureScanner scanner, string entry)
-        {
-            var temp = (long)scanner.Scan(new SigScanTarget(BitConverter.GetBytes(RTTI_Entries[entry])), 4) - 0xC;
-            var temp2 = scanner.Scan(new SigScanTarget(BitConverter.GetBytes(temp)), 8) + 0x8;
-            this[entry] = temp2;
-        }
+            foreach (var entry in entries)
+            {
+                long temp = (long)scanner.ScanOrThrow(new SigScanTarget(BitConverter.GetBytes(RTTI_Entries[entry])), 4) - 0xC;
+                IntPtr vTableAddr = scanner.ScanOrThrow(new SigScanTarget(BitConverter.GetBytes(temp)), 8) + 0x8;
+                this[entry] = vTableAddr;
+            }
 
-        /// <summary>
-        /// Clears the internal RTTI_Entries dictionary. Used as a memory-saving feature.
-        /// </summary>
-        public void ClearDict()
-        {
             RTTI_Entries.Clear();
         }
     }

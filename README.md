@@ -1,6 +1,6 @@
 <h1> <img src="https://raw.githubusercontent.com/SonicSpeedrunning/LiveSplit.SonicFrontiers/main/sonic-frontiers-logo.png" alt="SonicFrontiers" height="75" align="middle" /> Sonic Frontiers - Autosplitter</h1>
 
-Autosplitter for the PC version of Sonic Frontiers with customizable options
+Fully-featured autosplitter for the PC version of Sonic Frontiers with customizable options
 
 <img src="https://raw.githubusercontent.com/SonicSpeedrunning/LiveSplit.SonicFrontiers/main/settings.png">
 

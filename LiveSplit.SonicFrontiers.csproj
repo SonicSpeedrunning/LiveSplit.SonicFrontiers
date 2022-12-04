@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\GameMemory_patches.cs" />
     <Compile Include="Game\Common\GameMemoryCommon.cs" />
     <Compile Include="Game\Common\RTTI.cs" />
     <Compile Include="Game\Common\Methods.cs" />

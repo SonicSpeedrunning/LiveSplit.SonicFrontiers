@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.1.0">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Added a lot of new splitting options.</change>
+			<change>Partial rewrite of the memory logic (improves performance).</change>
+			<change>Due to how the new splitting logic works, previously-set custom splitting options might have been reset. PLEASE check settings.</change>
+		</changelog>
+	</update>
 	<update version="1.0.8.2">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
