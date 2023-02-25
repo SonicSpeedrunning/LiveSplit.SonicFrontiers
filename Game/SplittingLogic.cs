@@ -1,8 +1,6 @@
 ﻿using LiveSplit.UI.Components;
 using System;
-using System.Diagnostics;
 using System.Linq;
-using LiveSplit.Model;
 
 namespace LiveSplit.SonicFrontiers
 {
@@ -18,29 +16,11 @@ namespace LiveSplit.SonicFrontiers
             return false;
         }
 
-        private bool IsLastSplitTooShort()
-        {
-            int split_idx = timer.CurrentState.CurrentSplitIndex;
-            if (split_idx == 0)
-            {
-                return false;
-            }
-
-            double this_splittime = timer.CurrentState.CurrentSplit.SplitTime.RealTime.Value.TotalMilliseconds;
-            double last_splittime = timer.CurrentState.Run[split_idx - 1].SplitTime.RealTime.Value.TotalMilliseconds;
-            if (this_splittime - last_splittime <= 200)
-            {
-                return true;
-            }
-
-            return false;
-        }
         private bool Split()
         {
-            if (IsLastSplitTooShort())
-            {
+            // Prevents autosplitting if the previous split occurred under 200 milliseconds from the current time
+            if (watchers.IsLastSplitBelowValue(200))
                 return false;
-            }
 
             // Arcade mode splitting
             if (watchers.IsInArcade)
@@ -77,10 +57,7 @@ namespace LiveSplit.SonicFrontiers
             return Settings["c" + watchers.LevelID.Old + "_story"] && watchers.StoryModeCyberSpaceCompletionFlag.Old && !watchers.StoryModeCyberSpaceCompletionFlag.Current;
         }
 
-        bool Reset()
-        {
-            return false;
-        }
+        bool Reset() => false;
 
         bool IsLoading()
         {

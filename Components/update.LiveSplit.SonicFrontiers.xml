@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.1.1">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Added a workaround that should prevent the unwanted multiple splitting issue when exiting the game via Alt-F4 (courtesy of Labrys).</change>
+		</changelog>
+	</update>
 	<update version="1.1.0">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
