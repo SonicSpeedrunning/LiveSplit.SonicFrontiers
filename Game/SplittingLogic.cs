@@ -18,6 +18,10 @@ namespace LiveSplit.SonicFrontiers
 
         private bool Split()
         {
+            // Prevents autosplitting if the previous split occurred under 200 milliseconds from the current time
+            if (watchers.IsLastSplitBelowValue(200))
+                return false;
+
             // Arcade mode splitting
             if (watchers.IsInArcade)
             {
@@ -53,10 +57,7 @@ namespace LiveSplit.SonicFrontiers
             return Settings["c" + watchers.LevelID.Old + "_story"] && watchers.StoryModeCyberSpaceCompletionFlag.Old && !watchers.StoryModeCyberSpaceCompletionFlag.Current;
         }
 
-        bool Reset()
-        {
-            return false;
-        }
+        bool Reset() => false;
 
         bool IsLoading()
         {
