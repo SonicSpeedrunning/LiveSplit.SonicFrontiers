@@ -9,7 +9,7 @@ namespace LiveSplit.SonicFrontiers
     /// <summary>
     /// Custom class with the ability to automatically hook to a target process using Tasks
     /// </summary>
-    class ProcessHook
+    public class ProcessHook
     {
         // Internal stuff
         private readonly string[] processNames;
@@ -42,7 +42,15 @@ namespace LiveSplit.SonicFrontiers
             {
                 foreach (var entry in processNames)
                 {
-                    Game = Process.GetProcessesByName(entry).OrderByDescending(p => p.StartTime).FirstOrDefault(p => !p.HasExited);
+                    try
+                    {
+                        Game = Process.GetProcessesByName(entry).OrderByDescending(p => p.StartTime).FirstOrDefault(p => !p.HasExited);
+                    }
+                    catch
+                    {
+                        break;
+                    }
+
                     if (Game != null)
                     {
                         Game.Exited += CallBackTryConnect;
@@ -70,7 +78,7 @@ namespace LiveSplit.SonicFrontiers
         }
     }
 
-    enum GameInitStatus
+    public enum GameInitStatus
     {
         NotStarted,
         InProgress,

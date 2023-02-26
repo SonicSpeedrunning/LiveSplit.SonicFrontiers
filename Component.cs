@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using LiveSplit.Model;
 using LiveSplit.UI;
 using LiveSplit.UI.Components;
-using System.Threading.Tasks;
 
 namespace LiveSplit.SonicFrontiers
 {
@@ -18,12 +17,13 @@ namespace LiveSplit.SonicFrontiers
         {
             timer = new TimerModel { CurrentState = state };
             Settings = new Settings();
-            watchers = new Watchers(state, "SonicFrontiers");
+            watchers = new Watchers(state);
 
             watchers.WFocusChange += (s, e) => OnWFocusChange(s, Settings.WFocus);
             Settings.WFocusChange += OnWFocusChange;
 
-            if (timer.CurrentState.CurrentTimingMethod == TimingMethod.RealTime) Task.Run(AskGameTime);
+            if (timer.CurrentState.CurrentTimingMethod == TimingMethod.RealTime)
+                AskGameTime();
         }
 
         private void AskGameTime()
@@ -48,7 +48,7 @@ namespace LiveSplit.SonicFrontiers
         public override void Dispose()
         {
             Settings.WFocusChange -= OnWFocusChange;
-            watchers.WFocusChange -= (s, e) => OnWFocusChange(s, Settings.WFocus); ;
+            watchers.WFocusChange -= (s, e) => OnWFocusChange(s, Settings.WFocus);
             Settings.Dispose();
             watchers.Dispose();
         }
@@ -62,22 +62,32 @@ namespace LiveSplit.SonicFrontiers
         public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
             // If LiveSplit is not connected to the game, of course there's no point in going further
-            if (!watchers.Init()) return;
+            if (!watchers.Init())
+                return;
 
             // Main update logic is inside the watcher class in order to avoid exposing unneded stuff to the outside
             watchers.Update();
 
+            // Main logic: the autosplitter checks for time, reset and splitting conditions only if it's running
+            // This prevents, for example, automatic resetting when the run is already complete (TimerPhase.Ended)
             if (timer.CurrentState.CurrentPhase == TimerPhase.Running || timer.CurrentState.CurrentPhase == TimerPhase.Paused)
             {
                 timer.CurrentState.IsGameTimePaused = IsLoading();
-                if (GameTime() != null) timer.CurrentState.SetGameTime(GameTime());
-                if (Reset()) timer.Reset();
-                else if (Split()) timer.Split();
+
+                if (GameTime() != null)
+                    timer.CurrentState.SetGameTime(GameTime());
+                
+                if (Reset())
+                    timer.Reset();
+                else if (Split())
+                    timer.Split();
             }
 
+            // Start logic: for obvious reasons, this should be checked only if the timer has not started yet
             if (timer.CurrentState.CurrentPhase == TimerPhase.NotRunning)
             {
-                if (Start()) timer.Start();
+                if (Start())
+                    timer.Start();
             }
         }
     }

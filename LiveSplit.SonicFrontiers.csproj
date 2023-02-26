@@ -9,13 +9,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LiveSplit.SonicFrontiers</RootNamespace>
     <AssemblyName>LiveSplit.SonicFrontiers</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
+    <LangVersion>11.0</LangVersion>
     <OutputPath>Components\</OutputPath>
     <DefineConstants>
     </DefineConstants>
@@ -27,7 +28,7 @@
     <OutputPath>ComponentsDebug\</OutputPath>
     <Optimize>true</Optimize>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>11.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
@@ -50,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\StoryFlags.cs" />
     <Compile Include="Game\GameMemory_patches.cs" />
     <Compile Include="Game\Common\GameMemoryCommon.cs" />
     <Compile Include="Game\Common\RTTI.cs" />
@@ -65,7 +67,7 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Game\FakeEnums.cs" />
+    <Compile Include="Game\Enums.cs" />
     <Compile Include="Game\GameMemory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
