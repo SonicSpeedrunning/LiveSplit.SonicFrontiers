@@ -18,16 +18,13 @@ namespace LiveSplit.SonicFrontiers
 
         private bool Split()
         {
-            // Prevents autosplitting if the previous split occurred under 200 milliseconds from the current time
-            if (watchers.IsLastSplitBelowValue(200))
-                return false;
-
             // Arcade mode splitting
             if (watchers.IsInArcade)
             {
                 // First, the code checks if autosplitting for the current stage is enabled.
                 // If it's not, there's no point in continuing.
-                if (!Settings["c" + watchers.LevelID.Old + "_arcade"]) return false;
+                if (!Settings["c" + watchers.LevelID.Old + "_arcade"])
+                    return false;
 
                 // In 4-9 there's a specific setting to allow splitting when touching the goal.
                 // As this is usually the final split, this is usually a desirable thing to have.
@@ -57,7 +54,10 @@ namespace LiveSplit.SonicFrontiers
             return Settings["c" + watchers.LevelID.Old + "_story"] && watchers.StoryModeCyberSpaceCompletionFlag.Old && !watchers.StoryModeCyberSpaceCompletionFlag.Current;
         }
 
-        bool Reset() => false;
+        bool Reset()
+        {
+            return false;
+        }
 
         bool IsLoading()
         {
