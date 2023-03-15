@@ -22,8 +22,8 @@
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -193,6 +193,13 @@
             this.chk2_arcade = new System.Windows.Forms.CheckBox();
             this.chk1_arcade = new System.Windows.Forms.CheckBox();
             this.chk0_arcade = new System.Windows.Forms.CheckBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkSkill_StompAttack = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.chkSkill_AirTrick = new System.Windows.Forms.CheckBox();
+            this.chkSkill_PhantomRush = new System.Windows.Forms.CheckBox();
+            this.chkSkill_Cyloop = new System.Windows.Forms.CheckBox();
             this.autosplitterVersion = new System.Windows.Forms.Label();
             this.chkFocus = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -229,6 +236,8 @@
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox13.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -305,6 +314,7 @@
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabControl1.Location = new System.Drawing.Point(10, 23);
             this.tabControl1.Name = "tabControl1";
@@ -1341,8 +1351,7 @@
             this.rheaWarning.Name = "rheaWarning";
             this.rheaWarning.Size = new System.Drawing.Size(371, 26);
             this.rheaWarning.TabIndex = 12;
-            this.rheaWarning.Text = "Note: to avoid unwanted double splitting, you might want to disable automatic\r\nsp" +
-    "litting on the last tower you plan on deactivating in your run.";
+            this.rheaWarning.Text = "Note: to avoid unwanted double splitting, you might want to disable automatic\r\nsp" + "litting on the last tower you plan on deactivating in your run.";
             // 
             // RheaButton
             // 
@@ -2289,6 +2298,75 @@
             this.chk0_arcade.Text = "1 - 1";
             this.chk0_arcade.UseVisualStyleBackColor = true;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(427, 341);
+            this.tabPage1.TabIndex = 8;
+            this.tabPage1.Text = "Skills (WIP)";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.chkSkill_StompAttack);
+            this.groupBox4.Controls.Add(this.checkBox4);
+            this.groupBox4.Controls.Add(this.chkSkill_AirTrick);
+            this.groupBox4.Controls.Add(this.chkSkill_PhantomRush);
+            this.groupBox4.Controls.Add(this.chkSkill_Cyloop);
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(421, 63);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Split On Unlock";
+            // 
+            // chkSkill_StompAttack
+            // 
+            this.chkSkill_StompAttack.Location = new System.Drawing.Point(266, 20);
+            this.chkSkill_StompAttack.Name = "chkSkill_StompAttack";
+            this.chkSkill_StompAttack.Size = new System.Drawing.Size(106, 21);
+            this.chkSkill_StompAttack.TabIndex = 5;
+            this.chkSkill_StompAttack.Text = "Stomp Attack";
+            this.chkSkill_StompAttack.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.Location = new System.Drawing.Point(299, 40);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(8, 8);
+            this.checkBox4.TabIndex = 4;
+            this.checkBox4.Text = "checkBox4";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_AirTrick
+            // 
+            this.chkSkill_AirTrick.Location = new System.Drawing.Point(192, 20);
+            this.chkSkill_AirTrick.Name = "chkSkill_AirTrick";
+            this.chkSkill_AirTrick.Size = new System.Drawing.Size(68, 22);
+            this.chkSkill_AirTrick.TabIndex = 3;
+            this.chkSkill_AirTrick.Text = "Air Trick";
+            this.chkSkill_AirTrick.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_PhantomRush
+            // 
+            this.chkSkill_PhantomRush.Location = new System.Drawing.Point(84, 19);
+            this.chkSkill_PhantomRush.Name = "chkSkill_PhantomRush";
+            this.chkSkill_PhantomRush.Size = new System.Drawing.Size(104, 24);
+            this.chkSkill_PhantomRush.TabIndex = 2;
+            this.chkSkill_PhantomRush.Text = "Phantom Rush";
+            this.chkSkill_PhantomRush.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_Cyloop
+            // 
+            this.chkSkill_Cyloop.Location = new System.Drawing.Point(19, 19);
+            this.chkSkill_Cyloop.Name = "chkSkill_Cyloop";
+            this.chkSkill_Cyloop.Size = new System.Drawing.Size(104, 24);
+            this.chkSkill_Cyloop.TabIndex = 1;
+            this.chkSkill_Cyloop.Text = "Cyloop";
+            this.chkSkill_Cyloop.UseVisualStyleBackColor = true;
+            // 
             // autosplitterVersion
             // 
             this.autosplitterVersion.AutoSize = true;
@@ -2411,12 +2489,24 @@
             this.groupBox12.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.CheckBox chkSkill_Cyloop;
+
+        private System.Windows.Forms.CheckBox chkSkill_AirTrick;
+        private System.Windows.Forms.CheckBox checkBox4;
+
+        private System.Windows.Forms.CheckBox chkSkill_StompAttack;
+        private System.Windows.Forms.CheckBox chkSkill_PhantomRush;
+
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.GroupBox groupBox4;
 
         #endregion
         private System.Windows.Forms.GroupBox groupBox1;

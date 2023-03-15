@@ -33,24 +33,6 @@
     <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LiveSplit.Core">
-      <HintPath>..\..\..\..\..\Program Files (x86)\LiveSplit\LiveSplit.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UpdateManager">
-      <HintPath>..\..\..\..\..\Program Files (x86)\LiveSplit\UpdateManager.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Game\StoryFlags.cs" />
     <Compile Include="Game\GameMemory_patches.cs" />
     <Compile Include="Game\Common\GameMemoryCommon.cs" />
@@ -83,6 +65,21 @@
     <Content Include="Components\update.LiveSplit.SonicFrontiers.xml" />
     <Content Include="settings.png" />
     <Content Include="sonic-frontiers-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="LiveSplit.Core">
+      <HintPath>C:\Program Files (x86)\LiveSplit\LiveSplit.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UpdateManager">
+      <HintPath>..\..\..\..\Program Files (x86)\LiveSplit\UpdateManager.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

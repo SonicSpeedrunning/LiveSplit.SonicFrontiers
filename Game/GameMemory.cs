@@ -55,6 +55,11 @@ namespace LiveSplit.SonicFrontiers
             // Split bools
             SplitBools = new Dictionary<string, FakeMemoryWatcher<bool>>
             {
+                //Skills (Incomplete)
+                {"Skill_Cyloop", new FakeMemoryWatcher<bool>(()=>Flags.Skill_Cyloop)},
+                {"Skill_PhantomRush", new FakeMemoryWatcher<bool>(() => Flags.Skill_PhantomRush)},
+                {"Skill_AirTrick", new FakeMemoryWatcher<bool>(() => Flags.Skill_AirTrick)},
+                {"Skill_StompAttack", new FakeMemoryWatcher<bool>(() => Flags.Skill_StompAttack)},
                 // Kronos
                 { "Kronos_Ninja",           new FakeMemoryWatcher<bool>(() => Flags.Kronos_Ninja) },
                 { "Kronos_Door",            new FakeMemoryWatcher<bool>(() => Flags.Kronos_Door) },
@@ -222,7 +227,7 @@ namespace LiveSplit.SonicFrontiers
             addresses["APPLICATIONSEQUENCE"] = IntPtr.Zero;
             addresses["HsmExtension"] = IntPtr.Zero;
             addresses["StageTimeExtension"] = IntPtr.Zero;
-            offsets["GameModeExtensionCount"] = 0;
+            offsets["GameModeExtensionCount"] = 0; 
 
 
             byte ApplicationSequenceCount = new DeepPointer(addresses["baseAddress"], offsets["APPLICATION"] + 0x8).Deref<byte>(game);

@@ -10,6 +10,10 @@ namespace LiveSplit.SonicFrontiers
         {
             [FieldOffset(0x0)] private IntPtr SaveDataRTTI = IntPtr.Zero;
             [FieldOffset(0x8)] private bool IsValid = false;
+            [FieldOffset(0x86 + 0x50)] private readonly byte _86 = 0;
+            [FieldOffset(0x89 + 0x50)] private readonly byte _89 = 0;
+            [FieldOffset(0x8C + 0x50)] private readonly byte _8C = 0;
+            [FieldOffset(0x91 + 0x50)] private readonly byte _91 = 0;
             [FieldOffset(0xA45 + 0x50)] private readonly byte _A45 = 0;
             [FieldOffset(0xA48 + 0x50)] private readonly byte _A48 = 0;
             [FieldOffset(0xA49 + 0x50)] private readonly byte _A49 = 0;
@@ -43,6 +47,11 @@ namespace LiveSplit.SonicFrontiers
                 IsValid = SaveDataRTTI == RTTIValue;
             }
 
+            //Skills
+            public bool Skill_Cyloop => IsValid && _86.BitCheck(0);
+            public bool Skill_PhantomRush => IsValid && _89.BitCheck(0);
+            public bool Skill_AirTrick => IsValid && _8C.BitCheck(0);
+            public bool Skill_StompAttack => IsValid && _91.BitCheck(0);
             // Kronos
             public bool Kronos_Ninja => IsValid && _1201.BitCheck(2);
             public bool Kronos_Door => IsValid && _1201.BitCheck(0);

@@ -12,6 +12,17 @@ namespace LiveSplit.SonicFrontiers
         public bool ArcadeStart { get; set; }
         public bool Arcade1_1 { get; set; }
 
+        // Skills
+        
+        public bool Skill_Cyloop { get; set; }
+        
+        public bool Skill_PhantomRush { get; set; }
+        
+        public bool Skill_AirTrick { get; set; }
+        
+        public bool Skill_StompAttack { get; set; }
+        
+
         // Story - Kronos
         public bool Kronos_Ninja { get; set; }
         public bool Kronos_Door { get; set; }
@@ -158,6 +169,14 @@ namespace LiveSplit.SonicFrontiers
             chkStoryStart.DataBindings.Add("Checked", this, "StoryStart", false, DataSourceUpdateMode.OnPropertyChanged);
             chkArcadeStart.DataBindings.Add("Checked", this, "ArcadeStart", false, DataSourceUpdateMode.OnPropertyChanged);
             chkArcade1_1.DataBindings.Add("Checked", this, "Arcade1_1", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_Cyloop.DataBindings.Add("Checked", this, "Skill_Cyloop", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_PhantomRush.DataBindings.Add("Checked", this, "Skill_PhantomRush", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_AirTrick.DataBindings.Add("Checked", this, "Skill_AirTrick", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_StompAttack.DataBindings.Add("Checked", this, "Skill_StompAttack", false,
+                DataSourceUpdateMode.OnPropertyChanged);
             chkKronos_Ninja.DataBindings.Add("Checked", this, "Kronos_Ninja", false, DataSourceUpdateMode.OnPropertyChanged);
             chkKronos_Door.DataBindings.Add("Checked", this, "Kronos_Door", false, DataSourceUpdateMode.OnPropertyChanged);
             chkKronos_Amy.DataBindings.Add("Checked", this, "Kronos_Amy", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -285,7 +304,10 @@ namespace LiveSplit.SonicFrontiers
             // Default Values
             WFocus = false;
             StoryStart = ArcadeStart = Arcade1_1 = true;
-
+            
+            //Skills
+            Skill_Cyloop = Skill_AirTrick = Skill_PhantomRush = Skill_StompAttack = false;
+            
             // Kronos
             Kronos_Ninja = Kronos_Door = Kronos_Amy = Kronos_GigantosFirst = Kronos_Tombstones = false;
             Island_Kronos_story = Island_Kronos_fishing = true;
@@ -332,6 +354,10 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "WFocus", WFocus));
             settingsNode.AppendChild(ToElement(doc, "StoryStart", StoryStart));
             settingsNode.AppendChild(ToElement(doc, "ArcadeStart", ArcadeStart));
+            settingsNode.AppendChild(ToElement(doc, "Skill_Cyloop", Skill_Cyloop));
+            settingsNode.AppendChild(ToElement(doc, "Skill_PhantomRush", Skill_PhantomRush));
+            settingsNode.AppendChild(ToElement(doc, "Skill_AirTrick", Skill_AirTrick));
+            settingsNode.AppendChild(ToElement(doc, "Skill_StompAttack", Skill_StompAttack));
             settingsNode.AppendChild(ToElement(doc, "Kronos_Ninja", Kronos_Ninja));
             settingsNode.AppendChild(ToElement(doc, "Kronos_Door", Kronos_Door));
             settingsNode.AppendChild(ToElement(doc, "Kronos_Amy", Kronos_Amy));
@@ -464,6 +490,10 @@ namespace LiveSplit.SonicFrontiers
             StoryStart = ParseBool(settings, "StoryStart", true);
             ArcadeStart = ParseBool(settings, "ArcadeStart", true);
             Arcade1_1 = ParseBool(settings, "Arcade1_1", true);
+            Skill_Cyloop = ParseBool(settings, "Skill_Cyloop", false);
+            Skill_AirTrick = ParseBool(settings, "Skill_AirTrick", false);
+            Skill_PhantomRush = ParseBool(settings, "Skill_PhantomRush", false);
+            Skill_StompAttack = ParseBool(settings, "Skill_StompAttack");
             Kronos_Ninja = ParseBool(settings, "Kronos_Ninja", false);
             Kronos_Door = ParseBool(settings, "Kronos_Door", false);
             Kronos_Amy = ParseBool(settings, "Kronos_Amy", false);
