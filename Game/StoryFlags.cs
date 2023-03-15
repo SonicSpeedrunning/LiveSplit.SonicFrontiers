@@ -11,9 +11,17 @@ namespace LiveSplit.SonicFrontiers
             [FieldOffset(0x0)] private IntPtr SaveDataRTTI = IntPtr.Zero;
             [FieldOffset(0x8)] private bool IsValid = false;
             [FieldOffset(0x86 + 0x50)] private readonly byte _86 = 0;
+            [FieldOffset(0x88 + 0x50)] private readonly byte _88 = 0; //Quick Cyloop
             [FieldOffset(0x89 + 0x50)] private readonly byte _89 = 0;
+            [FieldOffset(0x8B + 0x50)] private readonly byte _8B = 0; //Recovery Smash
             [FieldOffset(0x8C + 0x50)] private readonly byte _8C = 0;
+            [FieldOffset(0x8D + 0x50)] private readonly byte _8D = 0; //Sonic Boom
+            [FieldOffset(0x8E + 0x50)] private readonly byte _8E = 0; //Wild Rush
+            [FieldOffset(0x8F + 0x50)] private readonly byte _8F = 0; //Loop Kick
+            [FieldOffset(0x90 + 0x50)] private readonly byte _90 = 0; //Spin Slash
             [FieldOffset(0x91 + 0x50)] private readonly byte _91 = 0;
+            [FieldOffset(0x92 + 0x50)] private readonly byte _92 = 0; //Homing Shot
+            [FieldOffset(0x94 + 0x50)] private readonly byte _94 = 0; //Auto Combo
             [FieldOffset(0xA45 + 0x50)] private readonly byte _A45 = 0;
             [FieldOffset(0xA48 + 0x50)] private readonly byte _A48 = 0;
             [FieldOffset(0xA49 + 0x50)] private readonly byte _A49 = 0;
@@ -49,9 +57,24 @@ namespace LiveSplit.SonicFrontiers
 
             //Skills
             public bool Skill_Cyloop => IsValid && _86.BitCheck(0);
+            public bool Skill_QuickCyloop => IsValid && _88.BitCheck(0);
             public bool Skill_PhantomRush => IsValid && _89.BitCheck(0);
+
+            public bool Skill_RecoverySmash => IsValid && _8B.BitCheck(0);
             public bool Skill_AirTrick => IsValid && _8C.BitCheck(0);
+            
+            public bool Skill_SonicBoom => IsValid && _8D.BitCheck(0);
+            public bool Skill_WildRush => IsValid && _8E.BitCheck(0);
+            public bool Skill_LoopKick => IsValid && _8F.BitCheck(0);
+
+            public bool Skill_SpinSlash => IsValid && _90.BitCheck(0);
+            
+            
             public bool Skill_StompAttack => IsValid && _91.BitCheck(0);
+
+            public bool Skill_HomingShot => IsValid && _92.BitCheck(0);
+
+            public bool Skill_AutoCombo => IsValid && _94.BitCheck(0);
             // Kronos
             public bool Kronos_Ninja => IsValid && _1201.BitCheck(2);
             public bool Kronos_Door => IsValid && _1201.BitCheck(0);

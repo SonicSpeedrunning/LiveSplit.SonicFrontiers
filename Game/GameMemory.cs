@@ -55,11 +55,19 @@ namespace LiveSplit.SonicFrontiers
             // Split bools
             SplitBools = new Dictionary<string, FakeMemoryWatcher<bool>>
             {
-                //Skills (Incomplete)
+                //Skills (Manual Unlocks)
                 {"Skill_Cyloop", new FakeMemoryWatcher<bool>(()=>Flags.Skill_Cyloop)},
                 {"Skill_PhantomRush", new FakeMemoryWatcher<bool>(() => Flags.Skill_PhantomRush)},
                 {"Skill_AirTrick", new FakeMemoryWatcher<bool>(() => Flags.Skill_AirTrick)},
                 {"Skill_StompAttack", new FakeMemoryWatcher<bool>(() => Flags.Skill_StompAttack)},
+                {"Skill_QuickCyloop", new FakeMemoryWatcher<bool>(() => Flags.Skill_QuickCyloop)},
+                {"Skill_SonicBoom", new FakeMemoryWatcher<bool>(() => Flags.Skill_SonicBoom)},
+                {"Skill_WildRush", new FakeMemoryWatcher<bool>(() => Flags.Skill_WildRush)},
+                {"Skill_LoopKick", new FakeMemoryWatcher<bool>(()=>Flags.Skill_LoopKick)},
+                {"Skill_HomingShot", new FakeMemoryWatcher<bool>(() => Flags.Skill_HomingShot)},
+                {"Skill_AutoCombo", new FakeMemoryWatcher<bool>(() => Flags.Skill_AutoCombo)},
+                {"Skill_SpinSlash", new FakeMemoryWatcher<bool>(() => Flags.Skill_SpinSlash)},
+                {"Skill_RecoverySmash", new FakeMemoryWatcher<bool>(() => Flags.Skill_RecoverySmash)},
                 // Kronos
                 { "Kronos_Ninja",           new FakeMemoryWatcher<bool>(() => Flags.Kronos_Ninja) },
                 { "Kronos_Door",            new FakeMemoryWatcher<bool>(() => Flags.Kronos_Door) },

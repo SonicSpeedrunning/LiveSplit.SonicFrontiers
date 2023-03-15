@@ -195,8 +195,15 @@
             this.chk0_arcade = new System.Windows.Forms.CheckBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkSkill_RecoverySmash = new System.Windows.Forms.CheckBox();
+            this.chkSkill_LoopKick = new System.Windows.Forms.CheckBox();
+            this.chkSkill_SpinSlash = new System.Windows.Forms.CheckBox();
+            this.chkSkill_HomingShot = new System.Windows.Forms.CheckBox();
+            this.chkSkill_AutoCombo = new System.Windows.Forms.CheckBox();
+            this.chkSkill_QuickCyloop = new System.Windows.Forms.CheckBox();
+            this.chkSkill_WildRush = new System.Windows.Forms.CheckBox();
+            this.chkSkill_SonicBoom = new System.Windows.Forms.CheckBox();
             this.chkSkill_StompAttack = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.chkSkill_AirTrick = new System.Windows.Forms.CheckBox();
             this.chkSkill_PhantomRush = new System.Windows.Forms.CheckBox();
             this.chkSkill_Cyloop = new System.Windows.Forms.CheckBox();
@@ -2305,40 +2312,110 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(427, 341);
             this.tabPage1.TabIndex = 8;
-            this.tabPage1.Text = "Skills (WIP)";
+            this.tabPage1.Text = "Skills";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.chkSkill_RecoverySmash);
+            this.groupBox4.Controls.Add(this.chkSkill_LoopKick);
+            this.groupBox4.Controls.Add(this.chkSkill_SpinSlash);
+            this.groupBox4.Controls.Add(this.chkSkill_HomingShot);
+            this.groupBox4.Controls.Add(this.chkSkill_AutoCombo);
+            this.groupBox4.Controls.Add(this.chkSkill_QuickCyloop);
+            this.groupBox4.Controls.Add(this.chkSkill_WildRush);
+            this.groupBox4.Controls.Add(this.chkSkill_SonicBoom);
             this.groupBox4.Controls.Add(this.chkSkill_StompAttack);
-            this.groupBox4.Controls.Add(this.checkBox4);
             this.groupBox4.Controls.Add(this.chkSkill_AirTrick);
             this.groupBox4.Controls.Add(this.chkSkill_PhantomRush);
             this.groupBox4.Controls.Add(this.chkSkill_Cyloop);
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(421, 63);
+            this.groupBox4.Size = new System.Drawing.Size(421, 115);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Split On Unlock";
             // 
+            // chkSkill_RecoverySmash
+            // 
+            this.chkSkill_RecoverySmash.Location = new System.Drawing.Point(277, 76);
+            this.chkSkill_RecoverySmash.Name = "chkSkill_RecoverySmash";
+            this.chkSkill_RecoverySmash.Size = new System.Drawing.Size(110, 20);
+            this.chkSkill_RecoverySmash.TabIndex = 13;
+            this.chkSkill_RecoverySmash.Text = "Recovery Smash";
+            this.chkSkill_RecoverySmash.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_LoopKick
+            // 
+            this.chkSkill_LoopKick.Location = new System.Drawing.Point(193, 76);
+            this.chkSkill_LoopKick.Name = "chkSkill_LoopKick";
+            this.chkSkill_LoopKick.Size = new System.Drawing.Size(78, 20);
+            this.chkSkill_LoopKick.TabIndex = 12;
+            this.chkSkill_LoopKick.Text = "Loop Kick";
+            this.chkSkill_LoopKick.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_SpinSlash
+            // 
+            this.chkSkill_SpinSlash.Location = new System.Drawing.Point(109, 74);
+            this.chkSkill_SpinSlash.Name = "chkSkill_SpinSlash";
+            this.chkSkill_SpinSlash.Size = new System.Drawing.Size(76, 24);
+            this.chkSkill_SpinSlash.TabIndex = 11;
+            this.chkSkill_SpinSlash.Text = "Spin Slash";
+            this.chkSkill_SpinSlash.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_HomingShot
+            // 
+            this.chkSkill_HomingShot.Location = new System.Drawing.Point(19, 75);
+            this.chkSkill_HomingShot.Name = "chkSkill_HomingShot";
+            this.chkSkill_HomingShot.Size = new System.Drawing.Size(98, 23);
+            this.chkSkill_HomingShot.TabIndex = 10;
+            this.chkSkill_HomingShot.Text = "Homing Shot";
+            this.chkSkill_HomingShot.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_AutoCombo
+            // 
+            this.chkSkill_AutoCombo.Location = new System.Drawing.Point(19, 51);
+            this.chkSkill_AutoCombo.Name = "chkSkill_AutoCombo";
+            this.chkSkill_AutoCombo.Size = new System.Drawing.Size(85, 18);
+            this.chkSkill_AutoCombo.TabIndex = 9;
+            this.chkSkill_AutoCombo.Text = "Auto Combo";
+            this.chkSkill_AutoCombo.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_QuickCyloop
+            // 
+            this.chkSkill_QuickCyloop.Location = new System.Drawing.Point(287, 50);
+            this.chkSkill_QuickCyloop.Name = "chkSkill_QuickCyloop";
+            this.chkSkill_QuickCyloop.Size = new System.Drawing.Size(100, 21);
+            this.chkSkill_QuickCyloop.TabIndex = 8;
+            this.chkSkill_QuickCyloop.Text = "Quick Cyloop";
+            this.chkSkill_QuickCyloop.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_WildRush
+            // 
+            this.chkSkill_WildRush.Location = new System.Drawing.Point(110, 51);
+            this.chkSkill_WildRush.Name = "chkSkill_WildRush";
+            this.chkSkill_WildRush.Size = new System.Drawing.Size(78, 18);
+            this.chkSkill_WildRush.TabIndex = 7;
+            this.chkSkill_WildRush.Text = "Wild Rush";
+            this.chkSkill_WildRush.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_SonicBoom
+            // 
+            this.chkSkill_SonicBoom.Location = new System.Drawing.Point(266, 19);
+            this.chkSkill_SonicBoom.Name = "chkSkill_SonicBoom";
+            this.chkSkill_SonicBoom.Size = new System.Drawing.Size(90, 23);
+            this.chkSkill_SonicBoom.TabIndex = 6;
+            this.chkSkill_SonicBoom.Text = "Sonic Boom";
+            this.chkSkill_SonicBoom.UseVisualStyleBackColor = true;
+            // 
             // chkSkill_StompAttack
             // 
-            this.chkSkill_StompAttack.Location = new System.Drawing.Point(266, 20);
+            this.chkSkill_StompAttack.Location = new System.Drawing.Point(192, 50);
             this.chkSkill_StompAttack.Name = "chkSkill_StompAttack";
-            this.chkSkill_StompAttack.Size = new System.Drawing.Size(106, 21);
+            this.chkSkill_StompAttack.Size = new System.Drawing.Size(92, 21);
             this.chkSkill_StompAttack.TabIndex = 5;
             this.chkSkill_StompAttack.Text = "Stomp Attack";
             this.chkSkill_StompAttack.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.Location = new System.Drawing.Point(299, 40);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(8, 8);
-            this.checkBox4.TabIndex = 4;
-            this.checkBox4.Text = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // chkSkill_AirTrick
             // 
@@ -2497,10 +2574,19 @@
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.CheckBox chkSkill_AutoCombo;
+        private System.Windows.Forms.CheckBox chkSkill_HomingShot;
+        private System.Windows.Forms.CheckBox chkSkill_SpinSlash;
+        private System.Windows.Forms.CheckBox chkSkill_LoopKick;
+        private System.Windows.Forms.CheckBox chkSkill_RecoverySmash;
+
+        private System.Windows.Forms.CheckBox chkSkill_SonicBoom;
+        private System.Windows.Forms.CheckBox chkSkill_WildRush;
+        private System.Windows.Forms.CheckBox chkSkill_QuickCyloop;
+
         private System.Windows.Forms.CheckBox chkSkill_Cyloop;
 
         private System.Windows.Forms.CheckBox chkSkill_AirTrick;
-        private System.Windows.Forms.CheckBox checkBox4;
 
         private System.Windows.Forms.CheckBox chkSkill_StompAttack;
         private System.Windows.Forms.CheckBox chkSkill_PhantomRush;

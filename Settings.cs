@@ -22,6 +22,21 @@ namespace LiveSplit.SonicFrontiers
         
         public bool Skill_StompAttack { get; set; }
         
+        public bool Skill_SonicBoom { get; set; }
+        
+        public bool Skill_AutoCombo { get; set; }
+        
+        public bool Skill_WildRush { get; set; }
+        
+        public bool Skill_QuickCyloop { get; set; }
+        
+        public bool Skill_HomingShot { get; set; }
+        
+        public bool Skill_SpinSlash { get; set; }
+        
+        public bool Skill_LoopKick { get; set; }
+        
+        public bool Skill_RecoverySmash { get; set; }
 
         // Story - Kronos
         public bool Kronos_Ninja { get; set; }
@@ -177,6 +192,22 @@ namespace LiveSplit.SonicFrontiers
                 DataSourceUpdateMode.OnPropertyChanged);
             chkSkill_StompAttack.DataBindings.Add("Checked", this, "Skill_StompAttack", false,
                 DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_AutoCombo.DataBindings.Add("Checked", this, "Skill_AutoCombo", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_HomingShot.DataBindings.Add("Checked", this, "Skill_HomingShot", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_LoopKick.DataBindings.Add("Checked", this, "Skill_LoopKick", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_QuickCyloop.DataBindings.Add("Checked", this, "Skill_QuickCyloop", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_RecoverySmash.DataBindings.Add("Checked", this, "Skill_RecoverySmash", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_SonicBoom.DataBindings.Add("Checked", this, "Skill_SonicBoom", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_SpinSlash.DataBindings.Add("Checked", this, "Skill_SpinSlash", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chkSkill_WildRush.DataBindings.Add("Checked", this, "Skill_WildRush", false,
+                DataSourceUpdateMode.OnPropertyChanged);
             chkKronos_Ninja.DataBindings.Add("Checked", this, "Kronos_Ninja", false, DataSourceUpdateMode.OnPropertyChanged);
             chkKronos_Door.DataBindings.Add("Checked", this, "Kronos_Door", false, DataSourceUpdateMode.OnPropertyChanged);
             chkKronos_Amy.DataBindings.Add("Checked", this, "Kronos_Amy", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -306,7 +337,7 @@ namespace LiveSplit.SonicFrontiers
             StoryStart = ArcadeStart = Arcade1_1 = true;
             
             //Skills
-            Skill_Cyloop = Skill_AirTrick = Skill_PhantomRush = Skill_StompAttack = false;
+            Skill_Cyloop = Skill_AirTrick = Skill_PhantomRush = Skill_StompAttack = Skill_AutoCombo = Skill_HomingShot = Skill_LoopKick = Skill_QuickCyloop = Skill_RecoverySmash = Skill_SonicBoom = Skill_SpinSlash = Skill_WildRush = false;
             
             // Kronos
             Kronos_Ninja = Kronos_Door = Kronos_Amy = Kronos_GigantosFirst = Kronos_Tombstones = false;
@@ -358,6 +389,14 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "Skill_PhantomRush", Skill_PhantomRush));
             settingsNode.AppendChild(ToElement(doc, "Skill_AirTrick", Skill_AirTrick));
             settingsNode.AppendChild(ToElement(doc, "Skill_StompAttack", Skill_StompAttack));
+            settingsNode.AppendChild(ToElement(doc, "Skill_SonicBoom", Skill_SonicBoom));
+            settingsNode.AppendChild(ToElement(doc, "Skill_AutoCombo", Skill_AutoCombo));
+            settingsNode.AppendChild(ToElement(doc, "Skill_QuickCyloop", Skill_QuickCyloop));
+            settingsNode.AppendChild(ToElement(doc, "Skill_HomingShot", Skill_HomingShot));
+            settingsNode.AppendChild(ToElement(doc, "Skill_SpinSlash", Skill_SpinSlash));
+            settingsNode.AppendChild(ToElement(doc, "Skill_LoopKick", Skill_LoopKick));
+            settingsNode.AppendChild(ToElement(doc, "Skill_WildRush", Skill_WildRush));
+            settingsNode.AppendChild(ToElement(doc, "Skill_RecoverySmash", Skill_RecoverySmash));
             settingsNode.AppendChild(ToElement(doc, "Kronos_Ninja", Kronos_Ninja));
             settingsNode.AppendChild(ToElement(doc, "Kronos_Door", Kronos_Door));
             settingsNode.AppendChild(ToElement(doc, "Kronos_Amy", Kronos_Amy));
@@ -493,7 +532,14 @@ namespace LiveSplit.SonicFrontiers
             Skill_Cyloop = ParseBool(settings, "Skill_Cyloop", false);
             Skill_AirTrick = ParseBool(settings, "Skill_AirTrick", false);
             Skill_PhantomRush = ParseBool(settings, "Skill_PhantomRush", false);
-            Skill_StompAttack = ParseBool(settings, "Skill_StompAttack");
+            Skill_StompAttack = ParseBool(settings, "Skill_StompAttack", false);
+            Skill_AutoCombo = ParseBool(settings, "Skill_AutoCombo", false);
+            Skill_HomingShot = ParseBool(settings, "Skill_HomingShot", false);
+            Skill_LoopKick = ParseBool(settings, "Skill_LoopKick", false);
+            Skill_QuickCyloop = ParseBool(settings, "Skill_QuickCyloop", false);
+            Skill_RecoverySmash = ParseBool(settings, "Skill_RecoverySmash", false);
+            Skill_SonicBoom = ParseBool(settings, "Skill_SonicBoom");
+            Skill_WildRush = ParseBool(settings, "Skill_WildRush");
             Kronos_Ninja = ParseBool(settings, "Kronos_Ninja", false);
             Kronos_Door = ParseBool(settings, "Kronos_Door", false);
             Kronos_Amy = ParseBool(settings, "Kronos_Amy", false);
