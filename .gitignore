@@ -6,3 +6,6 @@
 /.vs
 /.idea
 /ComponentsDebug
+!/Components/Livesplit.SonicFrontiers.dll
+/Components/*.dll
+/Components/*.dll.config
