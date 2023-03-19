@@ -1,7 +1,6 @@
 ﻿using LiveSplit.ComponentUtil;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace LiveSplit.SonicFrontiers
 {   
