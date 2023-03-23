@@ -344,7 +344,7 @@ namespace LiveSplit.SonicFrontiers
                     CurrentGameMode = GameMode.Arcade;
                 else if (Status.Current == SonicFrontiers.Status.CyberMode || gamemodeflag.BitCheck(7))
                     CurrentGameMode = GameMode.CyberspaceChallenge;
-                else if (Status.Current == SonicFrontiers.Status.BattleMode || LevelID.Current == SonicFrontiers.LevelID.Island_Kronos_BossRush)
+                else if (Status.Current == SonicFrontiers.Status.BattleMode || LevelID.Current == SonicFrontiers.LevelID.Island_Kronos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ares_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Chaos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos_BossRush)
                     CurrentGameMode = GameMode.BossRush;
                 else
                     CurrentGameMode = GameMode.Story;
