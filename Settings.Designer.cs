@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkBossRushStart = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.chkArcade1_1 = new System.Windows.Forms.CheckBox();
             this.chkArcadeStart = new System.Windows.Forms.CheckBox();
             this.chkStoryStart = new System.Windows.Forms.CheckBox();
@@ -193,10 +195,6 @@
             this.chk2_arcade = new System.Windows.Forms.CheckBox();
             this.chk1_arcade = new System.Windows.Forms.CheckBox();
             this.chk0_arcade = new System.Windows.Forms.CheckBox();
-            this.autosplitterVersion = new System.Windows.Forms.Label();
-            this.chkFocus = new System.Windows.Forms.CheckBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.DiscordLink = new System.Windows.Forms.LinkLabel();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.chkSkill_RecoverySmash = new System.Windows.Forms.CheckBox();
@@ -211,6 +209,58 @@
             this.chkSkill_AirTrick = new System.Windows.Forms.CheckBox();
             this.chkSkill_PhantomRush = new System.Windows.Forms.CheckBox();
             this.chkSkill_Cyloop = new System.Windows.Forms.CheckBox();
+            this.autosplitterVersion = new System.Windows.Forms.Label();
+            this.chkFocus = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.DiscordLink = new System.Windows.Forms.LinkLabel();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox28 = new System.Windows.Forms.GroupBox();
+            this.chkBoss4_9 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_8 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_7 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_6 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_5 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_4 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_3 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_2 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_1 = new System.Windows.Forms.CheckBox();
+            this.groupBox29 = new System.Windows.Forms.GroupBox();
+            this.chkBoss3_7 = new System.Windows.Forms.CheckBox();
+            this.chkBoss3_6 = new System.Windows.Forms.CheckBox();
+            this.chkBoss3_5 = new System.Windows.Forms.CheckBox();
+            this.chkBoss3_4 = new System.Windows.Forms.CheckBox();
+            this.chkBoss3_3 = new System.Windows.Forms.CheckBox();
+            this.chkBoss3_2 = new System.Windows.Forms.CheckBox();
+            this.chkBoss3_1 = new System.Windows.Forms.CheckBox();
+            this.groupBox30 = new System.Windows.Forms.GroupBox();
+            this.chkBoss2_7 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_6 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_5 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_4 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_3 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_2 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_1 = new System.Windows.Forms.CheckBox();
+            this.groupBox31 = new System.Windows.Forms.GroupBox();
+            this.chkBoss1_7 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_6 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_5 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_4 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_3 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_2 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_1 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_8 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_9 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_10 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_8 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_9 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_10 = new System.Windows.Forms.CheckBox();
+            this.chkBoss3_8 = new System.Windows.Forms.CheckBox();
+            this.chkBoss3_9 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_10 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_11 = new System.Windows.Forms.CheckBox();
+            this.BossRushButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -243,13 +293,22 @@
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox13.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox28.SuspendLayout();
+            this.groupBox29.SuspendLayout();
+            this.groupBox30.SuspendLayout();
+            this.groupBox31.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkBossRushStart);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.chkArcade1_1);
             this.groupBox1.Controls.Add(this.chkArcadeStart);
             this.groupBox1.Controls.Add(this.chkStoryStart);
@@ -262,17 +321,38 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Auto start settings";
             // 
+            // chkBossRushStart
+            // 
+            this.chkBossRushStart.AutoSize = true;
+            this.chkBossRushStart.Checked = true;
+            this.chkBossRushStart.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBossRushStart.Location = new System.Drawing.Point(95, 23);
+            this.chkBossRushStart.Name = "chkBossRushStart";
+            this.chkBossRushStart.Size = new System.Drawing.Size(72, 17);
+            this.chkBossRushStart.TabIndex = 6;
+            this.chkBossRushStart.Text = "Boss rush";
+            this.chkBossRushStart.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(132, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(22, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "--->";
+            // 
             // chkArcade1_1
             // 
             this.chkArcade1_1.AutoSize = true;
             this.chkArcade1_1.Checked = true;
             this.chkArcade1_1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkArcade1_1.Location = new System.Drawing.Point(101, 40);
+            this.chkArcade1_1.Location = new System.Drawing.Point(158, 40);
             this.chkArcade1_1.Margin = new System.Windows.Forms.Padding(0);
             this.chkArcade1_1.Name = "chkArcade1_1";
-            this.chkArcade1_1.Size = new System.Drawing.Size(141, 17);
+            this.chkArcade1_1.Size = new System.Drawing.Size(80, 17);
             this.chkArcade1_1.TabIndex = 4;
-            this.chkArcade1_1.Text = "Only when entering 1 - 1";
+            this.chkArcade1_1.Text = "Only for 1-1";
             this.chkArcade1_1.UseVisualStyleBackColor = true;
             // 
             // chkArcadeStart
@@ -282,9 +362,9 @@
             this.chkArcadeStart.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkArcadeStart.Location = new System.Drawing.Point(10, 40);
             this.chkArcadeStart.Name = "chkArcadeStart";
-            this.chkArcadeStart.Size = new System.Drawing.Size(89, 17);
+            this.chkArcadeStart.Size = new System.Drawing.Size(124, 17);
             this.chkArcadeStart.TabIndex = 3;
-            this.chkArcadeStart.Text = "Arcade mode";
+            this.chkArcadeStart.Text = "Arcade / Cyberstage";
             this.chkArcadeStart.UseVisualStyleBackColor = true;
             this.chkArcadeStart.CheckedChanged += new System.EventHandler(this.ChkArcadeStart_CheckedChanged);
             // 
@@ -295,9 +375,9 @@
             this.chkStoryStart.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkStoryStart.Location = new System.Drawing.Point(10, 23);
             this.chkStoryStart.Name = "chkStoryStart";
-            this.chkStoryStart.Size = new System.Drawing.Size(141, 17);
+            this.chkStoryStart.Size = new System.Drawing.Size(79, 17);
             this.chkStoryStart.TabIndex = 0;
-            this.chkStoryStart.Text = "Story mode (New Game)";
+            this.chkStoryStart.Text = "Story mode";
             this.chkStoryStart.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -320,8 +400,9 @@
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabControl1.Location = new System.Drawing.Point(10, 23);
             this.tabControl1.Name = "tabControl1";
@@ -1790,7 +1871,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(427, 341);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Arcade mode";
+            this.tabPage2.Text = "Arcade / Cyberstage challenge";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // ArcadeButton
@@ -2306,52 +2387,6 @@
             this.chk0_arcade.Text = "1 - 1";
             this.chk0_arcade.UseVisualStyleBackColor = true;
             // 
-            // autosplitterVersion
-            // 
-            this.autosplitterVersion.AutoSize = true;
-            this.autosplitterVersion.Location = new System.Drawing.Point(330, 484);
-            this.autosplitterVersion.Name = "autosplitterVersion";
-            this.autosplitterVersion.Size = new System.Drawing.Size(135, 13);
-            this.autosplitterVersion.TabIndex = 5;
-            this.autosplitterVersion.Text = "Autosplitter version: vX.X.X";
-            this.autosplitterVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // chkFocus
-            // 
-            this.chkFocus.AutoSize = true;
-            this.chkFocus.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkFocus.Location = new System.Drawing.Point(10, 23);
-            this.chkFocus.Margin = new System.Windows.Forms.Padding(0);
-            this.chkFocus.Name = "chkFocus";
-            this.chkFocus.Size = new System.Drawing.Size(183, 30);
-            this.chkFocus.TabIndex = 5;
-            this.chkFocus.Text = "Prevent the game from pausing\r\nwhen it goes out of focus";
-            this.chkFocus.UseVisualStyleBackColor = true;
-            this.chkFocus.CheckedChanged += new System.EventHandler(this.chkFocus_CheckedChanged);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.chkFocus);
-            this.groupBox6.Location = new System.Drawing.Point(262, 10);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(0);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox6.Size = new System.Drawing.Size(203, 67);
-            this.groupBox6.TabIndex = 6;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Other options";
-            // 
-            // DiscordLink
-            // 
-            this.DiscordLink.AutoSize = true;
-            this.DiscordLink.Location = new System.Drawing.Point(7, 484);
-            this.DiscordLink.Name = "DiscordLink";
-            this.DiscordLink.Size = new System.Drawing.Size(205, 13);
-            this.DiscordLink.TabIndex = 7;
-            this.DiscordLink.TabStop = true;
-            this.DiscordLink.Text = "Need help setting this up? Ask on Discord";
-            this.DiscordLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.DiscordLink_LinkClicked);
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox4);
@@ -2504,6 +2539,713 @@
             this.chkSkill_Cyloop.Text = "Cyloop";
             this.chkSkill_Cyloop.UseVisualStyleBackColor = true;
             // 
+            // autosplitterVersion
+            // 
+            this.autosplitterVersion.AutoSize = true;
+            this.autosplitterVersion.Location = new System.Drawing.Point(330, 484);
+            this.autosplitterVersion.Name = "autosplitterVersion";
+            this.autosplitterVersion.Size = new System.Drawing.Size(135, 13);
+            this.autosplitterVersion.TabIndex = 5;
+            this.autosplitterVersion.Text = "Autosplitter version: vX.X.X";
+            this.autosplitterVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkFocus
+            // 
+            this.chkFocus.AutoSize = true;
+            this.chkFocus.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkFocus.Location = new System.Drawing.Point(10, 23);
+            this.chkFocus.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFocus.Name = "chkFocus";
+            this.chkFocus.Size = new System.Drawing.Size(183, 30);
+            this.chkFocus.TabIndex = 5;
+            this.chkFocus.Text = "Prevent the game from pausing\r\nwhen it goes out of focus";
+            this.chkFocus.UseVisualStyleBackColor = true;
+            this.chkFocus.CheckedChanged += new System.EventHandler(this.chkFocus_CheckedChanged);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.chkFocus);
+            this.groupBox6.Location = new System.Drawing.Point(262, 10);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox6.Size = new System.Drawing.Size(203, 67);
+            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Other options";
+            // 
+            // DiscordLink
+            // 
+            this.DiscordLink.AutoSize = true;
+            this.DiscordLink.Location = new System.Drawing.Point(7, 484);
+            this.DiscordLink.Name = "DiscordLink";
+            this.DiscordLink.Size = new System.Drawing.Size(205, 13);
+            this.DiscordLink.TabIndex = 7;
+            this.DiscordLink.TabStop = true;
+            this.DiscordLink.Text = "Need help setting this up? Ask on Discord";
+            this.DiscordLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.DiscordLink_LinkClicked);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox5);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(427, 341);
+            this.tabPage3.TabIndex = 9;
+            this.tabPage3.Text = "Boss rush";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.BossRushButton);
+            this.groupBox5.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox5.Location = new System.Drawing.Point(3, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(421, 335);
+            this.groupBox5.TabIndex = 2;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Split on defeat";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox28, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox29, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox30, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox31, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(415, 226);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // groupBox28
+            // 
+            this.groupBox28.AutoSize = true;
+            this.groupBox28.Controls.Add(this.chkBoss4_11);
+            this.groupBox28.Controls.Add(this.chkBoss4_10);
+            this.groupBox28.Controls.Add(this.chkBoss4_9);
+            this.groupBox28.Controls.Add(this.chkBoss4_8);
+            this.groupBox28.Controls.Add(this.chkBoss4_7);
+            this.groupBox28.Controls.Add(this.chkBoss4_6);
+            this.groupBox28.Controls.Add(this.chkBoss4_5);
+            this.groupBox28.Controls.Add(this.chkBoss4_4);
+            this.groupBox28.Controls.Add(this.chkBoss4_3);
+            this.groupBox28.Controls.Add(this.chkBoss4_2);
+            this.groupBox28.Controls.Add(this.chkBoss4_1);
+            this.groupBox28.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox28.Location = new System.Drawing.Point(312, 3);
+            this.groupBox28.Name = "groupBox28";
+            this.groupBox28.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox28.Size = new System.Drawing.Size(100, 220);
+            this.groupBox28.TabIndex = 3;
+            this.groupBox28.TabStop = false;
+            this.groupBox28.Text = "Ouranos Island";
+            // 
+            // chkBoss4_9
+            // 
+            this.chkBoss4_9.AutoSize = true;
+            this.chkBoss4_9.Checked = true;
+            this.chkBoss4_9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_9.Location = new System.Drawing.Point(10, 159);
+            this.chkBoss4_9.Name = "chkBoss4_9";
+            this.chkBoss4_9.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_9.TabIndex = 12;
+            this.chkBoss4_9.Text = "Phase 9";
+            this.chkBoss4_9.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_8
+            // 
+            this.chkBoss4_8.AutoSize = true;
+            this.chkBoss4_8.Checked = true;
+            this.chkBoss4_8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_8.Location = new System.Drawing.Point(10, 142);
+            this.chkBoss4_8.Name = "chkBoss4_8";
+            this.chkBoss4_8.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_8.TabIndex = 11;
+            this.chkBoss4_8.Text = "Phase 8";
+            this.chkBoss4_8.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_7
+            // 
+            this.chkBoss4_7.AutoSize = true;
+            this.chkBoss4_7.Checked = true;
+            this.chkBoss4_7.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_7.Location = new System.Drawing.Point(10, 125);
+            this.chkBoss4_7.Name = "chkBoss4_7";
+            this.chkBoss4_7.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_7.TabIndex = 10;
+            this.chkBoss4_7.Text = "Phase 7";
+            this.chkBoss4_7.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_6
+            // 
+            this.chkBoss4_6.AutoSize = true;
+            this.chkBoss4_6.Checked = true;
+            this.chkBoss4_6.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_6.Location = new System.Drawing.Point(10, 108);
+            this.chkBoss4_6.Name = "chkBoss4_6";
+            this.chkBoss4_6.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_6.TabIndex = 9;
+            this.chkBoss4_6.Text = "Phase 6";
+            this.chkBoss4_6.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_5
+            // 
+            this.chkBoss4_5.AutoSize = true;
+            this.chkBoss4_5.Checked = true;
+            this.chkBoss4_5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_5.Location = new System.Drawing.Point(10, 91);
+            this.chkBoss4_5.Name = "chkBoss4_5";
+            this.chkBoss4_5.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_5.TabIndex = 8;
+            this.chkBoss4_5.Text = "Phase 5";
+            this.chkBoss4_5.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_4
+            // 
+            this.chkBoss4_4.AutoSize = true;
+            this.chkBoss4_4.Checked = true;
+            this.chkBoss4_4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_4.Location = new System.Drawing.Point(10, 74);
+            this.chkBoss4_4.Name = "chkBoss4_4";
+            this.chkBoss4_4.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_4.TabIndex = 7;
+            this.chkBoss4_4.Text = "Phase 4";
+            this.chkBoss4_4.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_3
+            // 
+            this.chkBoss4_3.AutoSize = true;
+            this.chkBoss4_3.Checked = true;
+            this.chkBoss4_3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_3.Location = new System.Drawing.Point(10, 57);
+            this.chkBoss4_3.Name = "chkBoss4_3";
+            this.chkBoss4_3.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_3.TabIndex = 6;
+            this.chkBoss4_3.Text = "Phase 3";
+            this.chkBoss4_3.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_2
+            // 
+            this.chkBoss4_2.AutoSize = true;
+            this.chkBoss4_2.Checked = true;
+            this.chkBoss4_2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_2.Location = new System.Drawing.Point(10, 40);
+            this.chkBoss4_2.Name = "chkBoss4_2";
+            this.chkBoss4_2.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_2.TabIndex = 5;
+            this.chkBoss4_2.Text = "Phase 2";
+            this.chkBoss4_2.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_1
+            // 
+            this.chkBoss4_1.AutoSize = true;
+            this.chkBoss4_1.Checked = true;
+            this.chkBoss4_1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_1.Location = new System.Drawing.Point(10, 23);
+            this.chkBoss4_1.Name = "chkBoss4_1";
+            this.chkBoss4_1.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_1.TabIndex = 4;
+            this.chkBoss4_1.Text = "Phase 1";
+            this.chkBoss4_1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox29
+            // 
+            this.groupBox29.AutoSize = true;
+            this.groupBox29.Controls.Add(this.chkBoss3_9);
+            this.groupBox29.Controls.Add(this.chkBoss3_8);
+            this.groupBox29.Controls.Add(this.chkBoss3_7);
+            this.groupBox29.Controls.Add(this.chkBoss3_6);
+            this.groupBox29.Controls.Add(this.chkBoss3_5);
+            this.groupBox29.Controls.Add(this.chkBoss3_4);
+            this.groupBox29.Controls.Add(this.chkBoss3_3);
+            this.groupBox29.Controls.Add(this.chkBoss3_2);
+            this.groupBox29.Controls.Add(this.chkBoss3_1);
+            this.groupBox29.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox29.Location = new System.Drawing.Point(209, 3);
+            this.groupBox29.Name = "groupBox29";
+            this.groupBox29.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox29.Size = new System.Drawing.Size(97, 186);
+            this.groupBox29.TabIndex = 2;
+            this.groupBox29.TabStop = false;
+            this.groupBox29.Text = "Chaos Island";
+            // 
+            // chkBoss3_7
+            // 
+            this.chkBoss3_7.AutoSize = true;
+            this.chkBoss3_7.Checked = true;
+            this.chkBoss3_7.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_7.Location = new System.Drawing.Point(10, 125);
+            this.chkBoss3_7.Name = "chkBoss3_7";
+            this.chkBoss3_7.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_7.TabIndex = 9;
+            this.chkBoss3_7.Text = "Phase 7";
+            this.chkBoss3_7.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss3_6
+            // 
+            this.chkBoss3_6.AutoSize = true;
+            this.chkBoss3_6.Checked = true;
+            this.chkBoss3_6.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_6.Location = new System.Drawing.Point(10, 108);
+            this.chkBoss3_6.Name = "chkBoss3_6";
+            this.chkBoss3_6.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_6.TabIndex = 8;
+            this.chkBoss3_6.Text = "Phase 6";
+            this.chkBoss3_6.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss3_5
+            // 
+            this.chkBoss3_5.AutoSize = true;
+            this.chkBoss3_5.Checked = true;
+            this.chkBoss3_5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_5.Location = new System.Drawing.Point(10, 91);
+            this.chkBoss3_5.Name = "chkBoss3_5";
+            this.chkBoss3_5.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_5.TabIndex = 7;
+            this.chkBoss3_5.Text = "Phase 5";
+            this.chkBoss3_5.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss3_4
+            // 
+            this.chkBoss3_4.AutoSize = true;
+            this.chkBoss3_4.Checked = true;
+            this.chkBoss3_4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_4.Location = new System.Drawing.Point(10, 74);
+            this.chkBoss3_4.Name = "chkBoss3_4";
+            this.chkBoss3_4.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_4.TabIndex = 6;
+            this.chkBoss3_4.Text = "Phase 4";
+            this.chkBoss3_4.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss3_3
+            // 
+            this.chkBoss3_3.AutoSize = true;
+            this.chkBoss3_3.Checked = true;
+            this.chkBoss3_3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_3.Location = new System.Drawing.Point(10, 57);
+            this.chkBoss3_3.Name = "chkBoss3_3";
+            this.chkBoss3_3.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_3.TabIndex = 5;
+            this.chkBoss3_3.Text = "Phase 3";
+            this.chkBoss3_3.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss3_2
+            // 
+            this.chkBoss3_2.AutoSize = true;
+            this.chkBoss3_2.Checked = true;
+            this.chkBoss3_2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_2.Location = new System.Drawing.Point(10, 40);
+            this.chkBoss3_2.Name = "chkBoss3_2";
+            this.chkBoss3_2.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_2.TabIndex = 4;
+            this.chkBoss3_2.Text = "Phase 2";
+            this.chkBoss3_2.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss3_1
+            // 
+            this.chkBoss3_1.AutoSize = true;
+            this.chkBoss3_1.Checked = true;
+            this.chkBoss3_1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_1.Location = new System.Drawing.Point(10, 23);
+            this.chkBoss3_1.Name = "chkBoss3_1";
+            this.chkBoss3_1.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_1.TabIndex = 3;
+            this.chkBoss3_1.Text = "Phase 1";
+            this.chkBoss3_1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox30
+            // 
+            this.groupBox30.AutoSize = true;
+            this.groupBox30.Controls.Add(this.chkBoss2_10);
+            this.groupBox30.Controls.Add(this.chkBoss2_9);
+            this.groupBox30.Controls.Add(this.chkBoss2_8);
+            this.groupBox30.Controls.Add(this.chkBoss2_7);
+            this.groupBox30.Controls.Add(this.chkBoss2_6);
+            this.groupBox30.Controls.Add(this.chkBoss2_5);
+            this.groupBox30.Controls.Add(this.chkBoss2_4);
+            this.groupBox30.Controls.Add(this.chkBoss2_3);
+            this.groupBox30.Controls.Add(this.chkBoss2_2);
+            this.groupBox30.Controls.Add(this.chkBoss2_1);
+            this.groupBox30.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox30.Location = new System.Drawing.Point(106, 3);
+            this.groupBox30.Name = "groupBox30";
+            this.groupBox30.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox30.Size = new System.Drawing.Size(97, 203);
+            this.groupBox30.TabIndex = 1;
+            this.groupBox30.TabStop = false;
+            this.groupBox30.Text = "Ares Island";
+            // 
+            // chkBoss2_7
+            // 
+            this.chkBoss2_7.AutoSize = true;
+            this.chkBoss2_7.Checked = true;
+            this.chkBoss2_7.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_7.Location = new System.Drawing.Point(10, 125);
+            this.chkBoss2_7.Name = "chkBoss2_7";
+            this.chkBoss2_7.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_7.TabIndex = 9;
+            this.chkBoss2_7.Text = "Phase 7";
+            this.chkBoss2_7.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_6
+            // 
+            this.chkBoss2_6.AutoSize = true;
+            this.chkBoss2_6.Checked = true;
+            this.chkBoss2_6.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_6.Location = new System.Drawing.Point(10, 108);
+            this.chkBoss2_6.Name = "chkBoss2_6";
+            this.chkBoss2_6.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_6.TabIndex = 8;
+            this.chkBoss2_6.Text = "Phase 6";
+            this.chkBoss2_6.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_5
+            // 
+            this.chkBoss2_5.AutoSize = true;
+            this.chkBoss2_5.Checked = true;
+            this.chkBoss2_5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_5.Location = new System.Drawing.Point(10, 91);
+            this.chkBoss2_5.Name = "chkBoss2_5";
+            this.chkBoss2_5.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_5.TabIndex = 7;
+            this.chkBoss2_5.Text = "Phase 5";
+            this.chkBoss2_5.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_4
+            // 
+            this.chkBoss2_4.AutoSize = true;
+            this.chkBoss2_4.Checked = true;
+            this.chkBoss2_4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_4.Location = new System.Drawing.Point(10, 74);
+            this.chkBoss2_4.Name = "chkBoss2_4";
+            this.chkBoss2_4.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_4.TabIndex = 6;
+            this.chkBoss2_4.Text = "Phase 4";
+            this.chkBoss2_4.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_3
+            // 
+            this.chkBoss2_3.AutoSize = true;
+            this.chkBoss2_3.Checked = true;
+            this.chkBoss2_3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_3.Location = new System.Drawing.Point(10, 57);
+            this.chkBoss2_3.Name = "chkBoss2_3";
+            this.chkBoss2_3.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_3.TabIndex = 5;
+            this.chkBoss2_3.Text = "Phase 3";
+            this.chkBoss2_3.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_2
+            // 
+            this.chkBoss2_2.AutoSize = true;
+            this.chkBoss2_2.Checked = true;
+            this.chkBoss2_2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_2.Location = new System.Drawing.Point(10, 40);
+            this.chkBoss2_2.Name = "chkBoss2_2";
+            this.chkBoss2_2.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_2.TabIndex = 4;
+            this.chkBoss2_2.Text = "Phase 2";
+            this.chkBoss2_2.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_1
+            // 
+            this.chkBoss2_1.AutoSize = true;
+            this.chkBoss2_1.Checked = true;
+            this.chkBoss2_1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_1.Location = new System.Drawing.Point(10, 23);
+            this.chkBoss2_1.Name = "chkBoss2_1";
+            this.chkBoss2_1.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_1.TabIndex = 3;
+            this.chkBoss2_1.Text = "Phase 1";
+            this.chkBoss2_1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox31
+            // 
+            this.groupBox31.AutoSize = true;
+            this.groupBox31.Controls.Add(this.chkBoss1_10);
+            this.groupBox31.Controls.Add(this.chkBoss1_9);
+            this.groupBox31.Controls.Add(this.chkBoss1_8);
+            this.groupBox31.Controls.Add(this.chkBoss1_7);
+            this.groupBox31.Controls.Add(this.chkBoss1_6);
+            this.groupBox31.Controls.Add(this.chkBoss1_5);
+            this.groupBox31.Controls.Add(this.chkBoss1_4);
+            this.groupBox31.Controls.Add(this.chkBoss1_3);
+            this.groupBox31.Controls.Add(this.chkBoss1_2);
+            this.groupBox31.Controls.Add(this.chkBoss1_1);
+            this.groupBox31.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox31.Location = new System.Drawing.Point(3, 3);
+            this.groupBox31.Name = "groupBox31";
+            this.groupBox31.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox31.Size = new System.Drawing.Size(97, 203);
+            this.groupBox31.TabIndex = 0;
+            this.groupBox31.TabStop = false;
+            this.groupBox31.Text = "Kronos Island";
+            // 
+            // chkBoss1_7
+            // 
+            this.chkBoss1_7.AutoSize = true;
+            this.chkBoss1_7.Checked = true;
+            this.chkBoss1_7.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_7.Location = new System.Drawing.Point(10, 125);
+            this.chkBoss1_7.Name = "chkBoss1_7";
+            this.chkBoss1_7.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_7.TabIndex = 8;
+            this.chkBoss1_7.Text = "Phase 7";
+            this.chkBoss1_7.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_6
+            // 
+            this.chkBoss1_6.AutoSize = true;
+            this.chkBoss1_6.Checked = true;
+            this.chkBoss1_6.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_6.Location = new System.Drawing.Point(10, 108);
+            this.chkBoss1_6.Name = "chkBoss1_6";
+            this.chkBoss1_6.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_6.TabIndex = 7;
+            this.chkBoss1_6.Text = "Phase 6";
+            this.chkBoss1_6.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_5
+            // 
+            this.chkBoss1_5.AutoSize = true;
+            this.chkBoss1_5.Checked = true;
+            this.chkBoss1_5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_5.Location = new System.Drawing.Point(10, 91);
+            this.chkBoss1_5.Name = "chkBoss1_5";
+            this.chkBoss1_5.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_5.TabIndex = 6;
+            this.chkBoss1_5.Text = "Phase 5";
+            this.chkBoss1_5.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_4
+            // 
+            this.chkBoss1_4.AutoSize = true;
+            this.chkBoss1_4.Checked = true;
+            this.chkBoss1_4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_4.Location = new System.Drawing.Point(10, 74);
+            this.chkBoss1_4.Name = "chkBoss1_4";
+            this.chkBoss1_4.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_4.TabIndex = 5;
+            this.chkBoss1_4.Text = "Phase 4";
+            this.chkBoss1_4.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_3
+            // 
+            this.chkBoss1_3.AutoSize = true;
+            this.chkBoss1_3.Checked = true;
+            this.chkBoss1_3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_3.Location = new System.Drawing.Point(10, 57);
+            this.chkBoss1_3.Name = "chkBoss1_3";
+            this.chkBoss1_3.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_3.TabIndex = 4;
+            this.chkBoss1_3.Text = "Phase 3";
+            this.chkBoss1_3.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_2
+            // 
+            this.chkBoss1_2.AutoSize = true;
+            this.chkBoss1_2.Checked = true;
+            this.chkBoss1_2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_2.Location = new System.Drawing.Point(10, 40);
+            this.chkBoss1_2.Name = "chkBoss1_2";
+            this.chkBoss1_2.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_2.TabIndex = 3;
+            this.chkBoss1_2.Text = "Phase 2";
+            this.chkBoss1_2.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_1
+            // 
+            this.chkBoss1_1.AutoSize = true;
+            this.chkBoss1_1.Checked = true;
+            this.chkBoss1_1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_1.Location = new System.Drawing.Point(10, 23);
+            this.chkBoss1_1.Name = "chkBoss1_1";
+            this.chkBoss1_1.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_1.TabIndex = 2;
+            this.chkBoss1_1.Text = "Phase 1";
+            this.chkBoss1_1.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_8
+            // 
+            this.chkBoss1_8.AutoSize = true;
+            this.chkBoss1_8.Checked = true;
+            this.chkBoss1_8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_8.Location = new System.Drawing.Point(10, 142);
+            this.chkBoss1_8.Name = "chkBoss1_8";
+            this.chkBoss1_8.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_8.TabIndex = 9;
+            this.chkBoss1_8.Text = "Phase 8";
+            this.chkBoss1_8.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_9
+            // 
+            this.chkBoss1_9.AutoSize = true;
+            this.chkBoss1_9.Checked = true;
+            this.chkBoss1_9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_9.Location = new System.Drawing.Point(10, 159);
+            this.chkBoss1_9.Name = "chkBoss1_9";
+            this.chkBoss1_9.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_9.TabIndex = 10;
+            this.chkBoss1_9.Text = "Phase 9";
+            this.chkBoss1_9.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_10
+            // 
+            this.chkBoss1_10.AutoSize = true;
+            this.chkBoss1_10.Checked = true;
+            this.chkBoss1_10.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_10.Location = new System.Drawing.Point(10, 176);
+            this.chkBoss1_10.Name = "chkBoss1_10";
+            this.chkBoss1_10.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_10.TabIndex = 11;
+            this.chkBoss1_10.Text = "Phase 10";
+            this.chkBoss1_10.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_8
+            // 
+            this.chkBoss2_8.AutoSize = true;
+            this.chkBoss2_8.Checked = true;
+            this.chkBoss2_8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_8.Location = new System.Drawing.Point(10, 142);
+            this.chkBoss2_8.Name = "chkBoss2_8";
+            this.chkBoss2_8.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_8.TabIndex = 10;
+            this.chkBoss2_8.Text = "Phase 8";
+            this.chkBoss2_8.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_9
+            // 
+            this.chkBoss2_9.AutoSize = true;
+            this.chkBoss2_9.Checked = true;
+            this.chkBoss2_9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_9.Location = new System.Drawing.Point(10, 159);
+            this.chkBoss2_9.Name = "chkBoss2_9";
+            this.chkBoss2_9.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_9.TabIndex = 11;
+            this.chkBoss2_9.Text = "Phase 9";
+            this.chkBoss2_9.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_10
+            // 
+            this.chkBoss2_10.AutoSize = true;
+            this.chkBoss2_10.Checked = true;
+            this.chkBoss2_10.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_10.Location = new System.Drawing.Point(10, 176);
+            this.chkBoss2_10.Name = "chkBoss2_10";
+            this.chkBoss2_10.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_10.TabIndex = 12;
+            this.chkBoss2_10.Text = "Phase 10";
+            this.chkBoss2_10.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss3_8
+            // 
+            this.chkBoss3_8.AutoSize = true;
+            this.chkBoss3_8.Checked = true;
+            this.chkBoss3_8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_8.Location = new System.Drawing.Point(10, 142);
+            this.chkBoss3_8.Name = "chkBoss3_8";
+            this.chkBoss3_8.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_8.TabIndex = 10;
+            this.chkBoss3_8.Text = "Phase 8";
+            this.chkBoss3_8.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss3_9
+            // 
+            this.chkBoss3_9.AutoSize = true;
+            this.chkBoss3_9.Checked = true;
+            this.chkBoss3_9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_9.Location = new System.Drawing.Point(10, 159);
+            this.chkBoss3_9.Name = "chkBoss3_9";
+            this.chkBoss3_9.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_9.TabIndex = 11;
+            this.chkBoss3_9.Text = "Phase 9";
+            this.chkBoss3_9.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_10
+            // 
+            this.chkBoss4_10.AutoSize = true;
+            this.chkBoss4_10.Checked = true;
+            this.chkBoss4_10.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_10.Location = new System.Drawing.Point(10, 176);
+            this.chkBoss4_10.Name = "chkBoss4_10";
+            this.chkBoss4_10.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_10.TabIndex = 13;
+            this.chkBoss4_10.Text = "Phase 10";
+            this.chkBoss4_10.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_11
+            // 
+            this.chkBoss4_11.AutoSize = true;
+            this.chkBoss4_11.Checked = true;
+            this.chkBoss4_11.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_11.Location = new System.Drawing.Point(10, 193);
+            this.chkBoss4_11.Name = "chkBoss4_11";
+            this.chkBoss4_11.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_11.TabIndex = 14;
+            this.chkBoss4_11.Text = "Phase 11";
+            this.chkBoss4_11.UseVisualStyleBackColor = true;
+            // 
+            // BossRushButton
+            // 
+            this.BossRushButton.Location = new System.Drawing.Point(309, 256);
+            this.BossRushButton.Name = "BossRushButton";
+            this.BossRushButton.Size = new System.Drawing.Size(93, 23);
+            this.BossRushButton.TabIndex = 17;
+            this.BossRushButton.Text = "Reset to Default";
+            this.BossRushButton.UseVisualStyleBackColor = true;
+            this.BossRushButton.Click += new System.EventHandler(this.BossRushButton_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2580,10 +3322,23 @@
             this.groupBox12.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.groupBox28.ResumeLayout(false);
+            this.groupBox28.PerformLayout();
+            this.groupBox29.ResumeLayout(false);
+            this.groupBox29.PerformLayout();
+            this.groupBox30.ResumeLayout(false);
+            this.groupBox30.PerformLayout();
+            this.groupBox31.ResumeLayout(false);
+            this.groupBox31.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2773,5 +3528,55 @@
         private System.Windows.Forms.CheckBox chkSkill_AirTrick;
         private System.Windows.Forms.CheckBox chkSkill_PhantomRush;
         private System.Windows.Forms.CheckBox chkSkill_Cyloop;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkBossRushStart;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button BossRushButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.GroupBox groupBox28;
+        private System.Windows.Forms.CheckBox chkBoss4_11;
+        private System.Windows.Forms.CheckBox chkBoss4_10;
+        private System.Windows.Forms.CheckBox chkBoss4_9;
+        private System.Windows.Forms.CheckBox chkBoss4_8;
+        private System.Windows.Forms.CheckBox chkBoss4_7;
+        private System.Windows.Forms.CheckBox chkBoss4_6;
+        private System.Windows.Forms.CheckBox chkBoss4_5;
+        private System.Windows.Forms.CheckBox chkBoss4_4;
+        private System.Windows.Forms.CheckBox chkBoss4_3;
+        private System.Windows.Forms.CheckBox chkBoss4_2;
+        private System.Windows.Forms.CheckBox chkBoss4_1;
+        private System.Windows.Forms.GroupBox groupBox29;
+        private System.Windows.Forms.CheckBox chkBoss3_9;
+        private System.Windows.Forms.CheckBox chkBoss3_8;
+        private System.Windows.Forms.CheckBox chkBoss3_7;
+        private System.Windows.Forms.CheckBox chkBoss3_6;
+        private System.Windows.Forms.CheckBox chkBoss3_5;
+        private System.Windows.Forms.CheckBox chkBoss3_4;
+        private System.Windows.Forms.CheckBox chkBoss3_3;
+        private System.Windows.Forms.CheckBox chkBoss3_2;
+        private System.Windows.Forms.CheckBox chkBoss3_1;
+        private System.Windows.Forms.GroupBox groupBox30;
+        private System.Windows.Forms.CheckBox chkBoss2_10;
+        private System.Windows.Forms.CheckBox chkBoss2_9;
+        private System.Windows.Forms.CheckBox chkBoss2_8;
+        private System.Windows.Forms.CheckBox chkBoss2_7;
+        private System.Windows.Forms.CheckBox chkBoss2_6;
+        private System.Windows.Forms.CheckBox chkBoss2_5;
+        private System.Windows.Forms.CheckBox chkBoss2_4;
+        private System.Windows.Forms.CheckBox chkBoss2_3;
+        private System.Windows.Forms.CheckBox chkBoss2_2;
+        private System.Windows.Forms.CheckBox chkBoss2_1;
+        private System.Windows.Forms.GroupBox groupBox31;
+        private System.Windows.Forms.CheckBox chkBoss1_10;
+        private System.Windows.Forms.CheckBox chkBoss1_9;
+        private System.Windows.Forms.CheckBox chkBoss1_8;
+        private System.Windows.Forms.CheckBox chkBoss1_7;
+        private System.Windows.Forms.CheckBox chkBoss1_6;
+        private System.Windows.Forms.CheckBox chkBoss1_5;
+        private System.Windows.Forms.CheckBox chkBoss1_4;
+        private System.Windows.Forms.CheckBox chkBoss1_3;
+        private System.Windows.Forms.CheckBox chkBoss1_2;
+        private System.Windows.Forms.CheckBox chkBoss1_1;
     }
 }

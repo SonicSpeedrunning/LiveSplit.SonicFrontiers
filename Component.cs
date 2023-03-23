@@ -76,7 +76,7 @@ namespace LiveSplit.SonicFrontiers
 
                 if (GameTime() != null)
                     timer.CurrentState.SetGameTime(GameTime());
-                
+
                 if (Reset())
                     timer.Reset();
                 else if (Split())
@@ -87,7 +87,9 @@ namespace LiveSplit.SonicFrontiers
             if (timer.CurrentState.CurrentPhase == TimerPhase.NotRunning)
             {
                 if (Start())
+                {
                     timer.Start();
+                }
             }
         }
     }

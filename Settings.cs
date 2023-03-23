@@ -11,6 +11,7 @@ namespace LiveSplit.SonicFrontiers
         public bool StoryStart { get; set; }
         public bool ArcadeStart { get; set; }
         public bool Arcade1_1 { get; set; }
+        public bool BossRushStart { get; set; }
 
         // Skills
         public bool Skill_Cyloop { get; set; }
@@ -160,7 +161,46 @@ namespace LiveSplit.SonicFrontiers
         public bool w4_8_arcade { get; set; }
         public bool w4_9_arcade { get; set; }
         public bool w4_9_arcade_soon { get; set; }
-
+        public bool Boss1_1 { get; set; }
+        public bool Boss1_2 { get; set; }
+        public bool Boss1_3 { get; set; }
+        public bool Boss1_4 { get; set; }
+        public bool Boss1_5 { get; set; }
+        public bool Boss1_6 { get; set; }
+        public bool Boss1_7 { get; set; }
+        public bool Boss1_8 { get; set; }
+        public bool Boss1_9 { get; set; }
+        public bool Boss1_10 { get; set; }
+        public bool Boss2_1 { get; set; }
+        public bool Boss2_2 { get; set; }
+        public bool Boss2_3 { get; set; }
+        public bool Boss2_4 { get; set; }
+        public bool Boss2_5 { get; set; }
+        public bool Boss2_6 { get; set; }
+        public bool Boss2_7 { get; set; }
+        public bool Boss2_8 { get; set; }
+        public bool Boss2_9 { get; set; }
+        public bool Boss2_10 { get; set; }
+        public bool Boss3_1 { get; set; }
+        public bool Boss3_2 { get; set; }
+        public bool Boss3_3 { get; set; }
+        public bool Boss3_4 { get; set; }
+        public bool Boss3_5 { get; set; }
+        public bool Boss3_6 { get; set; }
+        public bool Boss3_7 { get; set; }
+        public bool Boss3_8 { get; set; }
+        public bool Boss3_9 { get; set; }
+        public bool Boss4_1 { get; set; }
+        public bool Boss4_2 { get; set; }
+        public bool Boss4_3 { get; set; }
+        public bool Boss4_4 { get; set; }
+        public bool Boss4_5 { get; set; }
+        public bool Boss4_6 { get; set; }
+        public bool Boss4_7 { get; set; }
+        public bool Boss4_8 { get; set; }
+        public bool Boss4_9 { get; set; }
+        public bool Boss4_10 { get; set; }
+        public bool Boss4_11 { get; set; }
 
         public Settings()
         {
@@ -171,6 +211,7 @@ namespace LiveSplit.SonicFrontiers
             chkFocus.DataBindings.Add("Checked", this, "WFocus", false, DataSourceUpdateMode.OnPropertyChanged);
             chkStoryStart.DataBindings.Add("Checked", this, "StoryStart", false, DataSourceUpdateMode.OnPropertyChanged);
             chkArcadeStart.DataBindings.Add("Checked", this, "ArcadeStart", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBossRushStart.DataBindings.Add("Checked", this, "BossRushStart", false, DataSourceUpdateMode.OnPropertyChanged);
             chkArcade1_1.DataBindings.Add("Checked", this, "Arcade1_1", false, DataSourceUpdateMode.OnPropertyChanged);
             chkSkill_Cyloop.DataBindings.Add("Checked", this, "Skill_Cyloop", false, DataSourceUpdateMode.OnPropertyChanged);
             chkSkill_PhantomRush.DataBindings.Add("Checked", this, "Skill_PhantomRush", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -307,10 +348,51 @@ namespace LiveSplit.SonicFrontiers
             chk28_arcade.DataBindings.Add("Checked", this, "w4_8_arcade", false, DataSourceUpdateMode.OnPropertyChanged);
             chk29_arcade.DataBindings.Add("Checked", this, "w4_9_arcade", false, DataSourceUpdateMode.OnPropertyChanged);
             chk29_arcade_soon.DataBindings.Add("Checked", this, "w4_9_arcade_soon", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_1.DataBindings.Add("Checked", this, "Boss1_1", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_2.DataBindings.Add("Checked", this, "Boss1_2", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_3.DataBindings.Add("Checked", this, "Boss1_3", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_4.DataBindings.Add("Checked", this, "Boss1_4", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_5.DataBindings.Add("Checked", this, "Boss1_5", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_6.DataBindings.Add("Checked", this, "Boss1_6", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_7.DataBindings.Add("Checked", this, "Boss1_7", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_8.DataBindings.Add("Checked", this, "Boss1_8", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_9.DataBindings.Add("Checked", this, "Boss1_9", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss1_10.DataBindings.Add("Checked", this, "Boss1_10", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_1.DataBindings.Add("Checked", this, "Boss2_1", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_2.DataBindings.Add("Checked", this, "Boss2_2", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_3.DataBindings.Add("Checked", this, "Boss2_3", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_4.DataBindings.Add("Checked", this, "Boss2_4", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_5.DataBindings.Add("Checked", this, "Boss2_5", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_6.DataBindings.Add("Checked", this, "Boss2_6", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_7.DataBindings.Add("Checked", this, "Boss2_7", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_8.DataBindings.Add("Checked", this, "Boss2_8", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_9.DataBindings.Add("Checked", this, "Boss2_9", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss2_10.DataBindings.Add("Checked", this, "Boss2_10", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss3_1.DataBindings.Add("Checked", this, "Boss3_1", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss3_2.DataBindings.Add("Checked", this, "Boss3_2", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss3_3.DataBindings.Add("Checked", this, "Boss3_3", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss3_4.DataBindings.Add("Checked", this, "Boss3_4", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss3_5.DataBindings.Add("Checked", this, "Boss3_5", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss3_6.DataBindings.Add("Checked", this, "Boss3_6", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss3_7.DataBindings.Add("Checked", this, "Boss3_7", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss3_8.DataBindings.Add("Checked", this, "Boss3_8", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss3_9.DataBindings.Add("Checked", this, "Boss3_9", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_1.DataBindings.Add("Checked", this, "Boss4_1", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_2.DataBindings.Add("Checked", this, "Boss4_2", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_3.DataBindings.Add("Checked", this, "Boss4_3", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_4.DataBindings.Add("Checked", this, "Boss4_4", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_5.DataBindings.Add("Checked", this, "Boss4_5", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_6.DataBindings.Add("Checked", this, "Boss4_6", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_7.DataBindings.Add("Checked", this, "Boss4_7", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_8.DataBindings.Add("Checked", this, "Boss4_8", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_9.DataBindings.Add("Checked", this, "Boss4_9", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_10.DataBindings.Add("Checked", this, "Boss4_10", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkBoss4_11.DataBindings.Add("Checked", this, "Boss4_11", false, DataSourceUpdateMode.OnPropertyChanged);
 
             // Default Values
             WFocus = false;
             StoryStart = ArcadeStart = Arcade1_1 = true;
+            BossRushStart = true;
 
             //Skills
             Skill_Cyloop = Skill_AirTrick = Skill_PhantomRush = Skill_StompAttack = Skill_AutoCombo = Skill_HomingShot = Skill_LoopKick = Skill_QuickCyloop = Skill_RecoverySmash = Skill_SonicBoom = Skill_SpinSlash = Skill_WildRush = false;
@@ -353,6 +435,12 @@ namespace LiveSplit.SonicFrontiers
             w3_1_arcade = w3_2_arcade = w3_3_arcade = w3_4_arcade = w3_5_arcade = w3_6_arcade = w3_7_arcade = true;
             w4_1_arcade = w4_2_arcade = w4_3_arcade = w4_4_arcade = w4_5_arcade = w4_6_arcade = w4_7_arcade = w4_8_arcade = w4_9_arcade = true;
             w4_9_arcade_soon = true;
+
+            // Boss Rush
+            Boss1_1 = Boss1_2 = Boss1_3 = Boss1_4 = Boss1_5 = Boss1_6 = Boss1_7 = Boss1_8 = Boss1_9 = Boss1_10 = true;
+            Boss2_1 = Boss2_2 = Boss2_3 = Boss2_4 = Boss2_5 = Boss2_6 = Boss2_7 = Boss2_8 = Boss2_9 = Boss2_10 = true;
+            Boss3_1 = Boss3_2 = Boss3_3 = Boss3_4 = Boss3_5 = Boss3_6 = Boss3_7 = Boss3_8 = Boss3_9 = true;
+            Boss4_1 = Boss4_2 = Boss4_3 = Boss4_4 = Boss4_5 = Boss4_6 = Boss4_7 = Boss4_8 = Boss4_9 = Boss4_10 = Boss4_11 = true;
         }
 
         public XmlNode GetSettings(XmlDocument doc)
@@ -361,6 +449,7 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "WFocus", WFocus));
             settingsNode.AppendChild(ToElement(doc, "StoryStart", StoryStart));
             settingsNode.AppendChild(ToElement(doc, "ArcadeStart", ArcadeStart));
+            settingsNode.AppendChild(ToElement(doc, "BossRushStart", BossRushStart));
             settingsNode.AppendChild(ToElement(doc, "Skill_Cyloop", Skill_Cyloop));
             settingsNode.AppendChild(ToElement(doc, "Skill_PhantomRush", Skill_PhantomRush));
             settingsNode.AppendChild(ToElement(doc, "Skill_AirTrick", Skill_AirTrick));
@@ -496,6 +585,46 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "w4_8_arcade", w4_8_arcade));
             settingsNode.AppendChild(ToElement(doc, "w4_9_arcade", w4_9_arcade));
             settingsNode.AppendChild(ToElement(doc, "w4_9_arcade_soon", w4_9_arcade_soon));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_1", Boss1_1));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_2", Boss1_2));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_3", Boss1_3));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_4", Boss1_4));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_5", Boss1_5));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_6", Boss1_6));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_7", Boss1_7));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_8", Boss1_8));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_9", Boss1_9));
+            settingsNode.AppendChild(ToElement(doc, "Boss1_10", Boss1_10));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_1", Boss2_1));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_2", Boss2_2));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_3", Boss2_3));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_4", Boss2_4));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_5", Boss2_5));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_6", Boss2_6));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_7", Boss2_7));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_8", Boss2_8));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_9", Boss2_9));
+            settingsNode.AppendChild(ToElement(doc, "Boss2_10", Boss2_10));
+            settingsNode.AppendChild(ToElement(doc, "Boss3_1", Boss3_1));
+            settingsNode.AppendChild(ToElement(doc, "Boss3_2", Boss3_2));
+            settingsNode.AppendChild(ToElement(doc, "Boss3_3", Boss3_3));
+            settingsNode.AppendChild(ToElement(doc, "Boss3_4", Boss3_4));
+            settingsNode.AppendChild(ToElement(doc, "Boss3_5", Boss3_5));
+            settingsNode.AppendChild(ToElement(doc, "Boss3_6", Boss3_6));
+            settingsNode.AppendChild(ToElement(doc, "Boss3_7", Boss3_7));
+            settingsNode.AppendChild(ToElement(doc, "Boss3_8", Boss3_8));
+            settingsNode.AppendChild(ToElement(doc, "Boss3_9", Boss3_9));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_1", Boss4_1));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_2", Boss4_2));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_3", Boss4_3));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_4", Boss4_4));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_5", Boss4_5));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_6", Boss4_6));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_7", Boss4_7));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_8", Boss4_8));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_9", Boss4_9));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_10", Boss4_10));
+            settingsNode.AppendChild(ToElement(doc, "Boss4_11", Boss4_11));
             return settingsNode;
         }
 
@@ -504,6 +633,7 @@ namespace LiveSplit.SonicFrontiers
             WFocus = ParseBool(settings, "WFocus", false);
             StoryStart = ParseBool(settings, "StoryStart", true);
             ArcadeStart = ParseBool(settings, "ArcadeStart", true);
+            BossRushStart = ParseBool(settings, "BossRushStart", true);
             Arcade1_1 = ParseBool(settings, "Arcade1_1", true);
             Skill_Cyloop = ParseBool(settings, "Skill_Cyloop", false);
             Skill_AirTrick = ParseBool(settings, "Skill_AirTrick", false);
@@ -640,6 +770,46 @@ namespace LiveSplit.SonicFrontiers
             w4_8_arcade = ParseBool(settings, "w4_8_arcade", true);
             w4_9_arcade = ParseBool(settings, "w4_9_arcade", true);
             w4_9_arcade_soon = ParseBool(settings, "w4_9_arcade_soon", true);
+            Boss1_1 = ParseBool(settings, "Boss1_1", true);
+            Boss1_2 = ParseBool(settings, "Boss1_2", true);
+            Boss1_3 = ParseBool(settings, "Boss1_3", true);
+            Boss1_4 = ParseBool(settings, "Boss1_4", true);
+            Boss1_5 = ParseBool(settings, "Boss1_5", true);
+            Boss1_6 = ParseBool(settings, "Boss1_6", true);
+            Boss1_7 = ParseBool(settings, "Boss1_7", true);
+            Boss1_8 = ParseBool(settings, "Boss1_8", true);
+            Boss1_9 = ParseBool(settings, "Boss1_9", true);
+            Boss1_10 = ParseBool(settings, "Boss1_10", true);
+            Boss2_1 = ParseBool(settings, "Boss2_1", true);
+            Boss2_2 = ParseBool(settings, "Boss2_2", true);
+            Boss2_3 = ParseBool(settings, "Boss2_3", true);
+            Boss2_4 = ParseBool(settings, "Boss2_4", true);
+            Boss2_5 = ParseBool(settings, "Boss2_5", true);
+            Boss2_6 = ParseBool(settings, "Boss2_6", true);
+            Boss2_7 = ParseBool(settings, "Boss2_7", true);
+            Boss2_8 = ParseBool(settings, "Boss2_8", true);
+            Boss2_9 = ParseBool(settings, "Boss2_9", true);
+            Boss2_10 = ParseBool(settings, "Boss2_10", true);
+            Boss3_1 = ParseBool(settings, "Boss3_1", true);
+            Boss3_2 = ParseBool(settings, "Boss3_2", true);
+            Boss3_3 = ParseBool(settings, "Boss3_3", true);
+            Boss3_4 = ParseBool(settings, "Boss3_4", true);
+            Boss3_5 = ParseBool(settings, "Boss3_5", true);
+            Boss3_6 = ParseBool(settings, "Boss3_6", true);
+            Boss3_7 = ParseBool(settings, "Boss3_7", true);
+            Boss3_8 = ParseBool(settings, "Boss3_8", true);
+            Boss3_9 = ParseBool(settings, "Boss3_9", true);
+            Boss4_1 = ParseBool(settings, "Boss4_1", true);
+            Boss4_2 = ParseBool(settings, "Boss4_2", true);
+            Boss4_3 = ParseBool(settings, "Boss4_3", true);
+            Boss4_4 = ParseBool(settings, "Boss4_4", true);
+            Boss4_5 = ParseBool(settings, "Boss4_5", true);
+            Boss4_6 = ParseBool(settings, "Boss4_6", true);
+            Boss4_7 = ParseBool(settings, "Boss4_7", true);
+            Boss4_8 = ParseBool(settings, "Boss4_8", true);
+            Boss4_9 = ParseBool(settings, "Boss4_9", true);
+            Boss4_10 = ParseBool(settings, "Boss4_10", true);
+            Boss4_11 = ParseBool(settings, "Boss4_11", true);
         }
 
         static bool ParseBool(XmlNode settings, string setting, bool default_ = false)
@@ -659,6 +829,8 @@ namespace LiveSplit.SonicFrontiers
             chkArcade1_1.Enabled = chkArcadeStart.Checked;
         }
 
+        /*
+        // Commented out because I want to avoid using Reflection in this case
         public bool this[string entry]
         {
             get
@@ -669,6 +841,7 @@ namespace LiveSplit.SonicFrontiers
                 return t;
             }
         }
+        */
 
         private void Chk4_9_arcade_CheckedChanged(object sender, EventArgs e)
         {
@@ -831,6 +1004,49 @@ namespace LiveSplit.SonicFrontiers
             chk20_story.Checked = false;
         }
 
+        private void BossRushButton_Click(object sender, EventArgs e)
+        {
+            chkBoss1_1.Checked = true;
+            chkBoss1_2.Checked = true;
+            chkBoss1_3.Checked = true;
+            chkBoss1_4.Checked = true;
+            chkBoss1_5.Checked = true;
+            chkBoss1_6.Checked = true;
+            chkBoss1_7.Checked = true;
+            chkBoss1_8.Checked = true;
+            chkBoss1_9.Checked = true;
+            chkBoss1_10.Checked = true;
+            chkBoss2_1.Checked = true;
+            chkBoss2_2.Checked = true;
+            chkBoss2_3.Checked = true;
+            chkBoss2_4.Checked = true;
+            chkBoss2_5.Checked = true;
+            chkBoss2_6.Checked = true;
+            chkBoss2_7.Checked = true;
+            chkBoss2_8.Checked = true;
+            chkBoss2_9.Checked = true;
+            chkBoss2_10.Checked = true;
+            chkBoss3_1.Checked = true;
+            chkBoss3_2.Checked = true;
+            chkBoss3_3.Checked = true;
+            chkBoss3_4.Checked = true;
+            chkBoss3_5.Checked = true;
+            chkBoss3_6.Checked = true;
+            chkBoss3_7.Checked = true;
+            chkBoss3_8.Checked = true;
+            chkBoss3_9.Checked = true;
+            chkBoss4_1.Checked = true;
+            chkBoss4_2.Checked = true;
+            chkBoss4_3.Checked = true;
+            chkBoss4_4.Checked = true;
+            chkBoss4_5.Checked = true;
+            chkBoss4_6.Checked = true;
+            chkBoss4_7.Checked = true;
+            chkBoss4_8.Checked = true;
+            chkBoss4_9.Checked = true;
+            chkBoss4_10.Checked = true;
+            chkBoss4_11.Checked = true;
+        }
 
         public event EventHandler<bool> WFocusChange;
 

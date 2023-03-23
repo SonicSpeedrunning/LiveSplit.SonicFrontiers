@@ -2,6 +2,14 @@
 
 namespace LiveSplit.SonicFrontiers
 {
+    enum GameMode
+    {
+        Story,
+        Arcade,
+        CyberspaceChallenge,
+        BossRush,
+    }
+
     enum LevelID
     {
         w1_1,
@@ -44,6 +52,10 @@ namespace LiveSplit.SonicFrontiers
         Boss_TheEnd,
         Tutorial,
         None,
+        Island_Kronos_BossRush,
+        Island_Ares_BossRush,
+        Island_Chaos_BossRush,
+        Island_Ouranos_BossRush,
     }
 
     enum Status
@@ -52,6 +64,8 @@ namespace LiveSplit.SonicFrontiers
         NewGameMenu,
         ContinueMenu,
         ArcadeMode,
+        BattleMode,
+        CyberMode,
         SelectLanguage,
         ChangingLanguage,
         ViewLicense,
@@ -63,6 +77,7 @@ namespace LiveSplit.SonicFrontiers
         Finish,
         Result,
         Build,
+        StageResult,
         Default, // Used as default
     }
 
@@ -71,6 +86,51 @@ namespace LiveSplit.SonicFrontiers
         NotCompleted = 0,
         Completed = 1,
         Failed = 2
+    }
+
+    enum BossRushAct
+    {
+        None,
+        b1_1,
+        b1_2,
+        b1_3,
+        b1_4,
+        b1_5,
+        b1_6,
+        b1_7,
+        b1_8,
+        b1_9,
+        b1_10,
+        b2_1,
+        b2_2,
+        b2_3,
+        b2_4,
+        b2_5,
+        b2_6,
+        b2_7,
+        b2_8,
+        b2_9,
+        b2_10,
+        b3_1,
+        b3_2,
+        b3_3,
+        b3_4,
+        b3_5,
+        b3_6,
+        b3_7,
+        b3_8,
+        b3_9,
+        b4_1,
+        b4_2,
+        b4_3,
+        b4_4,
+        b4_5,
+        b4_6,
+        b4_7,
+        b4_8,
+        b4_9,
+        b4_10,
+        b4_11,
     }
 
     readonly struct Enums
@@ -116,6 +176,10 @@ namespace LiveSplit.SonicFrontiers
             { "w0r01", SonicFrontiers.LevelID.MainMenu },    // Main Menu
             { "w5r01", SonicFrontiers.LevelID.Boss_TheEnd },    // The End (boss)
             { "w5t01", SonicFrontiers.LevelID.Tutorial },    // Tutorial stage
+            { "w1b01", SonicFrontiers.LevelID.Island_Kronos_BossRush },
+            { "w2b01", SonicFrontiers.LevelID.Island_Ares_BossRush },
+            { "w3b01", SonicFrontiers.LevelID.Island_Chaos_BossRush },
+            { "w1b02", SonicFrontiers.LevelID.Island_Ouranos_BossRush },
         };
 
         public static readonly Dictionary<string, Status> Status = new Dictionary<string, Status>
@@ -124,6 +188,8 @@ namespace LiveSplit.SonicFrontiers
             { "NewGameMenu",SonicFrontiers.Status.NewGameMenu },            // New game
             { "ContinueMenu", SonicFrontiers.Status.ContinueMenu },         // Continue screen - save selection
             { "ArcadeMode", SonicFrontiers.Status.ArcadeMode },             // Arcade mode menu
+            { "BattleMode", SonicFrontiers.Status.BattleMode },               // Cyberspace Challenge
+            { "CyberMode", SonicFrontiers.Status.CyberMode },               // Cyberspace Challenge
             { "SelectLanguage", SonicFrontiers.Status.SelectLanguage },     // Select Language
             { "ChangingLanguage", SonicFrontiers.Status.ChangingLanguage },
             { "ViewLicense", SonicFrontiers.Status.ViewLicense },           // Copyright menu
@@ -134,6 +200,7 @@ namespace LiveSplit.SonicFrontiers
             { "PlayTop", SonicFrontiers.Status.PlayTop },                   // Normal gameplay
             { "Finish", SonicFrontiers.Status.Finish },                     // Reached the end of a level
             { "Result", SonicFrontiers.Status.Result },                     // Results screen
+            { "StageResult", SonicFrontiers.Status.StageResult },           // Results at the end of boss rush
             { "Build", SonicFrontiers.Status.Build },                       // Used while "building" the level, regardless of the actual load. Don't use it
         };
     }
@@ -146,5 +213,6 @@ namespace LiveSplit.SonicFrontiers
         Unknown,
         v1_01 = 0x162C8000,
         v1_10 = 0x1661B000,
+        v1_20 = 0x1622F000, // Speed update
     }
 }
