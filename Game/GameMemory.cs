@@ -55,23 +55,20 @@ namespace LiveSplit.SonicFrontiers
             {
                 if (!addresses["StageTimeExtension"].IsZero())
                 {
-                    var igt = game.ReadValue<float>(addresses["StageTimeExtension"] + 0x28);
+                    double igt = game.ReadValue<float>(addresses["StageTimeExtension"] + 0x28);
                     if (GameVersion != GameVersion.v1_01 && GameVersion != GameVersion.v1_10)
                     {
-                        if (igt <= 0.066f)
-                        {
-                            igt = 0f;
-                        }
+                        const double coef = .05 + (1 / 60d);
+                        if (igt <= coef)
+                            igt = 0d;
                         else
-                        {
-                            igt -= 0.066f;
-                        }
+                            igt -= coef;
                     }
                     return TimeSpan.FromSeconds(Math.Truncate(igt * 100) / 100);
                 }
                 else if (!addresses["BattleRushExtension"].IsZero())
                 {
-                    var igt = game.ReadValue<float>(addresses["BattleRushExtension"] + 0x38);
+                    double igt = game.ReadValue<float>(addresses["BattleRushExtension"] + 0x38);
                     return TimeSpan.FromSeconds(Math.Truncate(igt * 100) / 100);
                 }
                 else
