@@ -6,6 +6,8 @@ namespace LiveSplit.SonicFrontiers
 {
     public partial class Settings : UserControl
     {
+        
+
         // General
         public bool WFocus { get; set; }
         public bool StoryStart { get; set; }
@@ -129,6 +131,10 @@ namespace LiveSplit.SonicFrontiers
         public bool Ouranos_WhiteCE { get; set; }
         public bool Island_Ouranos_fishing { get; set; }
 
+        
+        //Music Notes
+        public bool Split_AnyNote { get; set; }
+        
         // Arcade mode
         public bool w1_1_arcade { get; set; }
         public bool w1_2_arcade { get; set; }
@@ -201,7 +207,10 @@ namespace LiveSplit.SonicFrontiers
         public bool Boss4_9 { get; set; }
         public bool Boss4_10 { get; set; }
         public bool Boss4_11 { get; set; }
-
+        
+        //Notes
+        
+        public bool MusicNoteAny { get; set; }
         public Settings()
         {
             InitializeComponent();
@@ -388,12 +397,15 @@ namespace LiveSplit.SonicFrontiers
             chkBoss4_9.DataBindings.Add("Checked", this, "Boss4_9", false, DataSourceUpdateMode.OnPropertyChanged);
             chkBoss4_10.DataBindings.Add("Checked", this, "Boss4_10", false, DataSourceUpdateMode.OnPropertyChanged);
             chkBoss4_11.DataBindings.Add("Checked", this, "Boss4_11", false, DataSourceUpdateMode.OnPropertyChanged);
-
+            chkMusicNoteAny.DataBindings.Add("Checked", this, "MusicNoteAny", false,
+                DataSourceUpdateMode.OnPropertyChanged);
             // Default Values
             WFocus = false;
             StoryStart = ArcadeStart = Arcade1_1 = true;
             BossRushStart = true;
 
+            MusicNoteAny = false;
+            
             //Skills
             Skill_Cyloop = Skill_AirTrick = Skill_PhantomRush = Skill_StompAttack = Skill_AutoCombo = Skill_HomingShot = Skill_LoopKick = Skill_QuickCyloop = Skill_RecoverySmash = Skill_SonicBoom = Skill_SpinSlash = Skill_WildRush = false;
 
@@ -625,6 +637,7 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "Boss4_9", Boss4_9));
             settingsNode.AppendChild(ToElement(doc, "Boss4_10", Boss4_10));
             settingsNode.AppendChild(ToElement(doc, "Boss4_11", Boss4_11));
+            settingsNode.AppendChild(ToElement(doc, "MusicNoteAny", MusicNoteAny));
             return settingsNode;
         }
 
@@ -810,6 +823,7 @@ namespace LiveSplit.SonicFrontiers
             Boss4_9 = ParseBool(settings, "Boss4_9", true);
             Boss4_10 = ParseBool(settings, "Boss4_10", true);
             Boss4_11 = ParseBool(settings, "Boss4_11", true);
+            MusicNoteAny = ParseBool(settings, "MusicNoteAny", false);
         }
 
         static bool ParseBool(XmlNode settings, string setting, bool default_ = false)

@@ -22,8 +22,8 @@
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -157,6 +157,20 @@
             this.chkFinalBoss = new System.Windows.Forms.CheckBox();
             this.chkOuranos_SupremeDefeated = new System.Windows.Forms.CheckBox();
             this.chkOuranos_Bridge = new System.Windows.Forms.CheckBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkSkill_RecoverySmash = new System.Windows.Forms.CheckBox();
+            this.chkSkill_LoopKick = new System.Windows.Forms.CheckBox();
+            this.chkSkill_SpinSlash = new System.Windows.Forms.CheckBox();
+            this.chkSkill_HomingShot = new System.Windows.Forms.CheckBox();
+            this.chkSkill_AutoCombo = new System.Windows.Forms.CheckBox();
+            this.chkSkill_QuickCyloop = new System.Windows.Forms.CheckBox();
+            this.chkSkill_WildRush = new System.Windows.Forms.CheckBox();
+            this.chkSkill_SonicBoom = new System.Windows.Forms.CheckBox();
+            this.chkSkill_StompAttack = new System.Windows.Forms.CheckBox();
+            this.chkSkill_AirTrick = new System.Windows.Forms.CheckBox();
+            this.chkSkill_PhantomRush = new System.Windows.Forms.CheckBox();
+            this.chkSkill_Cyloop = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ArcadeButton = new System.Windows.Forms.Button();
             this.chk29_arcade_soon = new System.Windows.Forms.CheckBox();
@@ -195,28 +209,13 @@
             this.chk2_arcade = new System.Windows.Forms.CheckBox();
             this.chk1_arcade = new System.Windows.Forms.CheckBox();
             this.chk0_arcade = new System.Windows.Forms.CheckBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chkSkill_RecoverySmash = new System.Windows.Forms.CheckBox();
-            this.chkSkill_LoopKick = new System.Windows.Forms.CheckBox();
-            this.chkSkill_SpinSlash = new System.Windows.Forms.CheckBox();
-            this.chkSkill_HomingShot = new System.Windows.Forms.CheckBox();
-            this.chkSkill_AutoCombo = new System.Windows.Forms.CheckBox();
-            this.chkSkill_QuickCyloop = new System.Windows.Forms.CheckBox();
-            this.chkSkill_WildRush = new System.Windows.Forms.CheckBox();
-            this.chkSkill_SonicBoom = new System.Windows.Forms.CheckBox();
-            this.chkSkill_StompAttack = new System.Windows.Forms.CheckBox();
-            this.chkSkill_AirTrick = new System.Windows.Forms.CheckBox();
-            this.chkSkill_PhantomRush = new System.Windows.Forms.CheckBox();
-            this.chkSkill_Cyloop = new System.Windows.Forms.CheckBox();
-            this.autosplitterVersion = new System.Windows.Forms.Label();
-            this.chkFocus = new System.Windows.Forms.CheckBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.DiscordLink = new System.Windows.Forms.LinkLabel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.BossRushButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox28 = new System.Windows.Forms.GroupBox();
+            this.chkBoss4_11 = new System.Windows.Forms.CheckBox();
+            this.chkBoss4_10 = new System.Windows.Forms.CheckBox();
             this.chkBoss4_9 = new System.Windows.Forms.CheckBox();
             this.chkBoss4_8 = new System.Windows.Forms.CheckBox();
             this.chkBoss4_7 = new System.Windows.Forms.CheckBox();
@@ -227,6 +226,8 @@
             this.chkBoss4_2 = new System.Windows.Forms.CheckBox();
             this.chkBoss4_1 = new System.Windows.Forms.CheckBox();
             this.groupBox29 = new System.Windows.Forms.GroupBox();
+            this.chkBoss3_9 = new System.Windows.Forms.CheckBox();
+            this.chkBoss3_8 = new System.Windows.Forms.CheckBox();
             this.chkBoss3_7 = new System.Windows.Forms.CheckBox();
             this.chkBoss3_6 = new System.Windows.Forms.CheckBox();
             this.chkBoss3_5 = new System.Windows.Forms.CheckBox();
@@ -235,6 +236,9 @@
             this.chkBoss3_2 = new System.Windows.Forms.CheckBox();
             this.chkBoss3_1 = new System.Windows.Forms.CheckBox();
             this.groupBox30 = new System.Windows.Forms.GroupBox();
+            this.chkBoss2_10 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_9 = new System.Windows.Forms.CheckBox();
+            this.chkBoss2_8 = new System.Windows.Forms.CheckBox();
             this.chkBoss2_7 = new System.Windows.Forms.CheckBox();
             this.chkBoss2_6 = new System.Windows.Forms.CheckBox();
             this.chkBoss2_5 = new System.Windows.Forms.CheckBox();
@@ -243,6 +247,9 @@
             this.chkBoss2_2 = new System.Windows.Forms.CheckBox();
             this.chkBoss2_1 = new System.Windows.Forms.CheckBox();
             this.groupBox31 = new System.Windows.Forms.GroupBox();
+            this.chkBoss1_10 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_9 = new System.Windows.Forms.CheckBox();
+            this.chkBoss1_8 = new System.Windows.Forms.CheckBox();
             this.chkBoss1_7 = new System.Windows.Forms.CheckBox();
             this.chkBoss1_6 = new System.Windows.Forms.CheckBox();
             this.chkBoss1_5 = new System.Windows.Forms.CheckBox();
@@ -250,17 +257,11 @@
             this.chkBoss1_3 = new System.Windows.Forms.CheckBox();
             this.chkBoss1_2 = new System.Windows.Forms.CheckBox();
             this.chkBoss1_1 = new System.Windows.Forms.CheckBox();
-            this.chkBoss1_8 = new System.Windows.Forms.CheckBox();
-            this.chkBoss1_9 = new System.Windows.Forms.CheckBox();
-            this.chkBoss1_10 = new System.Windows.Forms.CheckBox();
-            this.chkBoss2_8 = new System.Windows.Forms.CheckBox();
-            this.chkBoss2_9 = new System.Windows.Forms.CheckBox();
-            this.chkBoss2_10 = new System.Windows.Forms.CheckBox();
-            this.chkBoss3_8 = new System.Windows.Forms.CheckBox();
-            this.chkBoss3_9 = new System.Windows.Forms.CheckBox();
-            this.chkBoss4_10 = new System.Windows.Forms.CheckBox();
-            this.chkBoss4_11 = new System.Windows.Forms.CheckBox();
-            this.BossRushButton = new System.Windows.Forms.Button();
+            this.autosplitterVersion = new System.Windows.Forms.Label();
+            this.chkFocus = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.DiscordLink = new System.Windows.Forms.LinkLabel();
+            this.chkMusicNoteAny = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -287,15 +288,14 @@
             this.groupBox16.SuspendLayout();
             this.groupBox17.SuspendLayout();
             this.groupBox18.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox13.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -303,6 +303,7 @@
             this.groupBox29.SuspendLayout();
             this.groupBox30.SuspendLayout();
             this.groupBox31.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -400,9 +401,9 @@
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabControl1.Location = new System.Drawing.Point(10, 23);
             this.tabControl1.Name = "tabControl1";
@@ -1439,8 +1440,7 @@
             this.rheaWarning.Name = "rheaWarning";
             this.rheaWarning.Size = new System.Drawing.Size(371, 26);
             this.rheaWarning.TabIndex = 12;
-            this.rheaWarning.Text = "Note: to avoid unwanted double splitting, you might want to disable automatic\r\nsp" +
-    "litting on the last tower you plan on deactivating in your run.";
+            this.rheaWarning.Text = "Note: to avoid unwanted double splitting, you might want to disable automatic\r\nsp" + "litting on the last tower you plan on deactivating in your run.";
             // 
             // RheaButton
             // 
@@ -1860,6 +1860,159 @@
             this.chkOuranos_Bridge.TabIndex = 2;
             this.chkOuranos_Bridge.Text = "Lower the bridge";
             this.chkOuranos_Bridge.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.chkMusicNoteAny);
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(427, 341);
+            this.tabPage1.TabIndex = 8;
+            this.tabPage1.Text = "Misc.";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.chkSkill_RecoverySmash);
+            this.groupBox4.Controls.Add(this.chkSkill_LoopKick);
+            this.groupBox4.Controls.Add(this.chkSkill_SpinSlash);
+            this.groupBox4.Controls.Add(this.chkSkill_HomingShot);
+            this.groupBox4.Controls.Add(this.chkSkill_AutoCombo);
+            this.groupBox4.Controls.Add(this.chkSkill_QuickCyloop);
+            this.groupBox4.Controls.Add(this.chkSkill_WildRush);
+            this.groupBox4.Controls.Add(this.chkSkill_SonicBoom);
+            this.groupBox4.Controls.Add(this.chkSkill_StompAttack);
+            this.groupBox4.Controls.Add(this.chkSkill_AirTrick);
+            this.groupBox4.Controls.Add(this.chkSkill_PhantomRush);
+            this.groupBox4.Controls.Add(this.chkSkill_Cyloop);
+            this.groupBox4.Location = new System.Drawing.Point(3, 63);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox4.Size = new System.Drawing.Size(150, 275);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Split On Skill Unlock";
+            // 
+            // chkSkill_RecoverySmash
+            // 
+            this.chkSkill_RecoverySmash.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_RecoverySmash.Location = new System.Drawing.Point(10, 210);
+            this.chkSkill_RecoverySmash.Name = "chkSkill_RecoverySmash";
+            this.chkSkill_RecoverySmash.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_RecoverySmash.TabIndex = 13;
+            this.chkSkill_RecoverySmash.Text = "Recovery Smash";
+            this.chkSkill_RecoverySmash.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_LoopKick
+            // 
+            this.chkSkill_LoopKick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_LoopKick.Location = new System.Drawing.Point(10, 193);
+            this.chkSkill_LoopKick.Name = "chkSkill_LoopKick";
+            this.chkSkill_LoopKick.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_LoopKick.TabIndex = 12;
+            this.chkSkill_LoopKick.Text = "Loop Kick";
+            this.chkSkill_LoopKick.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_SpinSlash
+            // 
+            this.chkSkill_SpinSlash.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_SpinSlash.Location = new System.Drawing.Point(10, 176);
+            this.chkSkill_SpinSlash.Name = "chkSkill_SpinSlash";
+            this.chkSkill_SpinSlash.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_SpinSlash.TabIndex = 11;
+            this.chkSkill_SpinSlash.Text = "Spin Slash";
+            this.chkSkill_SpinSlash.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_HomingShot
+            // 
+            this.chkSkill_HomingShot.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_HomingShot.Location = new System.Drawing.Point(10, 159);
+            this.chkSkill_HomingShot.Name = "chkSkill_HomingShot";
+            this.chkSkill_HomingShot.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_HomingShot.TabIndex = 10;
+            this.chkSkill_HomingShot.Text = "Homing Shot";
+            this.chkSkill_HomingShot.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_AutoCombo
+            // 
+            this.chkSkill_AutoCombo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_AutoCombo.Location = new System.Drawing.Point(10, 142);
+            this.chkSkill_AutoCombo.Name = "chkSkill_AutoCombo";
+            this.chkSkill_AutoCombo.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_AutoCombo.TabIndex = 9;
+            this.chkSkill_AutoCombo.Text = "Auto Combo";
+            this.chkSkill_AutoCombo.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_QuickCyloop
+            // 
+            this.chkSkill_QuickCyloop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_QuickCyloop.Location = new System.Drawing.Point(10, 125);
+            this.chkSkill_QuickCyloop.Name = "chkSkill_QuickCyloop";
+            this.chkSkill_QuickCyloop.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_QuickCyloop.TabIndex = 8;
+            this.chkSkill_QuickCyloop.Text = "Quick Cyloop";
+            this.chkSkill_QuickCyloop.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_WildRush
+            // 
+            this.chkSkill_WildRush.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_WildRush.Location = new System.Drawing.Point(10, 108);
+            this.chkSkill_WildRush.Name = "chkSkill_WildRush";
+            this.chkSkill_WildRush.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_WildRush.TabIndex = 7;
+            this.chkSkill_WildRush.Text = "Wild Rush";
+            this.chkSkill_WildRush.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_SonicBoom
+            // 
+            this.chkSkill_SonicBoom.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_SonicBoom.Location = new System.Drawing.Point(10, 91);
+            this.chkSkill_SonicBoom.Name = "chkSkill_SonicBoom";
+            this.chkSkill_SonicBoom.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_SonicBoom.TabIndex = 6;
+            this.chkSkill_SonicBoom.Text = "Sonic Boom";
+            this.chkSkill_SonicBoom.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_StompAttack
+            // 
+            this.chkSkill_StompAttack.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_StompAttack.Location = new System.Drawing.Point(10, 74);
+            this.chkSkill_StompAttack.Name = "chkSkill_StompAttack";
+            this.chkSkill_StompAttack.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_StompAttack.TabIndex = 5;
+            this.chkSkill_StompAttack.Text = "Stomp Attack";
+            this.chkSkill_StompAttack.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_AirTrick
+            // 
+            this.chkSkill_AirTrick.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_AirTrick.Location = new System.Drawing.Point(10, 57);
+            this.chkSkill_AirTrick.Name = "chkSkill_AirTrick";
+            this.chkSkill_AirTrick.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_AirTrick.TabIndex = 3;
+            this.chkSkill_AirTrick.Text = "Air Trick";
+            this.chkSkill_AirTrick.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_PhantomRush
+            // 
+            this.chkSkill_PhantomRush.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_PhantomRush.Location = new System.Drawing.Point(10, 40);
+            this.chkSkill_PhantomRush.Name = "chkSkill_PhantomRush";
+            this.chkSkill_PhantomRush.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_PhantomRush.TabIndex = 2;
+            this.chkSkill_PhantomRush.Text = "Phantom Rush";
+            this.chkSkill_PhantomRush.UseVisualStyleBackColor = true;
+            // 
+            // chkSkill_Cyloop
+            // 
+            this.chkSkill_Cyloop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkSkill_Cyloop.Location = new System.Drawing.Point(10, 23);
+            this.chkSkill_Cyloop.Name = "chkSkill_Cyloop";
+            this.chkSkill_Cyloop.Size = new System.Drawing.Size(130, 17);
+            this.chkSkill_Cyloop.TabIndex = 1;
+            this.chkSkill_Cyloop.Text = "Cyloop";
+            this.chkSkill_Cyloop.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -2387,204 +2540,6 @@
             this.chk0_arcade.Text = "1 - 1";
             this.chk0_arcade.UseVisualStyleBackColor = true;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.groupBox4);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(427, 341);
-            this.tabPage1.TabIndex = 8;
-            this.tabPage1.Text = "Skills";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.chkSkill_RecoverySmash);
-            this.groupBox4.Controls.Add(this.chkSkill_LoopKick);
-            this.groupBox4.Controls.Add(this.chkSkill_SpinSlash);
-            this.groupBox4.Controls.Add(this.chkSkill_HomingShot);
-            this.groupBox4.Controls.Add(this.chkSkill_AutoCombo);
-            this.groupBox4.Controls.Add(this.chkSkill_QuickCyloop);
-            this.groupBox4.Controls.Add(this.chkSkill_WildRush);
-            this.groupBox4.Controls.Add(this.chkSkill_SonicBoom);
-            this.groupBox4.Controls.Add(this.chkSkill_StompAttack);
-            this.groupBox4.Controls.Add(this.chkSkill_AirTrick);
-            this.groupBox4.Controls.Add(this.chkSkill_PhantomRush);
-            this.groupBox4.Controls.Add(this.chkSkill_Cyloop);
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox4.Size = new System.Drawing.Size(421, 335);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Split On Unlock";
-            // 
-            // chkSkill_RecoverySmash
-            // 
-            this.chkSkill_RecoverySmash.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_RecoverySmash.Location = new System.Drawing.Point(10, 210);
-            this.chkSkill_RecoverySmash.Name = "chkSkill_RecoverySmash";
-            this.chkSkill_RecoverySmash.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_RecoverySmash.TabIndex = 13;
-            this.chkSkill_RecoverySmash.Text = "Recovery Smash";
-            this.chkSkill_RecoverySmash.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_LoopKick
-            // 
-            this.chkSkill_LoopKick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_LoopKick.Location = new System.Drawing.Point(10, 193);
-            this.chkSkill_LoopKick.Name = "chkSkill_LoopKick";
-            this.chkSkill_LoopKick.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_LoopKick.TabIndex = 12;
-            this.chkSkill_LoopKick.Text = "Loop Kick";
-            this.chkSkill_LoopKick.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_SpinSlash
-            // 
-            this.chkSkill_SpinSlash.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_SpinSlash.Location = new System.Drawing.Point(10, 176);
-            this.chkSkill_SpinSlash.Name = "chkSkill_SpinSlash";
-            this.chkSkill_SpinSlash.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_SpinSlash.TabIndex = 11;
-            this.chkSkill_SpinSlash.Text = "Spin Slash";
-            this.chkSkill_SpinSlash.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_HomingShot
-            // 
-            this.chkSkill_HomingShot.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_HomingShot.Location = new System.Drawing.Point(10, 159);
-            this.chkSkill_HomingShot.Name = "chkSkill_HomingShot";
-            this.chkSkill_HomingShot.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_HomingShot.TabIndex = 10;
-            this.chkSkill_HomingShot.Text = "Homing Shot";
-            this.chkSkill_HomingShot.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_AutoCombo
-            // 
-            this.chkSkill_AutoCombo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_AutoCombo.Location = new System.Drawing.Point(10, 142);
-            this.chkSkill_AutoCombo.Name = "chkSkill_AutoCombo";
-            this.chkSkill_AutoCombo.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_AutoCombo.TabIndex = 9;
-            this.chkSkill_AutoCombo.Text = "Auto Combo";
-            this.chkSkill_AutoCombo.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_QuickCyloop
-            // 
-            this.chkSkill_QuickCyloop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_QuickCyloop.Location = new System.Drawing.Point(10, 125);
-            this.chkSkill_QuickCyloop.Name = "chkSkill_QuickCyloop";
-            this.chkSkill_QuickCyloop.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_QuickCyloop.TabIndex = 8;
-            this.chkSkill_QuickCyloop.Text = "Quick Cyloop";
-            this.chkSkill_QuickCyloop.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_WildRush
-            // 
-            this.chkSkill_WildRush.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_WildRush.Location = new System.Drawing.Point(10, 108);
-            this.chkSkill_WildRush.Name = "chkSkill_WildRush";
-            this.chkSkill_WildRush.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_WildRush.TabIndex = 7;
-            this.chkSkill_WildRush.Text = "Wild Rush";
-            this.chkSkill_WildRush.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_SonicBoom
-            // 
-            this.chkSkill_SonicBoom.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_SonicBoom.Location = new System.Drawing.Point(10, 91);
-            this.chkSkill_SonicBoom.Name = "chkSkill_SonicBoom";
-            this.chkSkill_SonicBoom.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_SonicBoom.TabIndex = 6;
-            this.chkSkill_SonicBoom.Text = "Sonic Boom";
-            this.chkSkill_SonicBoom.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_StompAttack
-            // 
-            this.chkSkill_StompAttack.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_StompAttack.Location = new System.Drawing.Point(10, 74);
-            this.chkSkill_StompAttack.Name = "chkSkill_StompAttack";
-            this.chkSkill_StompAttack.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_StompAttack.TabIndex = 5;
-            this.chkSkill_StompAttack.Text = "Stomp Attack";
-            this.chkSkill_StompAttack.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_AirTrick
-            // 
-            this.chkSkill_AirTrick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_AirTrick.Location = new System.Drawing.Point(10, 57);
-            this.chkSkill_AirTrick.Name = "chkSkill_AirTrick";
-            this.chkSkill_AirTrick.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_AirTrick.TabIndex = 3;
-            this.chkSkill_AirTrick.Text = "Air Trick";
-            this.chkSkill_AirTrick.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_PhantomRush
-            // 
-            this.chkSkill_PhantomRush.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_PhantomRush.Location = new System.Drawing.Point(10, 40);
-            this.chkSkill_PhantomRush.Name = "chkSkill_PhantomRush";
-            this.chkSkill_PhantomRush.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_PhantomRush.TabIndex = 2;
-            this.chkSkill_PhantomRush.Text = "Phantom Rush";
-            this.chkSkill_PhantomRush.UseVisualStyleBackColor = true;
-            // 
-            // chkSkill_Cyloop
-            // 
-            this.chkSkill_Cyloop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSkill_Cyloop.Location = new System.Drawing.Point(10, 23);
-            this.chkSkill_Cyloop.Name = "chkSkill_Cyloop";
-            this.chkSkill_Cyloop.Size = new System.Drawing.Size(401, 17);
-            this.chkSkill_Cyloop.TabIndex = 1;
-            this.chkSkill_Cyloop.Text = "Cyloop";
-            this.chkSkill_Cyloop.UseVisualStyleBackColor = true;
-            // 
-            // autosplitterVersion
-            // 
-            this.autosplitterVersion.AutoSize = true;
-            this.autosplitterVersion.Location = new System.Drawing.Point(330, 484);
-            this.autosplitterVersion.Name = "autosplitterVersion";
-            this.autosplitterVersion.Size = new System.Drawing.Size(135, 13);
-            this.autosplitterVersion.TabIndex = 5;
-            this.autosplitterVersion.Text = "Autosplitter version: vX.X.X";
-            this.autosplitterVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // chkFocus
-            // 
-            this.chkFocus.AutoSize = true;
-            this.chkFocus.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkFocus.Location = new System.Drawing.Point(10, 23);
-            this.chkFocus.Margin = new System.Windows.Forms.Padding(0);
-            this.chkFocus.Name = "chkFocus";
-            this.chkFocus.Size = new System.Drawing.Size(183, 30);
-            this.chkFocus.TabIndex = 5;
-            this.chkFocus.Text = "Prevent the game from pausing\r\nwhen it goes out of focus";
-            this.chkFocus.UseVisualStyleBackColor = true;
-            this.chkFocus.CheckedChanged += new System.EventHandler(this.chkFocus_CheckedChanged);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.chkFocus);
-            this.groupBox6.Location = new System.Drawing.Point(262, 10);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(0);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox6.Size = new System.Drawing.Size(203, 67);
-            this.groupBox6.TabIndex = 6;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Other options";
-            // 
-            // DiscordLink
-            // 
-            this.DiscordLink.AutoSize = true;
-            this.DiscordLink.Location = new System.Drawing.Point(7, 484);
-            this.DiscordLink.Name = "DiscordLink";
-            this.DiscordLink.Size = new System.Drawing.Size(205, 13);
-            this.DiscordLink.TabIndex = 7;
-            this.DiscordLink.TabStop = true;
-            this.DiscordLink.Text = "Need help setting this up? Ask on Discord";
-            this.DiscordLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.DiscordLink_LinkClicked);
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.groupBox5);
@@ -2605,6 +2560,16 @@
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Split on defeat";
+            // 
+            // BossRushButton
+            // 
+            this.BossRushButton.Location = new System.Drawing.Point(309, 256);
+            this.BossRushButton.Name = "BossRushButton";
+            this.BossRushButton.Size = new System.Drawing.Size(93, 23);
+            this.BossRushButton.TabIndex = 17;
+            this.BossRushButton.Text = "Reset to Default";
+            this.BossRushButton.UseVisualStyleBackColor = true;
+            this.BossRushButton.Click += new System.EventHandler(this.BossRushButton_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -2650,6 +2615,32 @@
             this.groupBox28.TabIndex = 3;
             this.groupBox28.TabStop = false;
             this.groupBox28.Text = "Ouranos Island";
+            // 
+            // chkBoss4_11
+            // 
+            this.chkBoss4_11.AutoSize = true;
+            this.chkBoss4_11.Checked = true;
+            this.chkBoss4_11.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_11.Location = new System.Drawing.Point(10, 193);
+            this.chkBoss4_11.Name = "chkBoss4_11";
+            this.chkBoss4_11.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_11.TabIndex = 14;
+            this.chkBoss4_11.Text = "Phase 11";
+            this.chkBoss4_11.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss4_10
+            // 
+            this.chkBoss4_10.AutoSize = true;
+            this.chkBoss4_10.Checked = true;
+            this.chkBoss4_10.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss4_10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss4_10.Location = new System.Drawing.Point(10, 176);
+            this.chkBoss4_10.Name = "chkBoss4_10";
+            this.chkBoss4_10.Size = new System.Drawing.Size(80, 17);
+            this.chkBoss4_10.TabIndex = 13;
+            this.chkBoss4_10.Text = "Phase 10";
+            this.chkBoss4_10.UseVisualStyleBackColor = true;
             // 
             // chkBoss4_9
             // 
@@ -2789,6 +2780,32 @@
             this.groupBox29.TabStop = false;
             this.groupBox29.Text = "Chaos Island";
             // 
+            // chkBoss3_9
+            // 
+            this.chkBoss3_9.AutoSize = true;
+            this.chkBoss3_9.Checked = true;
+            this.chkBoss3_9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_9.Location = new System.Drawing.Point(10, 159);
+            this.chkBoss3_9.Name = "chkBoss3_9";
+            this.chkBoss3_9.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_9.TabIndex = 11;
+            this.chkBoss3_9.Text = "Phase 9";
+            this.chkBoss3_9.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss3_8
+            // 
+            this.chkBoss3_8.AutoSize = true;
+            this.chkBoss3_8.Checked = true;
+            this.chkBoss3_8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss3_8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss3_8.Location = new System.Drawing.Point(10, 142);
+            this.chkBoss3_8.Name = "chkBoss3_8";
+            this.chkBoss3_8.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss3_8.TabIndex = 10;
+            this.chkBoss3_8.Text = "Phase 8";
+            this.chkBoss3_8.UseVisualStyleBackColor = true;
+            // 
             // chkBoss3_7
             // 
             this.chkBoss3_7.AutoSize = true;
@@ -2901,6 +2918,45 @@
             this.groupBox30.TabIndex = 1;
             this.groupBox30.TabStop = false;
             this.groupBox30.Text = "Ares Island";
+            // 
+            // chkBoss2_10
+            // 
+            this.chkBoss2_10.AutoSize = true;
+            this.chkBoss2_10.Checked = true;
+            this.chkBoss2_10.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_10.Location = new System.Drawing.Point(10, 176);
+            this.chkBoss2_10.Name = "chkBoss2_10";
+            this.chkBoss2_10.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_10.TabIndex = 12;
+            this.chkBoss2_10.Text = "Phase 10";
+            this.chkBoss2_10.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_9
+            // 
+            this.chkBoss2_9.AutoSize = true;
+            this.chkBoss2_9.Checked = true;
+            this.chkBoss2_9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_9.Location = new System.Drawing.Point(10, 159);
+            this.chkBoss2_9.Name = "chkBoss2_9";
+            this.chkBoss2_9.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_9.TabIndex = 11;
+            this.chkBoss2_9.Text = "Phase 9";
+            this.chkBoss2_9.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss2_8
+            // 
+            this.chkBoss2_8.AutoSize = true;
+            this.chkBoss2_8.Checked = true;
+            this.chkBoss2_8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss2_8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss2_8.Location = new System.Drawing.Point(10, 142);
+            this.chkBoss2_8.Name = "chkBoss2_8";
+            this.chkBoss2_8.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss2_8.TabIndex = 10;
+            this.chkBoss2_8.Text = "Phase 8";
+            this.chkBoss2_8.UseVisualStyleBackColor = true;
             // 
             // chkBoss2_7
             // 
@@ -3015,6 +3071,45 @@
             this.groupBox31.TabStop = false;
             this.groupBox31.Text = "Kronos Island";
             // 
+            // chkBoss1_10
+            // 
+            this.chkBoss1_10.AutoSize = true;
+            this.chkBoss1_10.Checked = true;
+            this.chkBoss1_10.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_10.Location = new System.Drawing.Point(10, 176);
+            this.chkBoss1_10.Name = "chkBoss1_10";
+            this.chkBoss1_10.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_10.TabIndex = 11;
+            this.chkBoss1_10.Text = "Phase 10";
+            this.chkBoss1_10.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_9
+            // 
+            this.chkBoss1_9.AutoSize = true;
+            this.chkBoss1_9.Checked = true;
+            this.chkBoss1_9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_9.Location = new System.Drawing.Point(10, 159);
+            this.chkBoss1_9.Name = "chkBoss1_9";
+            this.chkBoss1_9.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_9.TabIndex = 10;
+            this.chkBoss1_9.Text = "Phase 9";
+            this.chkBoss1_9.UseVisualStyleBackColor = true;
+            // 
+            // chkBoss1_8
+            // 
+            this.chkBoss1_8.AutoSize = true;
+            this.chkBoss1_8.Checked = true;
+            this.chkBoss1_8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoss1_8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkBoss1_8.Location = new System.Drawing.Point(10, 142);
+            this.chkBoss1_8.Name = "chkBoss1_8";
+            this.chkBoss1_8.Size = new System.Drawing.Size(77, 17);
+            this.chkBoss1_8.TabIndex = 9;
+            this.chkBoss1_8.Text = "Phase 8";
+            this.chkBoss1_8.UseVisualStyleBackColor = true;
+            // 
             // chkBoss1_7
             // 
             this.chkBoss1_7.AutoSize = true;
@@ -3106,145 +3201,60 @@
             this.chkBoss1_1.Text = "Phase 1";
             this.chkBoss1_1.UseVisualStyleBackColor = true;
             // 
-            // chkBoss1_8
+            // autosplitterVersion
             // 
-            this.chkBoss1_8.AutoSize = true;
-            this.chkBoss1_8.Checked = true;
-            this.chkBoss1_8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss1_8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss1_8.Location = new System.Drawing.Point(10, 142);
-            this.chkBoss1_8.Name = "chkBoss1_8";
-            this.chkBoss1_8.Size = new System.Drawing.Size(77, 17);
-            this.chkBoss1_8.TabIndex = 9;
-            this.chkBoss1_8.Text = "Phase 8";
-            this.chkBoss1_8.UseVisualStyleBackColor = true;
+            this.autosplitterVersion.AutoSize = true;
+            this.autosplitterVersion.Location = new System.Drawing.Point(330, 484);
+            this.autosplitterVersion.Name = "autosplitterVersion";
+            this.autosplitterVersion.Size = new System.Drawing.Size(135, 13);
+            this.autosplitterVersion.TabIndex = 5;
+            this.autosplitterVersion.Text = "Autosplitter version: vX.X.X";
+            this.autosplitterVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // chkBoss1_9
+            // chkFocus
             // 
-            this.chkBoss1_9.AutoSize = true;
-            this.chkBoss1_9.Checked = true;
-            this.chkBoss1_9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss1_9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss1_9.Location = new System.Drawing.Point(10, 159);
-            this.chkBoss1_9.Name = "chkBoss1_9";
-            this.chkBoss1_9.Size = new System.Drawing.Size(77, 17);
-            this.chkBoss1_9.TabIndex = 10;
-            this.chkBoss1_9.Text = "Phase 9";
-            this.chkBoss1_9.UseVisualStyleBackColor = true;
+            this.chkFocus.AutoSize = true;
+            this.chkFocus.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkFocus.Location = new System.Drawing.Point(10, 23);
+            this.chkFocus.Margin = new System.Windows.Forms.Padding(0);
+            this.chkFocus.Name = "chkFocus";
+            this.chkFocus.Size = new System.Drawing.Size(183, 30);
+            this.chkFocus.TabIndex = 5;
+            this.chkFocus.Text = "Prevent the game from pausing\r\nwhen it goes out of focus";
+            this.chkFocus.UseVisualStyleBackColor = true;
+            this.chkFocus.CheckedChanged += new System.EventHandler(this.chkFocus_CheckedChanged);
             // 
-            // chkBoss1_10
+            // groupBox6
             // 
-            this.chkBoss1_10.AutoSize = true;
-            this.chkBoss1_10.Checked = true;
-            this.chkBoss1_10.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss1_10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss1_10.Location = new System.Drawing.Point(10, 176);
-            this.chkBoss1_10.Name = "chkBoss1_10";
-            this.chkBoss1_10.Size = new System.Drawing.Size(77, 17);
-            this.chkBoss1_10.TabIndex = 11;
-            this.chkBoss1_10.Text = "Phase 10";
-            this.chkBoss1_10.UseVisualStyleBackColor = true;
+            this.groupBox6.Controls.Add(this.chkFocus);
+            this.groupBox6.Location = new System.Drawing.Point(262, 10);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox6.Size = new System.Drawing.Size(203, 67);
+            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Other options";
             // 
-            // chkBoss2_8
+            // DiscordLink
             // 
-            this.chkBoss2_8.AutoSize = true;
-            this.chkBoss2_8.Checked = true;
-            this.chkBoss2_8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss2_8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss2_8.Location = new System.Drawing.Point(10, 142);
-            this.chkBoss2_8.Name = "chkBoss2_8";
-            this.chkBoss2_8.Size = new System.Drawing.Size(77, 17);
-            this.chkBoss2_8.TabIndex = 10;
-            this.chkBoss2_8.Text = "Phase 8";
-            this.chkBoss2_8.UseVisualStyleBackColor = true;
+            this.DiscordLink.AutoSize = true;
+            this.DiscordLink.Location = new System.Drawing.Point(7, 484);
+            this.DiscordLink.Name = "DiscordLink";
+            this.DiscordLink.Size = new System.Drawing.Size(205, 13);
+            this.DiscordLink.TabIndex = 7;
+            this.DiscordLink.TabStop = true;
+            this.DiscordLink.Text = "Need help setting this up? Ask on Discord";
+            this.DiscordLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.DiscordLink_LinkClicked);
             // 
-            // chkBoss2_9
+            // chkMusicNoteAny
             // 
-            this.chkBoss2_9.AutoSize = true;
-            this.chkBoss2_9.Checked = true;
-            this.chkBoss2_9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss2_9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss2_9.Location = new System.Drawing.Point(10, 159);
-            this.chkBoss2_9.Name = "chkBoss2_9";
-            this.chkBoss2_9.Size = new System.Drawing.Size(77, 17);
-            this.chkBoss2_9.TabIndex = 11;
-            this.chkBoss2_9.Text = "Phase 9";
-            this.chkBoss2_9.UseVisualStyleBackColor = true;
-            // 
-            // chkBoss2_10
-            // 
-            this.chkBoss2_10.AutoSize = true;
-            this.chkBoss2_10.Checked = true;
-            this.chkBoss2_10.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss2_10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss2_10.Location = new System.Drawing.Point(10, 176);
-            this.chkBoss2_10.Name = "chkBoss2_10";
-            this.chkBoss2_10.Size = new System.Drawing.Size(77, 17);
-            this.chkBoss2_10.TabIndex = 12;
-            this.chkBoss2_10.Text = "Phase 10";
-            this.chkBoss2_10.UseVisualStyleBackColor = true;
-            // 
-            // chkBoss3_8
-            // 
-            this.chkBoss3_8.AutoSize = true;
-            this.chkBoss3_8.Checked = true;
-            this.chkBoss3_8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss3_8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss3_8.Location = new System.Drawing.Point(10, 142);
-            this.chkBoss3_8.Name = "chkBoss3_8";
-            this.chkBoss3_8.Size = new System.Drawing.Size(77, 17);
-            this.chkBoss3_8.TabIndex = 10;
-            this.chkBoss3_8.Text = "Phase 8";
-            this.chkBoss3_8.UseVisualStyleBackColor = true;
-            // 
-            // chkBoss3_9
-            // 
-            this.chkBoss3_9.AutoSize = true;
-            this.chkBoss3_9.Checked = true;
-            this.chkBoss3_9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss3_9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss3_9.Location = new System.Drawing.Point(10, 159);
-            this.chkBoss3_9.Name = "chkBoss3_9";
-            this.chkBoss3_9.Size = new System.Drawing.Size(77, 17);
-            this.chkBoss3_9.TabIndex = 11;
-            this.chkBoss3_9.Text = "Phase 9";
-            this.chkBoss3_9.UseVisualStyleBackColor = true;
-            // 
-            // chkBoss4_10
-            // 
-            this.chkBoss4_10.AutoSize = true;
-            this.chkBoss4_10.Checked = true;
-            this.chkBoss4_10.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss4_10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss4_10.Location = new System.Drawing.Point(10, 176);
-            this.chkBoss4_10.Name = "chkBoss4_10";
-            this.chkBoss4_10.Size = new System.Drawing.Size(80, 17);
-            this.chkBoss4_10.TabIndex = 13;
-            this.chkBoss4_10.Text = "Phase 10";
-            this.chkBoss4_10.UseVisualStyleBackColor = true;
-            // 
-            // chkBoss4_11
-            // 
-            this.chkBoss4_11.AutoSize = true;
-            this.chkBoss4_11.Checked = true;
-            this.chkBoss4_11.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoss4_11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBoss4_11.Location = new System.Drawing.Point(10, 193);
-            this.chkBoss4_11.Name = "chkBoss4_11";
-            this.chkBoss4_11.Size = new System.Drawing.Size(80, 17);
-            this.chkBoss4_11.TabIndex = 14;
-            this.chkBoss4_11.Text = "Phase 11";
-            this.chkBoss4_11.UseVisualStyleBackColor = true;
-            // 
-            // BossRushButton
-            // 
-            this.BossRushButton.Location = new System.Drawing.Point(309, 256);
-            this.BossRushButton.Name = "BossRushButton";
-            this.BossRushButton.Size = new System.Drawing.Size(93, 23);
-            this.BossRushButton.TabIndex = 17;
-            this.BossRushButton.Text = "Reset to Default";
-            this.BossRushButton.UseVisualStyleBackColor = true;
-            this.BossRushButton.Click += new System.EventHandler(this.BossRushButton_Click);
+            this.chkMusicNoteAny.Location = new System.Drawing.Point(13, 19);
+            this.chkMusicNoteAny.Name = "chkMusicNoteAny";
+            this.chkMusicNoteAny.Size = new System.Drawing.Size(126, 38);
+            this.chkMusicNoteAny.TabIndex = 2;
+            this.chkMusicNoteAny.Text = "Split Upon Collecting Any Music Note";
+            this.chkMusicNoteAny.UseVisualStyleBackColor = true;
             // 
             // Settings
             // 
@@ -3310,6 +3320,8 @@
             this.groupBox17.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -3322,10 +3334,6 @@
             this.groupBox12.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -3339,10 +3347,13 @@
             this.groupBox30.PerformLayout();
             this.groupBox31.ResumeLayout(false);
             this.groupBox31.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.CheckBox chkMusicNoteAny;
 
         #endregion
         private System.Windows.Forms.GroupBox groupBox1;

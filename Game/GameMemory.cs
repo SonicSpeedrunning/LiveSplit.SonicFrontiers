@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using LiveSplit.ComponentUtil;
 using LiveSplit.Model;
+using LiveSplit.Options;
 
 namespace LiveSplit.SonicFrontiers
 {
@@ -44,7 +45,9 @@ namespace LiveSplit.SonicFrontiers
 
         // Boss Rush
         public FakeMemoryWatcher<BossRushAct> BossRushAct { get; }
-
+        
+        // Music Notes
+        public FakeMemoryWatcher<byte[]> MusicNotes;
         public Watchers(LiveSplitState LSstate)
         {
             // Define LiveSplit's current state. We need this because we want to reset AccumulatedIGT and AlreadyTriggeredBools when a run is reset
@@ -121,7 +124,16 @@ namespace LiveSplit.SonicFrontiers
 
                 return LevelID.Current;
             });
-
+            MusicNotes = new FakeMemoryWatcher<byte[]>(() =>
+                {
+                    if (Flags.NoteFlags == null)
+                    {
+                        Log.Warning("DEFAULT RETURNED");
+                        return new byte[] { 0, 0, 0, 0, 0 };
+                    }
+                    return Flags.NoteFlags;
+                }
+            );
             StoryModeCyberSpaceCompletionFlag = new FakeMemoryWatcher<bool>(() => CurrentGameMode == GameMode.Story && LevelID.Current <= SonicFrontiers.LevelID.w4_9 && (Status.Current == SonicFrontiers.Status.Result || StoryModeCyberSpaceCompletionFlag.Old));
 
             QTEStatus = new FakeMemoryWatcher<QTEResolveStatus>(() =>
@@ -238,7 +250,7 @@ namespace LiveSplit.SonicFrontiers
                 { "Ouranos_WhiteCE",        new FakeMemoryWatcher<bool>(() => Flags.Ouranos_WhiteCE) },
                 { "Island_Ouranos_fishing", new FakeMemoryWatcher<bool>(() => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos) }
             };
-
+            
             BossRushAct = new FakeMemoryWatcher<BossRushAct>(() =>
             {
                 var levelid = LevelID.Current;
@@ -329,11 +341,13 @@ namespace LiveSplit.SonicFrontiers
 
             // Get the game flags for story mode
             //Flags = new DeepPointer(addresses["baseAddress"], 0x28, 0x110, 0x40, 0x50).Deref<StoryFlags>(game);
+            
             Flags = new DeepPointer(addresses["baseAddress"], 0x28, 0x110, 0x40, 0x0).Deref<StoryFlags>(game);
             Flags.ValidateRTTI(RTTI["UserElement::save::app"]);
             foreach (var entry in SplitBools)
                 entry.Value.Update();
-
+            
+            MusicNotes.Update();
             if (state.CurrentPhase == TimerPhase.NotRunning)
             {
                 var gamemodeflag = game.ReadValue<byte>(addresses["APPLICATIONSEQUENCE"] + 0x122);
@@ -435,7 +449,7 @@ namespace LiveSplit.SonicFrontiers
             addresses["GAMEMODE"] = IntPtr.Zero;
             addresses["GAMEMODEEXTENSION"] = IntPtr.Zero;
             addresses["QTE"] = IntPtr.Zero;
-
+            addresses["MUSICNOTES"] = IntPtr.Zero;
             addresses["HsmExtension"] = IntPtr.Zero;
             addresses["StageTimeExtension"] = IntPtr.Zero;
             addresses["BattleRushExtension"] = IntPtr.Zero;

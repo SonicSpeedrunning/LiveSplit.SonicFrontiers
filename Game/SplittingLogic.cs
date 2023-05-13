@@ -1,6 +1,7 @@
 ﻿using LiveSplit.UI.Components;
 using System;
 using System.Linq;
+using LiveSplit.Options;
 
 namespace LiveSplit.SonicFrontiers
 {
@@ -96,7 +97,16 @@ namespace LiveSplit.SonicFrontiers
                     return true;
                 }
             }
-
+            // Music Notes (any)
+            if (Settings.MusicNoteAny && watchers.MusicNotes.Old != null && !watchers.MusicNotes.Old.SequenceEqual(watchers.MusicNotes.Current))
+            {
+                return true;
+            } 
+            if (watchers.MusicNotes.Old == null)
+            {
+                Log.Warning("watchers musicnotes old is null");
+            }
+            
             // Final boss split
             if (Settings.FinalBoss && watchers.LevelID.Current == LevelID.Boss_TheEnd && watchers.EndQTECount.Old == 3 && watchers.EndQTECount.Current == 0)
                 return true;

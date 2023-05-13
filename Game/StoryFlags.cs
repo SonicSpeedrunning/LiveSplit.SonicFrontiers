@@ -9,7 +9,7 @@ namespace LiveSplit.SonicFrontiers
         private struct StoryFlags
         {
             [FieldOffset(0x0)] private IntPtr SaveDataRTTI = IntPtr.Zero;
-            [FieldOffset(0x8)] private bool IsValid = false;
+            [FieldOffset(0x8)] public bool IsValid = false;
             [FieldOffset(0x86 + 0x50)] private readonly byte _86 = 0;
             [FieldOffset(0x88 + 0x50)] private readonly byte _88 = 0; //Quick Cyloop
             [FieldOffset(0x89 + 0x50)] private readonly byte _89 = 0;
@@ -28,6 +28,12 @@ namespace LiveSplit.SonicFrontiers
             [FieldOffset(0xA4A + 0x50)] private readonly byte _A4A = 0;
             [FieldOffset(0xA5B + 0x50)] private readonly byte _A5B = 0;
             [FieldOffset(0xA85 + 0x50)] private readonly byte _A85 = 0;
+
+            [FieldOffset(0xAD2 + 0x50)] private readonly byte _AD2 = 0;
+            [FieldOffset(0xAD3 + 0x50)] private readonly byte _AD3 = 0;
+            [FieldOffset(0xAD4 + 0x50)] private readonly byte _AD4 = 0;
+            [FieldOffset(0xAD5 + 0x50)] private readonly byte _AD5 = 0;
+            [FieldOffset(0xAD6 + 0x50)] private readonly byte _AD6 = 0;
             [FieldOffset(0x10C1 + 0x50)] private readonly byte _10C1 = 0;
             [FieldOffset(0x1201 + 0x50)] private readonly byte _1201 = 0;
             [FieldOffset(0x1783 + 0x50)] private readonly byte _1783 = 0;
@@ -124,6 +130,9 @@ namespace LiveSplit.SonicFrontiers
             public bool Ouranos_YellowCE => IsValid && _80C1.BitCheck(2);
             public bool Ouranos_CyanCE => IsValid && _80C1.BitCheck(3);
             public bool Ouranos_WhiteCE => IsValid && _80C1.BitCheck(4);
+            
+            //Note Flags 
+            public byte[] NoteFlags => new byte[] { _AD2, _AD3, _AD4, _AD5, _AD6 }; //the C# marshaller isn't the greatest...
         }
     }
 }

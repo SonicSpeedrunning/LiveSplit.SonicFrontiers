@@ -68,7 +68,7 @@ namespace LiveSplit.SonicFrontiers
             // Main update logic is inside the watcher class in order to avoid exposing unneded stuff to the outside
             watchers.Update();
 
-            // Main logic: the autosplitter checks for time, reset and splitting conditions only if it's running
+            // Main logic: the autosplitter checks for time, s and splitting conditions only if it's running
             // This prevents, for example, automatic resetting when the run is already complete (TimerPhase.Ended)
             if (timer.CurrentState.CurrentPhase == TimerPhase.Running || timer.CurrentState.CurrentPhase == TimerPhase.Paused)
             {
