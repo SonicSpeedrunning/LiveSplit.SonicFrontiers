@@ -211,7 +211,7 @@ namespace LiveSplit.SonicFrontiers
                 { "Ares_WyvernRun",         new FakeMemoryWatcher<bool>(() => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && !addresses["CURRENTBOSSSTATUS_WYVERN"].IsZero() && game.ReadString(addresses["CURRENTBOSSSTATUS_WYVERN"], 255, out var value) && value == "EventRise") },
                 { "Ares_SuperSonic",        new FakeMemoryWatcher<bool>(() => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && !addresses["CURRENTBOSSSTATUS_WYVERN"].IsZero() && game.ReadString(addresses["CURRENTBOSSSTATUS_WYVERN"], 255, out var value) && value == "BattleTop") },
                 { "Island_Ares_story",      new FakeMemoryWatcher<bool>(() => LevelID.Old == SonicFrontiers.LevelID.Island_Ares && LevelID.Current == SonicFrontiers.LevelID.Island_Chaos) },
-                { "Island_Ares_fishing",    new FakeMemoryWatcher<bool>(() => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Chaos) },
+                { "Island_Ares_fishing",    new FakeMemoryWatcher<bool>(() => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Ares) },
 
                 // Chaos
                 { "Chaos_Tails",            new FakeMemoryWatcher<bool>(() => Flags.Chaos_Tails) },
