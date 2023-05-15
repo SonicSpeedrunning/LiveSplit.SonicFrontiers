@@ -20,4 +20,4 @@ There are a few things you will need to build this solution.
 - Download .NET 4.8.1 from [Microsoft](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks?cid=getdotnetsdk).
 - Move your "regular" copy of LiveSplit to a directory other than "C:\ProgramFiles (x86)\LiveSplit\" for safety.
 - Download/make a copy of [LiveSplit](http://livesplit.org/downloads/) and put it in "C:\Program Files (x86)\LiveSplit\" The path to LiveSplit.exe needs to be "C:\Program Files (x86)\LiveSplit\LiveSplit.exe."
-- Clone a copy of this respository
+- Clone a copy of this respository.
