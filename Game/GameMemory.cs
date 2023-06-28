@@ -58,7 +58,7 @@ namespace LiveSplit.SonicFrontiers
             {
                 if (!addresses["StageTimeExtension"].IsZero())
                 {
-                    double igt = game.ReadValue<float>(addresses["StageTimeExtension"] + 0x28);
+                    double igt = game.ReadValue<float>(addresses["StageTimeExtension"] + offsets["cyberstage_igt"]);
                     if (GameVersion != GameVersion.v1_01 && GameVersion != GameVersion.v1_10)
                     {
                         const double coef = .05 + (1 / 60d);
@@ -397,6 +397,7 @@ namespace LiveSplit.SonicFrontiers
                 0x162C8000 => GameVersion.v1_01,
                 0x1661B000 => GameVersion.v1_10,
                 0x1622F000 => GameVersion.v1_20, // Speed update (March 23rd, 2023)
+                0x16418000 => GameVersion.v1_30, // Sonic's birthday update (June 24th, 2023)
                 _ => GameVersion.Unknown,
             };
 
@@ -415,6 +416,9 @@ namespace LiveSplit.SonicFrontiers
             offsets["APPLICATION"]       = 0x80;
             offsets["GAMEMODE"]          = 0x78;
             offsets["GAMEMODEEXTENSION"] = 0xB0;
+
+            // These offsets are known to change so we will dynamically find them through specific sigscanning
+            offsets["cyberstage_igt"] = game.ReadValue<byte>(scanner.ScanOrThrow(new SigScanTarget(4, "F3 0F 11 49 ?? F3 0F 5C 0D")));
 
             // Defining a new instance of the RTTI class in order to get the vTable addresses of a couple of classes.
             // This makes it incredibly easy to calculate some dynamic offsets later,

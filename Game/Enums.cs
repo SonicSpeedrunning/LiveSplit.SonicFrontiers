@@ -214,5 +214,6 @@ namespace LiveSplit.SonicFrontiers
         v1_01 = 0x162C8000,
         v1_10 = 0x1661B000,
         v1_20 = 0x1622F000, // Speed update
+        v1_30 = 0x16418000, // Sonic's birthday update
     }
 }
