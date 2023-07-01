@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.4.2">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Fixed issue where the autosplitter would split twice upon starting a NG+ run.</change>
+			<change>Fixed support for the additional Music Memories added with Sonic Frontiers v1.30</change>
+		</changelog>
+	</update>
 	<update version="1.4.1">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>

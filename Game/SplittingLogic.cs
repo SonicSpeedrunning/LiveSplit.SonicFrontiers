@@ -84,19 +84,23 @@ namespace LiveSplit.SonicFrontiers
                     BossRushAct.b4_11 => Settings.Boss4_11 && watchers.Status.Changed && watchers.Status.Current == Status.StageResult,
                     _ => false
                 };
-            }
+            }                                                               
 
             // Story mode
-
-            // Event flags
-            foreach (var flag in watchers.SplitBools.Where(b => !watchers.AlreadyTriggeredBools.Contains(b.Key)))
+            // Doublesplit on start prevention
+            if (timer.CurrentState.CurrentTime.RealTime > new TimeSpan(0, 0, 2))
             {
-                if (CheckBoolSplit(flag.Key) && !flag.Value.Old && flag.Value.Current)
+                // Event flags
+                foreach (var flag in watchers.SplitBools.Where(b => !watchers.AlreadyTriggeredBools.Contains(b.Key)))
                 {
-                    watchers.AlreadyTriggeredBools.Add(flag.Key);
-                    return true;
+                    if (CheckBoolSplit(flag.Key) && !flag.Value.Old && flag.Value.Current)
+                    {
+                        watchers.AlreadyTriggeredBools.Add(flag.Key);
+                        return true;
+                    }
                 }
             }
+
             // Music Notes (any)
             if (Settings.MusicNoteAny && watchers.MusicNotes.Old != null && !watchers.MusicNotes.Old.SequenceEqual(watchers.MusicNotes.Current))
             {

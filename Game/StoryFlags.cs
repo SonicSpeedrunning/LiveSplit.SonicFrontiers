@@ -34,6 +34,9 @@ namespace LiveSplit.SonicFrontiers
             [FieldOffset(0xAD4 + 0x50)] private readonly byte _AD4 = 0;
             [FieldOffset(0xAD5 + 0x50)] private readonly byte _AD5 = 0;
             [FieldOffset(0xAD6 + 0x50)] private readonly byte _AD6 = 0;
+            [FieldOffset(0xAD7 + 0x50)] private readonly byte _AD7 = 0;
+            [FieldOffset(0xAD8 + 0x50)] private readonly byte _AD8 = 0;
+            [FieldOffset(0xAD9 + 0x50)] private readonly byte _AD9 = 0;
             [FieldOffset(0x10C1 + 0x50)] private readonly byte _10C1 = 0;
             [FieldOffset(0x1201 + 0x50)] private readonly byte _1201 = 0;
             [FieldOffset(0x1783 + 0x50)] private readonly byte _1783 = 0;
@@ -132,7 +135,7 @@ namespace LiveSplit.SonicFrontiers
             public bool Ouranos_WhiteCE => IsValid && _80C1.BitCheck(4);
             
             //Note Flags 
-            public byte[] NoteFlags => new byte[] { _AD2, _AD3, _AD4, _AD5, _AD6 }; //the C# marshaller isn't the greatest...
+            public byte[] NoteFlags => new byte[] { _AD2, _AD3, _AD4, _AD5, _AD6, _AD7, _AD8, _AD9 }; //the C# marshaller isn't the greatest...
         }
     }
 }
