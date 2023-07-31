@@ -12,7 +12,7 @@ namespace LiveSplit.SonicFrontiers
             if (watchers.Status.Current == Status.Quit && watchers.Status.Old == Status.NewGameMenu) // Main trigger for story mode
                 return Settings.StoryStart;
             else if (Settings.ArcadeStart && (watchers.CurrentGameMode == GameMode.Arcade || watchers.CurrentGameMode == GameMode.CyberspaceChallenge))
-                return (Settings.Arcade1_1 ? watchers.LevelID.Current == LevelID.w1_1 : watchers.LevelID.Current != watchers.LevelID.Old) && watchers.LevelID.Old == LevelID.MainMenu;
+                return (watchers.LevelID.Current != watchers.LevelID.Old) && watchers.LevelID.Old == LevelID.MainMenu;
             else if (Settings.BossRushStart && watchers.CurrentGameMode == GameMode.BossRush)
                 return watchers.LevelID.Old == LevelID.MainMenu && (watchers.LevelID.Current == LevelID.Island_Kronos_BossRush || watchers.LevelID.Current == LevelID.Island_Ares_BossRush || watchers.LevelID.Current == LevelID.Island_Chaos_BossRush || watchers.LevelID.Current == LevelID.Island_Ouranos_BossRush);
 

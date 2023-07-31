@@ -351,9 +351,10 @@ namespace LiveSplit.SonicFrontiers
             if (state.CurrentPhase == TimerPhase.NotRunning)
             {
                 var gamemodeflag = game.ReadValue<byte>(addresses["APPLICATIONSEQUENCE"] + 0x122);
+                var gamemodeflag2 = game.ReadValue<byte>(addresses["APPLICATIONSEQUENCE"] + 0x123);
                 if (Status.Current == SonicFrontiers.Status.ArcadeMode || gamemodeflag.BitCheck(0))
                     CurrentGameMode = GameMode.Arcade;
-                else if (Status.Current == SonicFrontiers.Status.CyberMode || gamemodeflag.BitCheck(7))
+                else if (Status.Current == SonicFrontiers.Status.CyberMode || gamemodeflag.BitCheck(7) || (gamemodeflag2 & 0b1111) != 0) //kronos,ares,chaos,ouranos,all = bits 7, (next byte) 0,1,2,3
                     CurrentGameMode = GameMode.CyberspaceChallenge;
                 else if (Status.Current == SonicFrontiers.Status.BattleMode || LevelID.Current == SonicFrontiers.LevelID.Island_Kronos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ares_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Chaos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos_BossRush)
                     CurrentGameMode = GameMode.BossRush;
@@ -510,7 +511,7 @@ namespace LiveSplit.SonicFrontiers
                                     }
                                 }
                             }
-                        }
+                        }                                                                                   
                     }
                 }
 
