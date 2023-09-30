@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.5.0">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Fixed the autosplitter to function on Frontiers Update 3.</change>
+		</changelog>
+	</update>
 	<update version="1.4.3">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>

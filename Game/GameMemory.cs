@@ -419,7 +419,7 @@ namespace LiveSplit.SonicFrontiers
             offsets["GAMEMODEEXTENSION"] = 0xB0;
 
             // These offsets are known to change so we will dynamically find them through specific sigscanning
-            offsets["cyberstage_igt"] = game.ReadValue<byte>(scanner.ScanOrThrow(new SigScanTarget(4, "F3 0F 11 49 ?? F3 0F 5C 0D")));
+            offsets["cyberstage_igt"] = 0x30;
 
             // Defining a new instance of the RTTI class in order to get the vTable addresses of a couple of classes.
             // This makes it incredibly easy to calculate some dynamic offsets later,
@@ -427,7 +427,7 @@ namespace LiveSplit.SonicFrontiers
             {
                 "ApplicationSequenceExtension::game::app",
                 "GameModeHsmExtension::game::app",
-                "GameModeStageTimeExtension::game::app",
+                "GameModeStageTimeExtension::game::app",    
                 "UserElement::save::app",
                 "EventQTEInput::evt::app",
                 "BossGiant::app",
