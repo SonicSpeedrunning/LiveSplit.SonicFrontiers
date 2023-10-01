@@ -59,7 +59,7 @@ namespace LiveSplit.SonicFrontiers
                 if (!addresses["StageTimeExtension"].IsZero())
                 {
                     double igt = game.ReadValue<float>(addresses["StageTimeExtension"] + offsets["cyberstage_igt"]);
-                    if (GameVersion != GameVersion.v1_01 && GameVersion != GameVersion.v1_10)
+                    if (GameVersion != GameVersion.v1_01) // 1.4 has the same module size as 1.1 so i removed that check here and now IGT works
                     {
                         const double coef = .05 + (1 / 60d);
                         if (igt <= coef)
