@@ -55,6 +55,11 @@ namespace LiveSplit.SonicFrontiers
             [FieldOffset(0x4FBA + 0x50)] private readonly byte _4FBA = 0;
             [FieldOffset(0x80C0 + 0x50)] private readonly byte _80C0 = 0;
             [FieldOffset(0x80C1 + 0x50)] private readonly byte _80C1 = 0;
+            [FieldOffset(0xCB94 + 0x50)] private readonly byte _CB94 = 0;
+            [FieldOffset(0xCF70 + 0x50)] private readonly byte _CF70 = 0;
+            [FieldOffset(0xCF73 + 0x50)] private readonly byte _CF73 = 0;
+            [FieldOffset(0xCF74 + 0x50)] private readonly byte _CF74 = 0;
+            
 
             public StoryFlags() {}
 
@@ -63,7 +68,21 @@ namespace LiveSplit.SonicFrontiers
             {
                 IsValid = SaveDataRTTI == RTTIValue;
             }
+            
+            //Another Story Flags
+            public bool Amy_First => IsValid && _CF73.BitCheck(4);
+            public bool Knuckles_First => IsValid && _CF73.BitCheck(5);
+            public bool Tails_First => IsValid && _CF73.BitCheck(6);
+            public bool Sonic_Tower1 => IsValid && _CF70.BitCheck(0);
+            public bool Sonic_Tower2 => IsValid && _CF70.BitCheck(1);
+            
+            public bool Sonic_Tower3 => IsValid && _CF70.BitCheck(2);
+            public bool Sonic_Tower4 => IsValid && _CF70.BitCheck(3);
 
+            public bool Amy_Second => IsValid && _CF73.BitCheck(7);
+            public bool Knuckles_Second => IsValid && _CF74.BitCheck(0);
+            public bool Tails_Second => IsValid && _CF74.BitCheck(1);
+            public bool Sonic_MasterTrial => IsValid && _CB94.BitCheck(1);
             //Skills
             public bool Skill_Cyloop => IsValid && _86.BitCheck(0);
             public bool Skill_QuickCyloop => IsValid && _88.BitCheck(0);

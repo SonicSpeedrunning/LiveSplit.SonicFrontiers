@@ -518,7 +518,7 @@ namespace LiveSplit.SonicFrontiers
                 IntPtr _addr = (IntPtr)game.ReadValue<long>(_base + 0x70);
                 if (!_addr.IsZero())
                 {
-                    _addr = (IntPtr)game.ReadValue<long>(_addr + 0xE0);
+                    _addr = (IntPtr)game.ReadValue<long>(_addr + 0xD0);
                     if (!_addr.IsZero())
                     {
                         _addr = (IntPtr)game.ReadValue<long>(_addr + 0x28);

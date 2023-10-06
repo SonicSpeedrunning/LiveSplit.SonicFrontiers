@@ -135,6 +135,20 @@ namespace LiveSplit.SonicFrontiers
         //Music Notes
         public bool Split_AnyNote { get; set; }
         
+        //Another Story
+        public bool Amy_First { get; set; }
+        public bool Knuckles_First { get; set; }
+        public bool Tails_First { get; set; }
+        public bool Sonic_Tower1 { get; set; }
+        public bool Sonic_Tower2 { get; set; }
+        public bool Sonic_Tower3 { get; set; }
+        public bool Sonic_Tower4 { get; set; }
+        public bool Amy_Second { get; set; }
+        public bool Knuckles_Second { get; set; }
+        public bool Tails_Second { get; set; }
+        public bool Sonic_MasterTrial { get; set; }
+        
+        
         // Arcade mode
         public bool w1_1_arcade { get; set; }
         public bool w1_2_arcade { get; set; }
@@ -403,8 +417,11 @@ namespace LiveSplit.SonicFrontiers
             WFocus = false;
             StoryStart = ArcadeStart = Arcade1_1 = true;
             BossRushStart = true;
-
+            
             MusicNoteAny = false;
+            
+            //Another Ending
+            
             
             //Skills
             Skill_Cyloop = Skill_AirTrick = Skill_PhantomRush = Skill_StompAttack = Skill_AutoCombo = Skill_HomingShot = Skill_LoopKick = Skill_QuickCyloop = Skill_RecoverySmash = Skill_SonicBoom = Skill_SpinSlash = Skill_WildRush = false;
@@ -1068,5 +1085,8 @@ namespace LiveSplit.SonicFrontiers
         {
             WFocusChange?.Invoke(this, chkFocus.Checked);
         }
+
+
+        
     }
 }
