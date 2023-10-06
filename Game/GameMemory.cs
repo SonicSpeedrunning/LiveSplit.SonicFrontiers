@@ -58,12 +58,12 @@ namespace LiveSplit.SonicFrontiers
             {
                 if (!addresses["StageTimeExtension"].IsZero())
                 {
-                    double igt = game.ReadValue<float>(addresses["StageTimeExtension"] + offsets["cyberstage_igt"]);
+                    float igt = game.ReadValue<float>(addresses["StageTimeExtension"] + offsets["cyberstage_igt"]);
                     if (GameVersion != GameVersion.v1_01) // 1.4 has the same module size as 1.1 so i removed that check here and now IGT works
                     {
-                        const double coef = .05 + (1 / 60d);
+                        float coef = game.ReadValue<float>(addresses["igt_subtraction"]);
                         if (igt <= coef)
-                            igt = 0d;
+                            igt = 0;
                         else
                             igt -= coef;
                     }
@@ -71,7 +71,7 @@ namespace LiveSplit.SonicFrontiers
                 }
                 else if (!addresses["BattleRushExtension"].IsZero())
                 {
-                    double igt = game.ReadValue<float>(addresses["BattleRushExtension"] + 0x38);
+                    float igt = game.ReadValue<float>(addresses["BattleRushExtension"] + 0x38);
                     return TimeSpan.FromSeconds(Math.Truncate(igt * 100) / 100);
                 }
                 else
@@ -419,7 +419,15 @@ namespace LiveSplit.SonicFrontiers
             offsets["GAMEMODEEXTENSION"] = 0xB0;
 
             // These offsets are known to change so we will dynamically find them through specific sigscanning
-            offsets["cyberstage_igt"] = 0x30;
+            IntPtr igtPtr = scanner.Scan(new SigScanTarget(4, "F3 0F 11 49 ?? F3 0F 5C 0D"));
+            IntPtr igtsubOffset = igtPtr + 5;
+            if (igtPtr == IntPtr.Zero)
+            {
+                igtPtr = scanner.ScanOrThrow(new SigScanTarget(4, "F3 0F 11 49 ?? F3 41 0F 58 ?? F3 0F 5C 0D"));
+                igtsubOffset = igtPtr + 10;
+            }
+            offsets["cyberstage_igt"] = game.ReadValue<byte>(igtPtr);
+            addresses["igt_subtraction"] = igtsubOffset + 0x4 + game.ReadValue<int>(igtsubOffset);
 
             // Defining a new instance of the RTTI class in order to get the vTable addresses of a couple of classes.
             // This makes it incredibly easy to calculate some dynamic offsets later,
