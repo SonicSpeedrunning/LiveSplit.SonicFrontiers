@@ -413,6 +413,22 @@ namespace LiveSplit.SonicFrontiers
             chkBoss4_11.DataBindings.Add("Checked", this, "Boss4_11", false, DataSourceUpdateMode.OnPropertyChanged);
             chkMusicNoteAny.DataBindings.Add("Checked", this, "MusicNoteAny", false,
                 DataSourceUpdateMode.OnPropertyChanged);
+            chk_AmyFirst.DataBindings.Add("Checked", this, "Amy_First", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk_KnucklesFirst.DataBindings.Add("Checked", this, "Knuckles_First", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk_TailsFirst.DataBindings.Add("Checked", this, "Tails_First", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk_AmySecond.DataBindings.Add("Checked", this, "Amy_Second", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk_KnucklesSecond.DataBindings.Add("Checked", this, "Knuckles_Second", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk_TailsSecond.DataBindings.Add("Checked", this, "Tails_Second", false, DataSourceUpdateMode.OnPropertyChanged);
+            chk_SonicTower1.DataBindings.Add("Checked", this, "Sonic_Tower1", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chk_SonicTower2.DataBindings.Add("Checked", this, "Sonic_Tower2", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chk_SonicTower3.DataBindings.Add("Checked", this, "Sonic_Tower3", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chk_SonicTower4.DataBindings.Add("Checked", this, "Sonic_Tower4", false,
+                DataSourceUpdateMode.OnPropertyChanged);
+            chk_MasterTrial.DataBindings.Add("Checked", this, "Sonic_MasterTrial", false,
+                DataSourceUpdateMode.OnPropertyChanged);
             // Default Values
             WFocus = false;
             StoryStart = ArcadeStart = Arcade1_1 = true;
@@ -420,7 +436,7 @@ namespace LiveSplit.SonicFrontiers
             
             MusicNoteAny = false;
             
-            //Another Ending
+           
             
             
             //Skills
@@ -470,6 +486,10 @@ namespace LiveSplit.SonicFrontiers
             Boss2_1 = Boss2_2 = Boss2_3 = Boss2_4 = Boss2_5 = Boss2_6 = Boss2_7 = Boss2_8 = Boss2_9 = Boss2_10 = true;
             Boss3_1 = Boss3_2 = Boss3_3 = Boss3_4 = Boss3_5 = Boss3_6 = Boss3_7 = Boss3_8 = Boss3_9 = true;
             Boss4_1 = Boss4_2 = Boss4_3 = Boss4_4 = Boss4_5 = Boss4_6 = Boss4_7 = Boss4_8 = Boss4_9 = Boss4_10 = Boss4_11 = true;
+            
+            //Another Story
+            Amy_First = Knuckles_First = Tails_First = Sonic_Tower1 = Sonic_Tower2 = Sonic_Tower3 =
+                Sonic_Tower4 = Sonic_MasterTrial = Amy_Second = Knuckles_Second = Tails_Second = true;
         }
 
         public XmlNode GetSettings(XmlDocument doc)
@@ -479,6 +499,17 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "StoryStart", StoryStart));
             settingsNode.AppendChild(ToElement(doc, "ArcadeStart", ArcadeStart));
             settingsNode.AppendChild(ToElement(doc, "BossRushStart", BossRushStart));
+            settingsNode.AppendChild(ToElement(doc, "Amy_First", Amy_First));
+            settingsNode.AppendChild(ToElement(doc, "Knuckles_First", Knuckles_First));
+            settingsNode.AppendChild(ToElement(doc, "Tails_First", Tails_First));
+            settingsNode.AppendChild(ToElement(doc, "Amy_Second", Amy_Second));
+            settingsNode.AppendChild(ToElement(doc, "Knuckles_Second", Knuckles_Second));
+            settingsNode.AppendChild(ToElement(doc, "Tails_Second", Tails_Second));
+            settingsNode.AppendChild(ToElement(doc, "Sonic_Tower1", Sonic_Tower1));
+            settingsNode.AppendChild(ToElement(doc, "Sonic_Tower2", Sonic_Tower2));
+            settingsNode.AppendChild(ToElement(doc, "Sonic_Tower3", Sonic_Tower3));
+            settingsNode.AppendChild(ToElement(doc, "Sonic_Tower4", Sonic_Tower4));
+            settingsNode.AppendChild(ToElement(doc, "Sonic_MasterTrial", Sonic_MasterTrial));
             settingsNode.AppendChild(ToElement(doc, "Skill_Cyloop", Skill_Cyloop));
             settingsNode.AppendChild(ToElement(doc, "Skill_PhantomRush", Skill_PhantomRush));
             settingsNode.AppendChild(ToElement(doc, "Skill_AirTrick", Skill_AirTrick));
@@ -665,7 +696,18 @@ namespace LiveSplit.SonicFrontiers
             ArcadeStart = ParseBool(settings, "ArcadeStart", true);
             BossRushStart = ParseBool(settings, "BossRushStart", true);
             Arcade1_1 = ParseBool(settings, "Arcade1_1", true);
-            Skill_Cyloop = ParseBool(settings, "Skill_Cyloop", false);
+            Amy_First = ParseBool(settings, "Amy_First", false);
+            Knuckles_First = ParseBool(settings, "Knuckles_First", false);
+            Tails_First = ParseBool(settings, "Tails_First", false);
+            Amy_Second = ParseBool(settings, "Amy_Second", false);
+            Knuckles_Second = ParseBool(settings, "Knuckles_Second", false);
+            Tails_Second = ParseBool(settings, "Tails_Second", false);
+            Sonic_Tower1 = ParseBool(settings, "Sonic_Tower1", false);
+            Sonic_Tower2 = ParseBool(settings, "Sonic_Tower2", false);
+            Sonic_Tower3 = ParseBool(settings, "Sonic_Tower3", false);
+            Sonic_Tower4 = ParseBool(settings, "Sonic_Tower4", false);
+            Sonic_MasterTrial = ParseBool(settings, "Sonic_MasterTrial", false);
+;           Skill_Cyloop = ParseBool(settings, "Skill_Cyloop", false);
             Skill_AirTrick = ParseBool(settings, "Skill_AirTrick", false);
             Skill_PhantomRush = ParseBool(settings, "Skill_PhantomRush", false);
             Skill_StompAttack = ParseBool(settings, "Skill_StompAttack", false);
@@ -1085,8 +1127,5 @@ namespace LiveSplit.SonicFrontiers
         {
             WFocusChange?.Invoke(this, chkFocus.Checked);
         }
-
-
-        
     }
 }

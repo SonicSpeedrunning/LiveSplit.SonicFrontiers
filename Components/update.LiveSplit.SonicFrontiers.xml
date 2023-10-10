@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.6.0">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Fixed the final QTE split for THE END during the main story</change>
+			<change>Added Another Story functionality. Auto-starts upon the first loading screen after sonic enters the portal, adjust your splits accordingly.</change>
+		</changelog>
+	</update>
 	<update version="1.5.1">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>

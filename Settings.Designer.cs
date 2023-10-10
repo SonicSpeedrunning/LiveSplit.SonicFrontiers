@@ -162,6 +162,18 @@
             this.groupBoxAmy = new System.Windows.Forms.GroupBox();
             this.chk_AmySecond = new System.Windows.Forms.CheckBox();
             this.chk_AmyFirst = new System.Windows.Forms.CheckBox();
+            this.groupBox32 = new System.Windows.Forms.GroupBox();
+            this.chk_KnucklesSecond = new System.Windows.Forms.CheckBox();
+            this.chk_KnucklesFirst = new System.Windows.Forms.CheckBox();
+            this.groupBox33 = new System.Windows.Forms.GroupBox();
+            this.chk_TailsSecond = new System.Windows.Forms.CheckBox();
+            this.chk_TailsFirst = new System.Windows.Forms.CheckBox();
+            this.groupBox34 = new System.Windows.Forms.GroupBox();
+            this.chk_MasterTrial = new System.Windows.Forms.CheckBox();
+            this.chk_SonicTower4 = new System.Windows.Forms.CheckBox();
+            this.chk_SonicTower3 = new System.Windows.Forms.CheckBox();
+            this.chk_SonicTower2 = new System.Windows.Forms.CheckBox();
+            this.chk_SonicTower1 = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ArcadeButton = new System.Windows.Forms.Button();
             this.chk29_arcade_soon = new System.Windows.Forms.CheckBox();
@@ -296,6 +308,9 @@
             this.tabPage9.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBoxAmy.SuspendLayout();
+            this.groupBox32.SuspendLayout();
+            this.groupBox33.SuspendLayout();
+            this.groupBox34.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -1879,7 +1894,7 @@
             this.tabPage9.TabIndex = 10;
             this.tabPage9.Text = "Another Story";
             this.tabPage9.UseVisualStyleBackColor = true;
-            this.tabPage9.Click += new System.EventHandler(this.tabPage9_Click);
+            
             // 
             // tableLayoutPanel3
             // 
@@ -1889,6 +1904,9 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.Controls.Add(this.groupBoxAmy, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox32, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox33, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox34, 3, 0);
             this.tableLayoutPanel3.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -1896,7 +1914,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(427, 218);
             this.tableLayoutPanel3.TabIndex = 0;
-            this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
             // groupBoxAmy
             // 
@@ -1911,7 +1928,7 @@
             // 
             // chk_AmySecond
             // 
-            this.chk_AmySecond.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_AmySecond.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chk_AmySecond.Location = new System.Drawing.Point(0, 49);
             this.chk_AmySecond.Name = "chk_AmySecond";
             this.chk_AmySecond.Size = new System.Drawing.Size(100, 20);
@@ -1927,7 +1944,123 @@
             this.chk_AmyFirst.TabIndex = 0;
             this.chk_AmyFirst.Text = "Sequence 1";
             this.chk_AmyFirst.UseVisualStyleBackColor = true;
-            this.chk_AmyFirst.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // groupBox32
+            // 
+            this.groupBox32.Controls.Add(this.chk_KnucklesSecond);
+            this.groupBox32.Controls.Add(this.chk_KnucklesFirst);
+            this.groupBox32.Location = new System.Drawing.Point(109, 3);
+            this.groupBox32.Name = "groupBox32";
+            this.groupBox32.Size = new System.Drawing.Size(100, 208);
+            this.groupBox32.TabIndex = 1;
+            this.groupBox32.TabStop = false;
+            this.groupBox32.Text = "Knuckles";
+            // 
+            // chk_KnucklesSecond
+            // 
+            this.chk_KnucklesSecond.Location = new System.Drawing.Point(6, 51);
+            this.chk_KnucklesSecond.Name = "chk_KnucklesSecond";
+            this.chk_KnucklesSecond.Size = new System.Drawing.Size(93, 18);
+            this.chk_KnucklesSecond.TabIndex = 1;
+            this.chk_KnucklesSecond.Text = "Sequence 2";
+            this.chk_KnucklesSecond.UseVisualStyleBackColor = true;
+            // 
+            // chk_KnucklesFirst
+            // 
+            this.chk_KnucklesFirst.Location = new System.Drawing.Point(6, 22);
+            this.chk_KnucklesFirst.Name = "chk_KnucklesFirst";
+            this.chk_KnucklesFirst.Size = new System.Drawing.Size(84, 20);
+            this.chk_KnucklesFirst.TabIndex = 0;
+            this.chk_KnucklesFirst.Text = "Sequence 1";
+            this.chk_KnucklesFirst.UseVisualStyleBackColor = true;
+            // 
+            // groupBox33
+            // 
+            this.groupBox33.Controls.Add(this.chk_TailsSecond);
+            this.groupBox33.Controls.Add(this.chk_TailsFirst);
+            this.groupBox33.Location = new System.Drawing.Point(215, 3);
+            this.groupBox33.Name = "groupBox33";
+            this.groupBox33.Size = new System.Drawing.Size(100, 211);
+            this.groupBox33.TabIndex = 2;
+            this.groupBox33.TabStop = false;
+            this.groupBox33.Text = "Tails";
+            // 
+            // chk_TailsSecond
+            // 
+            this.chk_TailsSecond.Location = new System.Drawing.Point(6, 49);
+            this.chk_TailsSecond.Name = "chk_TailsSecond";
+            this.chk_TailsSecond.Size = new System.Drawing.Size(98, 19);
+            this.chk_TailsSecond.TabIndex = 1;
+            this.chk_TailsSecond.Text = "Sequence 2";
+            this.chk_TailsSecond.UseVisualStyleBackColor = true;
+            // 
+            // chk_TailsFirst
+            // 
+            this.chk_TailsFirst.Location = new System.Drawing.Point(6, 19);
+            this.chk_TailsFirst.Name = "chk_TailsFirst";
+            this.chk_TailsFirst.Size = new System.Drawing.Size(93, 24);
+            this.chk_TailsFirst.TabIndex = 0;
+            this.chk_TailsFirst.Text = "Sequence 1";
+            this.chk_TailsFirst.UseVisualStyleBackColor = true;
+            // 
+            // groupBox34
+            // 
+            this.groupBox34.Controls.Add(this.chk_MasterTrial);
+            this.groupBox34.Controls.Add(this.chk_SonicTower4);
+            this.groupBox34.Controls.Add(this.chk_SonicTower3);
+            this.groupBox34.Controls.Add(this.chk_SonicTower2);
+            this.groupBox34.Controls.Add(this.chk_SonicTower1);
+            this.groupBox34.Location = new System.Drawing.Point(321, 3);
+            this.groupBox34.Name = "groupBox34";
+            this.groupBox34.Size = new System.Drawing.Size(101, 212);
+            this.groupBox34.TabIndex = 3;
+            this.groupBox34.TabStop = false;
+            this.groupBox34.Text = "Sonic";
+            // 
+            // chk_MasterTrial
+            // 
+            this.chk_MasterTrial.Location = new System.Drawing.Point(6, 121);
+            this.chk_MasterTrial.Name = "chk_MasterTrial";
+            this.chk_MasterTrial.Size = new System.Drawing.Size(84, 33);
+            this.chk_MasterTrial.TabIndex = 4;
+            this.chk_MasterTrial.Text = "Master King Trial";
+            this.chk_MasterTrial.UseVisualStyleBackColor = true;
+            // 
+            // chk_SonicTower4
+            // 
+            this.chk_SonicTower4.Location = new System.Drawing.Point(4, 97);
+            this.chk_SonicTower4.Name = "chk_SonicTower4";
+            this.chk_SonicTower4.Size = new System.Drawing.Size(85, 18);
+            this.chk_SonicTower4.TabIndex = 3;
+            this.chk_SonicTower4.Text = "Tower 4";
+            this.chk_SonicTower4.UseVisualStyleBackColor = true;
+            // 
+            // chk_SonicTower3
+            // 
+            this.chk_SonicTower3.Location = new System.Drawing.Point(4, 70);
+            this.chk_SonicTower3.Name = "chk_SonicTower3";
+            this.chk_SonicTower3.Size = new System.Drawing.Size(86, 21);
+            this.chk_SonicTower3.TabIndex = 2;
+            this.chk_SonicTower3.Text = "Tower 3";
+            this.chk_SonicTower3.UseVisualStyleBackColor = true;
+            // 
+            // chk_SonicTower2
+            // 
+            this.chk_SonicTower2.Location = new System.Drawing.Point(4, 46);
+            this.chk_SonicTower2.Name = "chk_SonicTower2";
+            this.chk_SonicTower2.Size = new System.Drawing.Size(87, 24);
+            this.chk_SonicTower2.TabIndex = 1;
+            this.chk_SonicTower2.Text = "Tower 2";
+            this.chk_SonicTower2.UseVisualStyleBackColor = true;
+            // 
+            // chk_SonicTower1
+            // 
+            this.chk_SonicTower1.Location = new System.Drawing.Point(4, 24);
+            this.chk_SonicTower1.Name = "chk_SonicTower1";
+            this.chk_SonicTower1.Size = new System.Drawing.Size(91, 17);
+            this.chk_SonicTower1.TabIndex = 0;
+            this.chk_SonicTower1.Text = "Tower 1";
+            this.chk_SonicTower1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -3391,6 +3524,9 @@
             this.tabPage9.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.groupBoxAmy.ResumeLayout(false);
+            this.groupBox32.ResumeLayout(false);
+            this.groupBox33.ResumeLayout(false);
+            this.groupBox34.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -3423,6 +3559,21 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.CheckBox chk_SonicTower2;
+        private System.Windows.Forms.CheckBox chk_SonicTower3;
+        private System.Windows.Forms.CheckBox chk_SonicTower4;
+
+        private System.Windows.Forms.CheckBox chk_SonicTower1;
+        private System.Windows.Forms.CheckBox chk_MasterTrial;
+
+        private System.Windows.Forms.GroupBox groupBox32;
+        private System.Windows.Forms.CheckBox chk_KnucklesFirst;
+        private System.Windows.Forms.CheckBox chk_KnucklesSecond;
+        private System.Windows.Forms.GroupBox groupBox33;
+        private System.Windows.Forms.GroupBox groupBox34;
+        private System.Windows.Forms.CheckBox chk_TailsFirst;
+        private System.Windows.Forms.CheckBox chk_TailsSecond;
 
         private System.Windows.Forms.CheckBox chk_AmyFirst;
 

@@ -47,6 +47,7 @@ namespace LiveSplit.SonicFrontiers
         Island_Chaos,
         Island_Rhea,
         Island_Ouranos,
+        Island_Another_Ouranos,
         Fishing,
         MainMenu,
         Boss_TheEnd,
@@ -172,6 +173,7 @@ namespace LiveSplit.SonicFrontiers
             { "w3r01", SonicFrontiers.LevelID.Island_Chaos },    // Chaos Island
             { "w1r05", SonicFrontiers.LevelID.Island_Rhea },    // Rhea Island
             { "w1r04", SonicFrontiers.LevelID.Island_Ouranos },    // Ouranos Island
+            { "w1r06", SonicFrontiers.LevelID.Island_Another_Ouranos}, //Another Story Ouranos
             { "w1f01", SonicFrontiers.LevelID.Fishing },    // Fishing
             { "w0r01", SonicFrontiers.LevelID.MainMenu },    // Main Menu
             { "w5r01", SonicFrontiers.LevelID.Boss_TheEnd },    // The End (boss)

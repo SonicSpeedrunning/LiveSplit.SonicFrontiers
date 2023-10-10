@@ -11,11 +11,13 @@ namespace LiveSplit.SonicFrontiers
         {
             if (watchers.Status.Current == Status.Quit && watchers.Status.Old == Status.NewGameMenu) // Main trigger for story mode
                 return Settings.StoryStart;
-            else if (Settings.ArcadeStart && (watchers.CurrentGameMode == GameMode.Arcade || watchers.CurrentGameMode == GameMode.CyberspaceChallenge))
+            else if (Settings.ArcadeStart && watchers.CurrentGameMode == GameMode.CyberspaceChallenge) //removed Aracde check since it's not a category anymore
                 return (watchers.LevelID.Current != watchers.LevelID.Old) && watchers.LevelID.Old == LevelID.MainMenu;
             else if (Settings.BossRushStart && watchers.CurrentGameMode == GameMode.BossRush)
                 return watchers.LevelID.Old == LevelID.MainMenu && (watchers.LevelID.Current == LevelID.Island_Kronos_BossRush || watchers.LevelID.Current == LevelID.Island_Ares_BossRush || watchers.LevelID.Current == LevelID.Island_Chaos_BossRush || watchers.LevelID.Current == LevelID.Island_Ouranos_BossRush);
-
+            else if (watchers.LevelID.Current == LevelID.Island_Another_Ouranos &&
+                     watchers.LevelID.Old == LevelID.Island_Ouranos)
+                return true; // make this a setting
             return false;
         }
 
@@ -115,6 +117,13 @@ namespace LiveSplit.SonicFrontiers
             if (Settings.FinalBoss && watchers.LevelID.Current == LevelID.Boss_TheEnd && watchers.EndQTECount.Old == 3 && watchers.EndQTECount.Current == 0)
                 return true;
             
+            //Another Final Boss Split
+            if (watchers.LevelID.Current == LevelID.Island_Another_Ouranos && watchers.AnotherQTECount.Old == 2 &&
+                watchers.EndQTECount.Current == 0)
+            {
+                return true;    
+            }
+            
             // Cyber space levels (in story mode)
             return CheckStorySplit(watchers.LevelID.Old) && watchers.StoryModeCyberSpaceCompletionFlag.Old && !watchers.StoryModeCyberSpaceCompletionFlag.Current;
         }
@@ -210,6 +219,14 @@ namespace LiveSplit.SonicFrontiers
 
         private bool CheckBoolSplit(string key) => key switch
         {
+            "Amy_First" => Settings.Amy_First,
+            "Knuckles_First" => Settings.Knuckles_First,
+            "Tails_First" => Settings.Tails_First,
+            "Sonic_Tower1" => Settings.Sonic_Tower1,
+            "Sonic_Tower2" => Settings.Sonic_Tower2,
+            "Sonic_Tower3" => Settings.Sonic_Tower3,
+            "Sonic_Tower4" => Settings.Sonic_Tower4,
+            "Sonic_MasterTrial" => Settings.Sonic_MasterTrial,
             "Skill_Cyloop" => Settings.Skill_Cyloop,
             "Skill_PhantomRush" => Settings.Skill_PhantomRush,
             "Skill_AirTrick" => Settings.Skill_AirTrick,

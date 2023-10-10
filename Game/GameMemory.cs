@@ -31,13 +31,20 @@ namespace LiveSplit.SonicFrontiers
         public FakeMemoryWatcher<byte> EndQTECount { get; }
         private readonly FakeMemoryWatcher<QTEResolveStatus> QTEStatus;
         private bool IsInEndQTE = false;
-
+        
+        
+        //QTE Stuff for the *other* final boss
+        public FakeMemoryWatcher<byte> AnotherQTECount { get; }
+        private bool IsInAnotherBoss = false;
+        private bool IsFightingRifleBeast = false;
+        
         // Stage completion flags
         public FakeMemoryWatcher<bool> StoryModeCyberSpaceCompletionFlag { get; }
         public GameMode CurrentGameMode { get; protected set; } = GameMode.Story;
         public bool GameModeLoad => offsets["GameModeExtensionCount"] == 0;
         public bool IsInTutorial { get; protected set; } = default;
 
+        
         // Story flags
         private StoryFlags Flags;
         public Dictionary<string, FakeMemoryWatcher<bool>> SplitBools { get; }
@@ -160,10 +167,41 @@ namespace LiveSplit.SonicFrontiers
                 else
                     return EndQTECount.Current;
             });
+            AnotherQTECount = new FakeMemoryWatcher<byte>(() =>
+            {
+                if (!IsInAnotherBoss)
+                    return 0;
+                if (QTEStatus.Changed && QTEStatus.Current == QTEResolveStatus.Failed)
+                    return 0;
+                if (AnotherQTECount.Current == 2 && !IsInAnotherBoss)
+                    return 0;
+                if (AnotherQTECount.Current > 2)
+                    return 0;
+                
+                if (IsInAnotherBoss && QTEStatus.Changed && QTEStatus.Current == QTEResolveStatus.Completed)
+                    return (byte)(AnotherQTECount.Current + 1);
+                else
+                    return AnotherQTECount.Current;
 
+            });
+            
             // Split bools
             SplitBools = new Dictionary<string, FakeMemoryWatcher<bool>>
             {
+                //Another Story
+                {"Amy_First", new FakeMemoryWatcher<bool>(()=> Flags.Amy_First)},
+                {"Amy_Second", new FakeMemoryWatcher<bool>( () => Flags.Amy_Second)},
+                {"Knuckles_First", new FakeMemoryWatcher<bool>( () => Flags.Knuckles_First)},
+                {"Knuckles_Second", new FakeMemoryWatcher<bool>( () => Flags.Knuckles_Second)},
+                {"Tails_First", new FakeMemoryWatcher<bool>( () => Flags.Tails_First)},
+                {"Tails_Second", new FakeMemoryWatcher<bool>( () => Flags.Tails_Second)},
+                {"Sonic_Tower1", new FakeMemoryWatcher<bool>(()=>Flags.Sonic_Tower1)},
+                {"Sonic_Tower2", new FakeMemoryWatcher<bool>(()=> Flags.Sonic_Tower2)},
+                {"Sonic_Tower3", new FakeMemoryWatcher<bool>( () => Flags.Sonic_Tower3)},
+                {"Sonic_Tower4", new FakeMemoryWatcher<bool>( () => Flags.Sonic_Tower4)},
+                {"Sonic_MasterTrial", new FakeMemoryWatcher<bool>(()=>Flags.Sonic_MasterTrial)},
+                
+                
                 //Skills (Manual Unlocks)
                 {"Skill_Cyloop",            new FakeMemoryWatcher<bool>(() => Flags.Skill_Cyloop) },
                 {"Skill_PhantomRush",       new FakeMemoryWatcher<bool>(() => Flags.Skill_PhantomRush) },
@@ -253,6 +291,7 @@ namespace LiveSplit.SonicFrontiers
             
             BossRushAct = new FakeMemoryWatcher<BossRushAct>(() =>
             {
+                
                 var levelid = LevelID.Current;
                 if (levelid != SonicFrontiers.LevelID.Island_Kronos_BossRush && levelid != SonicFrontiers.LevelID.Island_Ares_BossRush && levelid != SonicFrontiers.LevelID.Island_Chaos_BossRush && levelid != SonicFrontiers.LevelID.Island_Ouranos_BossRush)
                     return SonicFrontiers.BossRushAct.None;
@@ -367,8 +406,13 @@ namespace LiveSplit.SonicFrontiers
             
             // I'm not happy I use 3 different variables to define the behaviour in the final QTE, but heh, it works
             IsInEndQTE = LevelID.Current == SonicFrontiers.LevelID.Boss_TheEnd && !addresses["QTE"].IsZero() && (IntPtr)game.ReadValue<long>(addresses["QTE"]) == RTTI["EventQTEInput::evt::app"];
+            IsInAnotherBoss = IsFightingRifleBeast &&
+                              !addresses["QTE"].IsZero() && (IntPtr)game.ReadValue<long>(addresses["QTE"]) == RTTI["EventQTEInput::evt::app"];
+            
             QTEStatus.Update();
             EndQTECount.Update();
+            AnotherQTECount.Update();
+            
 
             // If the timer is not running (eg. a run has been reset) these variables need to be reset
             if (state.CurrentPhase == TimerPhase.NotRunning)
@@ -440,7 +484,8 @@ namespace LiveSplit.SonicFrontiers
                 "EventQTEInput::evt::app",
                 "BossGiant::app",
                 "BossDragon::app",
-                "BossKnight::app"
+                "BossKnight::app",
+                "BossRifleBeast::app" //new!
             };
 
             // Old game versions do not have Battle Rush
@@ -466,6 +511,7 @@ namespace LiveSplit.SonicFrontiers
             addresses["HsmExtension"] = IntPtr.Zero;
             addresses["StageTimeExtension"] = IntPtr.Zero;
             addresses["BattleRushExtension"] = IntPtr.Zero;
+            addresses["AnotherFinalBoss"] = IntPtr.Zero;
             offsets["GameModeExtensionCount"] = 0;
 
             var _base = (IntPtr)game.ReadValue<long>(addresses["baseAddress"]);
@@ -526,7 +572,7 @@ namespace LiveSplit.SonicFrontiers
                 IntPtr _addr = (IntPtr)game.ReadValue<long>(_base + 0x70);
                 if (!_addr.IsZero())
                 {
-                    _addr = (IntPtr)game.ReadValue<long>(_addr + 0xD0);
+                    _addr = (IntPtr)game.ReadValue<long>(_addr + 0xE0);
                     if (!_addr.IsZero())
                     {
                         _addr = (IntPtr)game.ReadValue<long>(_addr + 0x28);
@@ -577,8 +623,15 @@ namespace LiveSplit.SonicFrontiers
                                     break;
                                 }
                             }
+
+                            break;
                         }
-                        break;
+                        
+                    }
+                    else
+                    {
+
+                        IsFightingRifleBeast = temp == RTTI["BossRifleBeast::app"];
                     }
                 }
             }
