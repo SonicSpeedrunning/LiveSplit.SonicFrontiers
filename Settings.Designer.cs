@@ -1894,7 +1894,6 @@
             this.tabPage9.TabIndex = 10;
             this.tabPage9.Text = "Another Story";
             this.tabPage9.UseVisualStyleBackColor = true;
-            
             // 
             // tableLayoutPanel3
             // 
@@ -2019,6 +2018,7 @@
             // 
             // chk_MasterTrial
             // 
+            this.chk_MasterTrial.Enabled = false;
             this.chk_MasterTrial.Location = new System.Drawing.Point(6, 121);
             this.chk_MasterTrial.Name = "chk_MasterTrial";
             this.chk_MasterTrial.Size = new System.Drawing.Size(84, 33);
