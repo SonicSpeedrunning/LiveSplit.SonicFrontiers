@@ -10,7 +10,7 @@ namespace LiveSplit.SonicFrontiers
     partial class Watchers
     {
         // Game stuff
-        private GameVersion GameVersion { get; set; } = GameVersion.Unknown;
+        public GameVersion GameVersion { get; set; } = GameVersion.Unknown;
 
         // Pointers and offsets
         private readonly Dictionary<string, IntPtr> addresses = new Dictionary<string, IntPtr>();
@@ -445,7 +445,7 @@ namespace LiveSplit.SonicFrontiers
                 0x16418000 => GameVersion.v1_30, // Sonic's birthday update (June 24th, 2023)
                 _ => GameVersion.Unknown,
             };
-
+            
             SignatureScanner scanner = new SignatureScanner(game, game.MainModuleWow64Safe().BaseAddress, game.MainModuleWow64Safe().ModuleMemorySize);
 
             // Base Address - For the Hedgehog Engine 2, it can be considered essentially the same as GWorld for Unreal Engine games.
@@ -461,7 +461,11 @@ namespace LiveSplit.SonicFrontiers
             offsets["APPLICATION"]       = 0x80;
             offsets["GAMEMODE"]          = 0x78;
             offsets["GAMEMODEEXTENSION"] = 0xB0;
-
+            offsets["QTE"] = 0xD0;
+            if (GameVersion == GameVersion.v1_10 || GameVersion == GameVersion.Unknown)
+            {
+                offsets["QTE"] = 0xE0;
+            }
             // These offsets are known to change so we will dynamically find them through specific sigscanning
             IntPtr igtPtr = scanner.Scan(new SigScanTarget(4, "F3 0F 11 49 ?? F3 0F 5C 0D"));
             IntPtr igtsubOffset = igtPtr + 5;
@@ -572,7 +576,7 @@ namespace LiveSplit.SonicFrontiers
                 IntPtr _addr = (IntPtr)game.ReadValue<long>(_base + 0x70);
                 if (!_addr.IsZero())
                 {
-                    _addr = (IntPtr)game.ReadValue<long>(_addr + 0xE0);
+                    _addr = (IntPtr)game.ReadValue<long>(_addr + offsets["QTE"]);
                     if (!_addr.IsZero())
                     {
                         _addr = (IntPtr)game.ReadValue<long>(_addr + 0x28);

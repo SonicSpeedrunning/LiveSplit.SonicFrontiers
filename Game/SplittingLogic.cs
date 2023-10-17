@@ -137,7 +137,8 @@ namespace LiveSplit.SonicFrontiers
         {
             return watchers.CurrentGameMode == GameMode.Arcade || watchers.CurrentGameMode == GameMode.CyberspaceChallenge || watchers.CurrentGameMode == GameMode.BossRush
                 || (watchers.LevelID.Current != LevelID.MainMenu && watchers.GameModeLoad)
-                || (watchers.IsInTutorial && (watchers.LevelID.Current <= LevelID.w4_9 || watchers.LevelID.Current == LevelID.Fishing));
+                || (watchers.IsInTutorial && (watchers.LevelID.Current <= LevelID.w4_9 || watchers.LevelID.Current == LevelID.Fishing)) 
+                || (watchers.LevelID.Current != LevelID.MainMenu && (watchers.GameVersion == GameVersion.Unknown || watchers.GameVersion == GameVersion.v1_10) && watchers.Status.Current == Status.Finish);
         }
 
         private TimeSpan? GameTime()
@@ -229,7 +230,6 @@ namespace LiveSplit.SonicFrontiers
             "Sonic_Tower2" => Settings.Sonic_Tower2,
             "Sonic_Tower3" => Settings.Sonic_Tower3,
             "Sonic_Tower4" => Settings.Sonic_Tower4,
-            "Sonic_MasterTrial" => Settings.Sonic_MasterTrial,
             "Skill_Cyloop" => Settings.Skill_Cyloop,
             "Skill_PhantomRush" => Settings.Skill_PhantomRush,
             "Skill_AirTrick" => Settings.Skill_AirTrick,

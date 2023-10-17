@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.7.0">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Fixed The End QTE for Any% on versions before Update 3</change>
+			<change>Updated the fullgame timing method to account for the Update 3 cyberspace discrepancy (see frontiers discord announcements for more information)</change>
+		</changelog>
+	</update>
 	<update version="1.6.1">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
