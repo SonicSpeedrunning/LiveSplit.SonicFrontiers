@@ -286,6 +286,7 @@ namespace LiveSplit.SonicFrontiers
                 { "Ouranos_YellowCE",       new FakeMemoryWatcher<bool>(() => Flags.Ouranos_YellowCE) },
                 { "Ouranos_CyanCE",         new FakeMemoryWatcher<bool>(() => Flags.Ouranos_CyanCE) },
                 { "Ouranos_WhiteCE",        new FakeMemoryWatcher<bool>(() => Flags.Ouranos_WhiteCE) },
+                { "Ouranos_FinalDoor",      new FakeMemoryWatcher<bool>(()=> Flags.Ouranos_FinalDoor) },
                 { "Island_Ouranos_fishing", new FakeMemoryWatcher<bool>(() => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos) }
             };
             

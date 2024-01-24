@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.7.1">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Added the option to split upon completion of the final hacking minigame on Ouranos Island</change>
+		</changelog>
+	</update>
 	<update version="1.7.0">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>

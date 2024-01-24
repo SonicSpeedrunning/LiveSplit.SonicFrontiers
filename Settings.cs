@@ -129,7 +129,10 @@ namespace LiveSplit.SonicFrontiers
         public bool Ouranos_YellowCE { get; set; }
         public bool Ouranos_CyanCE { get; set; }
         public bool Ouranos_WhiteCE { get; set; }
+        
+        public bool Ouranos_FinalDoor { get; set; }
         public bool Island_Ouranos_fishing { get; set; }
+        
 
         
         //Music Notes
@@ -322,6 +325,8 @@ namespace LiveSplit.SonicFrontiers
             chkRhea_Tower6.DataBindings.Add("Checked", this, "Rhea_Tower6", false, DataSourceUpdateMode.OnPropertyChanged);
             chk53_story.DataBindings.Add("Checked", this, "Island_Rhea_story", false, DataSourceUpdateMode.OnPropertyChanged);
             chkOuranos_Bridge.DataBindings.Add("Checked", this, "Ouranos_Bridge", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkOuranos_FinalDoor.DataBindings.Add("Checked", this, "Ouranos_FinalDoor", false,
+                DataSourceUpdateMode.OnPropertyChanged);
             chkOuranos_SupremeDefeated.DataBindings.Add("Checked", this, "Ouranos_SupremeDefeated", false, DataSourceUpdateMode.OnPropertyChanged);
             chkFinalBoss.DataBindings.Add("Checked", this, "FinalBoss", false, DataSourceUpdateMode.OnPropertyChanged);
             chk21_story.DataBindings.Add("Checked", this, "w4_1_story", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -471,7 +476,7 @@ namespace LiveSplit.SonicFrontiers
             Ouranos_Bridge = Ouranos_SupremeDefeated = false;
             FinalBoss = true;
             w4_1_story = w4_2_story = w4_3_story = w4_4_story = w4_5_story = w4_6_story = w4_7_story = w4_8_story = w4_9_story = false;
-            Ouranos_BlueCE = Ouranos_RedCE = Ouranos_GreenCE = Ouranos_YellowCE = Ouranos_CyanCE = Ouranos_WhiteCE = false;
+            Ouranos_BlueCE = Ouranos_RedCE = Ouranos_GreenCE = Ouranos_YellowCE = Ouranos_CyanCE = Ouranos_WhiteCE = Ouranos_FinalDoor = false;
             Island_Ouranos_fishing = true;
 
             // Arcade mode
@@ -597,6 +602,7 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "Island_Rhea_story", Island_Rhea_story));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_Bridge", Ouranos_Bridge));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_SupremeDefeated", Ouranos_SupremeDefeated));
+            settingsNode.AppendChild(ToElement(doc, "Ouranos_FinalDoor", Ouranos_FinalDoor));
             settingsNode.AppendChild(ToElement(doc, "FinalBoss", FinalBoss));
             settingsNode.AppendChild(ToElement(doc, "w4_1_story", w4_1_story));
             settingsNode.AppendChild(ToElement(doc, "w4_2_story", w4_2_story));
@@ -614,6 +620,7 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "Ouranos_CyanCE", Ouranos_CyanCE));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_WhiteCE", Ouranos_WhiteCE));
             settingsNode.AppendChild(ToElement(doc, "Island_Ouranos_fishing", Island_Ouranos_fishing));
+            
             settingsNode.AppendChild(ToElement(doc, "w1_1_arcade", w1_1_arcade));
             settingsNode.AppendChild(ToElement(doc, "w1_2_arcade", w1_2_arcade));
             settingsNode.AppendChild(ToElement(doc, "w1_3_arcade", w1_3_arcade));
@@ -794,6 +801,7 @@ namespace LiveSplit.SonicFrontiers
             Island_Rhea_story = ParseBool(settings, "Island_Rhea_story", true);
             Ouranos_Bridge = ParseBool(settings, "Ouranos_Bridge", false);
             Ouranos_SupremeDefeated = ParseBool(settings, "Ouranos_SupremeDefeated", false);
+            Ouranos_FinalDoor = ParseBool(settings, "Ouranos_FinalDoor");
             FinalBoss = ParseBool(settings, "FinalBoss", true);
             w4_1_story = ParseBool(settings, "w4_1_story", false);
             w4_2_story = ParseBool(settings, "w4_2_story", false);
@@ -978,6 +986,7 @@ namespace LiveSplit.SonicFrontiers
             chkOuranos_CyanCE.Checked = false;
             chkOuranos_WhiteCE.Checked = false;
             chk54_fishing.Checked = true;
+            chkOuranos_FinalDoor.Checked = false;
         }
 
         private void ArcadeButton_Click(object sender, EventArgs e)

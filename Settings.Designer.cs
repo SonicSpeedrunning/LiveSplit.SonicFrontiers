@@ -154,6 +154,7 @@
             this.chkOuranos_RedCE = new System.Windows.Forms.CheckBox();
             this.chkOuranos_BlueCE = new System.Windows.Forms.CheckBox();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.chkOuranos_FinalDoor = new System.Windows.Forms.CheckBox();
             this.chkFinalBoss = new System.Windows.Forms.CheckBox();
             this.chkOuranos_SupremeDefeated = new System.Windows.Forms.CheckBox();
             this.chkOuranos_Bridge = new System.Windows.Forms.CheckBox();
@@ -1613,7 +1614,7 @@
             // 
             this.groupBox15.AutoSize = true;
             this.groupBox15.Controls.Add(this.chk54_fishing);
-            this.groupBox15.Location = new System.Drawing.Point(287, 93);
+            this.groupBox15.Location = new System.Drawing.Point(287, 133);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox15.Size = new System.Drawing.Size(137, 63);
@@ -1647,10 +1648,10 @@
             this.groupBox16.Controls.Add(this.chk23_story);
             this.groupBox16.Controls.Add(this.chk22_story);
             this.groupBox16.Controls.Add(this.chk21_story);
-            this.groupBox16.Location = new System.Drawing.Point(3, 93);
+            this.groupBox16.Location = new System.Drawing.Point(3, 133);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox16.Size = new System.Drawing.Size(136, 228);
+            this.groupBox16.Size = new System.Drawing.Size(136, 188);
             this.groupBox16.TabIndex = 7;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Cyber space";
@@ -1762,10 +1763,10 @@
             this.groupBox17.Controls.Add(this.chkOuranos_YellowCE);
             this.groupBox17.Controls.Add(this.chkOuranos_RedCE);
             this.groupBox17.Controls.Add(this.chkOuranos_BlueCE);
-            this.groupBox17.Location = new System.Drawing.Point(145, 94);
+            this.groupBox17.Location = new System.Drawing.Point(145, 133);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox17.Size = new System.Drawing.Size(136, 227);
+            this.groupBox17.Size = new System.Drawing.Size(136, 188);
             this.groupBox17.TabIndex = 8;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "Chaos emeralds";
@@ -1839,16 +1840,29 @@
             // groupBox18
             // 
             this.groupBox18.AutoSize = true;
+            this.groupBox18.Controls.Add(this.chkOuranos_FinalDoor);
             this.groupBox18.Controls.Add(this.chkFinalBoss);
             this.groupBox18.Controls.Add(this.chkOuranos_SupremeDefeated);
             this.groupBox18.Controls.Add(this.chkOuranos_Bridge);
             this.groupBox18.Location = new System.Drawing.Point(3, 3);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox18.Size = new System.Drawing.Size(421, 84);
+            this.groupBox18.Size = new System.Drawing.Size(421, 124);
             this.groupBox18.TabIndex = 6;
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "Story progression";
+            // 
+            // chkOuranos_FinalDoor
+            // 
+            this.chkOuranos_FinalDoor.AutoSize = true;
+            this.chkOuranos_FinalDoor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkOuranos_FinalDoor.Location = new System.Drawing.Point(10, 74);
+            this.chkOuranos_FinalDoor.Name = "chkOuranos_FinalDoor";
+            this.chkOuranos_FinalDoor.Size = new System.Drawing.Size(401, 17);
+            this.chkOuranos_FinalDoor.TabIndex = 6;
+            this.chkOuranos_FinalDoor.Text = "Open The Final Door (After The Second Hacking Minigame)";
+            this.chkOuranos_FinalDoor.UseVisualStyleBackColor = true;
+            
             // 
             // chkFinalBoss
             // 
@@ -1862,6 +1876,7 @@
             this.chkFinalBoss.TabIndex = 5;
             this.chkFinalBoss.Text = "The End: split when completing the final QTE";
             this.chkFinalBoss.UseVisualStyleBackColor = true;
+            
             // 
             // chkOuranos_SupremeDefeated
             // 
@@ -3559,6 +3574,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.CheckBox chkOuranos_FinalDoor;
 
         private System.Windows.Forms.CheckBox chk_SonicTower2;
         private System.Windows.Forms.CheckBox chk_SonicTower3;
