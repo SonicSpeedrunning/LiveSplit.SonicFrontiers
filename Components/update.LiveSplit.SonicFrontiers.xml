@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="1.7.2">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Fixed a minor bug that caused the final hacking split to not work</change>
+		</changelog>
+	</update>
 	<update version="1.7.1">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>

@@ -304,6 +304,7 @@ namespace LiveSplit.SonicFrontiers
             "Ouranos_CyanCE" => Settings.Ouranos_CyanCE,
             "Ouranos_WhiteCE" => Settings.Ouranos_WhiteCE,
             "Island_Ouranos_fishing" => Settings.Island_Ouranos_fishing,
+            "Ouranos_FinalDoor" => Settings.Ouranos_FinalDoor,
             _ => false,
         };
     }
