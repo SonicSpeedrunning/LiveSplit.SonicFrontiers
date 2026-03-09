@@ -153,13 +153,7 @@ namespace LiveSplit.SonicFrontiers
             return watchers.Status.Current == Status.Quit && watchers.Status.Old == Status.NewGameMenu && Settings.AutoReset; // Reset on new game
         }
 
-        bool IsLoading()
-        {
-            return watchers.CurrentGameMode == GameMode.Arcade || watchers.CurrentGameMode == GameMode.CyberspaceChallenge || watchers.CurrentGameMode == GameMode.BossRush
-                || (watchers.LevelID.Current != LevelID.MainMenu && watchers.GameModeLoad)
-                || (watchers.IsInTutorial && (watchers.LevelID.Current <= LevelID.w4_9 || watchers.LevelID.Current == LevelID.Fishing)) 
-                || (watchers.LevelID.Current != LevelID.MainMenu && (watchers.GameVersion == GameVersion.Unknown || watchers.GameVersion == GameVersion.v1_10) && watchers.Status.Current == Status.Finish);
-        }
+
 
         private TimeSpan? GameTime()
         {
