@@ -49,12 +49,14 @@ internal class HedgehogEngine2
     /// </summary>
     internal IntPtr GameMode { get; private set; } = default;
 
-
-
-
-
-
-    // Fixes
+    /// <summary>
+    /// Offset for the internal IGT applied during Cyber Stages.
+    /// </summary>
+    /// <remarks>
+    /// Generally known to be a fixed, constant value (around 0.07 seconds).
+    /// In this autosplitter the value is directly read from memory and cached
+    /// here for usage during the main update loop.
+    /// </remarks>
     public float IGTSubtraction { get; }
 
     /// <summary>
@@ -78,9 +80,8 @@ internal class HedgehogEngine2
         // Initialize RTTI for type information.
         RTTI = new RTTI(process);
 
-
-
-
+        // Retrieve the IGT offset for Cyber Stages
+        // FIXME: THIS CODE NEEDS TO BE REVIEWED AND COMPLETED AS IT BREAKS WITH OLDER VERSIONS OF THE GAME
         IntPtr igtSub = process.MainModule.Scan(new ScanPattern(0xE, "F3 0F 11 49 ?? F3 41 0F 58 ?? F3 0F 5C 0D"));
         if (!process.Read<float>(igtSub, out float igt))
             throw new InvalidProgramException("Could not find scan address for IGT subtraction");
@@ -110,7 +111,7 @@ internal class HedgehogEngine2
         ResetCache();
 
         // Step 2: Attempt to read the main GameManager pointer.
-        if (!process.ReadPointer(pGameManager, out IntPtr _gameManager))
+        if (!process.ReadPointer(pGameManager, out IntPtr _gameManager) || _gameManager == IntPtr.Zero)
             return; // Return early if GameManager address is invalid.
 
         IntPtr gameObjects;
@@ -121,17 +122,18 @@ internal class HedgehogEngine2
 
         IntPtr gameApplication;
 
+        using (ArrayRental<GameManager> rent = new(1))
         {
-            if (!process.Read(_gameManager, out GameManager gameManager))
+            var gameManager = rent.Span;
+            if (!process.ReadArray(_gameManager, gameManager))
                 return;
 
-            gameObjects = gameManager.GameObjects;
-            noOfGameObjects = gameManager.noOfGameObjects;
-            gameServices = gameManager.GameServices;
-            noOfGameServices = gameManager.noOfGameServices;
-            gameApplication = gameManager.GameApplication;
+            gameObjects = gameManager[0].GameObjects;
+            noOfGameObjects = gameManager[0].noOfGameObjects;
+            gameServices = gameManager[0].GameServices;
+            noOfGameServices = gameManager[0].noOfGameServices;
+            gameApplication = gameManager[0].GameApplication;
         }
-
 
         // Scan the game services
         if (noOfGameServices > 0 && noOfGameServices < 2048)
@@ -216,7 +218,7 @@ internal class HedgehogEngine2
                         if (RTTI.Lookup((IntPtr)entry, out string value))
                         {
                             // We are excluding elements starting with "Obj"
-                            if (value.Length > 2 && value[0] == 'O' && value[1] == 'b' && value[2] == 'j')
+                            if (value.AsSpan().StartsWith("Obj", StringComparison.Ordinal))
                                 continue;
 
                             _objects[value] = (IntPtr)entry;
