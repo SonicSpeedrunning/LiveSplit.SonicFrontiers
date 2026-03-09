@@ -62,7 +62,6 @@ public readonly struct StageData
     public IntPtr Name => (IntPtr)_name;
 }
 
-
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public readonly struct SaveManager
 {
