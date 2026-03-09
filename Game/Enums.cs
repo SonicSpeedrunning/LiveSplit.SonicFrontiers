@@ -2,14 +2,6 @@
 
 namespace LiveSplit.SonicFrontiers
 {
-    enum GameMode
-    {
-        Story,
-        Arcade,
-        CyberspaceChallenge,
-        BossRush,
-    }
-
     enum LevelID
     {
         w1_1,
@@ -148,66 +140,6 @@ namespace LiveSplit.SonicFrontiers
 
     readonly struct Enums
     {
-        public static readonly Dictionary<string, LevelID> LevelID = new Dictionary<string, LevelID>
-        {
-            { "w6d01", SonicFrontiers.LevelID.w1_1 },     // 1-1
-            { "w8d01", SonicFrontiers.LevelID.w1_2 },     // 1-2
-            { "w9d04", SonicFrontiers.LevelID.w1_3 },     // 1-3
-            { "w6d02", SonicFrontiers.LevelID.w1_4 },     // 1-4
-            { "w7d04", SonicFrontiers.LevelID.w1_5 },     // 1-5
-            { "w6d06", SonicFrontiers.LevelID.w1_6 },     // 1-6
-            { "w9d06", SonicFrontiers.LevelID.w1_7 },     // 1-7
-            { "w6d05", SonicFrontiers.LevelID.w2_1 },     // 2-1
-            { "w8d03", SonicFrontiers.LevelID.w2_2 },     // 2-2
-            { "w7d02", SonicFrontiers.LevelID.w2_3 },     // 2-3
-            { "w7d06", SonicFrontiers.LevelID.w2_4 },    // 2-4
-            { "w8d04", SonicFrontiers.LevelID.w2_5 },    // 2-5
-            { "w6d03", SonicFrontiers.LevelID.w2_6 },    // 2-6
-            { "w8d05", SonicFrontiers.LevelID.w2_7 },    // 2-7
-            { "w6d04", SonicFrontiers.LevelID.w3_1 },    // 3-1
-            { "w6d08", SonicFrontiers.LevelID.w3_2 },    // 3-2
-            { "w8d02", SonicFrontiers.LevelID.w3_3 },    // 3-3
-            { "w6d09", SonicFrontiers.LevelID.w3_4 },    // 3-4
-            { "w6d07", SonicFrontiers.LevelID.w3_5 },    // 3-5
-            { "w8d06", SonicFrontiers.LevelID.w3_6 },    // 3-6
-            { "w7d03", SonicFrontiers.LevelID.w3_7 },    // 3-7
-            { "w7d08", SonicFrontiers.LevelID.w4_1 },    // 4-1
-            { "w9d02", SonicFrontiers.LevelID.w4_2 },    // 4-2
-            { "w7d01", SonicFrontiers.LevelID.w4_3 },    // 4-3
-            { "w9d03", SonicFrontiers.LevelID.w4_4 },    // 4-4
-            { "w6d10", SonicFrontiers.LevelID.w4_5 },    // 4-5
-            { "w7d07", SonicFrontiers.LevelID.w4_6 },    // 4-6
-            { "w9d05", SonicFrontiers.LevelID.w4_7 },    // 4-7
-            { "w7d05", SonicFrontiers.LevelID.w4_8 },    // 4-8
-            { "w9d07", SonicFrontiers.LevelID.w4_9 },    // 4-9
-            { "w6d21", SonicFrontiers.LevelID.w4_A },    // 4-A
-            { "w6d22", SonicFrontiers.LevelID.w4_B },    // 4-B
-            { "w6d23", SonicFrontiers.LevelID.w4_C },    // 4-C
-            { "w7d21", SonicFrontiers.LevelID.w4_D },    // 4-D
-            { "w7d22", SonicFrontiers.LevelID.w4_E },    // 4-E
-            { "w7d23", SonicFrontiers.LevelID.w4_F },    // 4-F
-            { "w9d21", SonicFrontiers.LevelID.w4_G },    // 4-G
-            { "w9d22", SonicFrontiers.LevelID.w4_H },    // 4-H
-            { "w9d23", SonicFrontiers.LevelID.w4_I },    // 4-I
-            { "w1r03", SonicFrontiers.LevelID.Island_Kronos },    // Kronos Island
-            { "w2r01", SonicFrontiers.LevelID.Island_Ares },    // Ares Island
-            { "w3r01", SonicFrontiers.LevelID.Island_Chaos },    // Chaos Island
-            { "w1r05", SonicFrontiers.LevelID.Island_Rhea },    // Rhea Island
-            { "w1r04", SonicFrontiers.LevelID.Island_Ouranos },    // Ouranos Island
-            { "w1r06", SonicFrontiers.LevelID.Island_Another_Ouranos}, //Another Story Ouranos
-            { "w1f01", SonicFrontiers.LevelID.Fishing },    // Fishing
-            { "w0r01", SonicFrontiers.LevelID.MainMenu },    // Main Menu
-            { "w5r01", SonicFrontiers.LevelID.Boss_TheEnd },    // The End (boss)
-            { "w5t01", SonicFrontiers.LevelID.Tutorial },    // Tutorial stage
-            { "w1b01", SonicFrontiers.LevelID.Island_Kronos_BossRush },
-            { "w2b01", SonicFrontiers.LevelID.Island_Ares_BossRush },
-            { "w3b01", SonicFrontiers.LevelID.Island_Chaos_BossRush },
-            { "w1b02", SonicFrontiers.LevelID.Island_Ouranos_BossRush },
-            { "w1h01", SonicFrontiers.LevelID.Hacking_01}, // Chaos hacking
-            { "w1h02", SonicFrontiers.LevelID.Hacking_02}, // Ouranos bridge hacking 
-            { "w1h03", SonicFrontiers.LevelID.Hacking_03}, // Ouranos pyramid hacking
-        };
-
         public static readonly Dictionary<string, Status> Status = new Dictionary<string, Status>
         {
             { "TopMenu", SonicFrontiers.Status.TopMenu },                   // Main menu screen
@@ -237,9 +169,10 @@ namespace LiveSplit.SonicFrontiers
     enum GameVersion
     {
         Unknown,
-        v1_01 = 0x162C8000,
-        v1_10 = 0x1661B000,
-        v1_20 = 0x1622F000, // Speed update
-        v1_30 = 0x16418000, // Sonic's birthday update
+        v1_01,
+        v1_10,
+        v1_20, // Speed update
+        v1_30, // Sonic's birthday update
+        v1_42,
     }
 }
