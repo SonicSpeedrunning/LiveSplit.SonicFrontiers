@@ -62,7 +62,7 @@ internal class RTTI
 
         // Check if the type name for this offset is already cached
         if (cache.TryGetValue(vtable, out value))
-            return true;
+            return value != string.Empty;
         else
             value = string.Empty;
 
@@ -87,7 +87,10 @@ internal class RTTI
 
         // Return false if the regex does not match
         if (!match.Success)
+        {
+            cache[vtable] = string.Empty;
             return false;
+        }
 
         value = match.Groups[1].Value;
         cache[vtable] = value;
