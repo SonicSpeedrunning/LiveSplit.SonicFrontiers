@@ -259,9 +259,6 @@ partial class Memory
 
         MusicNotes = new LazyWatcher<byte[]>(StateTracker, [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], (current, old) =>
         {
-            for (int i = 0; i < old.Length; i++)
-                old[i] = current[i];
-
             old[0] = Flags._AD2;
             old[1] = Flags._AD3;
             old[2] = Flags._AD4;

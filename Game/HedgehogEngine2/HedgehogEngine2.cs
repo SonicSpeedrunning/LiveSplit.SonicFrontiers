@@ -9,7 +9,7 @@ namespace LiveSplit.SonicFrontiers.GameEngine;
 
 /// <summary>
 /// The HedgehogEngine2 class provides memory interaction for games based on the Hedgehog Engine 2.
-/// This class has been tailored for Shadow Generations, enabling real-time memory analysis
+/// This class has been tailored for Sonic Frontiers, enabling real-time memory analysis
 /// and caching of essential game objects like GameManager, Boss instances, and game modes.
 /// </summary>
 internal class HedgehogEngine2
@@ -33,11 +33,13 @@ internal class HedgehogEngine2
     /// Dictionary that stores cached addresses for various game services.
     /// </summary>
     private readonly Dictionary<string, IntPtr> _services = [];
+    private readonly GameServiceResolver _gameServices = new(); 
 
     /// <summary>
     /// Dictionary that stores cached addresses for different in-game objects.
     /// </summary>
     private readonly Dictionary<string, IntPtr> _objects = [];
+    private readonly GameObjectResolver _gameObjects = new();
 
     /// <summary>
     /// Dictionary that stores cached addresses for application extensions.
@@ -45,7 +47,7 @@ internal class HedgehogEngine2
     private readonly Dictionary<string, IntPtr> _extensions = [];
 
     /// <summary>
-    /// Pointer to the current running instance of app::game::GameMode.
+    /// Address of the current running instance of app::game::GameMode.
     /// </summary>
     internal IntPtr GameMode { get; private set; } = default;
 
@@ -114,17 +116,14 @@ internal class HedgehogEngine2
         if (!process.ReadPointer(pGameManager, out IntPtr _gameManager) || _gameManager == IntPtr.Zero)
             return; // Return early if GameManager address is invalid.
 
-        IntPtr gameObjects;
-        int noOfGameObjects;
-
-        IntPtr gameServices;
-        int noOfGameServices;
+        IntPtr gameObjects, gameServices;
+        int noOfGameObjects, noOfGameServices;
 
         IntPtr gameApplication;
 
         using (ArrayRental<GameManager> rent = new(1))
         {
-            var gameManager = rent.Span;
+            Span<GameManager> gameManager = rent.Span;
             if (!process.ReadArray(_gameManager, gameManager))
                 return;
 
@@ -144,7 +143,7 @@ internal class HedgehogEngine2
                 {
                     foreach (var entry in rent.Span)
                     {
-                        if (RTTI.Lookup((IntPtr)entry, out string value))
+                        if (_gameServices.Lookup(process, (IntPtr)entry, out string value))
                             _services[value] = (IntPtr)entry;
                     }
                 }
@@ -215,14 +214,8 @@ internal class HedgehogEngine2
                 {
                     foreach (var entry in rent.Span)
                     {
-                        if (RTTI.Lookup((IntPtr)entry, out string value))
-                        {
-                            // We are excluding elements starting with "Obj"
-                            if (value.AsSpan().StartsWith("Obj", StringComparison.Ordinal))
-                                continue;
-
+                        if (_gameObjects.Lookup(process, (IntPtr)entry, out string value))
                             _objects[value] = (IntPtr)entry;
-                        }
                     }
                 }
             }
