@@ -2,6 +2,14 @@
 
 namespace LiveSplit.SonicFrontiers
 {
+    enum GameMode
+    {
+        Story,
+        Arcade,
+        CyberspaceChallenge,
+        BossRush,
+    }
+
     enum LevelID
     {
         w1_1,
@@ -61,29 +69,6 @@ namespace LiveSplit.SonicFrontiers
         Hacking_01,
         Hacking_02,
         Hacking_03,
-    }
-
-    enum Status
-    {
-        TopMenu,
-        NewGameMenu,
-        ContinueMenu,
-        ArcadeMode,
-        BattleMode,
-        CyberMode,
-        SelectLanguage,
-        ChangingLanguage,
-        ViewLicense,
-        ViewQRCode,
-        ExtraContents,
-        CheckQuit,
-        Quit,
-        PlayTop,
-        Finish,
-        Result,
-        Build,
-        StageResult,
-        Default, // Used as default
     }
 
     enum QTEResolveStatus : byte

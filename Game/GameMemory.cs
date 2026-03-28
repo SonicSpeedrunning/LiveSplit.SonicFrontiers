@@ -55,9 +55,9 @@ partial class Memory
 
 
     /// <summary>
-    /// Watches the current game mode (e.g., main menu, in-game).
+    /// Watches the current game mode
     /// </summary>
-    public LazyWatcher<string> GameMode { get; }
+    public LazyWatcher<GameMode> GameMode { get; }
     
     
 
@@ -69,16 +69,16 @@ partial class Memory
     public List<string> AlreadyTriggeredBools { get; } = new List<string>();
 
     // Boss Rush
-    public FakeMemoryWatcher<BossRushAct> BossRushAct { get; }
+    public LazyWatcher<BossRushAct> BossRushAct { get; }
     
     // Music Notes
-    public FakeMemoryWatcher<byte[]> MusicNotes;
+    public LazyWatcher<byte[]> MusicNotes;
 
     /// <summary>
     /// Constructor initializing game engine, version, and various game state watchers.
     /// </summary>
     /// <param name="process">The current game process.</param>
-    public Memory(ProcessMemory process)
+    public Memory(ProcessMemory process, LiveSplitState liveSplitState)
     {
         Engine = new HedgehogEngine2(process);
         StateTracker.OnTick = () => Engine.Update(process);
@@ -97,9 +97,20 @@ partial class Memory
 
         // Initialize LazyWatchers for observing game data
 
-        this.GameMode = new LazyWatcher<string>(StateTracker, "GameModeTitle", (current, _) =>
+        GameMode = new LazyWatcher<GameMode>(StateTracker, SonicFrontiers.GameMode.Story, (current, _) =>
         {
-            return Engine.GameMode == string.Empty ? current : Engine.GameMode;
+            if (liveSplitState.CurrentPhase == TimerPhase.NotRunning)
+            {
+                if (HsmStatus.Current[0] == "ArcadeMode" || Engine.ApplicationSequenceExtensionFlags0.BitCheck(0))
+                    return SonicFrontiers.GameMode.Arcade;
+                else if (HsmStatus.Current[0] == "CyberMode" || Engine.ApplicationSequenceExtensionFlags0.BitCheck(7) || (Engine.ApplicationSequenceExtensionFlags1 & 0b1111) != 0) //kronos,ares,chaos,ouranos,all = bits 7, (next byte) 0,1,2,3
+                    return SonicFrontiers.GameMode.CyberspaceChallenge;
+                else if (HsmStatus.Current[0] == "BattleMode" || LevelID.Current == SonicFrontiers.LevelID.Island_Kronos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ares_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Chaos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos_BossRush)
+                    return SonicFrontiers.GameMode.BossRush;
+                else
+                    return SonicFrontiers.GameMode.Story;
+            }
+            return current;
         });
 
         IGT = new LazyWatcher<TimeSpan>(StateTracker, TimeSpan.Zero, (_, _) =>
@@ -182,15 +193,13 @@ partial class Memory
 
         LevelID = new LazyWatcher<LevelID>(StateTracker, SonicFrontiers.LevelID.MainMenu, (current, _) =>
         {
-            if (GameMode.Current == "GameModeTitle")
+            if (Engine.GameMode == "GameModeTitle")
                 return SonicFrontiers.LevelID.MainMenu;
 
             if (!Engine.GetService("LevelInfo", out IntPtr pLevelInfo)
                 || !process.Read(pLevelInfo, out LevelInfo levelInfo)
-                || levelInfo.StageData == IntPtr.Zero
-                || !process.Read(levelInfo.StageData, out StageData stageData)
-                || stageData.Name == IntPtr.Zero
-                || !process.ReadString(stageData.Name, 6, JHelper.Common.ProcessInterop.API.StringType.ASCII, out string id))
+                || !process.Read(levelInfo.stageData.Value, out StageData stageData)
+                || !process.ReadString(stageData.Name.Value, 6, JHelper.Common.ProcessInterop.API.StringType.ASCII, out string id))
                 return current;
 
             return id switch
@@ -256,7 +265,7 @@ partial class Memory
         });
 
 
-        MusicNotes = new LazyWatcher<byte[]>(StateTracker, [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], (current, old) =>
+        MusicNotes = new LazyWatcher<byte[]>(StateTracker, [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], (_, old) =>
         {
             old[0] = Flags._AD2;
             old[1] = Flags._AD3;
@@ -271,47 +280,48 @@ partial class Memory
         });
 
 
-        StoryModeCyberSpaceCompletionFlag = new LazyWatcher<bool>(StateTracker, false, (_, _) => GameMode.Current == GameMode.Story && LevelID.Current <= SonicFrontiers.LevelID.w4_I && (Status.Current == SonicFrontiers.Status.Result || StoryModeCyberSpaceCompletionFlag.Old));
+        StoryModeCyberSpaceCompletionFlag = new LazyWatcher<bool>(StateTracker, false, (_, _) => GameMode.Current == SonicFrontiers.GameMode.Story && LevelID.Current <= SonicFrontiers.LevelID.w4_I && (HsmStatus.Current[0] == "Result" || StoryModeCyberSpaceCompletionFlag!.Old));
 
-        QTEStatus = new FakeMemoryWatcher<QTEResolveStatus>(() =>
+        QTEStatus = new LazyWatcher<QTEResolveStatus>(StateTracker, QTEResolveStatus.NotCompleted, (_, _) =>
         {
-            if (!IsInEndQTE || !game.ReadValue<QTEResolveStatus>(addresses["QTE"] + 0x254, out var status))
+            if (!IsInEndQTE || !process.ReadValue<QTEResolveStatus>(addresses["QTE"] + 0x254, out var status))
                 return QTEResolveStatus.NotCompleted;
             else
                 return status;
         });
 
-        EndQTECount = new FakeMemoryWatcher<byte>(() =>
+        EndQTECount = new LazyWatcher<byte>(StateTracker, 0, (current, old) =>
         {
             if (LevelID.Current != SonicFrontiers.LevelID.Boss_TheEnd)
                 return 0;
             if (QTEStatus.Changed && QTEStatus.Current == QTEResolveStatus.Failed)
                 return 0;
-            if (EndQTECount.Current == 3 && !IsInEndQTE)
+            if (current == 3 && !IsInEndQTE)
                 return 0;
-            if (EndQTECount.Current > 3)
+            if (current > 3)
                 return 0;
 
             if (IsInEndQTE && QTEStatus.Changed && QTEStatus.Current == QTEResolveStatus.Completed)
-                return (byte)(EndQTECount.Current + 1);
+                return (byte)(current + 1);
             else
-                return EndQTECount.Current;
+                return current;
         });
-        AnotherQTECount = new FakeMemoryWatcher<byte>(() =>
+
+        AnotherQTECount = new LazyWatcher<byte>(StateTracker, 0, (current, _) =>
         {
             if (!IsInAnotherBoss)
                 return 0;
             if (QTEStatus.Changed && QTEStatus.Current == QTEResolveStatus.Failed)
                 return 0;
-            if (AnotherQTECount.Current == 2 && !IsInAnotherBoss)
+            if (current == 2 && !IsInAnotherBoss)
                 return 0;
-            if (AnotherQTECount.Current > 2)
+            if (current > 2)
                 return 0;
             
             if (IsInAnotherBoss && QTEStatus.Changed && QTEStatus.Current == QTEResolveStatus.Completed)
-                return (byte)(AnotherQTECount.Current + 1);
+                return (byte)(current + 1);
             else
-                return AnotherQTECount.Current;
+                return current;
 
         });
         
@@ -420,7 +430,7 @@ partial class Memory
             { "Island_Ouranos_fishing", new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos) }
         };
         
-        BossRushAct = new FakeMemoryWatcher<BossRushAct>(() =>
+        BossRushAct = new LazyWatcher<BossRushAct>(StateTracker, SonicFrontiers.BossRushAct.None, (_, _) =>
         {
             
             var levelid = LevelID.Current;
@@ -499,11 +509,8 @@ partial class Memory
         StateTracker.Tick();
 
         if (Engine.GetService("SaveManager", out IntPtr pSaveManager)
-            && pSaveManager != IntPtr.Zero
             && process.Read(pSaveManager, out SaveManager saveManager)
-            && saveManager.SaveInterface != IntPtr.Zero
-            && process.ReadPointer(saveManager.SaveInterface + 0x98, out IntPtr element)
-            && element != IntPtr.Zero
+            && process.ReadPointer(saveManager.saveInterface.Value + 0x98, out IntPtr element)
             && process.ReadPointer(element, out IntPtr userElement))
         {
             using (ArrayRental<StoryFlags> flags = new ArrayRental<StoryFlags>(1))
@@ -597,30 +604,6 @@ partial class Memory
     /// </summary>
     private void GetAddresses()
     {
-        GameVersion = game.MainModuleWow64Safe().ModuleMemorySize switch
-        {
-            0x162C8000 => GameVersion.v1_01,
-            0x1661B000 => GameVersion.v1_10,
-            0x1622F000 => GameVersion.v1_20, // Speed update (March 23rd, 2023)
-            0x16418000 => GameVersion.v1_30, // Sonic's birthday update (June 24th, 2023)
-            _ => GameVersion.Unknown,
-        };
-        
-        SignatureScanner scanner = new SignatureScanner(game, game.MainModuleWow64Safe().BaseAddress, game.MainModuleWow64Safe().ModuleMemorySize);
-
-        // Base Address - For the Hedgehog Engine 2, it can be considered essentially the same as GWorld for Unreal Engine games.
-        // Every important value needed by an autosplitter can essentially be grabbed from this address.
-        addresses["baseAddress"] = scanner.ScanOrThrow(new SigScanTarget(1, "E8 ???????? 4C 8B 78 70") { OnFound = (p, s, addr) => { IntPtr tempAddr = addr + p.ReadValue<int>(addr) + 0x4 + 0x3; return tempAddr + p.ReadValue<int>(tempAddr) + 0x4; } });
-
-        // Game patch offset - This points to an instruction responsible for pausing the game if the user switches to another window.
-        // This is used for the WFocus patch, which is essentially patching out a conditional jmp instruction.
-        addresses["baseFocus"] = scanner.ScanOrThrow(new SigScanTarget("?? 36 48 8B 52 28"));
-
-        // Offsets - I prefer defining them here because it makes it easier to change them, if the need arises.
-        // So far they never changed so it should be fine to leave them as constant values.
-        offsets["APPLICATION"]       = 0x80;
-        offsets["GAMEMODE"]          = 0x78;
-        offsets["GAMEMODEEXTENSION"] = 0xB0;
         offsets["QTE"] = 0xD0;
         if (GameVersion == GameVersion.v1_10 || GameVersion == GameVersion.Unknown)
         {
@@ -634,8 +617,6 @@ partial class Memory
             igtPtr = scanner.ScanOrThrow(new SigScanTarget(4, "F3 0F 11 49 ?? F3 41 0F 58 ?? F3 0F 5C 0D"));
             igtsubOffset = igtPtr + 10;
         }
-        offsets["cyberstage_igt"] = game.ReadValue<byte>(igtPtr);
-        addresses["igt_subtraction"] = igtsubOffset + 0x4 + game.ReadValue<int>(igtsubOffset);
 
         // Defining a new instance of the RTTI class in order to get the vTable addresses of a couple of classes.
         // This makes it incredibly easy to calculate some dynamic offsets later,
@@ -655,97 +636,5 @@ partial class Memory
         // Old game versions do not have Battle Rush
         if (GameVersion != GameVersion.v1_01 && GameVersion != GameVersion.v1_10)
             RTTILIST.Add("GameModeBattleRushExtension::game::app");
-
-        RTTI = new RTTI(scanner, RTTILIST.ToArray());
-
-        RTTI.Add("BossExtension::userdefined", scanner.ScanOrThrow(new SigScanTarget(8, "E8 ???????? 48 8D 05 ???????? 31 FF 48 89 03 48 8D 8B ???????? 48 89 BB ???????? 48 8B 53 08") { OnFound = (p, s, addr) => addr + 0x4 + p.ReadValue<int>(addr) }));
-
-        // Invoke whichever game fixes we want to apply
-        WFocusChange?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void GetPointerAddresses()
-    {
-        addresses["APPLICATION"] = IntPtr.Zero;
-        addresses["APPLICATIONSEQUENCE"] = IntPtr.Zero;
-        addresses["GAMEMODE"] = IntPtr.Zero;
-        addresses["GAMEMODEEXTENSION"] = IntPtr.Zero;
-        addresses["QTE"] = IntPtr.Zero;
-        addresses["MUSICNOTES"] = IntPtr.Zero;
-        addresses["HsmExtension"] = IntPtr.Zero;
-        addresses["StageTimeExtension"] = IntPtr.Zero;
-        addresses["BattleRushExtension"] = IntPtr.Zero;
-        addresses["AnotherFinalBoss"] = IntPtr.Zero;
-        offsets["GameModeExtensionCount"] = 0;
-
-        var _base = (IntPtr)game.ReadValue<long>(addresses["baseAddress"]);
-        if (!_base.IsZero())
-        {
-            addresses["APPLICATION"] = (IntPtr)game.ReadValue<long>(_base + offsets["APPLICATION"]);
-            if (!addresses["APPLICATION"].IsZero())
-            {
-                byte ApplicationSequenceCount = game.ReadValue<byte>(_base + offsets["APPLICATION"] + 0x8);
-                if (ApplicationSequenceCount != 0)
-                {
-                    byte[] array = game.ReadBytes(addresses["APPLICATION"], ApplicationSequenceCount * 8);
-                    for (int i = 0; i < ApplicationSequenceCount; i++)
-                    {
-                        IntPtr InstanceAddress = (IntPtr)BitConverter.ToInt64(array, i * 8);
-                        if ((IntPtr)game.ReadValue<long>(InstanceAddress) == RTTI["ApplicationSequenceExtension::game::app"])
-                        {
-                            addresses["APPLICATIONSEQUENCE"] = InstanceAddress;
-                            break;
-                        }
-                    }
-
-                    if (!addresses["APPLICATIONSEQUENCE"].IsZero())
-                    {
-                        addresses["GAMEMODE"] = (IntPtr)game.ReadValue<long>(addresses["APPLICATIONSEQUENCE"] + offsets["GAMEMODE"]);
-                        addresses["GAMEMODEEXTENSION"] = (IntPtr)game.ReadValue<long>(addresses["GAMEMODE"] + offsets["GAMEMODEEXTENSION"]);
-
-                        if (!addresses["GAMEMODEEXTENSION"].IsZero())
-                        {
-                            offsets["GameModeExtensionCount"] = game.ReadValue<byte>(addresses["GAMEMODE"] + +offsets["GAMEMODEEXTENSION"] + 0x8);
-                            if (offsets["GameModeExtensionCount"] != 0)
-                            {
-                                array = game.ReadBytes(addresses["GAMEMODEEXTENSION"], offsets["GameModeExtensionCount"] * 8);
-
-                                for (int i = 0; i < offsets["GameModeExtensionCount"]; i++)
-                                {
-                                    IntPtr InstanceAddress = (IntPtr)BitConverter.ToInt64(array, i * 8);
-                                    IntPtr temp = (IntPtr)game.ReadValue<long>(InstanceAddress);
-
-                                    if (temp == RTTI["GameModeHsmExtension::game::app"])
-                                        addresses["HsmExtension"] = InstanceAddress;
-                                    else if (temp == RTTI["GameModeStageTimeExtension::game::app"])
-                                        addresses["StageTimeExtension"] = InstanceAddress;
-                                    else if (GameVersion != GameVersion.v1_01 && GameVersion != GameVersion.v1_10 && temp == RTTI["GameModeBattleRushExtension::game::app"])
-                                        addresses["BattleRushExtension"] = InstanceAddress;
-
-                                    if (!addresses["HsmExtension"].IsZero() &&
-                                        !addresses["StageTimeExtension"].IsZero() &&
-                                        (GameVersion != GameVersion.v1_01 && GameVersion != GameVersion.v1_10 && !addresses["BattleRushExtension"].IsZero()) )
-                                        break;
-                                }
-                            }
-                        }
-                    }                                                                                   
-                }
-            }
-
-            IntPtr _addr = (IntPtr)game.ReadValue<long>(_base + 0x70);
-            if (!_addr.IsZero())
-            {
-                _addr = (IntPtr)game.ReadValue<long>(_addr + offsets["QTE"]);
-                if (!_addr.IsZero())
-                {
-                    _addr = (IntPtr)game.ReadValue<long>(_addr + 0x28);
-                    if (!_addr.IsZero())
-                    {
-                        addresses["QTE"] = (IntPtr)game.ReadValue<long>(_addr);
-                    }
-                }
-            }
-        }
     }
 }

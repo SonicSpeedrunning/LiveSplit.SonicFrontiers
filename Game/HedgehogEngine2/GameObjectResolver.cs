@@ -42,15 +42,15 @@ internal class GameObjectResolver : Dictionary<string, IntPtr>
             return false;
 
         // Check if the name for this vtable is already cached.
-        if (cache.TryGetValue((IntPtr)gameObject.vtable, out value))
+        if (cache.TryGetValue(gameObject.vtable.Value, out value))
             return true;
 
         // Read the ASCII string from memory.
-        if (!process.ReadString((IntPtr)gameObject.nameAddr, 127, StringType.ASCII, out value))
+        if (!process.ReadString(gameObject.nameAddr.Value, 127, StringType.ASCII, out value))
             return false;
 
         // Cache the result for future lookups.
-        cache[(IntPtr)gameObject.vtable] = value;
+        cache[gameObject.vtable.Value] = value;
         return true;
     }
 
@@ -60,9 +60,9 @@ internal class GameObjectResolver : Dictionary<string, IntPtr>
     [StructLayout(LayoutKind.Explicit)]
     private struct GameObject
     {
-        [FieldOffset(0)] public long vtable;
+        [FieldOffset(0x00)] public Address<long> vtable;
         [FieldOffset(0x30)] public byte flags;
-        [FieldOffset(0x48)] public long pGameManager;
-        [FieldOffset(0xB8)] public long nameAddr;
+        [FieldOffset(0x48)] public Address<long> pGameManager;
+        [FieldOffset(0xB8)] public Address<long> nameAddr;
     }
 }
