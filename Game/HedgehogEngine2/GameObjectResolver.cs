@@ -11,7 +11,7 @@ namespace LiveSplit.SonicFrontiers.GameEngine;
 /// This implementation reads a string pointer and caches the result cached based on the
 /// object's vtable address to avoid repeated memory reads.
 /// </summary>
-internal class GameObjectResolver
+internal class GameObjectResolver : Dictionary<string, IntPtr>
 {
     /// <summary>
     /// Cache of resolved object names, keyed by vtable pointer.

@@ -99,8 +99,7 @@ partial class Memory
 
         this.GameMode = new LazyWatcher<string>(StateTracker, "GameModeTitle", (current, _) =>
         {
-            // Look up the game mode using RTTI
-            return Engine.RTTI.Lookup(Engine.GameMode, out string gm) ? gm : current;
+            return Engine.GameMode == string.Empty ? current : Engine.GameMode;
         });
 
         IGT = new LazyWatcher<TimeSpan>(StateTracker, TimeSpan.Zero, (_, _) =>
