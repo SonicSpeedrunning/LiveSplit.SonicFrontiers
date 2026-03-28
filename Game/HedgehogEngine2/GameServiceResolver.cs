@@ -17,7 +17,7 @@ internal class GameServiceResolver : Dictionary<string, IntPtr>
     /// Cache of resolved object names, keyed by vtable pointer.
     /// This avoids redundant memory reads for objects of the same type.
     /// </summary>
-    private readonly Dictionary<IntPtr, string> cache = new Dictionary<IntPtr, string>();
+    private readonly Dictionary<IntPtr, string> cache = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameServiceResolver"/> class.
@@ -39,11 +39,11 @@ internal class GameServiceResolver : Dictionary<string, IntPtr>
             return false;
 
         // Check if the name for this vtable is already cached.
-        if (cache.TryGetValue((IntPtr)gameService.vtable, out value))
+        if (cache.TryGetValue(gameService.vtable.Value, out value))
             return true;
 
         // Read the pointer to the name string from the object.
-        if (!process.ReadPointer((IntPtr)gameService.pStaticClass, out IntPtr nameAddr))
+        if (!process.ReadPointer(gameService.pStaticClass.Value, out IntPtr nameAddr))
             return false;
 
         // Read the ASCII string from memory.
@@ -51,7 +51,7 @@ internal class GameServiceResolver : Dictionary<string, IntPtr>
             return false;
 
         // Cache the result for future lookups.
-        cache[(IntPtr)gameService.vtable] = value;
+        cache[gameService.vtable.Value] = value;
         return true;
     }
 
@@ -61,8 +61,8 @@ internal class GameServiceResolver : Dictionary<string, IntPtr>
     [StructLayout(LayoutKind.Explicit)]
     private struct GameService
     {
-        [FieldOffset(0x0)] public long vtable;
-        [FieldOffset(0x30)] public long pGameManager;
-        [FieldOffset(0x38)] public long pStaticClass;
+        [FieldOffset(0x0)] public Address<long> vtable;
+        [FieldOffset(0x30)] public Address<long> pGameManager;
+        [FieldOffset(0x38)] public Address<long> pStaticClass;
     }
 }

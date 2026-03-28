@@ -59,6 +59,9 @@ internal class HedgehogEngine2
     /// </remarks>
     public float IGTSubtraction { get; }
 
+    public byte ApplicationSequenceExtensionFlags0 { get; private set; }
+    public byte ApplicationSequenceExtensionFlags1 { get; private set; }
+
     /// <summary>
     /// Initializes a new instance of the HedgehogEngine2 class and locates
     /// the pointer to the main game manager in memory.
@@ -119,39 +122,39 @@ internal class HedgehogEngine2
         // Scan the game services
         if (gameManager.noOfGameServices > 0 && gameManager.noOfGameServices < 2048)
         {
-            using (ArrayRental<long> rent = new(gameManager.noOfGameServices))
+            using (ArrayRental<Address<long>> rent = new(gameManager.noOfGameServices))
             {
-                if (process.ReadArray(gameManager.GameServices, rent.Span))
+                if (process.ReadArray(gameManager.GameServices.Value, rent.Span))
                 {
                     foreach (var entry in rent.Span)
                     {
-                        if (_services.Lookup(process, (IntPtr)entry, out string value))
-                            _services[value] = (IntPtr)entry;
+                        if (_services.Lookup(process, entry.Value, out string value))
+                            _services[value] = entry.Value;
                     }
                 }
             }
         }
 
         // Scan game application extensions.
-        if (process.Read(gameManager.GameApplication, out GameApplication ggameApplication)
-            && ggameApplication.noOfApplicationExtensions > 0
-            && ggameApplication.noOfApplicationExtensions < 64)
+        if (process.Read(gameManager.gameApplication.Value, out GameApplication gameApplication)
+            && gameApplication.noOfApplicationExtensions > 0
+            && gameApplication.noOfApplicationExtensions < 64)
         {
             IntPtr ase = IntPtr.Zero;
 
-            using (ArrayRental<long> rent = new(ggameApplication.noOfApplicationExtensions))
+            using (ArrayRental<Address<long>> rent = new(gameApplication.noOfApplicationExtensions))
             {
                 // Read array of pointers for ApplicationSequenceExtension
-                if (process.ReadArray(ggameApplication.ApplicationExtensions, rent.Span))
+                if (process.ReadArray(gameApplication.ApplicationExtensions.Value, rent.Span))
                 {
-                    foreach (long entry in rent.Span)
+                    foreach (var entry in rent.Span)
                     {
                         // Identify ApplicationSequenceExtension using RTTI lookup.
-                        if (RTTI.Lookup((IntPtr)entry, out string value))
+                        if (RTTI.Lookup(entry.Value, out string value))
                         {
                             if (value == "ApplicationSequenceExtension")
                             {
-                                ase = (IntPtr)entry;
+                                ase = entry.Value;
                                 break;
                             }
                         }
@@ -165,21 +168,24 @@ internal class HedgehogEngine2
                 // Try to read the pointer for GameMode instance.
                 if (process.Read(ase, out ApplicationSequenceExtension extension))
                 {
-                    if (RTTI.Lookup(extension.GameMode, out string gameModeText))
+                    ApplicationSequenceExtensionFlags0 = extension.Flags0;
+                    ApplicationSequenceExtensionFlags1 = extension.Flags1;
+
+                    if (RTTI.Lookup(extension.GameMode.Value, out string gameModeText))
                         GameMode = gameModeText;
 
                     // Read current instance of GameModeExtension.
-                    if (process.Read(extension.GameMode, out GameMode gameMode) && gameMode.noOfExtensions > 0 && gameMode.noOfExtensions < 128)
+                    if (process.Read(extension.GameMode.Value, out GameMode gameMode) && gameMode.noOfExtensions > 0 && gameMode.noOfExtensions < 128)
                     {
-                        using (ArrayRental<long> rent = gameMode.noOfExtensions < 25 ? new(stackalloc long[gameMode.noOfExtensions]) : new(gameMode.noOfExtensions))
+                        using (ArrayRental<Address<long>> rent = gameMode.noOfExtensions < 25 ? new(stackalloc Address<long>[gameMode.noOfExtensions]) : new(gameMode.noOfExtensions))
                         {
                             // Retrieve array of extensions
-                            if (process.ReadArray(gameMode.Extensions, rent.Span))
+                            if (process.ReadArray(gameMode.extensions.Value, rent.Span))
                             {
                                 foreach (var entry in rent.Span)
                                 {
-                                    if (RTTI.Lookup((IntPtr)entry, out string value))
-                                        _extensions[value] = (IntPtr)entry;
+                                    if (RTTI.Lookup(entry.Value, out string value))
+                                        _extensions[value] = entry.Value;
                                 }
                             }
                         }
@@ -191,14 +197,14 @@ internal class HedgehogEngine2
         // Scan the game objects.
         if (gameManager.noOfGameObjects > 0 && gameManager.noOfGameObjects < 4096)
         {
-            using (ArrayRental<long> rent = new(gameManager.noOfGameObjects))
+            using (ArrayRental<Address<long>> rent = new(gameManager.noOfGameObjects))
             {
-                if (process.ReadArray(gameManager.GameObjects, rent.Span))
+                if (process.ReadArray(gameManager.GameObjects.Value, rent.Span))
                 {
                     foreach (var entry in rent.Span)
                     {
-                        if (_objects.Lookup(process, (IntPtr)entry, out string value))
-                            _objects[value] = (IntPtr)entry;
+                        if (_objects.Lookup(process, entry.Value, out string value))
+                            _objects[value] = entry.Value;
                     }
                 }
             }

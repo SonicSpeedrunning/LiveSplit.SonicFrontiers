@@ -27,7 +27,7 @@ internal class RTTI
     /// A cache for storing previously identified RTTI type names, 
     /// mapped by memory offset, to reduce redundant lookups.
     /// </summary>
-    private readonly Dictionary<IntPtr, string> cache = new Dictionary<IntPtr, string>();
+    private readonly Dictionary<IntPtr, string> cache = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RTTI"/> class with the specified process memory interface.
