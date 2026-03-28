@@ -20,11 +20,6 @@ internal class HedgehogEngine2
     private readonly IntPtr pGameManager; // Points to an instance of hh:game::GameManager
 
     /// <summary>
-    /// Address of the game's routine responsible for pausing the game when the main window goes out of focus
-    /// </summary>
-    internal IntPtr HWndAddress { get; }
-
-    /// <summary>
     /// Runtime Type Information instance used to look up and identify in-memory types.
     /// </summary>
     internal RTTI RTTI { get; }
@@ -32,14 +27,12 @@ internal class HedgehogEngine2
     /// <summary>
     /// Dictionary that stores cached addresses for various game services.
     /// </summary>
-    private readonly Dictionary<string, IntPtr> _services = [];
-    private readonly GameServiceResolver _gameServices = new(); 
+    private readonly GameServiceResolver _services = []; 
 
     /// <summary>
     /// Dictionary that stores cached addresses for different in-game objects.
     /// </summary>
-    private readonly Dictionary<string, IntPtr> _objects = [];
-    private readonly GameObjectResolver _gameObjects = new();
+    private readonly GameObjectResolver _objects = [];
 
     /// <summary>
     /// Dictionary that stores cached addresses for application extensions.
@@ -47,9 +40,14 @@ internal class HedgehogEngine2
     private readonly Dictionary<string, IntPtr> _extensions = [];
 
     /// <summary>
-    /// Address of the current running instance of app::game::GameMode.
+    /// The name of the current instance of app::game::GameMode, recovered through RTTI
     /// </summary>
-    internal IntPtr GameMode { get; private set; } = default;
+    internal string GameMode { get; private set; } = string.Empty;
+
+    /// <summary>
+    /// Address of the game's routine responsible for pausing the game when the main window goes out of focus
+    /// </summary>
+    internal IntPtr HWndAddress { get; }
 
     /// <summary>
     /// Offset for the internal IGT applied during Cyber Stages.
@@ -95,7 +93,7 @@ internal class HedgehogEngine2
     /// </summary>
     private void ResetCache()
     {
-        GameMode = IntPtr.Zero;
+        GameMode = string.Empty;
         _services.Clear();
         _objects.Clear();
         _extensions.Clear();
@@ -109,41 +107,25 @@ internal class HedgehogEngine2
     [SkipLocalsInit]
     public void Update(ProcessMemory process)
     {
-        // Step 1: Reset the cached addresses at the beginning of each update cycle.
+        // Step 1: Reset the cached addresses at the beginning of each update cycle
         ResetCache();
 
-        // Step 2: Attempt to read the main GameManager pointer.
-        if (!process.ReadPointer(pGameManager, out IntPtr _gameManager) || _gameManager == IntPtr.Zero)
-            return; // Return early if GameManager address is invalid.
+        // Step 2: Attempt to read the main GameManager struct
+        if (!process.ReadPointer(pGameManager, out IntPtr _gameManager)
+            || !process.Read(_gameManager, out GameManager gameManager))
+            return;
 
-        IntPtr gameObjects, gameServices;
-        int noOfGameObjects, noOfGameServices;
-
-        IntPtr gameApplication;
-
-        using (ArrayRental<GameManager> rent = new(1))
-        {
-            Span<GameManager> gameManager = rent.Span;
-            if (!process.ReadArray(_gameManager, gameManager))
-                return;
-
-            gameObjects = gameManager[0].GameObjects;
-            noOfGameObjects = gameManager[0].noOfGameObjects;
-            gameServices = gameManager[0].GameServices;
-            noOfGameServices = gameManager[0].noOfGameServices;
-            gameApplication = gameManager[0].GameApplication;
-        }
 
         // Scan the game services
-        if (noOfGameServices > 0 && noOfGameServices < 2048)
+        if (gameManager.noOfGameServices > 0 && gameManager.noOfGameServices < 2048)
         {
-            using (ArrayRental<long> rent = new(noOfGameServices))
+            using (ArrayRental<long> rent = new(gameManager.noOfGameServices))
             {
-                if (process.ReadArray(gameServices, rent.Span))
+                if (process.ReadArray(gameManager.GameServices, rent.Span))
                 {
                     foreach (var entry in rent.Span)
                     {
-                        if (_gameServices.Lookup(process, (IntPtr)entry, out string value))
+                        if (_services.Lookup(process, (IntPtr)entry, out string value))
                             _services[value] = (IntPtr)entry;
                     }
                 }
@@ -151,7 +133,7 @@ internal class HedgehogEngine2
         }
 
         // Scan game application extensions.
-        if (process.Read(gameApplication, out GameApplication ggameApplication)
+        if (process.Read(gameManager.GameApplication, out GameApplication ggameApplication)
             && ggameApplication.noOfApplicationExtensions > 0
             && ggameApplication.noOfApplicationExtensions < 64)
         {
@@ -162,7 +144,7 @@ internal class HedgehogEngine2
                 // Read array of pointers for ApplicationSequenceExtension
                 if (process.ReadArray(ggameApplication.ApplicationExtensions, rent.Span))
                 {
-                    foreach (var entry in rent.Span)
+                    foreach (long entry in rent.Span)
                     {
                         // Identify ApplicationSequenceExtension using RTTI lookup.
                         if (RTTI.Lookup((IntPtr)entry, out string value))
@@ -183,7 +165,8 @@ internal class HedgehogEngine2
                 // Try to read the pointer for GameMode instance.
                 if (process.Read(ase, out ApplicationSequenceExtension extension))
                 {
-                    GameMode = extension.GameMode;
+                    if (RTTI.Lookup(extension.GameMode, out string gameModeText))
+                        GameMode = gameModeText;
 
                     // Read current instance of GameModeExtension.
                     if (process.Read(extension.GameMode, out GameMode gameMode) && gameMode.noOfExtensions > 0 && gameMode.noOfExtensions < 128)
@@ -206,15 +189,15 @@ internal class HedgehogEngine2
         }
 
         // Scan the game objects.
-        if (noOfGameObjects > 0 && noOfGameObjects < 4096)
+        if (gameManager.noOfGameObjects > 0 && gameManager.noOfGameObjects < 4096)
         {
-            using (ArrayRental<long> rent = new(noOfGameObjects))
+            using (ArrayRental<long> rent = new(gameManager.noOfGameObjects))
             {
-                if (process.ReadArray(gameObjects, rent.Span))
+                if (process.ReadArray(gameManager.GameObjects, rent.Span))
                 {
                     foreach (var entry in rent.Span)
                     {
-                        if (_gameObjects.Lookup(process, (IntPtr)entry, out string value))
+                        if (_objects.Lookup(process, (IntPtr)entry, out string value))
                             _objects[value] = (IntPtr)entry;
                     }
                 }
