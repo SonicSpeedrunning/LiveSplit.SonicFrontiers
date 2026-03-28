@@ -87,3 +87,19 @@ public readonly struct SaveManager
 {
     [FieldOffset(0xB8)] public readonly Address<long> saveInterface;
 }
+
+
+[StructLayout(LayoutKind.Explicit)]
+public readonly struct Boss
+{
+    [FieldOffset(0x130)] public readonly Address<long> array;
+    [FieldOffset(0x138)] public readonly int noOfElements;
+}
+
+[StructLayout(LayoutKind.Explicit)]
+public readonly struct BossHsm
+{
+    [FieldOffset(0x48)] public readonly Address<long> statik;
+    [FieldOffset(0xA8)] public readonly Address<long> array;
+    [FieldOffset(0xB0)] public readonly int noOfElements;
+}
