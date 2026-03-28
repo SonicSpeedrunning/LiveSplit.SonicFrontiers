@@ -1,6 +1,7 @@
 ﻿using JHelper.Common.Collections;
 using JHelper.Common.MemoryUtils;
 using JHelper.Common.ProcessInterop;
+using JHelper.Common.ProcessInterop.API;
 using LiveSplit.ComponentUtil;
 using LiveSplit.Model;
 using LiveSplit.SonicFrontiers.GameEngine;
@@ -96,43 +97,6 @@ partial class Memory
         };
 
         // Initialize LazyWatchers for observing game data
-
-        GameMode = new LazyWatcher<GameMode>(StateTracker, SonicFrontiers.GameMode.Story, (current, _) =>
-        {
-            if (liveSplitState.CurrentPhase == TimerPhase.NotRunning)
-            {
-                if (HsmStatus.Current[0] == "ArcadeMode" || Engine.ApplicationSequenceExtensionFlags0.BitCheck(0))
-                    return SonicFrontiers.GameMode.Arcade;
-                else if (HsmStatus.Current[0] == "CyberMode" || Engine.ApplicationSequenceExtensionFlags0.BitCheck(7) || (Engine.ApplicationSequenceExtensionFlags1 & 0b1111) != 0) //kronos,ares,chaos,ouranos,all = bits 7, (next byte) 0,1,2,3
-                    return SonicFrontiers.GameMode.CyberspaceChallenge;
-                else if (HsmStatus.Current[0] == "BattleMode" || LevelID.Current == SonicFrontiers.LevelID.Island_Kronos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ares_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Chaos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos_BossRush)
-                    return SonicFrontiers.GameMode.BossRush;
-                else
-                    return SonicFrontiers.GameMode.Story;
-            }
-            return current;
-        });
-
-        IGT = new LazyWatcher<TimeSpan>(StateTracker, TimeSpan.Zero, (_, _) =>
-        {
-            if (Engine.GetExtension("GameModeStageTimeExtension", out IntPtr stageTimeExtension))
-            {
-                float igt = process.Read<float>(stageTimeExtension + 0x34) - Engine.IGTSubtraction;
-                if (igt < 0)
-                    igt = 0;
-                return TimeSpan.FromSeconds(Math.Truncate(igt * 100) / 100);
-            }
-            else if (Engine.GetExtension("GameModeBattleRushExtension", out IntPtr battleRushExtension))
-            {
-                float igt = process.Read<float>(battleRushExtension + 0x38);
-                return TimeSpan.FromSeconds(Math.Truncate(igt * 100) / 100);
-            }
-            else
-            {
-                return TimeSpan.Zero;
-            }
-        });
-
         HsmStatus = new LazyWatcher<string[]>(StateTracker, [string.Empty, string.Empty, string.Empty, string.Empty], [string.Empty, string.Empty, string.Empty, string.Empty], (current, old) =>
         {
             int no_of_details;
@@ -264,6 +228,41 @@ partial class Memory
             };
         });
 
+        GameMode = new LazyWatcher<GameMode>(StateTracker, SonicFrontiers.GameMode.Story, (current, _) =>
+        {
+            if (liveSplitState.CurrentPhase == TimerPhase.NotRunning)
+            {
+                if (HsmStatus.Current[1] == "ArcadeMode" || Engine.ApplicationSequenceExtensionFlags0.BitCheck(0))
+                    return SonicFrontiers.GameMode.Arcade;
+                else if (HsmStatus.Current[1] == "CyberMode" || Engine.ApplicationSequenceExtensionFlags0.BitCheck(7) || (Engine.ApplicationSequenceExtensionFlags1 & 0b1111) != 0) //kronos,ares,chaos,ouranos,all = bits 7, (next byte) 0,1,2,3
+                    return SonicFrontiers.GameMode.CyberspaceChallenge;
+                else if (HsmStatus.Current[1] == "BattleMode" || LevelID.Current == SonicFrontiers.LevelID.Island_Kronos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ares_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Chaos_BossRush || LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos_BossRush)
+                    return SonicFrontiers.GameMode.BossRush;
+                else
+                    return SonicFrontiers.GameMode.Story;
+            }
+            return current;
+        });
+
+        IGT = new LazyWatcher<TimeSpan>(StateTracker, TimeSpan.Zero, (_, _) =>
+        {
+            if (Engine.GetExtension("GameModeStageTimeExtension", out IntPtr stageTimeExtension))
+            {
+                float igt = process.Read<float>(stageTimeExtension + 0x34) - Engine.IGTSubtraction;
+                if (igt < 0)
+                    igt = 0;
+                return TimeSpan.FromSeconds(Math.Truncate(igt * 100) / 100);
+            }
+            else if (Engine.GetExtension("GameModeBattleRushExtension", out IntPtr battleRushExtension))
+            {
+                float igt = process.Read<float>(battleRushExtension + 0x38);
+                return TimeSpan.FromSeconds(Math.Truncate(igt * 100) / 100);
+            }
+            else
+            {
+                return TimeSpan.Zero;
+            }
+        });
 
         MusicNotes = new LazyWatcher<byte[]>(StateTracker, [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], (_, old) =>
         {
@@ -279,12 +278,11 @@ partial class Memory
             return old;
         });
 
-
-        StoryModeCyberSpaceCompletionFlag = new LazyWatcher<bool>(StateTracker, false, (_, _) => GameMode.Current == SonicFrontiers.GameMode.Story && LevelID.Current <= SonicFrontiers.LevelID.w4_I && (HsmStatus.Current[0] == "Result" || StoryModeCyberSpaceCompletionFlag!.Old));
+        StoryModeCyberSpaceCompletionFlag = new LazyWatcher<bool>(StateTracker, false, (current, old) => GameMode.Current == SonicFrontiers.GameMode.Story && LevelID.Current <= SonicFrontiers.LevelID.w4_I && (HsmStatus.Current[1] == "Result" || old));
 
         QTEStatus = new LazyWatcher<QTEResolveStatus>(StateTracker, QTEResolveStatus.NotCompleted, (_, _) =>
         {
-            if (!IsInEndQTE || !process.ReadValue<QTEResolveStatus>(addresses["QTE"] + 0x254, out var status))
+            if (!IsInEndQTE || !Engine.GetObject("EventQTEInput", out IntPtr qte) || !process.Read<QTEResolveStatus>(qte + 0x254, out var status))
                 return QTEResolveStatus.NotCompleted;
             else
                 return status;
@@ -324,7 +322,7 @@ partial class Memory
                 return current;
 
         });
-        
+
         // Split bools
         SplitBools = new Dictionary<string, LazyWatcher<bool>>
         {
@@ -368,8 +366,8 @@ partial class Memory
             { "Kronos_RedCE",           new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Kronos_RedCE) },
             { "Kronos_YellowCE",        new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Kronos_YellowCE) },
             { "Kronos_WhiteCE",         new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Kronos_WhiteCE) },
-            { "Kronos_GigantosStart",   new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Kronos && !addresses["CURRENTBOSSSTATUS"].IsZero() && game.ReadString(addresses["CURRENTBOSSSTATUS"], 255, out var value) && value == "WalkingBase") },
-            { "Kronos_SuperSonic",      new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Kronos && !addresses["CURRENTBOSSSTATUS"].IsZero() && game.ReadString(addresses["CURRENTBOSSSTATUS"], 255, out var value) && value == "BattlePhaseParent") },
+            { "Kronos_GigantosStart",   new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Kronos && ScanBossHsm(process, "BossGiant", "WalkingBase")) },
+            { "Kronos_SuperSonic",      new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Kronos && ScanBossHsm(process, "BossGiant", "BattlePhaseParent")) },
             { "Island_Kronos_story",    new LazyWatcher<bool>(StateTracker, false, (_, _) =>  LevelID.Old == SonicFrontiers.LevelID.Island_Kronos && LevelID.Current == SonicFrontiers.LevelID.Island_Ares) },
             { "Island_Kronos_fishing",  new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Kronos) },
 
@@ -385,9 +383,9 @@ partial class Memory
             { "Ares_RedCE",             new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ares_RedCE) },
             { "Ares_YellowCE",          new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ares_YellowCE) },
             { "Ares_WhiteCE",           new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ares_WhiteCE) },
-            { "Ares_WyvernStart",       new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && !addresses["CURRENTBOSSSTATUS_WYVERN"].IsZero() && game.ReadString(addresses["CURRENTBOSSSTATUS_WYVERN"], 255, out var value) && value == "PatrolTop") },
-            { "Ares_WyvernRun",         new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && !addresses["CURRENTBOSSSTATUS_WYVERN"].IsZero() && game.ReadString(addresses["CURRENTBOSSSTATUS_WYVERN"], 255, out var value) && value == "EventRise") },
-            { "Ares_SuperSonic",        new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && !addresses["CURRENTBOSSSTATUS_WYVERN"].IsZero() && game.ReadString(addresses["CURRENTBOSSSTATUS_WYVERN"], 255, out var value) && value == "BattleTop") },
+            { "Ares_WyvernStart",       new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && ScanBossHsm(process, "BossDragon", "PatrolTop")) },
+            { "Ares_WyvernRun",         new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && ScanBossHsm(process, "BossDragon", "EventRise")) },
+            { "Ares_SuperSonic",        new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && ScanBossHsm(process, "BossDragon", "BattleTop")) },
             { "Island_Ares_story",      new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Island_Ares && LevelID.Current == SonicFrontiers.LevelID.Island_Chaos) },
             { "Island_Ares_fishing",    new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Ares) },
 
@@ -404,7 +402,7 @@ partial class Memory
             { "Chaos_YellowCE",         new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Chaos_YellowCE) },
             { "Chaos_WhiteCE",          new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Chaos_WhiteCE) },
             { "Chaos_KnightStart",      new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Chaos_KnightStart) },
-            { "Chaos_SuperSonic",       new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Chaos && !addresses["CURRENTBOSSSTATUS"].IsZero() && game.ReadString(addresses["CURRENTBOSSSTATUS"], 255, out var value) && value == "Battle1Top") },
+            { "Chaos_SuperSonic",       new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Chaos && ScanBossHsm(process, "BossKnight", "Battle1Top")) },
             { "Island_Chaos_story",     new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Island_Chaos && LevelID.Current == SonicFrontiers.LevelID.Island_Rhea) },
             { "Island_Chaos_fishing",   new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Chaos) },
 
@@ -437,7 +435,8 @@ partial class Memory
             if (levelid != SonicFrontiers.LevelID.Island_Kronos_BossRush && levelid != SonicFrontiers.LevelID.Island_Ares_BossRush && levelid != SonicFrontiers.LevelID.Island_Chaos_BossRush && levelid != SonicFrontiers.LevelID.Island_Ouranos_BossRush)
                 return SonicFrontiers.BossRushAct.None;
 
-            if (addresses["BattleRushExtension"].IsZero() || !game.ReadValue<byte>(addresses["BattleRushExtension"] + 0x2C, out var phase))
+            if (!Engine.GetExtension("BattleRushExtension", out IntPtr battleRushExt)
+                || !process.Read(battleRushExt + 0x2C, out byte phase))
                 return SonicFrontiers.BossRushAct.None;
 
             return levelid switch
@@ -527,9 +526,8 @@ partial class Memory
         IsInTutorial = LevelID.Current == SonicFrontiers.LevelID.Tutorial;
         
         // I'm not happy I use 3 different variables to define the behaviour in the final QTE, but heh, it works
-        IsInEndQTE = LevelID.Current == SonicFrontiers.LevelID.Boss_TheEnd && !addresses["QTE"].IsZero() && (IntPtr)game.ReadValue<long>(addresses["QTE"]) == RTTI["EventQTEInput::evt::app"];
-        IsInAnotherBoss = IsFightingRifleBeast &&
-                          !addresses["QTE"].IsZero() && (IntPtr)game.ReadValue<long>(addresses["QTE"]) == RTTI["EventQTEInput::evt::app"];
+        IsInEndQTE = LevelID.Current == SonicFrontiers.LevelID.Boss_TheEnd && Engine.GetObject("EventQTEInput", out _);
+        IsInAnotherBoss = IsFightingRifleBeast && Engine.GetObject("EventQTEInput", out _);
         
 
         
@@ -577,7 +575,7 @@ partial class Memory
     /// <returns>True if the game is loading; otherwise, false.</returns>
     internal bool? IsLoading(Settings settings)
     {
-        return !Engine.GetExtension("GameModeHsmExtension", out _) || CurrentGameMode == GameMode.Arcade || CurrentGameMode == GameMode.CyberspaceChallenge || CurrentGameMode == GameMode.BossRush
+        return !Engine.GetExtension("GameModeHsmExtension", out _) || GameMode.Current == SonicFrontiers.GameMode.Arcade || GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge || GameMode.Current == SonicFrontiers.GameMode.BossRush
                         || (LevelID.Current != SonicFrontiers.LevelID.MainMenu && GameModeLoad)
                         || (IsInTutorial && (LevelID.Current <= SonicFrontiers.LevelID.w4_9 || watchers.LevelID.Current == SonicFrontiers.LevelID.Fishing))
                         || (LevelID.Current != SonicFrontiers.LevelID.MainMenu && (GameVersion == GameVersion.Unknown || GameVersion == GameVersion.v1_10) && Status.Current == Status.Finish);
@@ -593,7 +591,43 @@ partial class Memory
 
 
 
+    private bool ScanBossHsm(ProcessMemory process, string bossName, string bossMove)
+    {
+        if (!Engine.GetObject(bossName, out IntPtr boss) || !process.Read(boss, out Boss bossData))
+            return false;
 
+        IntPtr gocHsm2 = IntPtr.Zero;
+
+        using (ArrayRental<Address<long>> buf = new(bossData.noOfElements))
+        {
+            if (!process.ReadArray(bossData.array.Value, buf.Span))
+                return false;
+
+            foreach (var entry in buf.Span)
+            {
+                if (!process.Read(entry.Value, out BossHsm bossHsm)
+                    || !process.ReadPointer(bossHsm.statik.Value, out IntPtr name)
+                    || !process.ReadPointer(name, out name)
+                    || !process.ReadString(name, 127, StringType.ASCII, out string val)
+                    || val != "GOCHsm2")
+                    continue;
+
+                using (ArrayRental<Address<long>> newBuf = new(bossHsm.noOfElements))
+                {
+                    if (!process.ReadArray(bossData.array.Value, newBuf.Span))
+                        return false;
+
+                    foreach (var element in newBuf.Span)
+                    {
+                        if (Engine.RTTI.Lookup(element.Value, out val) && val == bossMove)
+                            return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 
 
     /// <summary>
@@ -604,11 +638,7 @@ partial class Memory
     /// </summary>
     private void GetAddresses()
     {
-        offsets["QTE"] = 0xD0;
-        if (GameVersion == GameVersion.v1_10 || GameVersion == GameVersion.Unknown)
-        {
-            offsets["QTE"] = 0xE0;
-        }
+
         // These offsets are known to change so we will dynamically find them through specific sigscanning
         IntPtr igtPtr = scanner.Scan(new SigScanTarget(4, "F3 0F 11 49 ?? F3 0F 5C 0D"));
         IntPtr igtsubOffset = igtPtr + 5;
@@ -622,14 +652,7 @@ partial class Memory
         // This makes it incredibly easy to calculate some dynamic offsets later,
         var RTTILIST = new List<string>
         {
-            "ApplicationSequenceExtension::game::app",
-            "GameModeHsmExtension::game::app",
-            "GameModeStageTimeExtension::game::app",    
-            "UserElement::save::app",
-            "EventQTEInput::evt::app",
-            "BossGiant::app",
-            "BossDragon::app",
-            "BossKnight::app",
+
             "BossRifleBeast::app" //new!
         };
 
