@@ -4,9 +4,13 @@ using JHelper.Common.ProcessInterop;
 using JHelper.Common.ProcessInterop.API;
 using LiveSplit.ComponentUtil;
 using LiveSplit.Model;
+using LiveSplit.Options;
+using LiveSplit.SonicFrontiers;
 using LiveSplit.SonicFrontiers.GameEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LiveSplit.SonicFrontiers;
 
@@ -59,9 +63,9 @@ partial class Memory
     /// Watches the current game mode
     /// </summary>
     public LazyWatcher<GameMode> GameMode { get; }
-    
-    
 
+
+    private bool IsInTutorial = false;
 
     
     // Story flags
@@ -502,7 +506,7 @@ partial class Memory
         });
     }
 
-    internal void Update(ProcessMemory process, Settings settings)
+    internal void Update(ProcessMemory process, FrontiersSettings settings, LiveSplitState state)
     {
         ApplyHWNDpatch(process, settings);
         StateTracker.Tick();
@@ -519,11 +523,12 @@ partial class Memory
                     Flags = span[0];
             }
         }
-       
 
+        
 
         StoryModeCyberSpaceCompletionFlag.Update();
         IsInTutorial = LevelID.Current == SonicFrontiers.LevelID.Tutorial;
+        
         
         // I'm not happy I use 3 different variables to define the behaviour in the final QTE, but heh, it works
         IsInEndQTE = LevelID.Current == SonicFrontiers.LevelID.Boss_TheEnd && Engine.GetObject("EventQTEInput", out _);
@@ -552,7 +557,7 @@ partial class Memory
     /// </summary>
     /// <param name="process">The current process memory instance.</param>
     /// <param name="settings">The settings specifying whether to apply the patch.</param>
-    private void ApplyHWNDpatch(ProcessMemory process, Settings settings)
+    private void ApplyHWNDpatch(ProcessMemory process, FrontiersSettings settings)
     {
         IntPtr address = Engine.HWndAddress;
         bool setting = settings.WFocus;
@@ -573,23 +578,355 @@ partial class Memory
     /// Determines if the game is currently loading.
     /// </summary>
     /// <returns>True if the game is loading; otherwise, false.</returns>
-    internal bool? IsLoading(Settings settings)
+    internal bool? IsLoading(FrontiersSettings settings)
     {
-        return !Engine.GetExtension("GameModeHsmExtension", out _) || GameMode.Current == SonicFrontiers.GameMode.Arcade || GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge || GameMode.Current == SonicFrontiers.GameMode.BossRush
-                        || (LevelID.Current != SonicFrontiers.LevelID.MainMenu && GameModeLoad)
-                        || (IsInTutorial && (LevelID.Current <= SonicFrontiers.LevelID.w4_9 || watchers.LevelID.Current == SonicFrontiers.LevelID.Fishing))
-                        || (LevelID.Current != SonicFrontiers.LevelID.MainMenu && (GameVersion == GameVersion.Unknown || GameVersion == GameVersion.v1_10) && Status.Current == Status.Finish);
+        if (!Engine.GetExtension("GameModeHsmExtension", out _)) {
+            return true;
+        }
+        //all these modes use IGT only
+        if (GameMode.Current == SonicFrontiers.GameMode.Arcade || GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge || GameMode.Current == SonicFrontiers.GameMode.BossRush)
+        {
+            return true;
+        }
+        if (LevelID.Current != SonicFrontiers.LevelID.MainMenu && Engine.GameMode == "GameModeLoad")
+        {
+            return true;
+        }
+        if (IsInTutorial && (LevelID.Current <= SonicFrontiers.LevelID.w4_9 || LevelID.Current == SonicFrontiers.LevelID.Fishing))
+        {
+            return true;
+        }
+        //fix for cyberspace taking randomly longer to finish in >=1.20
+        if (LevelID.Current != SonicFrontiers.LevelID.MainMenu && (GameVersion == GameVersion.Unknown || GameVersion == GameVersion.v1_10) && HsmStatus.Current[0] == "Finish")
+        {
+            return true;
+        }
+        //new checks to help accuracy out
+        if (!(Engine.GetObject("GOCPlayerInformationUpdater", out _) && Engine.GetObject("ObjForetasteSign", out _)))
+        {
+            return true;
+        }
+        
+        return false;
+
     }
 
+    internal bool Start(FrontiersSettings settings)
+    {
+        if (HsmStatus.Current[1] == "Quit" && HsmStatus.Old[1] == "NewGameMenu")
+        {
+            return settings.StoryStart;
+        }
+        else if(settings.ArcadeStart && GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge)
+        {
+            return LevelID.Changed && LevelID.Old == SonicFrontiers.LevelID.MainMenu;
+        }
+        else if(settings.BossRushStart && GameMode.Current == SonicFrontiers.GameMode.BossRush)
+        {
+            return LevelID.Changed && LevelID.Old == SonicFrontiers.LevelID.MainMenu;
+        }
+        else if(LevelID.Current == SonicFrontiers.LevelID.Island_Another_Ouranos &&
+            LevelID.Old == SonicFrontiers.LevelID.Island_Ouranos)
+        {
+            return true;
+        }
+        else if(settings.IslandILStart && LevelID.Old == SonicFrontiers.LevelID.MainMenu && (LevelID.Current == SonicFrontiers.LevelID.Island_Ares || LevelID.Current == SonicFrontiers.LevelID.Island_Chaos || LevelID.Current == SonicFrontiers.LevelID.Island_Rhea || LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos))
+        {
+            AlreadyTriggeredBools.Add("Island_Kronos_story");
+            return true;
+        }
+        return false;
+    }
 
+    internal bool Split(FrontiersSettings settings)
+    {
+        if (GameMode.Current == SonicFrontiers.GameMode.Arcade || GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge)
+        {
+            if (!CheckArcadeSplit(LevelID.Old, settings))
+            {
+                return false;
+            }
+            if (LevelID.Old == SonicFrontiers.LevelID.w4_9 && settings.w4_9_arcade_soon)
+            {
+                return HsmStatus.Changed && HsmStatus.Current[1] == "Finish";
+            }
+            return HsmStatus.Changed && HsmStatus.Old[1] == "Result";
+        }
 
+        if (GameMode.Current == SonicFrontiers.GameMode.BossRush)
+        {
+            return BossRushAct.Old switch
+            {
+                SonicFrontiers.BossRushAct.b1_1 => settings.Boss1_1 && BossRushAct.Current == SonicFrontiers.BossRushAct.b1_2,
+                SonicFrontiers.BossRushAct.b1_2 => settings.Boss1_2 && BossRushAct.Current == SonicFrontiers.BossRushAct.b1_3,
+                SonicFrontiers.BossRushAct.b1_3 => settings.Boss1_3 && BossRushAct.Current == SonicFrontiers.BossRushAct.b1_4,
+                SonicFrontiers.BossRushAct.b1_4 => settings.Boss1_4 && BossRushAct.Current == SonicFrontiers.BossRushAct.b1_5,
+                SonicFrontiers.BossRushAct.b1_5 => settings.Boss1_5 && BossRushAct.Current == SonicFrontiers.BossRushAct.b1_6,
+                SonicFrontiers.BossRushAct.b1_6 => settings.Boss1_6 && BossRushAct.Current == SonicFrontiers.BossRushAct.b1_7,
+                SonicFrontiers.BossRushAct.b1_7 => settings.Boss1_7 && BossRushAct.Current == SonicFrontiers.BossRushAct.b1_8,
+                SonicFrontiers.BossRushAct.b1_8 => settings.Boss1_8 && BossRushAct.Current == SonicFrontiers.BossRushAct.b1_9,
+                SonicFrontiers.BossRushAct.b1_9 => settings.Boss1_9 && BossRushAct.Current == SonicFrontiers.BossRushAct.b1_10,
+                SonicFrontiers.BossRushAct.b1_10 => settings.Boss1_10 && ((IGT.Old > IGT.Current && IGT.Current == TimeSpan.Zero)), // || (Status.Changed && Status.Current == Status.StageResult)),
+                SonicFrontiers.BossRushAct.b2_1 => settings.Boss2_1 && BossRushAct.Current == SonicFrontiers.BossRushAct.b2_2,
+                SonicFrontiers.BossRushAct.b2_2 => settings.Boss2_2 && BossRushAct.Current == SonicFrontiers.BossRushAct.b2_3,
+                SonicFrontiers.BossRushAct.b2_3 => settings.Boss2_3 && BossRushAct.Current == SonicFrontiers.BossRushAct.b2_4,
+                SonicFrontiers.BossRushAct.b2_4 => settings.Boss2_4 && BossRushAct.Current == SonicFrontiers.BossRushAct.b2_5,
+                SonicFrontiers.BossRushAct.b2_5 => settings.Boss2_5 && BossRushAct.Current == SonicFrontiers.BossRushAct.b2_6,
+                SonicFrontiers.BossRushAct.b2_6 => settings.Boss2_6 && BossRushAct.Current == SonicFrontiers.BossRushAct.b2_7,
+                SonicFrontiers.BossRushAct.b2_7 => settings.Boss2_7 && BossRushAct.Current == SonicFrontiers.BossRushAct.b2_8,
+                SonicFrontiers.BossRushAct.b2_8 => settings.Boss2_8 && BossRushAct.Current == SonicFrontiers.BossRushAct.b2_9,
+                SonicFrontiers.BossRushAct.b2_9 => settings.Boss2_9 && BossRushAct.Current == SonicFrontiers.BossRushAct.b2_10,
+                SonicFrontiers.BossRushAct.b2_10 => settings.Boss2_10 && (IGT.Old > IGT.Current && IGT.Current == TimeSpan.Zero), // || (Status.Changed && Status.Current == Status.StageResult)),
+                SonicFrontiers.BossRushAct.b3_1 => settings.Boss3_1 && BossRushAct.Current == SonicFrontiers.BossRushAct.b3_2,
+                SonicFrontiers.BossRushAct.b3_2 => settings.Boss3_2 && BossRushAct.Current == SonicFrontiers.BossRushAct.b3_3,
+                SonicFrontiers.BossRushAct.b3_3 => settings.Boss3_3 && BossRushAct.Current == SonicFrontiers.BossRushAct.b3_4,
+                SonicFrontiers.BossRushAct.b3_4 => settings.Boss3_4 && BossRushAct.Current == SonicFrontiers.BossRushAct.b3_5,
+                SonicFrontiers.BossRushAct.b3_5 => settings.Boss3_5 && BossRushAct.Current == SonicFrontiers.BossRushAct.b3_6,
+                SonicFrontiers.BossRushAct.b3_6 => settings.Boss3_6 && BossRushAct.Current == SonicFrontiers.BossRushAct.b3_7,
+                SonicFrontiers.BossRushAct.b3_7 => settings.Boss3_7 && BossRushAct.Current == SonicFrontiers.BossRushAct.b3_8,
+                SonicFrontiers.BossRushAct.b3_8 => settings.Boss3_8 && BossRushAct.Current == SonicFrontiers.BossRushAct.b3_9,
+                SonicFrontiers.BossRushAct.b3_9 => settings.Boss3_9 && (IGT.Old > IGT.Current && IGT.Current == TimeSpan.Zero), // || (Status.Changed && Status.Current == Status.StageResult)),
+                SonicFrontiers.BossRushAct.b4_1 => settings.Boss4_1 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_2,
+                SonicFrontiers.BossRushAct.b4_2 => settings.Boss4_2 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_3,
+                SonicFrontiers.BossRushAct.b4_3 => settings.Boss4_3 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_4,
+                SonicFrontiers.BossRushAct.b4_4 => settings.Boss4_4 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_5,
+                SonicFrontiers.BossRushAct.b4_5 => settings.Boss4_5 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_6,
+                SonicFrontiers.BossRushAct.b4_6 => settings.Boss4_6 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_7,
+                SonicFrontiers.BossRushAct.b4_7 => settings.Boss4_7 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_8,
+                SonicFrontiers.BossRushAct.b4_8 => settings.Boss4_8 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_9,
+                SonicFrontiers.BossRushAct.b4_9 => settings.Boss4_9 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_10,
+                SonicFrontiers.BossRushAct.b4_10 => settings.Boss4_10 && BossRushAct.Current == SonicFrontiers.BossRushAct.b4_11,
+                SonicFrontiers.BossRushAct.b4_11 => settings.Boss4_11 && HsmStatus.Changed && HsmStatus.Current[1] == "StageResult",
+                _ => false
+            };
+        }
 
+        //Story Mode
 
+        foreach (var flag in SplitBools.Where(b => AlreadyTriggeredBools.Contains(b.Key)))
+        {
+            if (CheckBoolSplit(flag.Key, settings) && !flag.Value.Old && flag.Value.Current)
+            {
+                AlreadyTriggeredBools.Add(flag.Key);
+                return true;
+            }
+        }
 
+        //Music Notes
+        if (settings.MusicNoteAny && MusicNotes.Changed && MusicNotes.Old != null)
+        {
+            return true;
+        }
+        if (MusicNotes.Old == null)
+        {
+            Log.Warning("musicnotes old is null");
+        }
 
+        //Island Swap
+        if (settings.IslandSwapSplit && LevelID.Current == SonicFrontiers.LevelID.Island_Kronos)
+        {
 
+            if (LevelID.Old == SonicFrontiers.LevelID.Island_Ares || LevelID.Old == SonicFrontiers.LevelID.Island_Chaos || LevelID.Old == SonicFrontiers.LevelID.Island_Rhea || LevelID.Old == SonicFrontiers.LevelID.Island_Ouranos)
+            {
+                return true;
+            }
+        }
 
+        //Enter Cyberspace Stage
+        if (settings.EnterCyberspaceSplit && (LevelID.Current < SonicFrontiers.LevelID.Island_Kronos || LevelID.Current == SonicFrontiers.LevelID.Fishing))
+        {
+            if (LevelID.Old == SonicFrontiers.LevelID.Island_Ares || LevelID.Old == SonicFrontiers.LevelID.Island_Chaos || LevelID.Old == SonicFrontiers.LevelID.Island_Another_Ouranos || LevelID.Old == SonicFrontiers.LevelID.Island_Ouranos)
+            {
+                return true;
+            }
+        }
 
+        //Start Hacking
+        if((settings.Chaos_HackingStart && LevelID.Current == SonicFrontiers.LevelID.Hacking_01 && LevelID.Old == SonicFrontiers.LevelID.Island_Chaos)
+            || (settings.Ouranos_FirstHackingStart && LevelID.Current == SonicFrontiers.LevelID.Hacking_02 && LevelID.Old == SonicFrontiers.LevelID.Island_Ouranos)
+            || (settings.Ouranos_SecondHackingStart && LevelID.Current == SonicFrontiers.LevelID.Hacking_03 && LevelID.Old == SonicFrontiers.LevelID.Island_Ouranos)){
+            return true;
+        }
+
+        //Cyberspace within story mode
+        return CheckStorySplit(LevelID.Old, settings) && StoryModeCyberSpaceCompletionFlag.Old && !StoryModeCyberSpaceCompletionFlag.Current;
+    }
+    private bool CheckArcadeSplit(LevelID input, FrontiersSettings settings) => input switch
+    {
+        SonicFrontiers.LevelID.w1_1 => settings.w1_1_arcade,
+        SonicFrontiers.LevelID.w1_2 => settings.w1_2_arcade,
+        SonicFrontiers.LevelID.w1_3 => settings.w1_3_arcade,
+        SonicFrontiers.LevelID.w1_4 => settings.w1_4_arcade,
+        SonicFrontiers.LevelID.w1_5 => settings.w1_5_arcade,
+        SonicFrontiers.LevelID.w1_6 => settings.w1_6_arcade,
+        SonicFrontiers.LevelID.w1_7 => settings.w1_7_arcade,
+        SonicFrontiers.LevelID.w2_1 => settings.w2_1_arcade,
+        SonicFrontiers.LevelID.w2_2 => settings.w2_2_arcade,
+        SonicFrontiers.LevelID.w2_3 => settings.w2_3_arcade,
+        SonicFrontiers.LevelID.w2_4 => settings.w2_4_arcade,
+        SonicFrontiers.LevelID.w2_5 => settings.w2_5_arcade,
+        SonicFrontiers.LevelID.w2_6 => settings.w2_6_arcade,
+        SonicFrontiers.LevelID.w2_7 => settings.w2_7_arcade,
+        SonicFrontiers.LevelID.w3_1 => settings.w3_1_arcade,
+        SonicFrontiers.LevelID.w3_2 => settings.w3_2_arcade,
+        SonicFrontiers.LevelID.w3_3 => settings.w3_3_arcade,
+        SonicFrontiers.LevelID.w3_4 => settings.w3_4_arcade,
+        SonicFrontiers.LevelID.w3_5 => settings.w3_5_arcade,
+        SonicFrontiers.LevelID.w3_6 => settings.w3_6_arcade,
+        SonicFrontiers.LevelID.w3_7 => settings.w3_7_arcade,
+        SonicFrontiers.LevelID.w4_1 => settings.w4_1_arcade,
+        SonicFrontiers.LevelID.w4_2 => settings.w4_2_arcade,
+        SonicFrontiers.LevelID.w4_3 => settings.w4_3_arcade,
+        SonicFrontiers.LevelID.w4_4 => settings.w4_4_arcade,
+        SonicFrontiers.LevelID.w4_5 => settings.w4_5_arcade,
+        SonicFrontiers.LevelID.w4_6 => settings.w4_6_arcade,
+        SonicFrontiers.LevelID.w4_7 => settings.w4_7_arcade,
+        SonicFrontiers.LevelID.w4_8 => settings.w4_8_arcade,
+        SonicFrontiers.LevelID.w4_9 => settings.w4_9_arcade,
+        _ => false,
+    };
+
+    private bool CheckStorySplit(LevelID input, FrontiersSettings settings) => input switch
+    {
+        SonicFrontiers.LevelID.w1_1 => settings.w1_1_story,
+        SonicFrontiers.LevelID.w1_2 => settings.w1_2_story,
+        SonicFrontiers.LevelID.w1_3 => settings.w1_3_story,
+        SonicFrontiers.LevelID.w1_4 => settings.w1_4_story,
+        SonicFrontiers.LevelID.w1_5 => settings.w1_5_story,
+        SonicFrontiers.LevelID.w1_6 => settings.w1_6_story,
+        SonicFrontiers.LevelID.w1_7 => settings.w1_7_story,
+        SonicFrontiers.LevelID.w2_1 => settings.w2_1_story,
+        SonicFrontiers.LevelID.w2_2 => settings.w2_2_story,
+        SonicFrontiers.LevelID.w2_3 => settings.w2_3_story,
+        SonicFrontiers.LevelID.w2_4 => settings.w2_4_story,
+        SonicFrontiers.LevelID.w2_5 => settings.w2_5_story,
+        SonicFrontiers.LevelID.w2_6 => settings.w2_6_story,
+        SonicFrontiers.LevelID.w2_7 => settings.w2_7_story,
+        SonicFrontiers.LevelID.w3_1 => settings.w3_1_story,
+        SonicFrontiers.LevelID.w3_2 => settings.w3_2_story,
+        SonicFrontiers.LevelID.w3_3 => settings.w3_3_story,
+        SonicFrontiers.LevelID.w3_4 => settings.w3_4_story,
+        SonicFrontiers.LevelID.w3_5 => settings.w3_5_story,
+        SonicFrontiers.LevelID.w3_6 => settings.w3_6_story,
+        SonicFrontiers.LevelID.w3_7 => settings.w3_7_story,
+        SonicFrontiers.LevelID.w4_1 => settings.w4_1_story,
+        SonicFrontiers.LevelID.w4_2 => settings.w4_2_story,
+        SonicFrontiers.LevelID.w4_3 => settings.w4_3_story,
+        SonicFrontiers.LevelID.w4_4 => settings.w4_4_story,
+        SonicFrontiers.LevelID.w4_5 => settings.w4_5_story,
+        SonicFrontiers.LevelID.w4_6 => settings.w4_6_story,
+        SonicFrontiers.LevelID.w4_7 => settings.w4_7_story,
+        SonicFrontiers.LevelID.w4_8 => settings.w4_8_story,
+        SonicFrontiers.LevelID.w4_9 => settings.w4_9_story,
+        SonicFrontiers.LevelID.w4_A => settings.w4_A_story,
+        SonicFrontiers.LevelID.w4_B => settings.w4_B_story,
+        SonicFrontiers.LevelID.w4_C => settings.w4_C_story,
+        SonicFrontiers.LevelID.w4_D => settings.w4_D_story,
+        SonicFrontiers.LevelID.w4_E => settings.w4_E_story,
+        SonicFrontiers.LevelID.w4_F => settings.w4_F_story,
+        SonicFrontiers.LevelID.w4_G => settings.w4_G_story,
+        SonicFrontiers.LevelID.w4_H => settings.w4_H_story,
+        SonicFrontiers.LevelID.w4_I => settings.w4_I_story,
+        _ => false,
+    };
+
+    private bool CheckBoolSplit(string key, FrontiersSettings settings) => key switch
+    {
+        "Amy_First" => settings.Amy_First,
+        "Knuckles_First" => settings.Knuckles_First,
+        "Tails_First" => settings.Tails_First,
+        "Amy_Second" => settings.Amy_Second,
+        "Knuckles_Second" => settings.Knuckles_Second,
+        "Tails_Second" => settings.Tails_Second,
+        "Sonic_MasterTrial" => settings.Sonic_MasterTrial,
+        "Sonic_Tower1" => settings.Sonic_Tower1,
+        "Sonic_Tower2" => settings.Sonic_Tower2,
+        "Sonic_Tower3" => settings.Sonic_Tower3,
+        "Sonic_Tower4" => settings.Sonic_Tower4,
+        "Skill_Cyloop" => settings.Skill_Cyloop,
+        "Skill_PhantomRush" => settings.Skill_PhantomRush,
+        "Skill_AirTrick" => settings.Skill_AirTrick,
+        "Skill_StompAttack" => settings.Skill_StompAttack,
+        "Skill_QuickCyloop" => settings.Skill_QuickCyloop,
+        "Skill_SonicBoom" => settings.Skill_SonicBoom,
+        "Skill_WildRush" => settings.Skill_WildRush,
+        "Skill_LoopKick" => settings.Skill_LoopKick,
+        "Skill_HomingShot" => settings.Skill_HomingShot,
+        "Skill_AutoCombo" => settings.Skill_AutoCombo,
+        "Skill_SpinSlash" => settings.Skill_SpinSlash,
+        "Skill_RecoverySmash" => settings.Skill_RecoverySmash,
+        "Kronos_Ninja" => settings.Kronos_Ninja,
+        "Kronos_Door" => settings.Kronos_Door,
+        "Kronos_Amy" => settings.Kronos_Amy,
+        "Kronos_GigantosFirst" => settings.Kronos_GigantosFirst,
+        "Kronos_GreenCE" => settings.Kronos_GreenCE,
+        "Kronos_CyanCE" => settings.Kronos_CyanCE,
+        "Kronos_Tombstones" => settings.Kronos_Tombstones,
+        "Kronos_BlueCE" => settings.Kronos_BlueCE,
+        "Kronos_RedCE" => settings.Kronos_RedCE,
+        "Kronos_YellowCE" => settings.Kronos_YellowCE,
+        "Kronos_WhiteCE" => settings.Kronos_WhiteCE,
+        "Kronos_GigantosStart" => settings.Kronos_GigantosStart,
+        "Kronos_SuperSonic" => settings.Kronos_SuperSonic,
+        "Island_Kronos_story" => settings.Island_Kronos_story,
+        "Island_Kronos_fishing" => settings.Island_Kronos_fishing,
+        "Ares_Knuckles" => settings.Ares_Knuckles,
+        "Ares_WyvernFirst" => settings.Ares_WyvernFirst,
+        "Ares_Water" => settings.Ares_Water,
+        // "Ares_KocoRoundup"  => settings.Ares_KocoRoundup,
+        "Ares_Crane" => settings.Ares_Crane,
+        "Ares_GreenCE" => settings.Ares_GreenCE,
+        "Ares_CyanCE" => settings.Ares_CyanCE,
+        "Ares_BlueCE" => settings.Ares_BlueCE,
+        "Ares_RedCE" => settings.Ares_RedCE,
+        "Ares_YellowCE" => settings.Ares_YellowCE,
+        "Ares_WhiteCE" => settings.Ares_WhiteCE,
+        "Ares_WyvernStart" => settings.Ares_WyvernStart,
+        "Ares_WyvernRun" => settings.Ares_WyvernRun,
+        "Ares_SuperSonic" => settings.Ares_SuperSonic,
+        "Island_Ares_story" => settings.Island_Ares_story,
+        "Island_Ares_fishing" => settings.Island_Ares_fishing,
+        "Chaos_Tails" => settings.Chaos_Tails,
+        "Chaos_KnightFirst" => settings.Chaos_KnightFirst,
+        "Chaos_Hacking" => settings.Chaos_Hacking,
+        "Chaos_GreenCE" => settings.Chaos_GreenCE,
+        "Chaos_CyanCE" => settings.Chaos_CyanCE,
+        "Chaos_PinballStart" => settings.Chaos_PinballStart,
+        "Chaos_PinballEnd" => settings.Chaos_PinballEnd,
+        "Chaos_BlueCE" => settings.Chaos_BlueCE,
+        "Chaos_RedCE" => settings.Chaos_RedCE,
+        "Chaos_YellowCE" => settings.Chaos_YellowCE,
+        "Chaos_WhiteCE" => settings.Chaos_WhiteCE,
+        "Chaos_KnightStart" => settings.Chaos_KnightStart,
+        "Chaos_SuperSonic" => settings.Chaos_SuperSonic,
+        "Island_Chaos_story" => settings.Island_Chaos_story,
+        "Island_Chaos_fishing" => settings.Island_Chaos_fishing,
+        "Rhea_Tower1" => settings.Rhea_Tower1,
+        "Rhea_Tower2" => settings.Rhea_Tower2,
+        "Rhea_Tower3" => settings.Rhea_Tower3,
+        "Rhea_Tower4" => settings.Rhea_Tower4,
+        "Rhea_Tower5" => settings.Rhea_Tower5,
+        "Rhea_Tower6" => settings.Rhea_Tower6,
+        "Island_Rhea_story" => settings.Island_Rhea_story,
+        "Ouranos_FirstHackingStart" => settings.Ouranos_FirstHackingStart,
+        "Ouranos_Bridge" => settings.Ouranos_Bridge,
+        "Ouranos_SupremeDefeated" => settings.Ouranos_SupremeDefeated,
+        "Ouranos_BlueCE" => settings.Ouranos_BlueCE,
+        "Ouranos_RedCE" => settings.Ouranos_RedCE,
+        "Ouranos_GreenCE" => settings.Ouranos_GreenCE,
+        "Ouranos_YellowCE" => settings.Ouranos_YellowCE,
+        "Ouranos_CyanCE" => settings.Ouranos_CyanCE,
+        //"Ouranos_WhiteCE" => settings.Ouranos_WhiteCE,
+        "Island_Ouranos_fishing" => settings.Island_Ouranos_fishing,
+        "Ouranos_SecondHackingStart" => settings.Ouranos_SecondHackingStart,
+        "Ouranos_FinalDoor" => settings.Ouranos_FinalDoor,
+        _ => false,
+    };
+    
+    internal bool Reset(FrontiersSettings settings)
+    {
+        return HsmStatus.Current[1] == "Quit" && HsmStatus.Old[1] == "NewGameMenu" && settings.AutoReset;
+    }
 
     private bool ScanBossHsm(ProcessMemory process, string bossName, string bossMove)
     {
@@ -636,6 +973,8 @@ partial class Memory
     /// The main purpose of this function is to perform sigscanning and get memory addresses and offsets
     /// needed by the autosplitter.
     /// </summary>
+    
+    /*
     private void GetAddresses()
     {
 
@@ -660,4 +999,5 @@ partial class Memory
         if (GameVersion != GameVersion.v1_01 && GameVersion != GameVersion.v1_10)
             RTTILIST.Add("GameModeBattleRushExtension::game::app");
     }
+    */
 }

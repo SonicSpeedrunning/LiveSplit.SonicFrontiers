@@ -122,9 +122,20 @@ namespace LiveSplit.SonicFrontiers
         b4_10,
         b4_11,
     }
-
-    readonly struct Enums
+    public enum GameVersion
     {
+        Unknown,
+        v1_01,
+        v1_10,
+        v1_20, // Speed update
+        v1_30, // Sonic's birthday update
+        v1_42,
+    }
+}
+   
+    public readonly struct Enums
+    {
+    /*
         public static readonly Dictionary<string, Status> Status = new Dictionary<string, Status>
         {
             { "TopMenu", SonicFrontiers.Status.TopMenu },                   // Main menu screen
@@ -147,17 +158,9 @@ namespace LiveSplit.SonicFrontiers
             { "Build", SonicFrontiers.Status.Build },                       // Used while "building" the level, regardless of the actual load. Don't use it
         };
     }
-
+    */
     // Technically not needed, but this enum keeps track of the currently released patches
     // so it makes easier to deal with version changes, should a patch come that breaks
     // compatibility with the current autosplitter's functions.
-    enum GameVersion
-    {
-        Unknown,
-        v1_01,
-        v1_10,
-        v1_20, // Speed update
-        v1_30, // Sonic's birthday update
-        v1_42,
-    }
+    
 }
