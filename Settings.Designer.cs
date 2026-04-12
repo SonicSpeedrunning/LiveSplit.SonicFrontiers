@@ -1,6 +1,6 @@
 ﻿namespace LiveSplit.SonicFrontiers
 {
-    partial class Settings
+    partial class FrontiersSettings
     {
         /// <summary> 
         /// Required designer variable.

@@ -37,27 +37,23 @@
 
   <ItemGroup>
     <Reference Include="LiveSplit.Core">
-      <HintPath>..\..\..\..\..\Program Files\LiveSplit\LiveSplit.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\LiveSplit\LiveSplit.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers">
-      <HintPath>..\..\..\..\..\Program Files\LiveSplit\System.Buffers.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\Program Files (x86)\LiveSplit\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory">
-      <HintPath>..\..\..\..\..\Program Files\LiveSplit\System.Memory.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\Program Files (x86)\LiveSplit\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>..\..\..\..\..\Program Files\LiveSplit\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\Program Files (x86)\LiveSplit\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms">
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Workflow.Runtime" />
     <Reference Include="UpdateManager">
-      <HintPath>..\..\..\..\..\Program Files\LiveSplit\UpdateManager.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\Program Files (x86)\LiveSplit\UpdateManager.dll</HintPath>
     </Reference>
   </ItemGroup>
 

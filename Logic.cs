@@ -60,7 +60,7 @@ internal partial class SonicFrontiersComponent : LogicComponent
             {
                 try
                 {
-                    memory = new Memory();
+                    memory = new Memory(process, state);
                 }
                 catch
                 {
@@ -78,7 +78,7 @@ internal partial class SonicFrontiersComponent : LogicComponent
                 clock.Start();
 
                 // Memory update cycle for the current game process and settings
-                memory.Update(process, Settings);
+                memory.Update(process, Settings, state);
 
                 // Timer logic to manage game-time, loading status, and potential resets or splits
                 if (timer.CurrentState.CurrentPhase == TimerPhase.Running || timer.CurrentState.CurrentPhase == TimerPhase.Paused)
@@ -89,15 +89,18 @@ internal partial class SonicFrontiersComponent : LogicComponent
                         state.IsGameTimePaused = isLoading.Value;
 
                     // Update in-game time if available
-                    TimeSpan? gameTime = memory.GameTime(Settings);
+                    TimeSpan? gameTime = memory.IGT.Current;
                     if (gameTime is not null)
                         timer.CurrentState.SetGameTime(gameTime.Value);
 
                     // Check if the game conditions require a timer reset or split
+                    /*
                     if (memory.Reset(Settings))
                         timer.Reset();
-                    else if (memory.Split(Settings))
+                    */
+                    else if (timer.CurrentState.CurrentTime.RealTime > new TimeSpan(0, 0, 2) && memory.Split(Settings)) { 
                         timer.Split();
+                    }
                 }
 
                 // Start the timer if game start conditions are met and the timer is not running

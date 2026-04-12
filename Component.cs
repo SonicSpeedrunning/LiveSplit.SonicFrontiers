@@ -1,6 +1,7 @@
 ﻿using LiveSplit.Model;
 using LiveSplit.UI;
 using LiveSplit.UI.Components;
+using LiveSplit.SonicFrontiers;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -9,7 +10,7 @@ namespace LiveSplit.SonicFrontiers;
 
 internal partial class SonicFrontiersComponent : LogicComponent
 {
-    private Settings settings { get; set; } = new();
+    private FrontiersSettings Settings { get; set; } = new();
 
     public SonicFrontiersComponent(LiveSplitState state)
     {
@@ -23,7 +24,7 @@ internal partial class SonicFrontiersComponent : LogicComponent
         });
 
         if (state.CurrentTimingMethod == TimingMethod.RealTime)
-            AskGameTime();
+            AskGameTime(state);
     }
 
     public override void Dispose()
@@ -35,7 +36,7 @@ internal partial class SonicFrontiersComponent : LogicComponent
     }
 
     public override XmlNode GetSettings(XmlDocument document) => Settings.GetSettings(document);
-    public override Control GetSettingsControl(LayoutMode mode) => Settings;
+    public override Control GetSettingsControl(LayoutMode mode) => new FrontiersSettings();
     public override void SetSettings(XmlNode settings) => Settings.SetSettings(settings);
     public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode) { }
 
