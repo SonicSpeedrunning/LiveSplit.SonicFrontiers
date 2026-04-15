@@ -22,7 +22,7 @@ internal partial class SonicFrontiersComponent : LogicComponent
     private readonly CancellationTokenSource cancelToken = new();
 
     /// <summary>
-    /// Main task method for the autosplitter that monitors the game process and updates the LiveSplit timer based on in-game events.
+    /// Main task method for the autosplitter that monitors the game prochttps://i.imgur.com/dxBe3gM.pngess and updates the LiveSplit timer based on in-game events.
     /// </summary>
     /// <param name="state">Current state of the LiveSplit timer.</param>
     /// <param name="canceltoken">Token for cancelling the task.</param>
@@ -90,7 +90,7 @@ internal partial class SonicFrontiersComponent : LogicComponent
 
                     // Update in-game time if available
                     TimeSpan? gameTime = memory.IGT.Current;
-                    if (gameTime is not null)
+                    if (gameTime is not null && memory.GameMode.Current != SonicFrontiers.GameMode.Story)
                         timer.CurrentState.SetGameTime(gameTime.Value);
 
                     // Check if the game conditions require a timer reset or split

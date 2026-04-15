@@ -546,10 +546,12 @@ partial class Memory
             if (AlreadyTriggeredBools.Count > 0)
                 AlreadyTriggeredBools.Clear();
         }
-
-        // When exiting a stage, or whenever the IGT resets, this will keep track of the time you accumulated so far
-        if (IGT.Current == TimeSpan.Zero && IGT.Old != TimeSpan.Zero)
-            AccumulatedIGT += IGT.Old;
+        if (GameMode.Current != SonicFrontiers.GameMode.Story)
+        {
+            // When exiting a stage, or whenever the IGT resets, this will keep track of the time you accumulated so far
+            if (IGT.Current == TimeSpan.Zero && IGT.Old != TimeSpan.Zero)
+                AccumulatedIGT += IGT.Old;
+        }
     }
 
     /// <summary>
@@ -580,31 +582,47 @@ partial class Memory
     /// <returns>True if the game is loading; otherwise, false.</returns>
     internal bool? IsLoading(FrontiersSettings settings)
     {
-        if (!Engine.GetExtension("GameModeHsmExtension", out _)) {
-            return true;
-        }
         //all these modes use IGT only
         if (GameMode.Current == SonicFrontiers.GameMode.Arcade || GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge || GameMode.Current == SonicFrontiers.GameMode.BossRush)
         {
+            Log.Warning($"IN IGT GAMEMODE {GameMode.Current}");
+            return null;
+        }
+
+        if (!Engine.GetExtension("GameModeHsmExtension", out _)) {
+            Log.Warning("CANNOT FIND HSM EXTENSION");
             return true;
         }
+        
         if (LevelID.Current != SonicFrontiers.LevelID.MainMenu && Engine.GameMode == "GameModeLoad")
         {
+            Log.Warning("GameModeLoad");
             return true;
         }
         if (IsInTutorial && (LevelID.Current <= SonicFrontiers.LevelID.w4_9 || LevelID.Current == SonicFrontiers.LevelID.Fishing))
         {
+            Log.Warning("IN TUTORIAL");
             return true;
         }
         //fix for cyberspace taking randomly longer to finish in >=1.20
-        if (LevelID.Current != SonicFrontiers.LevelID.MainMenu && (GameVersion == GameVersion.Unknown || GameVersion == GameVersion.v1_10) && HsmStatus.Current[0] == "Finish")
+        if (LevelID.Current != SonicFrontiers.LevelID.MainMenu && (GameVersion == GameVersion.Unknown || GameVersion == GameVersion.v1_10) && HsmStatus.Current[1] == "Finish")
         {
+            Log.Warning("FINISHING CYBERSPACE STAGE");
             return true;
         }
-        //new checks to help accuracy out
-        if (!(Engine.GetObject("GOCPlayerInformationUpdater", out _) && Engine.GetObject("ObjForetasteSign", out _)))
+        if ((Engine.GameMode != "GameModeTitle"))
         {
-            return true;
+            if (!Engine.GetObject("Sonic", out IntPtr sonicPtr))
+            {
+                Log.Warning("Sonic Not Found");
+                Log.Info("HSMStatus: " + HsmStatus.Current[1]);
+                return true;
+            }
+            else
+            {
+                Log.Info("HSMStatus: " + HsmStatus.Current[1]);
+            }
+
         }
         
         return false;
