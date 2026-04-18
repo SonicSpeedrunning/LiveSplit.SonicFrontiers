@@ -10,7 +10,7 @@ namespace LiveSplit.SonicFrontiers;
 
 internal partial class SonicFrontiersComponent : LogicComponent
 {
-    private FrontiersSettings Settings { get; set; } = new();
+    private Settings Settings { get; set; } = new();
 
     public SonicFrontiersComponent(LiveSplitState state)
     {
@@ -36,7 +36,7 @@ internal partial class SonicFrontiersComponent : LogicComponent
     }
 
     public override XmlNode GetSettings(XmlDocument document) => Settings.GetSettings(document);
-    public override Control GetSettingsControl(LayoutMode mode) => new FrontiersSettings();
+    public override Control GetSettingsControl(LayoutMode mode) => Settings;
     public override void SetSettings(XmlNode settings) => Settings.SetSettings(settings);
     public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode) { }
 
