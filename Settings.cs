@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace LiveSplit.SonicFrontiers
 {
-    public partial class FrontiersSettings : UserControl
+    public partial class Settings : UserControl
     {
 
 
@@ -248,7 +248,7 @@ namespace LiveSplit.SonicFrontiers
         //Notes
 
         public bool MusicNoteAny { get; set; }
-        public FrontiersSettings()
+        public Settings()
         {
             InitializeComponent();
             autosplitterVersion.Text = "Autosplitter version: v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion;

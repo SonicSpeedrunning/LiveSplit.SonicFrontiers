@@ -37,7 +37,7 @@ partial class Memory
     public LazyWatcher<string[]> HsmStatus { get; }
 
     public LazyWatcher<TimeSpan> IGT { get; }
-    public TimeSpan AccumulatedIGT { get; protected set; } = default;
+    public TimeSpan AccumulatedIGT { get; set; } = default;
 
     /// <summary>
     /// Watches the level ID in the game.
@@ -254,7 +254,10 @@ partial class Memory
             {
                 float igt = process.Read<float>(stageTimeExtension + 0x34) - Engine.IGTSubtraction;
                 if (igt < 0)
+                {
+                    Log.Info(BitConverter.ToInt32(BitConverter.GetBytes(Engine.IGTSubtraction), 0).ToString("X8"));
                     igt = 0;
+                }
                 return TimeSpan.FromSeconds(Math.Truncate(igt * 100) / 100);
             }
             else if (Engine.GetExtension("GameModeBattleRushExtension", out IntPtr battleRushExtension))
@@ -506,7 +509,7 @@ partial class Memory
         });
     }
 
-    internal void Update(ProcessMemory process, FrontiersSettings settings, LiveSplitState state)
+    internal void Update(ProcessMemory process, Settings settings, LiveSplitState state)
     {
         ApplyHWNDpatch(process, settings);
         StateTracker.Tick();
@@ -559,7 +562,7 @@ partial class Memory
     /// </summary>
     /// <param name="process">The current process memory instance.</param>
     /// <param name="settings">The settings specifying whether to apply the patch.</param>
-    private void ApplyHWNDpatch(ProcessMemory process, FrontiersSettings settings)
+    private void ApplyHWNDpatch(ProcessMemory process, Settings settings)
     {
         IntPtr address = Engine.HWndAddress;
         bool setting = settings.WFocus;
@@ -580,56 +583,47 @@ partial class Memory
     /// Determines if the game is currently loading.
     /// </summary>
     /// <returns>True if the game is loading; otherwise, false.</returns>
-    internal bool? IsLoading(FrontiersSettings settings)
+    internal bool? IsLoading(Settings settings)
     {
         //all these modes use IGT only
         if (GameMode.Current == SonicFrontiers.GameMode.Arcade || GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge || GameMode.Current == SonicFrontiers.GameMode.BossRush)
         {
-            Log.Warning($"IN IGT GAMEMODE {GameMode.Current}");
             return null;
         }
 
         if (!Engine.GetExtension("GameModeHsmExtension", out _)) {
-            Log.Warning("CANNOT FIND HSM EXTENSION");
+
             return true;
         }
         
         if (LevelID.Current != SonicFrontiers.LevelID.MainMenu && Engine.GameMode == "GameModeLoad")
         {
-            Log.Warning("GameModeLoad");
+
             return true;
         }
         if (IsInTutorial && (LevelID.Current <= SonicFrontiers.LevelID.w4_9 || LevelID.Current == SonicFrontiers.LevelID.Fishing))
         {
-            Log.Warning("IN TUTORIAL");
             return true;
         }
         //fix for cyberspace taking randomly longer to finish in >=1.20
         if (LevelID.Current != SonicFrontiers.LevelID.MainMenu && (GameVersion == GameVersion.Unknown || GameVersion == GameVersion.v1_10) && HsmStatus.Current[1] == "Finish")
         {
-            Log.Warning("FINISHING CYBERSPACE STAGE");
             return true;
         }
         if ((Engine.GameMode != "GameModeTitle"))
         {
+            //to be completely honest this is just as reliable as what onaku had
             if (!Engine.GetObject("Sonic", out IntPtr sonicPtr))
-            {
-                Log.Warning("Sonic Not Found");
-                Log.Info("HSMStatus: " + HsmStatus.Current[1]);
+            { 
                 return true;
             }
-            else
-            {
-                Log.Info("HSMStatus: " + HsmStatus.Current[1]);
-            }
-
         }
         
         return false;
 
     }
 
-    internal bool Start(FrontiersSettings settings)
+    internal bool Start(Settings settings)
     {
         if (HsmStatus.Current[1] == "Quit" && HsmStatus.Old[1] == "NewGameMenu")
         {
@@ -656,7 +650,7 @@ partial class Memory
         return false;
     }
 
-    internal bool Split(FrontiersSettings settings)
+    internal bool Split(Settings settings)
     {
         if (GameMode.Current == SonicFrontiers.GameMode.Arcade || GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge)
         {
@@ -721,11 +715,13 @@ partial class Memory
 
         //Story Mode
 
-        foreach (var flag in SplitBools.Where(b => AlreadyTriggeredBools.Contains(b.Key)))
+        foreach (var flag in SplitBools.Where(b => !AlreadyTriggeredBools.Contains(b.Key)))
         {
+            
             if (CheckBoolSplit(flag.Key, settings) && !flag.Value.Old && flag.Value.Current)
             {
-                AlreadyTriggeredBools.Add(flag.Key);
+                
+                Log.Info("SPLIT ON " + flag.Key);
                 return true;
             }
         }
@@ -769,7 +765,7 @@ partial class Memory
         //Cyberspace within story mode
         return CheckStorySplit(LevelID.Old, settings) && StoryModeCyberSpaceCompletionFlag.Old && !StoryModeCyberSpaceCompletionFlag.Current;
     }
-    private bool CheckArcadeSplit(LevelID input, FrontiersSettings settings) => input switch
+    private bool CheckArcadeSplit(LevelID input, Settings settings) => input switch
     {
         SonicFrontiers.LevelID.w1_1 => settings.w1_1_arcade,
         SonicFrontiers.LevelID.w1_2 => settings.w1_2_arcade,
@@ -804,7 +800,7 @@ partial class Memory
         _ => false,
     };
 
-    private bool CheckStorySplit(LevelID input, FrontiersSettings settings) => input switch
+    private bool CheckStorySplit(LevelID input, Settings settings) => input switch
     {
         SonicFrontiers.LevelID.w1_1 => settings.w1_1_story,
         SonicFrontiers.LevelID.w1_2 => settings.w1_2_story,
@@ -848,7 +844,7 @@ partial class Memory
         _ => false,
     };
 
-    private bool CheckBoolSplit(string key, FrontiersSettings settings) => key switch
+    private bool CheckBoolSplit(string key, Settings settings) => key switch
     {
         "Amy_First" => settings.Amy_First,
         "Knuckles_First" => settings.Knuckles_First,
@@ -941,7 +937,7 @@ partial class Memory
         _ => false,
     };
     
-    internal bool Reset(FrontiersSettings settings)
+    internal bool Reset(Settings settings)
     {
         return HsmStatus.Current[1] == "Quit" && HsmStatus.Old[1] == "NewGameMenu" && settings.AutoReset;
     }
