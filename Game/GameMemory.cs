@@ -614,10 +614,15 @@ partial class Memory
         if ((Engine.GameMode != "GameModeTitle"))
         {
             //to be completely honest this is just as reliable as what onaku had
-            if (!Engine.GetObject("Sonic", out IntPtr sonicPtr))
+            if (Engine.GetObject("Sonic", out _)) 
             { 
-                return true;
+                
+                return false;
+            //another story, same idea
+            } else if (Engine.GetObject("PlayerAmy", out IntPtr _) || Engine.GetObject("PlayerKnuckles", out _) || Engine.GetObject("PlayerTails", out _)) {
+                return false;
             }
+            return true;
         }
         
         return false;
@@ -762,6 +767,8 @@ partial class Memory
             || (settings.Ouranos_SecondHackingStart && LevelID.Current == SonicFrontiers.LevelID.Hacking_03 && LevelID.Old == SonicFrontiers.LevelID.Island_Ouranos)){
             return true;
         }
+
+
 
         //Cyberspace within story mode
         return CheckStorySplit(LevelID.Old, settings) && StoryModeCyberSpaceCompletionFlag.Old && !StoryModeCyberSpaceCompletionFlag.Current;

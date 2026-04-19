@@ -1,5 +1,6 @@
 ﻿using JHelper.Common.ProcessInterop;
 using JHelper.Common.ProcessInterop.API;
+using LiveSplit.Options;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
