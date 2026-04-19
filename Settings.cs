@@ -658,6 +658,7 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "Ouranos_FirstHackingStart", Ouranos_FirstHackingStart));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_Bridge", Ouranos_Bridge));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_SupremeDefeated", Ouranos_SupremeDefeated));
+            settingsNode.AppendChild(ToElement(doc, "Ouranos_SecondHackingStart", Ouranos_SecondHackingStart));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_FinalDoor", Ouranos_FinalDoor));
             settingsNode.AppendChild(ToElement(doc, "FinalBoss", FinalBoss));
             settingsNode.AppendChild(ToElement(doc, "w4_1_story", w4_1_story));
