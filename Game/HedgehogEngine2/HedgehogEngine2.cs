@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using LiveSplit.Options;
 
 namespace LiveSplit.SonicFrontiers.GameEngine;
 
@@ -85,7 +86,8 @@ internal class HedgehogEngine2
 
         // Retrieve the IGT offset for Cyber Stages
         // FIXME: THIS CODE NEEDS TO BE REVIEWED AND COMPLETED AS IT BREAKS WITH OLDER VERSIONS OF THE GAME
-        IntPtr igtSub = process.MainModule.Scan(new ScanPattern(0xE, "F3 0F 11 49 ?? F3 41 0F 58 ?? F3 0F 5C 0D"));
+        IntPtr igtSub = process.MainModule.Scan(new ScanPattern(0xE, "F3 0F 11 49 ?? F3 41 0F 58 ?? F3 0F 5C 0D") { OnFound = addr => addr + 4 + process.Read<int>(addr)});
+        Log.Info(igtSub.ToString("X"));
         if (!process.Read<float>(igtSub, out float igt))
             throw new InvalidProgramException("Could not find scan address for IGT subtraction");
         IGTSubtraction = igt;

@@ -255,6 +255,7 @@ partial class Memory
                 float igt = process.Read<float>(stageTimeExtension + 0x34) - Engine.IGTSubtraction;
                 if (igt < 0)
                 {
+                    Log.Info(Engine.IGTSubtraction.ToString());
                     Log.Info(BitConverter.ToInt32(BitConverter.GetBytes(Engine.IGTSubtraction), 0).ToString("X8"));
                     igt = 0;
                 }
