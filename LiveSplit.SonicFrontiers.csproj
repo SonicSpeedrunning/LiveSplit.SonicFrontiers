@@ -18,16 +18,19 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
+	 <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
-    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
     <Deterministic>True</Deterministic>
   </PropertyGroup>
 
+	
+	
   <ItemGroup>
     <PackageReference Include="PolySharp" Version="1.15.0">
       <PrivateAssets>all</PrivateAssets>
