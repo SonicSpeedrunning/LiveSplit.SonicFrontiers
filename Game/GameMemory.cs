@@ -9,7 +9,10 @@ using LiveSplit.SonicFrontiers;
 using LiveSplit.SonicFrontiers.GameEngine;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
+using System.Drawing.Printing;
 using System.Linq;
+using System.Security;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LiveSplit.SonicFrontiers;
@@ -374,8 +377,8 @@ partial class Memory
             { "Kronos_RedCE",           new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Kronos_RedCE) },
             { "Kronos_YellowCE",        new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Kronos_YellowCE) },
             { "Kronos_WhiteCE",         new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Kronos_WhiteCE) },
-            { "Kronos_GigantosStart",   new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Kronos && ScanBossHsm(process, "BossGiant", "WalkingBase")) },
-            { "Kronos_SuperSonic",      new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Kronos && ScanBossHsm(process, "BossGiant", "BattlePhaseParent")) },
+            { "Kronos_GigantosStart",   new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Kronos && ScanBossHsm(process, "Giant0", "WalkingBase")) },
+            { "Kronos_SuperSonic",      new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Kronos && ScanBossHsm(process, "Giant0", "BattlePhaseParent")) },
             { "Island_Kronos_story",    new LazyWatcher<bool>(StateTracker, false, (_, _) =>  LevelID.Old == SonicFrontiers.LevelID.Island_Kronos && LevelID.Current == SonicFrontiers.LevelID.Island_Ares) },
             { "Island_Kronos_fishing",  new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Kronos) },
 
@@ -391,9 +394,9 @@ partial class Memory
             { "Ares_RedCE",             new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ares_RedCE) },
             { "Ares_YellowCE",          new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ares_YellowCE) },
             { "Ares_WhiteCE",           new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ares_WhiteCE) },
-            { "Ares_WyvernStart",       new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && ScanBossHsm(process, "BossDragon", "PatrolTop")) },
-            { "Ares_WyvernRun",         new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && ScanBossHsm(process, "BossDragon", "EventRise")) },
-            { "Ares_SuperSonic",        new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && ScanBossHsm(process, "BossDragon", "BattleTop")) },
+            { "Ares_WyvernStart",       new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && ScanBossHsm(process, "Dragon0", "PatrolTop")) },
+            { "Ares_WyvernRun",         new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && ScanBossHsm(process, "Dragon0", "EventRise")) },
+            { "Ares_SuperSonic",        new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ares && ScanBossHsm(process, "Dragon0", "BattleTop")) },
             { "Island_Ares_story",      new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Island_Ares && LevelID.Current == SonicFrontiers.LevelID.Island_Chaos) },
             { "Island_Ares_fishing",    new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Ares) },
 
@@ -410,7 +413,7 @@ partial class Memory
             { "Chaos_YellowCE",         new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Chaos_YellowCE) },
             { "Chaos_WhiteCE",          new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Chaos_WhiteCE) },
             { "Chaos_KnightStart",      new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Chaos_KnightStart) },
-            { "Chaos_SuperSonic",       new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Chaos && ScanBossHsm(process, "BossKnight", "Battle1Top")) },
+            { "Chaos_SuperSonic",       new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Chaos && ScanBossHsm(process, "Knight0", "Battle1Top")) },
             { "Island_Chaos_story",     new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Island_Chaos && LevelID.Current == SonicFrontiers.LevelID.Island_Rhea) },
             { "Island_Chaos_fishing",   new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Fishing && LevelID.Current == SonicFrontiers.LevelID.Island_Chaos) },
 
@@ -527,6 +530,14 @@ partial class Memory
                     Flags = span[0];
             }
         }
+        if(SplitBools.Values.Any(b => b.Changed))
+        {
+            var changedKeys = SplitBools.Keys.Where(k => SplitBools[k].Changed);
+            foreach (var ck in changedKeys)
+            {
+                //Log.Info(ck + " :" + SplitBools[ck].Current.ToString());
+            }
+        }
 
         
 
@@ -633,6 +644,7 @@ partial class Memory
     {
         if (HsmStatus.Current[1] == "Quit" && HsmStatus.Old[1] == "NewGameMenu")
         {
+            
             return settings.StoryStart;
         }
         else if(settings.ArcadeStart && GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge)
@@ -953,33 +965,37 @@ partial class Memory
     private bool ScanBossHsm(ProcessMemory process, string bossName, string bossMove)
     {
         if (!Engine.GetObject(bossName, out IntPtr boss) || !process.Read(boss, out Boss bossData))
+        {
             return false;
-
-        IntPtr gocHsm2 = IntPtr.Zero;
-
+        }
         using (ArrayRental<Address<long>> buf = new(bossData.noOfElements))
         {
             if (!process.ReadArray(bossData.array.Value, buf.Span))
                 return false;
+            var val = "";
 
             foreach (var entry in buf.Span)
             {
                 if (!process.Read(entry.Value, out BossHsm bossHsm)
                     || !process.ReadPointer(bossHsm.statik.Value, out IntPtr name)
-                    || !process.ReadPointer(name, out name)
-                    || !process.ReadString(name, 127, StringType.ASCII, out string val)
+                    || !process.ReadString(name, 127, StringType.ASCII, out val)
                     || val != "GOCHsm2")
-                    continue;
+                {
+                        continue;
+                }
 
                 using (ArrayRental<Address<long>> newBuf = new(bossHsm.noOfElements))
                 {
-                    if (!process.ReadArray(bossData.array.Value, newBuf.Span))
+                    if (!process.ReadArray(bossHsm.array.Value, newBuf.Span))
                         return false;
-
                     foreach (var element in newBuf.Span)
                     {
-                        if (Engine.RTTI.Lookup(element.Value, out val) && val == bossMove)
+
+                        if (Engine.RTTI.Lookup(element.Value, out val) && val == bossMove) { 
+
                             return true;
+                        }
+
                     }
                 }
             }

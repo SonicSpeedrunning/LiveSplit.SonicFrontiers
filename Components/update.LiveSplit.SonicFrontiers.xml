@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="2.0.1">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Fix boss state-dependent splits not triggering</change>
+		</changelog>
+	</update>
 	<update version="2.0.0">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
