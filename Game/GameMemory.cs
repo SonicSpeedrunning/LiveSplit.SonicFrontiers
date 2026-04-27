@@ -42,6 +42,7 @@ partial class Memory
     public LazyWatcher<TimeSpan> IGT { get; }
     public TimeSpan AccumulatedIGT { get; set; } = default;
 
+    public bool HasStarted11Story { get; set; } = false;
     /// <summary>
     /// Watches the level ID in the game.
     /// </summary>
@@ -67,10 +68,12 @@ partial class Memory
     /// </summary>
     public LazyWatcher<GameMode> GameMode { get; }
 
+    //Player Info Updater Watcher
+    public LazyWatcher<bool> HasPlayerInformationUpdater { get; }
 
     private bool IsInTutorial = false;
 
-    
+    public LazyWatcher<IntPtr> PlayerInstance { get; } 
     // Story flags
     private StoryFlags Flags;
     public Dictionary<string, LazyWatcher<bool>> SplitBools { get; }
@@ -334,6 +337,28 @@ partial class Memory
 
         });
 
+        PlayerInstance = new LazyWatcher<IntPtr>(StateTracker, IntPtr.Zero, (current, _) =>
+        {
+            IntPtr instance = IntPtr.Zero;
+            if (Engine.GetObject("Sonic", out instance)) 
+            {
+                return instance;
+            } else if (Engine.GetObject("PlayerTails", out instance) || Engine.GetObject("PlayerKnuckles", out instance) || Engine.GetObject("PlayerAmy", out instance))
+            {
+                return instance;
+            }
+            
+            return IntPtr.Zero;
+        });
+                HasPlayerInformationUpdater = new LazyWatcher<bool>(StateTracker, false, (_, _) =>
+                {
+                    if(PlayerInstance.Current == IntPtr.Zero)
+                    {
+                        return false;
+                    }
+                    return playerHasComponentName(process, "GOCPlayerInformationUpdater");
+                });
+
         // Split bools
         SplitBools = new Dictionary<string, LazyWatcher<bool>>
         {
@@ -535,7 +560,7 @@ partial class Memory
             var changedKeys = SplitBools.Keys.Where(k => SplitBools[k].Changed);
             foreach (var ck in changedKeys)
             {
-                //Log.Info(ck + " :" + SplitBools[ck].Current.ToString());
+                Log.Info(ck + " :" + SplitBools[ck].Current.ToString());
             }
         }
 
@@ -560,12 +585,29 @@ partial class Memory
 
             if (AlreadyTriggeredBools.Count > 0)
                 AlreadyTriggeredBools.Clear();
+            if (!HasStarted11Story)
+            {
+                HasStarted11Story = true;
+            }
         }
         if (GameMode.Current != SonicFrontiers.GameMode.Story)
         {
             // When exiting a stage, or whenever the IGT resets, this will keep track of the time you accumulated so far
             if (IGT.Current == TimeSpan.Zero && IGT.Old != TimeSpan.Zero)
                 AccumulatedIGT += IGT.Old;
+        } else
+        {
+            if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused) {
+                
+                if (!HasStarted11Story)
+                {
+                    if(LevelID.Changed && LevelID.Current == SonicFrontiers.LevelID.w1_1)
+                    {
+                        Log.Info($"{LevelID.Old} => {LevelID.Current}");
+                        HasStarted11Story = true;
+                    }
+                }
+            }
         }
     }
 
@@ -607,7 +649,10 @@ partial class Memory
 
             return true;
         }
-        
+        if (!settings.IslandILStart && !HasStarted11Story)
+        {
+            return true;
+        }
         if (LevelID.Current != SonicFrontiers.LevelID.MainMenu && Engine.GameMode == "GameModeLoad")
         {
 
@@ -622,18 +667,11 @@ partial class Memory
         {
             return true;
         }
-        if ((Engine.GameMode != "GameModeTitle"))
-        {
-            //to be completely honest this is just as reliable as what onaku had
-            if (Engine.GetObject("Sonic", out _)) 
-            { 
-                
-                return false;
-            //another story, same idea
-            } else if (Engine.GetObject("PlayerAmy", out IntPtr _) || Engine.GetObject("PlayerKnuckles", out _) || Engine.GetObject("PlayerTails", out _)) {
-                return false;
+        if ((Engine.GameMode != "GameModeTitle")) { 
+            if (!HasPlayerInformationUpdater.Current)
+            {
+                return true;
             }
-            return true;
         }
         
         return false;
@@ -644,7 +682,7 @@ partial class Memory
     {
         if (HsmStatus.Current[1] == "Quit" && HsmStatus.Old[1] == "NewGameMenu")
         {
-            
+            HasStarted11Story = false;
             return settings.StoryStart;
         }
         else if(settings.ArcadeStart && GameMode.Current == SonicFrontiers.GameMode.CyberspaceChallenge)
@@ -1004,6 +1042,32 @@ partial class Memory
         return false;
     }
 
+    private bool playerHasComponentName(ProcessMemory process, string componentName)
+    {
+        if (!process.Read(PlayerInstance.Current, out PlayerCharacter playerCharacter))
+        {
+            return false;
+        }
+        using (ArrayRental<Address<long>> buf = new(playerCharacter.noOfElements))
+        {
+            if (!process.ReadArray(playerCharacter.GOCArray.Value, buf.Span))
+                return false;
+            string name = "N/A";
+            foreach (var entry in buf.Span)
+            {
+                if (!process.Read(entry.Value + 0x48, out IntPtr GOCPtr)
+                    || !process.ReadPointer(GOCPtr, out IntPtr namePtr)
+                    || !process.ReadString(namePtr, 127, StringType.ASCII, out name)
+                    || name != componentName)
+                {
+                    continue;
+                }
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /// <summary>
     /// This function is essentially equivalent of the init descriptor in script-based autosplitters.
