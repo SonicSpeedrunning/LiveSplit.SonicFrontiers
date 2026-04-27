@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="2.0.3">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Fix LRT ticking prematurely before 1-1 in story</change>
+		</changelog>
+	</update>
 	<update version="2.0.2">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
