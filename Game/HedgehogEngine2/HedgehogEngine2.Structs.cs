@@ -103,3 +103,10 @@ public readonly struct BossHsm
     [FieldOffset(0xA8)] public readonly Address<long> array;
     [FieldOffset(0xB0)] public readonly int noOfElements;
 }
+
+[StructLayout(LayoutKind.Explicit)]
+public readonly struct PlayerCharacter
+{
+    [FieldOffset(0x58)] public readonly Address<long> GOCArray;
+    [FieldOffset(0x60)] public readonly int noOfElements;
+}
