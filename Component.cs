@@ -1,7 +1,10 @@
 ﻿using LiveSplit.Model;
+using LiveSplit.Options;
+using LiveSplit.SonicFrontiers;
 using LiveSplit.UI;
 using LiveSplit.UI.Components;
-using LiveSplit.SonicFrontiers;
+using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -20,8 +23,15 @@ internal partial class SonicFrontiersComponent : LogicComponent
             {
                 AutosplitterLogic(state, cancelToken.Token);
             }
-            catch { }
-        });
+			catch (OperationCanceledException e) {
+				File.WriteAllText("LiveSplit.SonicFrontiers.ErrorLog.txt", "Cancelled intentionally\n" + e.StackTrace + "\n" + e.Message);
+				Log.Error("Something broke :(\n" + e.StackTrace + "\n" + e.Message);
+			}
+			catch (Exception e) {
+                File.WriteAllText("LiveSplit.SonicFrontiers.ErrorLog.txt", "Something broke :(\n" + e.StackTrace + "\n" + e.Message);
+				Log.Error("Something broke :(\n" + e.StackTrace + "\n" + e.Message);
+			}
+		});
 
         if (state.CurrentTimingMethod == TimingMethod.RealTime)
             AskGameTime(state);

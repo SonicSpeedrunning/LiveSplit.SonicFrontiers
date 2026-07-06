@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <ImplicitUsings>disable</ImplicitUsings>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Configurations>Release</Configurations>
+    <Configurations>Release;Debug</Configurations>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <SignAssembly>False</SignAssembly>
