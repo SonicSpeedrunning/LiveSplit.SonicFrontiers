@@ -433,6 +433,7 @@ partial class Memory {
             // Ouranos
             { "Ouranos_Bridge",         new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ouranos_Bridge) },
 			{ "Ouranos_SupremeDefeated",new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Old == SonicFrontiers.LevelID.Island_Ouranos && LevelID.Current == SonicFrontiers.LevelID.Boss_TheEnd) },
+			{ "Ouranos_SupremeDead", new LazyWatcher<bool>(StateTracker, false, (_, _) => LevelID.Current == SonicFrontiers.LevelID.Island_Ouranos && ScanBossHsm(process, "Rifle0", "EventDead")) },
 			{ "Ouranos_BlueCE",         new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ouranos_BlueCE) },
 			{ "Ouranos_RedCE",          new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ouranos_RedCE) },
 			{ "Ouranos_GreenCE",        new LazyWatcher<bool>(StateTracker, false, (_, _) => Flags.Ouranos_GreenCE) },
@@ -936,6 +937,8 @@ partial class Memory {
 		"Island_Ouranos_fishing" => settings.Island_Ouranos_fishing,
 		"Ouranos_SecondHackingStart" => settings.Ouranos_SecondHackingStart,
 		"Ouranos_FinalDoor" => settings.Ouranos_FinalDoor,
+		//This fires immediately when supreme dies
+		"Ouranos_SupremeDead" => settings.Ouranos_SupremeDead,
 		_ => false,
 	};
 
