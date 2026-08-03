@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="2.1.0">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Added split that triggers when Supreme's health hits 0</change>
+			<change>Rename old "Defeat Supreme" split to "Enter The End"</change>
+		</changelog>
+	</update>
 	<update version="2.0.4">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>

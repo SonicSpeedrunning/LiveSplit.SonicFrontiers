@@ -117,6 +117,7 @@ namespace LiveSplit.SonicFrontiers
         public bool Ouranos_FirstHackingStart { get; set; }
         public bool Ouranos_Bridge { get; set; }
         public bool Ouranos_SupremeDefeated { get; set; }
+        public bool Ouranos_SupremeDead { get; set; }
         public bool FinalBoss { get; set; }
         public bool w4_1_story { get; set; }
         public bool w4_2_story { get; set; }
@@ -369,6 +370,7 @@ namespace LiveSplit.SonicFrontiers
             chkOuranos_GreenCE.DataBindings.Add("Checked", this, "Ouranos_GreenCE", false, DataSourceUpdateMode.OnPropertyChanged);
             chkOuranos_YellowCE.DataBindings.Add("Checked", this, "Ouranos_YellowCE", false, DataSourceUpdateMode.OnPropertyChanged);
             chkOuranos_CyanCE.DataBindings.Add("Checked", this, "Ouranos_CyanCE", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkOuranos_SupremeDead.DataBindings.Add("Checked", this, "Ouranos_SupremeDead", false, DataSourceUpdateMode.OnPropertyChanged);
             //chkOuranos_WhiteCE.DataBindings.Add("Checked", this, "Ouranos_WhiteCE", false, DataSourceUpdateMode.OnPropertyChanged);
             chk54_fishing.DataBindings.Add("Checked", this, "Island_Ouranos_fishing", false, DataSourceUpdateMode.OnPropertyChanged);
             chk0_arcade.DataBindings.Add("Checked", this, "w1_1_arcade", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -515,7 +517,7 @@ namespace LiveSplit.SonicFrontiers
             Island_Rhea_story = true;
 
             // Ouranos
-            Ouranos_Bridge = Ouranos_SupremeDefeated = false;
+            Ouranos_Bridge = Ouranos_SupremeDefeated = Ouranos_SupremeDead = false;
             FinalBoss = true;
             w4_1_story = w4_2_story = w4_3_story = w4_4_story = w4_5_story = w4_6_story = w4_7_story = w4_8_story = w4_9_story = false;
             Ouranos_BlueCE = Ouranos_RedCE = Ouranos_GreenCE = Ouranos_YellowCE = Ouranos_CyanCE = Ouranos_FinalDoor = Ouranos_FirstHackingStart = Ouranos_SecondHackingStart = false;
@@ -658,6 +660,7 @@ namespace LiveSplit.SonicFrontiers
             settingsNode.AppendChild(ToElement(doc, "Ouranos_FirstHackingStart", Ouranos_FirstHackingStart));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_Bridge", Ouranos_Bridge));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_SupremeDefeated", Ouranos_SupremeDefeated));
+            settingsNode.AppendChild(ToElement(doc, "Ouranos_SupremeDead", Ouranos_SupremeDead));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_SecondHackingStart", Ouranos_SecondHackingStart));
             settingsNode.AppendChild(ToElement(doc, "Ouranos_FinalDoor", Ouranos_FinalDoor));
             settingsNode.AppendChild(ToElement(doc, "FinalBoss", FinalBoss));
@@ -875,6 +878,7 @@ namespace LiveSplit.SonicFrontiers
             Ouranos_FirstHackingStart = ParseBool(settings, "Ouranos_FirstHackingStart", false);
             Ouranos_Bridge = ParseBool(settings, "Ouranos_Bridge", false);
             Ouranos_SupremeDefeated = ParseBool(settings, "Ouranos_SupremeDefeated", false);
+            Ouranos_SupremeDead = ParseBool(settings, "Ouranos_SupremeDead", false);
             Ouranos_SecondHackingStart = ParseBool(settings, "Ouranos_SecondHackingStart");
             Ouranos_FinalDoor = ParseBool(settings, "Ouranos_FinalDoor");
             FinalBoss = ParseBool(settings, "FinalBoss", true);
@@ -1045,6 +1049,7 @@ namespace LiveSplit.SonicFrontiers
             chkOuranos_FirstHackingStart.Checked = false;
 			chkOuranos_Bridge.Checked = false;
             chkOuranos_SupremeDefeated.Checked = false;
+            chkOuranos_SupremeDead.Checked = false;
             chkFinalBoss.Checked = true;
             chk21_story.Checked = false;
             chk22_story.Checked = false;
