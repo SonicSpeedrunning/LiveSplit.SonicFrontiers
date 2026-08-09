@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
+	<update version="2.1.1">
+		<files>
+			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change>Implemented fix that causes repeated splits with music notes/cyberspace stages</change>
+		</changelog>
+	</update>
 	<update version="2.1.0">
 		<files>
 			<file path="Components/LiveSplit.SonicFrontiers.dll" status="changed"/>
